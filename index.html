@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student List</title>
+</head>
+<body>
+  <h1>Students</h1>
+  <ul id="student-list"></ul>
+
+  <script>
+    // HCAER FETCH
+    fetch('http://192.168.18.11:3000/ALUMNOS')  // IP SERVIDOR
+      .then(response => response.json())
+      .then(data => {
+        const list = document.getElementById('student-list');
+        data.forEach(student => {
+          const li = document.createElement('li');
+          li.textContent = `${student.name} - ${student.age}`;  // AJUSTAR A TABLAS
+          list.appendChild(li);
+        });
+      })
+      .catch(error => console.error('Error fetching student data:', error));
+  </script>
+</body>
+</html>

@@ -18,6 +18,8 @@
   "homepage": "https://github.com/BennyBenn/SCGEM#readme",
   "description": "",
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.12.0"
   }
 }
