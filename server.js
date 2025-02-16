@@ -3,6 +3,11 @@ const mysql = require('mysql2');
 const app = express();
 const port = 3000;
 
+const cors = require('cors');
+
+app.use(cors());  // This will allow all origins to access your API
+
+
 // Create MySQL connection
 const db = mysql.createConnection({
   host: "192.168.18.11",  // IP DEL SERVIDOR
