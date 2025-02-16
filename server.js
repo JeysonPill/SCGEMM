@@ -1,3 +1,5 @@
+/*
+
 const express = require('express');
 const mysql = require('mysql2');
 const app = express();
@@ -39,4 +41,90 @@ app.get('/ALUMNOS', (req, res) => {
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
+});
+
+*/
+const express = require('express');
+const mysql = require('mysql2');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+// Create an Express app
+const app = express();
+const port = 3000;
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+
+// MySQL connection setup
+const db = mysql.createConnection({
+  host: '192.168.18.11',  // Replace with your Server Laptop's IP
+  user: 'node_user',
+  password: 'Zapatitoblanco123',
+  database: 'SCGEM'
+});
+
+// Check DB connection
+db.connect(err => {
+  if (err) {
+    console.error('Database connection failed: ' + err.stack);
+    return;
+  }
+  console.log('Connected to the database');
+});
+
+// Login route
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  const query = 'SELECT * FROM users WHERE user_name = ?';
+  db.query(query, [username], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+
+    const user = results[0];
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    // Compare passwords
+    bcrypt.compare(password, user.password, (err, isMatch) => {
+      if (err) return res.status(500).json({ message: 'Error comparing passwords' });
+
+      if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+
+      // Generate JWT token with user role
+      const token = jwt.sign({
+        id: user.id_user,
+        username: user.user_name,
+        role: user.user_role // Include role in the JWT
+      }, 'aVeryStrongSecretKeyHere', { expiresIn: '1h' });
+
+      res.json({ token });
+    });
+  });
+});
+
+// Middleware to check user role
+const checkRole = (role) => (req, res, next) => {
+  const token = req.header('Authorization').replace('Bearer ', '');
+  if (!token) return res.status(403).send('Access denied');
+
+  jwt.verify(token, 'aVeryStrongSecretKeyHere', (err, decoded) => {
+    if (err) return res.status(403).send('Invalid token');
+
+    if (decoded.role !== role) return res.status(403).send('Forbidden');
+    req.user = decoded;  // Attach user data to the request object
+    next();
+  });
+};
+
+// Example protected route for admins
+app.get('/admin-dashboard', checkRole('99'), (req, res) => {
+  res.send('Welcome to the Admin Dashboard');
+});
+
+// Start server
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });

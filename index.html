@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student List</title>
 </head>
+<!-- 
 <body>
   <h1>Students</h1>
   <ul id="student-list"></ul>
@@ -22,6 +23,107 @@
         });
       })
       .catch(error => console.error('Error fetching student data:', error));
+  </script>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    /* Simple styles for login */
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #login-content, #admin-content, #professor-content, #student-content {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Login</h2>
+  <div id="login-content">
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required><br><br>
+      <input type="password" id="password" placeholder="Password" required><br><br>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <div id="admin-content">
+    <h3>Welcome, Admin!</h3>
+    <p>Admin Dashboard</p>
+  </div>
+
+  <div id="professor-content">
+    <h3>Welcome, Professor!</h3>
+    <p>Professor Dashboard</p>
+  </div>
+
+  <div id="student-content">
+    <h3>Welcome, Student!</h3>
+    <p>Student Dashboard</p>
+  </div>
+
+  <script>
+    // Handle form submission
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const response = await fetch('http://192.168.18.11:3000/login', {  // Change to your server's IP
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('authToken', data.token);  // Save JWT token in localStorage
+        showUserRole();
+      } else {
+        alert(data.message);  // Show error message
+      }
+    });
+
+    // Decode JWT to get user role
+    const getUserRole = () => {
+      const token = localStorage.getItem('authToken');
+      if (!token) return null;
+
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));  // Decode JWT
+      return decodedToken.role;  // Extract user_role from the token
+    };
+
+    // Display content based on user role
+    const showUserRole = () => {
+      const userRole = getUserRole();
+
+      // Hide all content
+      document.getElementById('admin-content').style.display = 'none';
+      document.getElementById('professor-content').style.display = 'none';
+      document.getElementById('student-content').style.display = 'none';
+      document.getElementById('login-content').style.display = 'none';
+
+      // Show appropriate content based on user role
+      if (userRole === 'administrator') {
+        document.getElementById('admin-content').style.display = 'block';
+      } else if (userRole === 'professor') {
+        document.getElementById('professor-content').style.display = 'block';
+      } else if (userRole === 'student') {
+        document.getElementById('student-content').style.display = 'block';
+      } else {
+        document.getElementById('login-content').style.display = 'block';
+      }
+    };
+
+    // Show user role content on page load
+    showUserRole();
   </script>
 </body>
 </html>
