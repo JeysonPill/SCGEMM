@@ -17,7 +17,7 @@
         const list = document.getElementById('student-list');
         data.forEach(student => {
           const li = document.createElement('li');
-          li.textContent = `${student.matricula} - ${student.carrera}`;  // AJUSTAR A TABLAS
+          li.textContent = `${student.matricula} - ${student.carrera} - ${student.semestre} - ${student.nombre} - ${student.celular} - ${student.email} - ${student.created_at} `;  // AJUSTAR A TABLAS
           list.appendChild(li);
         });
       })
