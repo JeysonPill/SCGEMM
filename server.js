@@ -118,7 +118,7 @@ app.post('/login', (req, res) => {
           return res.status(500).send('Internal server error');
       }
 
-      if (result.length === 0 || result[0].password !== password) {
+      if (result.length === 0 || result[1].password !== password) {
         console.error(password);
           return res.status(401).send('Invalid credentials');
       }
@@ -126,7 +126,7 @@ app.post('/login', (req, res) => {
       const user = result[0];
       const token = jwt.sign(
           { user_id: user.id_user, user_name: user.user_name, user_role: user.user_role },
-          'your_secret_key',
+          'aVeryStrongSecretKeyHere',
           { expiresIn: '1h' }
       );
       res.json({ token });
