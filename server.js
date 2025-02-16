@@ -82,7 +82,7 @@ db.connect(err => {
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
-  const query = 'SELECT * FROM users WHERE user_name = ?';
+  const query = 'SELECT * FROM USUARIOS WHERE user_name = ?';
   alert("aaa");
   db.query(query, [username], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
@@ -112,7 +112,7 @@ app.post('/login', (req, res) => {
 app.post('/login', (req, res) => {
   const { user_name, password } = req.body;
 
-  db.query('SELECT * FROM users WHERE user_name = ?', [user_name], (err, result) => {
+  db.query('SELECT * FROM USUARIOS WHERE user_name = ?', [user_name], (err, result) => {
       if (err) {
           console.error('Database query error:', err); // Log the error
           return res.status(500).send('Internal server error');
