@@ -119,7 +119,7 @@ app.post('/login', (req, res) => {
       }
 
       if (result.length === 0 || result[0].password !== password) {
-        console.log(result);
+        console.log(user_name);
           return res.status(401).send('Invalid credentials');
       }
 
