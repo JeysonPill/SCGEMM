@@ -42,6 +42,13 @@
       color: red;
       margin-top: 10px;
     }
+    .logout-button {
+      background-color: #dc3545;
+      margin-top: 20px;
+    }
+    .logout-button:hover {
+      background-color: #c82333;
+    }
   </style>
 </head>
 <body>
@@ -58,21 +65,25 @@
   <div id="super-admin-content" class="content-section">
     <h3>Welcome, Super Administrator!</h3>
     <p>You have access to all system features.</p>
+    <button class="logout-button" onclick="handleLogout()">Logout</button>
   </div>
 
   <div id="professor-content" class="content-section">
     <h3>Welcome, Professor!</h3>
     <p>Access your teaching dashboard here.</p>
+    <button class="logout-button" onclick="handleLogout()">Logout</button>
   </div>
 
   <div id="student-content" class="content-section">
     <h3>Welcome, Student!</h3>
     <p>View your courses and grades here.</p>
+    <button class="logout-button" onclick="handleLogout()">Logout</button>
   </div>
 
   <div id="admin-staff-content" class="content-section">
     <h3>Welcome, Administrative Staff!</h3>
     <p>Access administrative functions here.</p>
+    <button class="logout-button" onclick="handleLogout()">Logout</button>
   </div>
 
   <script>
@@ -82,6 +93,14 @@
       PROFESSOR: 2,
       ADMIN_STAFF: 3,
       SUPER_ADMIN: 99
+    };
+
+    // Logout handler
+    const handleLogout = () => {
+      localStorage.removeItem('authToken');
+      showUserRole(null);
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
     };
 
     // Handle form submission
