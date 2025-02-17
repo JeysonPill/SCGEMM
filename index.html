@@ -309,11 +309,17 @@
     <h2>Administracion del sistema</h2>
     <div class="nav-tabs">
     
+        <!-- original
       <div class="nav-tab active" onclick="switchTab('user-management', this)">Usuarios</div>
       <div class="nav-tab" onclick="switchTab('system-config', this)">Configuraciones</div>
       <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
-    
-      <!--
+    -->
+
+    <div class="nav-tabt active" onclick="switchTab('user-management', this)">Usuarios</div>
+      <div class="nav-tab" onclick="switchTab('system-config', this)">Configuraciones</div>
+      <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
+
+      <!-- version 2
     <div id="user-management" class="tab-content active"></div>
     <div id="system-config" class="tab-content"></div>
     <div id="system-logs" class="tab-content"></div>
@@ -334,10 +340,10 @@
     // cambia paginas
     function switchTab(tabId, element) {
       // Remove active class from all tabs
-      document.querySelectorAll('.nav-tab').forEach(tab => {
+      document.querySelectorAll('nav-tab').forEach(tab => { //aqui iba un .nav-tab
         tab.classList.remove('active');
       });
-      document.querySelectorAll('.tab-content').forEach(content => {
+      document.querySelectorAll('tab-content').forEach(content => {
         content.classList.remove('active');
       });
 
