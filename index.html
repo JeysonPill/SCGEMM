@@ -102,11 +102,11 @@
     <h2>Login</h2>
     <form id="login-form">
       <div class="form-group">
-        <label for="username">Username</label>
+        <label for="username">Usuario</label>
         <input type="text" id="username" required>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">Contraseña</label>
         <input type="password" id="password" required>
       </div>
       <button type="submit" class="action-button">Login</button>
@@ -116,25 +116,25 @@
 
   <!-- Panel de estudiantes -->
   <div id="student-content" class="content-section">
-    <button class="logout-button" onclick="handleLogout()">Logout</button>
-    <h2>Student Dashboard</h2>
+    <button class="logout-button" onclick="handleLogout()">Cerrar sesion</button>
+    <h2>Panel de estudiantes</h2>
     <div class="nav-tabs">
-      <div class="nav-tab active" onclick="switchTab('enrolled-subjects', this)">Enrolled Subjects</div>
-      <div class="nav-tab" onclick="switchTab('grades', this)">Grades</div>
-      <div class="nav-tab" onclick="switchTab('kardex', this)">Kardex</div>
-      <div class="nav-tab" onclick="switchTab('payments', this)">Payments</div>
-      <div class="nav-tab" onclick="switchTab('attendance', this)">Attendance</div>
+      <div class="nav-tab active" onclick="switchTab('enrolled-subjects', this)">Materias</div>
+      <div class="nav-tab" onclick="switchTab('grades', this)">Calificaciones</div>
+      <div class="nav-tab" onclick="switchTab('kardex', this)">Kardez</div>
+      <div class="nav-tab" onclick="switchTab('payments', this)">Pagos</div>
+      <div class="nav-tab" onclick="switchTab('attendance', this)">Asistencias</div>
     </div>
 
     <div id="enrolled-subjects" class="tab-content active">
-      <h3>Current Subjects</h3>
+      <h3>Materias </h3>
       <table>
         <thead>
           <tr>
-            <th>Subject</th>
-            <th>Professor</th>
-            <th>Schedule</th>
-            <th>Group</th>
+            <th>Nombre</th>
+            <th>Profesor</th>
+            <th>Horarios</th>
+            <th>Grupos</th>
           </tr>
         </thead>
         <tbody id="subjects-table">
@@ -143,15 +143,15 @@
     </div>
 
     <div id="grades" class="tab-content">
-      <h3>Current Grades</h3>
+      <h3>Calificaciones</h3>
       <table>
         <thead>
           <tr>
-            <th>Subject</th>
-            <th>Partial 1</th>
-            <th>Partial 2</th>
+            <th>Nombre</th>
+            <th>Parcial 1</th>
+            <th>Parcial 2</th>
             <th>Final</th>
-            <th>Average</th>
+            <th>Promedio</th>
           </tr>
         </thead>
         <tbody id="grades-table">
@@ -160,14 +160,14 @@
     </div>
 
     <div id="kardex" class="tab-content">
-      <h3>Academic History</h3>
+      <h3>Historial academico</h3>
       <table>
         <thead>
           <tr>
-            <th>Subject</th>
-            <th>Period</th>
-            <th>Final Grade</th>
-            <th>Status</th>
+            <th>Materia</th>
+            <th>Periodo</th>
+            <th>Calificacion final</th>
+            <th>Estado</th>
           </tr>
         </thead>
         <tbody id="kardex-table">
@@ -176,15 +176,15 @@
     </div>
 
     <div id="payments" class="tab-content">
-      <h3>Payment Status</h3>
+      <h3>Estado de pagos</h3>
       <table>
         <thead>
           <tr>
-            <th>Month</th>
-            <th>Amount</th>
-            <th>Due Date</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th>Mes</th>
+            <th>Cantidad</th>
+            <th>Fecha de corte</th>
+            <th>Estado</th>
+            <th>Accion</th>
           </tr>
         </thead>
         <tbody id="payments-table">
@@ -193,10 +193,10 @@
     </div>
 
     <div id="attendance" class="tab-content">
-      <h3>Attendance Registration</h3>
+      <h3>Registro de asistencia</h3>
       <div class="qr-section">
         <div id="qr-reader"></div>
-        <p>Or enter attendance code:</p>
+        <p>Ingresa codigo de asistencia:</p>
         <input type="text" id="attendance-code" placeholder="Enter code">
         <button onclick="submitAttendance()" class="action-button">Submit</button>
       </div>
@@ -205,56 +205,55 @@
 
   <div id="professor-content" class="content-section">
     <button class="logout-button" onclick="handleLogout()">Logout</button>
-    <h2>Professor Dashboard</h2>
+    <h2>Panel de profesor</h2>
     <div class="nav-tabs">
-      <div class="nav-tab active" onclick="switchTab('teaching-schedule', this)">Teaching Schedule</div>
-      <div class="nav-tab" onclick="switchTab('attendance-qr', this)">Attendance QR</div>
-      <div class="nav-tab" onclick="switchTab('grade-entry', this)">Grade Entry</div>
+      <div class="nav-tab active" onclick="switchTab('teaching-schedule', this)">Horario de clases</div>
+      <div class="nav-tab" onclick="switchTab('attendance-qr', this)">QR de asistencia</div>
+      <div class="nav-tab" onclick="switchTab('grade-entry', this)">Ingreso de Calificaciones</div>
     </div>
 
     <div id="teaching-schedule" class="tab-content active">
-      <h3>Current Teaching Schedule</h3>
+      <h3>Horario de clases</h3>
       <table>
         <thead>
           <tr>
-            <th>Subject</th>
-            <th>Group</th>
-            <th>Schedule</th>
-            <th>Room</th>
+            <th>Materia</th>
+            <th>Grupo</th>
+            <th>Horario</th>
+            <th>Salon</th>
           </tr>
         </thead>
         <tbody id="schedule-table">
-          <!-- Populated by JavaScript -->
         </tbody>
       </table>
     </div>
 
     <div id="attendance-qr" class="tab-content">
-      <h3>Generate Attendance QR</h3>
+      <h3>Generar QR de asistencia</h3>
       <div class="form-group">
-        <label>Select Subject</label>
+        <label>Elegir materia</label>
         <select id="subject-select">
         </select>
       </div>
-      <button onclick="generateQR()" class="action-button">Generate QR Code</button>
+      <button onclick="generateQR()" class="action-button">Generar QR</button>
       <div id="qr-display"></div>
     </div>
 
     <div id="grade-entry" class="tab-content">
-      <h3>Enter Grades</h3>
+      <h3>Ingreso de calificaciones</h3>
       <div class="form-group">
-        <label>Select Subject</label>
+        <label>Elija materia</label>
         <select id="grade-subject-select">
         </select>
       </div>
       <table>
         <thead>
           <tr>
-            <th>Student</th>
-            <th>Partial 1</th>
-            <th>Partial 2</th>
+            <th>Estudiante</th>
+            <th>Parcial 1</th>
+            <th>Parcial 2</th>
             <th>Final</th>
-            <th>Action</th>
+            <th>Accion</th>
           </tr>
         </thead>
         <tbody id="grade-entry-table">
@@ -265,12 +264,12 @@
 
   <div id="admin-staff-content" class="content-section">
     <button class="logout-button" onclick="handleLogout()">Logout</button>
-    <h2>Administrative Staff Dashboard</h2>
+    <h2>Panel de administrativos</h2>
     <div class="nav-tabs">
-      <div class="nav-tab active" onclick="switchTab('student-management', this)">Students</div>
-      <div class="nav-tab" onclick="switchTab('professor-management', this)">Professors</div>
-      <div class="nav-tab" onclick="switchTab('subject-management', this)">Subjects</div>
-      <div class="nav-tab" onclick="switchTab('reports', this)">Reports</div>
+      <div class="nav-tab active" onclick="switchTab('student-management', this)">Estudiantes</div>
+      <div class="nav-tab" onclick="switchTab('professor-management', this)">Profesores</div>
+      <div class="nav-tab" onclick="switchTab('subject-management', this)">Materias</div>
+      <div class="nav-tab" onclick="switchTab('reports', this)">Reportes</div>
     </div>
 
   </div>
@@ -278,11 +277,11 @@
   <!-- Panel del linuxero maestro -->
   <div id="super-admin-content" class="content-section">
     <button class="logout-button" onclick="handleLogout()">Logout</button>
-    <h2>System Administration</h2>
+    <h2>Administracion del sistema</h2>
     <div class="nav-tabs">
-      <div class="nav-tab active" onclick="switchTab('user-management', this)">Users</div>
-      <div class="nav-tab" onclick="switchTab('system-config', this)">Configuration</div>
-      <div class="nav-tab" onclick="switchTab('system-logs', this)">Logs</div>
+      <div class="nav-tab active" onclick="switchTab('user-management', this)">Usuarios</div>
+      <div class="nav-tab" onclick="switchTab('system-config', this)">Configuraciones</div>
+      <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
     </div>
 
   </div>
