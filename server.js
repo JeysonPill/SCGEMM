@@ -131,6 +131,8 @@ app.post('/login', (req, res) => {
           { expiresIn: '1h' }
       );
       res.json({ token });
+      
+      console.log("si entra");
   });
 });
 
