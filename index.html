@@ -94,6 +94,28 @@
       border: 1px solid #ddd;
       border-radius: 4px;
     }
+
+
+ 
+    .form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+}
   </style>
 </head>
 <body>
@@ -266,9 +288,16 @@
     <button class="logout-button" onclick="handleLogout()">Logout</button>
     <h2>Panel de administrativos</h2>
     <div class="nav-tabs">
+   
       <div class="nav-tab active" onclick="switchTab('student-management', this)">Estudiantes</div>
       <div class="nav-tab" onclick="switchTab('professor-management', this)">Profesores</div>
       <div class="nav-tab" onclick="switchTab('subject-management', this)">Materias</div>
+   
+        <!--
+        <div id="student-management" class="tab-content active"></div>
+        <div id="professor-management" class="tab-content"></div>
+        <div id="subject-management" class="tab-content"></div>
+-->
       <div class="nav-tab" onclick="switchTab('reports', this)">Reportes</div>
     </div>
 
@@ -279,9 +308,16 @@
     <button class="logout-button" onclick="handleLogout()">Logout</button>
     <h2>Administracion del sistema</h2>
     <div class="nav-tabs">
+    
       <div class="nav-tab active" onclick="switchTab('user-management', this)">Usuarios</div>
       <div class="nav-tab" onclick="switchTab('system-config', this)">Configuraciones</div>
       <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
+    
+      <!--
+    <div id="user-management" class="tab-content active"></div>
+    <div id="system-config" class="tab-content"></div>
+    <div id="system-logs" class="tab-content"></div>
+    -->
     </div>
 
   </div>
