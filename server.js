@@ -110,16 +110,16 @@ app.post('/login', (req, res) => {
 */
 
 app.post('/login', (req, res) => {
-  const { user_name, password } = req.body;
+  const { username, password } = req.body;
 
-  db.query('SELECT * FROM USUARIOS WHERE user_name = ?', [user_name], (err, result) => {
+  db.query('SELECT * FROM USUARIOS WHERE user_name = ?', [username], (err, result) => {
       if (err) {
           console.error('Database query error:', err); // Log the error
           return res.status(500).send('Internal server error');
       }
 
       if (result.length === 0 || result[0].password !== password) {
-        console.log(user_name);
+        console.log(username);
         console.log(password);
           return res.status(401).send('Invalid credentials');
       }
