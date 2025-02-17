@@ -544,25 +544,3 @@ function closeForm() {
     overlay.remove();
   }
 }
-
-// Add these to your existing script section
-document.addEventListener('DOMContentLoaded', () => {
-  // Add to your existing role-based initialization
-  const token = localStorage.getItem('authToken');
-  if (token) {
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      const userRole = parseInt(payload.user_role);
-      
-      if (userRole === ROLES.ADMIN_STAFF) {
-        loadStudentManagement();
-        loadProfessorManagement();
-        loadSubjectManagement();
-      } else if (userRole === ROLES.SUPER_ADMIN) {
-        loadUserManagement();
-      }
-    } catch (error) {
-      console.error('Error initializing admin/super-admin data:', error);
-    }
-  }
-});
