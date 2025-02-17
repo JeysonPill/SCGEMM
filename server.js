@@ -68,9 +68,7 @@ app.post('/login', (req, res) => {
 // OBTENER MATERIAS Y PROFES
 app.get('/student/subjects/:matricula', authenticateToken, (req, res) => {
   const query = `
-    SELECT m.nombre as materia, p.nombre as profesor, 
-           h.h_lunes, h.h_martes, h.h_miercoles, h.h_jueves, h.h_viernes,
-           ga.id_grupo
+    SELECT m.nombre as materia, p.nombre as profesor, h.h_lunes, h.h_martes, h.h_miercoles, h.h_jueves, h.h_viernes, ga.id_grupo
     FROM GRUPOALUMNOS ga
     JOIN MATERIAS m ON ga.id_materia = m.id_materia
     JOIN MATERIASPROFESORES mp ON ga.id_grupo = mp.id_grupo
@@ -198,8 +196,7 @@ app.post('/professor/update-grades', authenticateToken, (req, res) => {
   const { matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando } = req.body;
   
   const query = `
-    INSERT INTO CALIFICACIONES (matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando)
-    VALUES (?, ?, ?, ?, ?, ?)
+    INSERT INTO CALIFICACIONES (matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando) VALUES (?, ?, ?, ?, ?, ?)
     ON DUPLICATE KEY UPDATE
     calif_p1 = VALUES(calif_p1),
     calif_p2 = VALUES(calif_p2),
