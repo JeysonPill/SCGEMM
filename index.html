@@ -3,127 +3,158 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student List</title>
-</head>
-<!-- 
-<body>
-  <h1>Students</h1>
-  <ul id="student-list"></ul>
-
-  <script>
-    // HCAER FETCH
-    fetch('http://192.168.18.11:3000/ALUMNOS')  // IP SERVIDOR
-      .then(response => response.json())
-      .then(data => {
-        const list = document.getElementById('student-list');
-        data.forEach(student => {
-          const li = document.createElement('li');
-          li.textContent = `${student.matricula} - ${student.carrera} - ${student.semestre} - ${student.nombre} - ${student.celular} - ${student.email} - ${student.created_at} `;  // AJUSTAR A TABLAS
-          list.appendChild(li);
-        });
-      })
-      .catch(error => console.error('Error fetching student data:', error));
-  </script>
-</body>
-</html>
--->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <style>
-    /* Simple styles for login */
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    #login-content, #admin-content, #professor-content, #student-content {
+    body { 
+      font-family: Arial, sans-serif; 
+      padding: 20px; 
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .content-section {
       display: none;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    #login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 300px;
+    }
+    input, button {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .error-message {
+      color: red;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-
-  <h2>Login</h2>
-  <div id="login-content">
-    <form id="loginForm">
-      <input type="text" id="username" placeholder="Username" required><br><br>
-      <input type="password" id="password" placeholder="Password" required><br><br>
+  <div id="login-content" class="content-section">
+    <h2>Login</h2>
+    <form id="login-form">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
       <button type="submit">Login</button>
     </form>
+    <div id="error-message" class="error-message"></div>
   </div>
 
-  <div id="admin-content">
-    <h3>Welcome, Admin!</h3>
-    <p>Admin Dashboard</p>
+  <div id="super-admin-content" class="content-section">
+    <h3>Welcome, Super Administrator!</h3>
+    <p>You have access to all system features.</p>
   </div>
 
-  <div id="professor-content">
+  <div id="professor-content" class="content-section">
     <h3>Welcome, Professor!</h3>
-    <p>Professor Dashboard</p>
+    <p>Access your teaching dashboard here.</p>
   </div>
 
-  <div id="student-content">
+  <div id="student-content" class="content-section">
     <h3>Welcome, Student!</h3>
-    <p>Student Dashboard</p>
+    <p>View your courses and grades here.</p>
+  </div>
+
+  <div id="admin-staff-content" class="content-section">
+    <h3>Welcome, Administrative Staff!</h3>
+    <p>Access administrative functions here.</p>
   </div>
 
   <script>
+    // Role constants matching the server
+    const ROLES = {
+      STUDENT: 1,
+      PROFESSOR: 2,
+      ADMIN_STAFF: 3,
+      SUPER_ADMIN: 99
+    };
+
     // Handle form submission
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
 
-      const response = await fetch('http://192.168.18.11:3000/login', {  // Change to your server's IP
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      });
+      try {
+        const response = await fetch('http://192.168.18.11:3000/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (response.ok) {
-        localStorage.setItem('authToken', data.token);  // Save JWT token in localStorage
-        showUserRole();
-      } else {
-        alert(data.message);  // Show error message
+        if (response.ok) {
+          localStorage.setItem('authToken', data.token);
+          errorMessage.textContent = '';
+          showUserRole(data.user_role);
+        } else {
+          errorMessage.textContent = data.message || 'Login failed';
+        }
+      } catch (error) {
+        errorMessage.textContent = 'Connection error. Please try again.';
+        console.error('Login error:', error);
       }
     });
 
-    // Decode JWT to get user role
-    const getUserRole = () => {
-      const token = localStorage.getItem('authToken');
-      if (!token) return null;
-
-      const decodedToken = JSON.parse(atob(token.split('.')[1]));  // Decode JWT
-      return decodedToken.role;  // Extract user_role from the token
-    };
-
     // Display content based on user role
-    const showUserRole = () => {
-      const userRole = getUserRole();
-
-      // Hide all content
-      document.getElementById('admin-content').style.display = 'none';
-      document.getElementById('professor-content').style.display = 'none';
-      document.getElementById('student-content').style.display = 'none';
-      document.getElementById('login-content').style.display = 'none';
+    const showUserRole = (role) => {
+      // Hide all content sections
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.style.display = 'none';
+      });
 
       // Show appropriate content based on user role
-      if (userRole === 'administrator') {
-        document.getElementById('admin-content').style.display = 'block';
-      } else if (userRole === 'professor') {
-        document.getElementById('professor-content').style.display = 'block';
-      } else if (userRole === 'student') {
-        document.getElementById('student-content').style.display = 'block';
-      } else {
-        document.getElementById('login-content').style.display = 'block';
+      switch (parseInt(role)) {
+        case ROLES.SUPER_ADMIN:
+          document.getElementById('super-admin-content').style.display = 'block';
+          break;
+        case ROLES.PROFESSOR:
+          document.getElementById('professor-content').style.display = 'block';
+          break;
+        case ROLES.STUDENT:
+          document.getElementById('student-content').style.display = 'block';
+          break;
+        case ROLES.ADMIN_STAFF:
+          document.getElementById('admin-staff-content').style.display = 'block';
+          break;
+        default:
+          document.getElementById('login-content').style.display = 'block';
       }
     };
 
-    // Show user role content on page load
-    showUserRole();
+    // Check auth status on page load
+    window.addEventListener('load', () => {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        try {
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          showUserRole(payload.user_role);
+        } catch (error) {
+          localStorage.removeItem('authToken');
+          showUserRole(null);
+        }
+      } else {
+        showUserRole(null);
+      }
+    });
   </script>
 </body>
 </html>
