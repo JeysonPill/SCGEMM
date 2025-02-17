@@ -5,15 +5,15 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-// Create an Express app
+//Express app
 const app = express();
 const port = 3000;
 
-// Middleware
+// Middleware para que no aviente el error del CORS
 app.use(cors());
 app.use(bodyParser.json());
 
-// MySQL connection setup
+// MySQL conexion
 const db = mysql.createConnection({
   host: '192.168.18.11',
   user: 'node_user',
@@ -21,7 +21,7 @@ const db = mysql.createConnection({
   database: 'SCGEM'
 });
 
-// Check DB connection
+// comprobar conexion
 db.connect(err => {
   if (err) {
     console.error('Database connection failed: ' + err.stack);
@@ -30,7 +30,7 @@ db.connect(err => {
   console.log('Connected to the database');
 });
 
-// Role mapping for clarity
+// Roles fijos para autentificacion de usuarios
 const ROLES = {
   STUDENT: 1,
   PROFESSOR: 2,
@@ -70,7 +70,7 @@ app.post('/login', (req, res) => {
   });
 });
 
-// Middleware to check user role
+// se checa el rol del usuario
 const checkRole = (allowedRoles) => (req, res, next) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -91,7 +91,7 @@ const checkRole = (allowedRoles) => (req, res, next) => {
   }
 };
 
-// Protected routes
+// Rutas protegidas para cada tipo de usuario
 app.get('/admin-dashboard', checkRole([ROLES.SUPER_ADMIN]), (req, res) => {
   res.json({ message: 'Welcome to the Admin Dashboard' });
 });
@@ -108,7 +108,7 @@ app.get('/staff-dashboard', checkRole([ROLES.ADMIN_STAFF]), (req, res) => {
   res.json({ message: 'Welcome to the Administrative Staff Dashboard' });
 });
 
-// Start server
+// Servidor
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
