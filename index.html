@@ -315,7 +315,7 @@
       <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
     -->
 
-    <div class="nav-tabt active" onclick="switchTab('user-management', this)">Usuarios</div>
+    <div class="nav-tab active" onclick="switchTab('user-management', this)">Usuarios</div>
       <div class="nav-tab" onclick="switchTab('system-config', this)">Configuraciones</div>
       <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
 
@@ -340,10 +340,10 @@
     // cambia paginas
     function switchTab(tabId, element) {
       // Remove active class from all tabs
-      document.querySelectorAll('nav-tab').forEach(tab => { //aqui iba un .nav-tab
+      document.querySelectorAll('.nav-tab').forEach(tab => { 
         tab.classList.remove('active');
       });
-      document.querySelectorAll('tab-content').forEach(content => {
+      document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
       });
 
@@ -430,27 +430,6 @@
       }
     });
 
-    // aqui va lo siguiente
-    document.addEventListener('DOMContentLoaded', () => {
-  // Add to your existing role-based initialization
-  const token = localStorage.getItem('authToken');
-  if (token) {
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      const userRole = parseInt(payload.user_role);
-      
-      if (userRole === ROLES.ADMIN_STAFF) {
-        loadStudentManagement();
-        loadProfessorManagement();
-        loadSubjectManagement();
-      } else if (userRole === ROLES.SUPER_ADMIN) {
-        loadUserManagement();
-      }
-    } catch (error) {
-      console.error('Error initializing admin/super-admin data:', error);
-    }
-  }
-});
   </script>
 </body>
 </html>
