@@ -349,6 +349,9 @@
 
       if (tabId === 'enrolled-subjects') {
         loadSubjects();
+      }
+      if (tabId === 'grades') {
+        loadGrades();
     }
     }
 
@@ -432,40 +435,59 @@
 
 
 
-    ///////////////////tabla estudiantes/////////////
+   ///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
+
+/////////////////       MATERIAS       ////////////////////////////////////////////
     async function loadSubjects() {
     const token = localStorage.getItem("authToken"); 
-    
-    console.log("Token being sent:", token);
-
-    const response = await fetch("http://192.168.18.11:3000/student/tabla-datos-estudiante/", {
-        headers: { "Authorization": `Bearer ${token}` }
-    });
+    const response = await fetch("http://192.168.18.11:3000/student/tabla-datos-estudiante/", {headers: { "Authorization": `Bearer ${token}` }});
     console.log("Token:", localStorage.getItem("authToken"));
 
-    if (!response.ok) {
-        console.error("Error al obtener las materias");
+    if (!response.ok) { console.error("Error al obtener las materias");
         return;
     }
 
     const subjects = await response.json();
     const tbody = document.getElementById("subjects-table");
-    tbody.innerHTML = ""; // Clear table before adding new data
+    tbody.innerHTML = "";
 
-    console.log("BRBRBRB");
     subjects.forEach(subject => {
-        const row = `<tr>
-            <td>${subject.materia_nombre}</td>
-            <td>${subject.profesor_nombre}</td>
-            <td>${subject.horarios}</td>
-            <td>${subject.id_grupo}</td>
+    const row = `<tr>
+        <td>${subject.materia_nombre}</td>
+        <td>${subject.profesor_nombre}</td>
+        <td>${subject.horarios.replace(/\n/g, '<br>')}</td> <!-- Replace \n with <br> -->
+        <td>${subject.id_grupo}</td>
+    </tr>`;
+    tbody.innerHTML += row;
+});
+}
 
-        </tr>`;
-        tbody.innerHTML += row;
-    });
 
+///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
 
+/////////////////       CALIFICACIONES       ////////////////////////////////////////////
+async function loadGrades() {
+    const token = localStorage.getItem("authToken"); 
+    const response = await fetch("http://192.168.18.11:3000/student/tabla-calificaciones/", { headers: { "Authorization": `Bearer ${token}` } });;
 
+    if (!response.ok) { console.error("Error al obtener las materias");
+        return;
+    }
+
+    const subjects = await response.json();
+    const tbody = document.getElementById("subjects-table");
+    tbody.innerHTML = "";
+
+    subjects.forEach(subject => {
+    const row = `<tr>
+        <td>${subject.materia_nombre}</td>
+        <td>${subject.calif_p1}</td>
+        <td>${subject.calif_p2}</td>
+        <td>${subject.calif_final}</td>
+        <td>${subject.promedio}</td>
+    </tr>`;
+    tbody.innerHTML += row;
+});
 }
 
 

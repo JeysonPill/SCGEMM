@@ -114,25 +114,7 @@ app.get('/student/subjects/:matricula', authenticateToken, (req, res) => {
   });
 });
 
-app.get('/student/grades/:matricula', authenticateToken, (req, res) => {
-  const query = `
-    SELECT 
-      m.nombre as materia,
-      c.calif_p1,
-      c.calif_p2,
-      c.calif_final,
-      c.ciclo_cursando,
-      ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) as promedio
-    FROM CALIFICACIONES c
-    JOIN MATERIAS m ON c.id_materia = m.id_materia
-    WHERE c.matricula = ?
-  `;
-  
-  db.query(query, [req.params.matricula], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(results);
-  });
-});
+
 
 app.get('/student/payments/:matricula', authenticateToken, (req, res) => {
   const query = `
@@ -159,8 +141,9 @@ app.get('/student/payments/:matricula', authenticateToken, (req, res) => {
 });
 
 
-///////////////////PRUEBA////////////////
-///////////ESTUDIANTES-TABLA/////////////
+///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
+
+/////////////////       MATERIAS       ////////////////////////////////////////////
 app.get('/student/tabla-datos-estudiante/', authenticateToken, (req, res) => {
   const query = `
     SELECT 
@@ -181,21 +164,34 @@ JOIN GRUPOALUMNOS ON GRUPOALUMNOS.id_materia = MATERIAS.id_materia
 JOIN ALUMNOS ON GRUPOALUMNOS.matricula = ALUMNOS.matricula
 WHERE ALUMNOS.matricula = ?;
    `;  
-  
-  //console.log("Query:" ,query);
-
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
-    
-    //console.log("Matricula",req.params.matricula);
-    //console.log("resutados",results);
-    //console.log("Token being sent:", req);
-
     res.json(results);
   });
-
 });
-//////////////////////////////////////////
+
+/////////////////       CALIFICACIONES       ///////////////////////////////////////
+
+app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
+  const query = `
+    SELECT 
+      m.nombre as materia,
+      c.calif_p1,
+      c.calif_p2,
+      c.calif_final,
+      ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) as promedio
+    FROM CALIFICACIONES c
+    JOIN MATERIAS m ON c.id_materia = m.id_materia
+    WHERE c.matricula = 'AA123' ;
+  `;
+  
+  db.query(query, [req.user.user_matricula], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    res.json(results);
+  });
+});
+
+
 
 
 // PROFESSOR ROUTES
