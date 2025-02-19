@@ -174,7 +174,7 @@ WHERE ALUMNOS.matricula = ? ;
     if (err) return res.status(500).json({ message: 'Database error' });
     
     console.log("resutados",results);
-    console.log("Token being sent:", req);
+    //console.log("Token being sent:", req);
 
     res.json(results);
   });
