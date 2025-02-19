@@ -168,6 +168,8 @@ JOIN ALUMNOS ON GRUPOALUMNOS.matricula = ALUMNOS.matricula
 WHERE ALUMNOS.matricula = ? ;
   `;  
   
+  console.log("Query:" ,query);
+
   db.query(query, [req.params.matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     
