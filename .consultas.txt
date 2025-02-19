@@ -33,3 +33,8 @@ WHERE GRUPOALUMNOS.id_materia = MATERIAS.id_materia;
 
 curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiQUExMjMiLCJ1c2VyX25hbWUiOiJlc3R1ZGlhbnRlIiwidXNlcl9yb2xlIjoiMSIsImlhdCI6MTczOTk0OTY5NywiZXhwIjoxNzM5OTUzMjk3fQ.kkLRf4rw8eW2W7dpOpu6lmJCVKm6ebM-NU6Ukt1Ycrw" http://192.168.18.11:3000/student/tabla-datos-estudiante/
 
+SELECT 
+    user_name,password,matricula 
+FROM USUARIOS
+JOIN ALUMNOS ON USUARIOS.id_user = ALUMNOS.matricula
+WHERE user_name = ?;
