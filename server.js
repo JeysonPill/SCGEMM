@@ -55,7 +55,7 @@ const checkRole = (roles) => {
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
-  db.query('SELECT * FROM USUARIOS WHERE user_name = ?;', [username], (err, result) => {
+  db.query('SELECT *,ALUMNOS.matricula FROM USUARIOS JOIN ALUMNOS ON USUARIOS.id_user = ALUMNOS.matricula WHERE user_name = ?;', [username], (err, result) => {
     if (err) return res.status(500).json({ message: 'Database error' });
 
     //console.log("Query:" ,query);
@@ -70,7 +70,8 @@ app.post('/login', (req, res) => {
       { 
         user_id: user.id_user, 
         user_name: user.user_name,
-        user_role: user.user_role 
+        user_role: user.user_role,
+        user_matricula: user.matricula
       },
       'aVeryStrongSecretKeyHere',
       { expiresIn: '1h' }
@@ -79,7 +80,8 @@ app.post('/login', (req, res) => {
     res.json({ 
       token, 
       user_role: user.user_role,
-      user_id: user.id_user
+      user_id: user.id_user,
+      user_matricula: user.matricula
       //matricula: user.matricula  
     });
   });
