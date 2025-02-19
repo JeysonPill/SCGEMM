@@ -164,25 +164,31 @@ app.get('/student/payments/:matricula', authenticateToken, (req, res) => {
 app.get('/student/tabla-datos-estudiante/', authenticateToken, (req, res) => {
   const query = `
     SELECT 
-      MATERIAS.nombre AS materia_nombre,
-      PROFESORES.nombre AS profesor_nombre,
-      CONCAT(HORARIOS.h_lunes, '\n', HORARIOS.h_martes, '\n', HORARIOS.h_miercoles, '\n', HORARIOS.h_jueves, '\n', HORARIOS.h_viernes) AS horarios,
-      GRUPOALUMNOS.id_grupo
-  FROM MATERIAS
-  JOIN PROFESORES
-join HORARIOS on MATERIAS.id_materia = HORARIOS.id_materia
-JOIN GRUPOALUMNOS on GRUPOALUMNOS.id_materia = MATERIAS.id_materia
+    MATERIAS.nombre AS materia_nombre,
+    PROFESORES.nombre AS profesor_nombre,
+    CONCAT(
+        'Lunes: ', TIME_FORMAT(HORARIOS.h_lunes, '%H:%i'), '\n',
+        'Martes: ', TIME_FORMAT(HORARIOS.h_martes, '%H:%i'), '\n',
+        'Miércoles: ', TIME_FORMAT(HORARIOS.h_miercoles, '%H:%i'), '\n',
+        'Jueves: ', TIME_FORMAT(HORARIOS.h_jueves, '%H:%i'), '\n',
+        'Viernes: ', TIME_FORMAT(HORARIOS.h_viernes, '%H:%i')
+    ) AS horarios,
+    GRUPOALUMNOS.id_grupo
+FROM MATERIAS
+JOIN PROFESORES
+JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
+JOIN GRUPOALUMNOS ON GRUPOALUMNOS.id_materia = MATERIAS.id_materia
 JOIN ALUMNOS ON GRUPOALUMNOS.matricula = ALUMNOS.matricula
-WHERE ALUMNOS.matricula = ? ;
-  `;  
+WHERE ALUMNOS.matricula = ?;
+   `;  
   
-  console.log("Query:" ,query);
+  //console.log("Query:" ,query);
 
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     
-    console.log("Matricula",req.params.matricula);
-    console.log("resutados",results);
+    //console.log("Matricula",req.params.matricula);
+    //console.log("resutados",results);
     //console.log("Token being sent:", req);
 
     res.json(results);

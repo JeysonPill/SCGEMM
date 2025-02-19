@@ -464,23 +464,7 @@
         tbody.innerHTML += row;
     });
 
-    console.log("Subjects received:", subjects);
-    console.log("FIN DEL FOR");
-    
 
-   
-
-subjects.forEach(subject => {
-    console.log("Processing subject:", subject); // Debugging line
-    const row = `<tr>
-        <td>${subject.materia_nombre}</td>
-        <td>${subject.profesor_nombre}</td>
-        <td>${subject.horarios}</td>
-        <td>${subject.id_grupo}</td>
-    </tr>`;
-    tbody.innerHTML += row;
-});
-console.log("Table updated!");
 
 }
 
