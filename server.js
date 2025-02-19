@@ -178,7 +178,7 @@ WHERE ALUMNOS.matricula = ? ;
   
   console.log("Query:" ,query);
 
-  db.query(query, [req.user.matricula], (err, results) => {
+  db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     
     console.log("Matricula",req.params.matricula);
