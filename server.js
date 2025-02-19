@@ -70,7 +70,6 @@ app.post('/login', (req, res) => {
       { 
         user_id: user.id_user, 
         user_name: user.user_name,
-        matricula: user.matricula, 
         user_role: user.user_role 
       },
       'aVeryStrongSecretKeyHere',
@@ -84,7 +83,6 @@ app.post('/login', (req, res) => {
       //matricula: user.matricula  
     });
   });
-  console.log("resutados",result);
 });
 
 // STUDENT ROUTES
