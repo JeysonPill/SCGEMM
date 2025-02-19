@@ -77,8 +77,8 @@ app.post('/login', (req, res) => {
     res.json({ 
       token, 
       user_role: user.user_role,
-      user_id: user.id_user,
-      matricula: user.matricula  
+      user_id: user.id_user
+      //matricula: user.matricula  
     });
   });
 });
