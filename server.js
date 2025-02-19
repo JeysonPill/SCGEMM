@@ -31,23 +31,10 @@ const authenticateToken = (req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
   if (!token) return res.status(401).json({ message: 'Authentication required' });
 
-  /*
+  
   jwt.verify(token, 'aVeryStrongSecretKeyHere', (err, user) => {
     if (err) return res.status(403).json({ message: 'Invalid token' });
     req.user = user;
-    next();
-  });
-  */
-
-  jwt.verify(token, process.env.aVeryStrongSecretKeyHere, (err, user) => {
-    if (err) {
-      console.log("Token verification failed:", err);
-      return res.status(403).json({ message: "Invalid token" });
-    }
-  
-    console.log("Verified user:", user);
-  
-    req.user = user; // Ensure `matricula` is included in the JWT payload
     next();
   });
   
