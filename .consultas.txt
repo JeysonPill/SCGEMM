@@ -1,0 +1,7 @@
+SELECT 
+      matricula,
+      nombre,
+      carrera,
+      semestre
+    FROM ALUMNOS
+    WHERE matricula = ? ;

@@ -150,6 +150,28 @@ app.get('/student/payments/:matricula', authenticateToken, (req, res) => {
   });
 });
 
+
+///////////////////PRUEBA////////////////
+///////////ESTUDIANTES-TABLA/////////////
+app.get('/student/tabla-datos-estudiante', authenticateToken, (req, res) => {
+  const query = `
+    SELECT 
+      matricula,
+      nombre,
+      carrera,
+      semestre
+    FROM ALUMNOS
+    WHERE matricula = ? ;
+  `;
+  
+  db.query(query, [req.params.matricula], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    res.json(results);
+  });
+});
+//////////////////////////////////////////
+
+
 // PROFESSOR ROUTES
 
 app.get('/professor/schedule/:id_profesor', authenticateToken, (req, res) => {

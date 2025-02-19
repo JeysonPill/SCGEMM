@@ -430,6 +430,37 @@
       }
     });
 
+
+
+    ///////////////////tabla estudiantes/////////////
+    async function loadStudents() {
+    const token = localStorage.getItem("token"); // Usa el token de autenticación almacenado
+    const response = await fetch("http://192.168.18.11:3000/student/tabla-datos-estudiante", {
+        headers: { "Authorization": `Bearer ${token}` }
+    });
+    
+    if (!response.ok) {
+        console.error("Error al obtener los estudiantes");
+        return;
+    }
+
+    const students = await response.json();
+    const tbody = document.querySelector("#subjects-table tbody");
+    tbody.innerHTML = "";
+
+    students.forEach(student => {
+        const row = `<tr>
+            <td>${student.matricula}</td>
+            <td>${student.nombre}</td>
+            <td>${student.carrera}</td>
+            <td>${student.semestre}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+    });
+}
+
+loadStudents();
+
   </script>
 </body>
 </html>
