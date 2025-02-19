@@ -173,6 +173,7 @@ WHERE ALUMNOS.matricula = ? ;
   db.query(query, [req.params.matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     
+    console.log("Matricula",req.params.matricula);
     console.log("resutados",results);
     //console.log("Token being sent:", req);
 
