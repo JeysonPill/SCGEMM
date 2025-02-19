@@ -340,16 +340,16 @@
     // cambia paginas
     function switchTab(tabId, element) {
       // Remove active class from all tabs
-      document.querySelectorAll('.nav-tab').forEach(tab => { 
-        tab.classList.remove('active');
-      });
-      document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-      });
+      document.querySelectorAll('.nav-tab').forEach(tab => { tab.classList.remove('active');  });
+      document.querySelectorAll('.tab-content').forEach(content => {content.classList.remove('active'); });
 
       // establece clase activa a la pagina actual
       element.classList.add('active');
       document.getElementById(tabId).classList.add('active');
+
+      if (tabId === 'enrolled-subjects') {
+        loadSubjects();
+    }
     }
 
     // Logout
@@ -361,8 +361,7 @@
     }
 
     // Login hanlder
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
+    document.getElementById('login-form').addEventListener('submit', async (e) => { e.preventDefault();
       
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
@@ -388,13 +387,14 @@
         errorMessage.textContent = 'Connection error. Please try again.';
         console.error('Login error:', error);
       }
+
+      console.log("Token being sent:", localStorage.getItem('authToken'));
+
     });
 
     // display por roles
     function showUserRole(role) {
-      document.querySelectorAll('.content-section').forEach(section => {
-        section.style.display = 'none';
-      });
+      document.querySelectorAll('.content-section').forEach(section => {  section.style.display = 'none'; });
 
       switch (parseInt(role)) {
         case ROLES.SUPER_ADMIN:
@@ -433,33 +433,58 @@
 
 
     ///////////////////tabla estudiantes/////////////
-    async function loadStudents() {
-    const token = localStorage.getItem("token"); // Usa el token de autenticación almacenado
-    const response = await fetch("http://192.168.18.11:3000/student/tabla-datos-estudiante", {
+    async function loadSubjects() {
+    const token = localStorage.getItem("authToken"); 
+    
+    console.log("Token being sent:", token);
+
+    const response = await fetch("http://192.168.18.11:3000/student/tabla-datos-estudiante/", {
         headers: { "Authorization": `Bearer ${token}` }
     });
-    
+    console.log("Token:", localStorage.getItem("authToken"));
+
     if (!response.ok) {
-        console.error("Error al obtener los estudiantes");
+        console.error("Error al obtener las materias");
         return;
     }
 
-    const students = await response.json();
-    const tbody = document.querySelector("#subjects-table tbody");
-    tbody.innerHTML = "";
+    const subjects = await response.json();
+    const tbody = document.getElementById("subjects-table");
+    tbody.innerHTML = ""; // Clear table before adding new data
 
-    students.forEach(student => {
+    console.log("BRBRBRB");
+    subjects.forEach(subject => {
         const row = `<tr>
-            <td>${student.matricula}</td>
-            <td>${student.nombre}</td>
-            <td>${student.carrera}</td>
-            <td>${student.semestre}</td>
+            <td>${subject.materia_nombre}</td>
+            <td>${subject.profesor_nombre}</td>
+            <td>${subject.horarios}</td>
+            <td>${subject.id_grupo}</td>
+
         </tr>`;
         tbody.innerHTML += row;
     });
+
+    console.log("Subjects received:", subjects);
+    console.log("FIN DEL FOR");
+    
+
+   
+
+subjects.forEach(subject => {
+    console.log("Processing subject:", subject); // Debugging line
+    const row = `<tr>
+        <td>${subject.materia_nombre}</td>
+        <td>${subject.profesor_nombre}</td>
+        <td>${subject.horarios}</td>
+        <td>${subject.id_grupo}</td>
+    </tr>`;
+    tbody.innerHTML += row;
+});
+console.log("Table updated!");
+
 }
 
-loadStudents();
+
 
   </script>
 </body>

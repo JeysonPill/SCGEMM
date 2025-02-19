@@ -5,3 +5,31 @@ SELECT
       semestre
     FROM ALUMNOS
     WHERE matricula = ? ;
+
+SELECT 
+MATERIAS.nombre,
+PROFESORES.nombre,
+CONCAT( HORARIOS.h_lunes + "/n"+HORARIOS.H_MARTES) AS HORARIOS
+GRUPOALUMNOS.id_grupo
+FROM MATERIAS 
+JOIN PROFESORES
+JOIN GRUPOALUMNOS
+join HORARIOS
+WHERE GRUPOALUMNOS.id_materia = MATERIAS.id_materia;
+
+SELECT 
+    MATERIAS.nombre AS materia_nombre,
+    PROFESORES.nombre AS profesor_nombre,
+    CONCAT(HORARIOS.h_lunes, '\n', HORARIOS.h_martes) AS horarios,
+    GRUPOALUMNOS.id_grupo
+FROM MATERIAS
+JOIN PROFESORES
+join HORARIOS on MATERIAS.id_materia = HORARIOS.id_materia
+JOIN GRUPOALUMNOS on GRUPOALUMNOS.id_materia = MATERIAS.id_materia;
+
+
+WHERE GRUPOALUMNOS.id_materia = MATERIAS.id_materia;
+
+
+curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiQUExMjMiLCJ1c2VyX25hbWUiOiJlc3R1ZGlhbnRlIiwidXNlcl9yb2xlIjoiMSIsImlhdCI6MTczOTk0OTY5NywiZXhwIjoxNzM5OTUzMjk3fQ.kkLRf4rw8eW2W7dpOpu6lmJCVKm6ebM-NU6Ukt1Ycrw" http://192.168.18.11:3000/student/tabla-datos-estudiante/
+

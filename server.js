@@ -153,21 +153,28 @@ app.get('/student/payments/:matricula', authenticateToken, (req, res) => {
 
 ///////////////////PRUEBA////////////////
 ///////////ESTUDIANTES-TABLA/////////////
-app.get('/student/tabla-datos-estudiante', authenticateToken, (req, res) => {
+app.get('/student/tabla-datos-estudiante/', authenticateToken, (req, res) => {
   const query = `
     SELECT 
-      matricula,
-      nombre,
-      carrera,
-      semestre
-    FROM ALUMNOS
-    WHERE matricula = ? ;
-  `;
+      MATERIAS.nombre AS materia_nombre,
+      PROFESORES.nombre AS profesor_nombre,
+      CONCAT(HORARIOS.h_lunes, '\n', HORARIOS.h_martes, '\n', HORARIOS.h_miercoles, '\n', HORARIOS.h_jueves, '\n', HORARIOS.h_viernes) AS horarios,
+      GRUPOALUMNOS.id_grupo
+  FROM MATERIAS
+  JOIN PROFESORES
+join HORARIOS on MATERIAS.id_materia = HORARIOS.id_materia
+JOIN GRUPOALUMNOS on GRUPOALUMNOS.id_materia = MATERIAS.id_materia
+JOIN ALUMNOS ON GRUPOALUMNOS.matricula = ALUMNOS.matricula
+WHERE ALUMNOS.matricula = ? ;
+  `;  
   
   db.query(query, [req.params.matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
+    
+    console.log("resutados",results);
     res.json(results);
   });
+
 });
 //////////////////////////////////////////
 
