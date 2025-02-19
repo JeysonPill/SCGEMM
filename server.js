@@ -66,7 +66,8 @@ app.post('/login', (req, res) => {
     const token = jwt.sign(
       { 
         user_id: user.id_user, 
-        user_name: user.user_name, 
+        user_name: user.user_name,
+        matricula: user.matricula, 
         user_role: user.user_role 
       },
       'aVeryStrongSecretKeyHere',
