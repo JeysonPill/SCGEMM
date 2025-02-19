@@ -180,7 +180,7 @@ app.get('/student/tabla-datos-estudiante/', authenticateToken, (req, res) => {
 join HORARIOS on MATERIAS.id_materia = HORARIOS.id_materia
 JOIN GRUPOALUMNOS on GRUPOALUMNOS.id_materia = MATERIAS.id_materia
 JOIN ALUMNOS ON GRUPOALUMNOS.matricula = ALUMNOS.matricula
-WHERE ALUMNOS.matricula ='AA123' ;
+WHERE ALUMNOS.matricula = ? ;
   `;  
   
   console.log("Query:" ,query);
