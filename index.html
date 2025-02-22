@@ -511,10 +511,11 @@ async function loadPagos() {
 
     subjects.forEach(subject => {
     const row = `<tr>
-        <td>${subject.materia}</td>
-        <td>${subject.periodo}</td>
-        <td>${subject.calif_final}</td>
-        <td>${subject.estado}</td>
+        <td>${subject.MES}</td>
+        <td>${subject.CANTIDAD}</td>
+        <td>${subject.FECHA_CORTE}</td>
+        <td>${subject.ESTADO}</td>
+        <td>${subject.ACCION}</td>
     </tr>`;
     tbody.innerHTML += row;
 });
