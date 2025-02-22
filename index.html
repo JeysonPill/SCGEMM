@@ -339,6 +339,9 @@
       if (tabId === 'kardex') {
         loadKardez();
       }
+      if (tabId === 'payments') {
+        loadPagos();
+      }
     }
 
     // Logout
@@ -503,7 +506,7 @@ async function loadPagos() {
     }
 
     const subjects = await response.json();
-    const tbody = document.getElementById("kardex-table");
+    const tbody = document.getElementById("payments-table");
     tbody.innerHTML = "";
 
     subjects.forEach(subject => {
