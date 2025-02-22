@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
-  host: '192.168.18.11',
+  host: '192.168.18.4',
   user: 'node_user',
   password: 'Zapatitoblanco123',
   database: 'SCGEM'
@@ -208,7 +208,7 @@ app.get('/student/tabla-kardez/', authenticateToken, (req, res) => {
     END AS estado
     FROM CALIFICACIONES c
     JOIN MATERIAS m ON c.id_materia = m.id_materia
-    WHERE c.matricula = 'AA123';
+    WHERE c.matricula = ?;
   `;
   
   db.query(query, [req.user.user_matricula], (err, results) => {
@@ -217,6 +217,36 @@ app.get('/student/tabla-kardez/', authenticateToken, (req, res) => {
   });
 });
 
+
+/////////////////       PAGOS       ///////////////////////////////////////
+
+app.get('/student/tabla-pagos/', authenticateToken, (req, res) => {
+  const query = `
+    SELECT 
+    DATE_FORMAT(p.fecha_vencimiento, '%M') AS MES,  -- Extracts month name
+    p.pago_mensual AS CANTIDAD,
+    p.fecha_vencimiento AS FECHA_CORTE,
+    CASE 
+        WHEN p.fecha_pago IS NULL THEN 'Pendiente'
+        WHEN DAY(p.fecha_pago) BETWEEN 1 AND 5 THEN 'Descuento 5%'
+        WHEN DAY(p.fecha_pago) BETWEEN 6 AND 15 THEN 'Normal'
+        WHEN DAY(p.fecha_pago) > 15 THEN 'Recargo 5%'
+    END AS ESTADO,
+    CASE 
+        WHEN p.fecha_pago IS NULL THEN 'Por pagar'
+        ELSE 'Pagado'
+    END AS ACCION
+
+FROM PAGOS p
+JOIN ALUMNOS on ALUMNOS.matricula = p.matricula
+where ALUMNOS.matricula = 'AA123';
+  `;
+  
+  db.query(query, [req.user.user_matricula], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    res.json(results);
+  });
+});
 
 ///////////////////////////////////////////////////////    FIN   ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
 
