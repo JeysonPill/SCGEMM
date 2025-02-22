@@ -292,12 +292,6 @@
       <div class="nav-tab active" onclick="switchTab('student-management', this)">Estudiantes</div>
       <div class="nav-tab" onclick="switchTab('professor-management', this)">Profesores</div>
       <div class="nav-tab" onclick="switchTab('subject-management', this)">Materias</div>
-   
-        <!--
-        <div id="student-management" class="tab-content active"></div>
-        <div id="professor-management" class="tab-content"></div>
-        <div id="subject-management" class="tab-content"></div>
--->
       <div class="nav-tab" onclick="switchTab('reports', this)">Reportes</div>
     </div>
 
@@ -308,22 +302,11 @@
     <button class="logout-button" onclick="handleLogout()">Logout</button>
     <h2>Administracion del sistema</h2>
     <div class="nav-tabs">
-    
-        <!-- original
-      <div class="nav-tab active" onclick="switchTab('user-management', this)">Usuarios</div>
-      <div class="nav-tab" onclick="switchTab('system-config', this)">Configuraciones</div>
-      <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
-    -->
 
     <div class="nav-tab active" onclick="switchTab('user-management', this)">Usuarios</div>
       <div class="nav-tab" onclick="switchTab('system-config', this)">Configuraciones</div>
       <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
 
-      <!-- version 2
-    <div id="user-management" class="tab-content active"></div>
-    <div id="system-config" class="tab-content"></div>
-    <div id="system-logs" class="tab-content"></div>
-    -->
     </div>
 
   </div>
@@ -352,7 +335,10 @@
       }
       if (tabId === 'grades') {
         loadGrades();
-    }
+      }
+      if (tabId === 'kardex') {
+        loadKardez();
+      }
     }
 
     // Logout
@@ -390,7 +376,6 @@
         errorMessage.textContent = 'Connection error. Please try again.';
         console.error('Login error:', error);
       }
-
       console.log("Token being sent:", localStorage.getItem('authToken'));
 
     });
@@ -400,20 +385,15 @@
       document.querySelectorAll('.content-section').forEach(section => {  section.style.display = 'none'; });
 
       switch (parseInt(role)) {
-        case ROLES.SUPER_ADMIN:
-          document.getElementById('super-admin-content').style.display = 'block';
+        case ROLES.SUPER_ADMIN: document.getElementById('super-admin-content').style.display = 'block';
           break;
-        case ROLES.PROFESSOR:
-          document.getElementById('professor-content').style.display = 'block';
+        case ROLES.PROFESSOR:   document.getElementById('professor-content').style.display = 'block';
           break;
-        case ROLES.STUDENT:
-          document.getElementById('student-content').style.display = 'block';
+        case ROLES.STUDENT:     document.getElementById('student-content').style.display = 'block';
           break;
-        case ROLES.ADMIN_STAFF:
-          document.getElementById('admin-staff-content').style.display = 'block';
+        case ROLES.ADMIN_STAFF: document.getElementById('admin-staff-content').style.display = 'block';
           break;
-        default:
-          document.getElementById('login-content').style.display = 'block';
+        default:                document.getElementById('login-content').style.display = 'block';
       }
     }
 
@@ -463,8 +443,6 @@
 }
 
 
-///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
-
 /////////////////       CALIFICACIONES       ////////////////////////////////////////////
 async function loadGrades() {
     const token = localStorage.getItem("authToken"); 
@@ -475,16 +453,41 @@ async function loadGrades() {
     }
 
     const subjects = await response.json();
-    const tbody = document.getElementById("subjects-table");
+    const tbody = document.getElementById("grades-table");
     tbody.innerHTML = "";
 
     subjects.forEach(subject => {
     const row = `<tr>
-        <td>${subject.materia_nombre}</td>
+        <td>${subject.materia}</td>
         <td>${subject.calif_p1}</td>
         <td>${subject.calif_p2}</td>
         <td>${subject.calif_final}</td>
         <td>${subject.promedio}</td>
+    </tr>`;
+    tbody.innerHTML += row;
+});
+}
+
+
+/////////////////       KARDEZ       ////////////////////////////////////////////
+async function loadKardez() {
+    const token = localStorage.getItem("authToken"); 
+    const response = await fetch("http://192.168.18.11:3000/student/tabla-kardez/", { headers: { "Authorization": `Bearer ${token}` } });;
+
+    if (!response.ok) { console.error("Error al obtener las materias");
+        return;
+    }
+
+    const subjects = await response.json();
+    const tbody = document.getElementById("grades-table");
+    tbody.innerHTML = "";
+
+    subjects.forEach(subject => {
+    const row = `<tr>
+        <td>${subject.materia}</td>
+        <td>${subject.periodo}</td>
+        <td>${subject.calif_final}</td>
+        <td>${subject.estado}</td>
     </tr>`;
     tbody.innerHTML += row;
 });

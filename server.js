@@ -179,10 +179,11 @@ app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
       c.calif_p1,
       c.calif_p2,
       c.calif_final,
-      ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) as promedio
+      ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) as promedio,
+      c.ciclo_cursando
     FROM CALIFICACIONES c
     JOIN MATERIAS m ON c.id_materia = m.id_materia
-    WHERE c.matricula = 'AA123' ;
+    WHERE c.matricula = ? ;
   `;
   
   db.query(query, [req.user.user_matricula], (err, results) => {
@@ -191,6 +192,33 @@ app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
   });
 });
 
+
+/////////////////       KARDEZ       ///////////////////////////////////////
+
+app.get('/student/tabla-kardez/', authenticateToken, (req, res) => {
+  const query = `
+    SELECT 
+    m.nombre AS materia,
+    c.ciclo_cursando AS periodo,
+    ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) AS calif_final,
+    CASE 
+        WHEN ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) > 7 
+        THEN 'Aprobado' 
+        ELSE 'Reprobado' 
+    END AS estado
+    FROM CALIFICACIONES c
+    JOIN MATERIAS m ON c.id_materia = m.id_materia
+    WHERE c.matricula = 'AA123';
+  `;
+  
+  db.query(query, [req.user.user_matricula], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    res.json(results);
+  });
+});
+
+
+///////////////////////////////////////////////////////    FIN   ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
 
 
 
