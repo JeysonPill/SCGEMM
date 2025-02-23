@@ -313,8 +313,8 @@
       <div class="nav-tab active" onclick="switchTab('student-management', this)">Estudiantes</div>
       <div class="nav-tab" onclick="switchTab('professor-management', this)">Profesores</div>
       <div class="nav-tab" onclick="switchTab('subject-management', this)">Materias</div>
-   
-        <!--
+
+      <!--
         <div id="student-management" class="tab-content active"></div>
         <div id="professor-management" class="tab-content"></div>
         <div id="subject-management" class="tab-content"></div>
@@ -329,8 +329,8 @@
     <button class="logout-button" onclick="handleLogout()">Logout</button>
     <h2>Administracion del sistema</h2>
     <div class="nav-tabs">
-    
-        <!-- original
+
+      <!-- original
       <div class="nav-tab active" onclick="switchTab('user-management', this)">Usuarios</div>
       <div class="nav-tab" onclick="switchTab('system-config', this)">Configuraciones</div>
       <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
@@ -340,6 +340,11 @@
       <div class="nav-tab" onclick="switchTab('system-config', this)">Configuraciones</div>
       <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
 
+      <!-- version 2
+    <div id="user-management" class="tab-content active"></div>
+    <div id="system-config" class="tab-content"></div>
+    <div id="system-logs" class="tab-content"></div>
+    -->
     </div>
 
   </div>
@@ -390,7 +395,7 @@
       }
       if (tabId === 'grades') {
         loadGrades();
-    }
+      }
     }
 
     // Logout
@@ -410,7 +415,7 @@
       const errorMessage = document.getElementById('error-message');
 
       try {
-        const response = await fetch('http://192.168.18.11:3000/login', {
+        const response = await fetch('http://192.168.100.61:3000/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password })
@@ -429,6 +434,7 @@
         errorMessage.textContent = 'Connection error. Please try again.';
         console.error('Login error:', error);
       }
+
       console.log("Token being sent:", localStorage.getItem('authToken'));
 
     });
@@ -438,15 +444,20 @@
       document.querySelectorAll('.content-section').forEach(section => { section.style.display = 'none'; });
 
       switch (parseInt(role)) {
-        case ROLES.SUPER_ADMIN: document.getElementById('super-admin-content').style.display = 'block';
+        case ROLES.SUPER_ADMIN:
+          document.getElementById('super-admin-content').style.display = 'block';
           break;
-        case ROLES.PROFESSOR:   document.getElementById('professor-content').style.display = 'block';
+        case ROLES.PROFESSOR:
+          document.getElementById('professor-content').style.display = 'block';
           break;
-        case ROLES.STUDENT:     document.getElementById('student-content').style.display = 'block';
+        case ROLES.STUDENT:
+          document.getElementById('student-content').style.display = 'block';
           break;
-        case ROLES.ADMIN_STAFF: document.getElementById('admin-staff-content').style.display = 'block';
+        case ROLES.ADMIN_STAFF:
+          document.getElementById('admin-staff-content').style.display = 'block';
           break;
-        default:                document.getElementById('login-content').style.display = 'block';
+        default:
+          document.getElementById('login-content').style.display = 'block';
       }
     }
 
@@ -474,9 +485,9 @@
 
     /////////////////       MATERIAS       ////////////////////////////////////////////
     async function loadSubjects() {
-    const token = localStorage.getItem("authToken"); 
-    const response = await fetch("http://192.168.18.11:3000/student/tabla-datos-estudiante/", {headers: { "Authorization": `Bearer ${token}` }});
-    console.log("Token:", localStorage.getItem("authToken"));
+      const token = localStorage.getItem("authToken");
+      const response = await fetch("http://192.168.100.61:3000/student/tabla-datos-estudiante/", { headers: { "Authorization": `Bearer ${token}` } });
+      console.log("Token:", localStorage.getItem("authToken"));
 
       if (!response.ok) {
         console.error("Error al obtener las materias");
@@ -499,24 +510,24 @@
     }
 
 
-///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
 
-/////////////////       CALIFICACIONES       ////////////////////////////////////////////
-async function loadGrades() {
-    const token = localStorage.getItem("authToken"); 
-    const response = await fetch("http://192.168.18.11:3000/student/tabla-calificaciones/", { headers: { "Authorization": `Bearer ${token}` } });;
+    /////////////////       CALIFICACIONES       ////////////////////////////////////////////
+    async function loadGrades() {
+      const token = localStorage.getItem("authToken");
+      const response = await fetch("http://192.168.100.61:3000/student/tabla-calificaciones/", { headers: { "Authorization": `Bearer ${token}` } });;
 
       if (!response.ok) {
         console.error("Error al obtener las materias");
         return;
       }
 
-    const subjects = await response.json();
-    const tbody = document.getElementById("subjects-table");
-    tbody.innerHTML = "";
+      const subjects = await response.json();
+      const tbody = document.getElementById("subjects-table");
+      tbody.innerHTML = "";
 
-    subjects.forEach(subject => {
-    const row = `<tr>
+      subjects.forEach(subject => {
+        const row = `<tr>
         <td>${subject.materia_nombre}</td>
         <td>${subject.calif_p1}</td>
         <td>${subject.calif_p2}</td>
@@ -527,55 +538,6 @@ async function loadGrades() {
       });
     }
 
-
-/////////////////       KARDEZ       ////////////////////////////////////////////
-async function loadKardez() {
-    const token = localStorage.getItem("authToken"); 
-    const response = await fetch("http://192.168.18.4:3000/student/tabla-kardez/", { headers: { "Authorization": `Bearer ${token}` } });;
-
-    if (!response.ok) { console.error("Error al obtener las materias");
-        return;
-    }
-
-    const subjects = await response.json();
-    const tbody = document.getElementById("kardex-table");
-    tbody.innerHTML = "";
-
-    subjects.forEach(subject => {
-    const row = `<tr>
-        <td>${subject.materia}</td>
-        <td>${subject.periodo}</td>
-        <td>${subject.calif_final}</td>
-        <td>${subject.estado}</td>
-    </tr>`;
-    tbody.innerHTML += row;
-});
-}
-
-/////////////////       PAGOS       ////////////////////////////////////////////
-async function loadPagos() {
-    const token = localStorage.getItem("authToken"); 
-    const response = await fetch("http://192.168.18.4:3000/student/tabla-pagos/", { headers: { "Authorization": `Bearer ${token}` } });;
-
-    if (!response.ok) { console.error("Error al obtener las materias");
-        return;
-    }
-
-    const subjects = await response.json();
-    const tbody = document.getElementById("payments-table");
-    tbody.innerHTML = "";
-
-    subjects.forEach(subject => {
-    const row = `<tr>
-        <td>${subject.MES}</td>
-        <td>${subject.CANTIDAD}</td>
-        <td>${subject.FECHA_CORTE}</td>
-        <td>${subject.ESTADO}</td>
-        <td>${subject.ACCION}</td>
-    </tr>`;
-    tbody.innerHTML += row;
-});
-}
 
 
   </script>
