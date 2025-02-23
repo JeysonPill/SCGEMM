@@ -38,3 +38,39 @@ SELECT
 FROM USUARIOS
 JOIN ALUMNOS ON USUARIOS.id_user = ALUMNOS.matricula
 WHERE user_name = ?;
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////para registro de pago/////////////////////////////////
+function calculateFinalAmount(monto, fechaPago) {
+    let paymentDay = new Date(fechaPago).getDate();
+    if (paymentDay >= 1 && paymentDay <= 5) {
+        return monto * 0.95;  // 5% discount
+    } else if (paymentDay >= 6 && paymentDay <= 15) {
+        return monto;  // No change
+    } else {
+        return monto * 1.05;  // 5% increase
+    }
+}
+
+// Example: User pays on January 20th
+let fechaPago = "2025-01-20";
+let montoBase = 1000;
+let finalAmount = calculateFinalAmount(montoBase, fechaPago);
+
+console.log(finalAmount); // Output: 1050 (5% increase)
+
+/////////actualizacion a la BD
+UPDATE PAGOS 
+SET fecha_pago = '2025-01-20', 
+    monto_pagado = 1050.00
+WHERE id_pago = 1;
+
+
