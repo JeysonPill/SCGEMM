@@ -205,6 +205,8 @@ app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     res.json(results);
   });
+
+  console.log(query);
 });
 
 
