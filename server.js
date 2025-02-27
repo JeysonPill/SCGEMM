@@ -175,37 +175,37 @@ WHERE ALUMNOS.matricula = ?;
 /////////////////       CALIFICACIONES       ///////////////////////////////////////
 
 app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
+  // Get current date
+  const today = new Date();
+  const year = today.getFullYear().toString().slice(-2); // Last 2 digits of the year
+  const month = today.getMonth() + 1; // Months are 0-indexed in JS
+
+  // Determine ciclo_cursando based on the month
+  const ciclo_cursando = month >= 1 && month <= 6 
+    ? `FEB${year}-JUN${year}` 
+    : `AGO${year}-DEC${year}`;
+
+  // SQL Query with ciclo_cursando filter
   const query = `
     SELECT 
-    m.nombre AS materia,
-    c.ciclo_cursando AS periodo,
-    ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) AS calif_final,
-    
-    CASE 
-        WHEN ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) > 7 
-        THEN 'Aprobado' 
-        ELSE 'Reprobado' 
-    END AS estado
-    
+      m.nombre as materia,
+      c.calif_p1,
+      c.calif_p2,
+      c.calif_final,
+      ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) as promedio,
+      c.ciclo_cursando
     FROM CALIFICACIONES c
     JOIN MATERIAS m ON c.id_materia = m.id_materia
+    WHERE c.matricula = ? AND c.ciclo_cursando = ?;
+  `;
 
-    WHERE c.matricula = 'AA123'
-    AND c.ciclo_cursando = (
-    CASE 
-        WHEN MONTH(CURDATE()) BETWEEN 1 AND 6 
-        THEN CONCAT('FEB', RIGHT(YEAR(CURDATE()), 2), '-JUN', RIGHT(YEAR(CURDATE()), 2))
-
-        ELSE CONCAT('AGO', RIGHT(YEAR(CURDATE()), 2), '-DEC', RIGHT(YEAR(CURDATE()), 2))
-    END
-    );`
-  ;
-  
-  db.query(query, [req.user.user_matricula], (err, results) => {
+  // Execute Query
+  db.query(query, [req.user.user_matricula, ciclo_cursando], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
-    console.log(results);
     res.json(results);
   });
+});
+
 
   
 });
