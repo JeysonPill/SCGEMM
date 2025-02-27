@@ -279,7 +279,7 @@ app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
   }
 
   const query = `
-    INSERT INTO ASISTENCIAS (matricula, codigo_asistencia, fecha_hora) 
+    INSERT INTO ASISTENCIAS (matricula, codigo_asistencia, asistencia) 
     VALUES (?, ?, NOW());
   `;
 

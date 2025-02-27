@@ -597,29 +597,37 @@ async function loadPagos() {
 
 function submitAttendance() {
   const token = localStorage.getItem("authToken"); 
-    const attendanceCode = document.getElementById("attendance-code").value.trim();
-    console.log(attendanceCode);
+  const attendanceCode = document.getElementById("attendance-code").value.trim();
+  
+  console.log("Attendance Code (Front):", attendanceCode); // Debugging
 
-    if (!attendanceCode) {
-      alert("Por favor, ingresa un código de asistencia.");
-      return;
-    }
-
-    fetch("http://192.168.18.4:3000/student/registro-asistencias/", {method: "POST", headers: { "Authorization": `Bearer ${token}` }, body: JSON.stringify({ codigo_asistencia: attendanceCode })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        alert("Asistencia registrada exitosamente.");
-      } else {
-        alert("Error al registrar asistencia: " + data.message);
-      }
-    })
-    .catch(error => {
-      console.log("Error:", error);
-      alert("Error al conectar con el servidor.");
-    });
+  if (!attendanceCode) {
+    alert("Por favor, ingresa un código de asistencia.");
+    return;
   }
+
+  fetch("http://192.168.18.4:3000/student/registro-asistencias/", {
+    method: "POST",
+    headers: { 
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json" // ✅ Required for JSON body parsing
+    },
+    body: JSON.stringify({ codigo_asistencia: attendanceCode })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert("Asistencia registrada exitosamente.");
+    } else {
+      alert("Error al registrar asistencia: " + data.message);
+    }
+  })
+  .catch(error => {
+    console.log("Error:", error);
+    alert("Error al conectar con el servidor.");
+  });
+}
+
 
   </script>
 </body>
