@@ -60,7 +60,7 @@ app.post('/login', (req, res) => {
   db.query('SELECT *, ALUMNOS.matricula FROM USUARIOS JOIN ALUMNOS ON USUARIOS.id_user = ALUMNOS.matricula WHERE user_name = ?;', [username], (err, result) => {
     if (err) return res.status(500).json({ message: 'Database error' });
 
-    console.log("Query:", query);
+  
 
 
     if (result.length === 0 || result[0].password !== password) {
