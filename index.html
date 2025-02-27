@@ -603,13 +603,7 @@ function submitAttendance() {
       return;
     }
 
-    fetch("/student/registro-asistencias/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("token") // Ensure token is sent
-      },
-      body: JSON.stringify({ codigo_asistencia: attendanceCode })
+    fetch("/student/registro-asistencias/", {method: "POST", headers: { "Authorization": `Bearer ${token}` }, body: JSON.stringify({ codigo_asistencia: attendanceCode })
     })
     .then(response => response.json())
     .then(data => {
@@ -620,7 +614,7 @@ function submitAttendance() {
       }
     })
     .catch(error => {
-      console.error("Error:", error);
+      console.log("Error:", error);
       alert("Error al conectar con el servidor.");
     });
   }
