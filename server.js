@@ -208,6 +208,62 @@ app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
 });
 
 
+/////////////////       KARDEZ       ///////////////////////////////////////
+
+app.get('/student/tabla-kardez/', authenticateToken, (req, res) => {
+  const query = `
+    SELECT 
+    m.nombre AS materia,
+    c.ciclo_cursando AS periodo,
+    ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) AS calif_final,
+    CASE 
+        WHEN ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) > 7 
+        THEN 'Aprobado' 
+        ELSE 'Reprobado' 
+    END AS estado
+    FROM CALIFICACIONES c
+    JOIN MATERIAS m ON c.id_materia = m.id_materia
+    WHERE c.matricula = ?;
+  `;
+  
+  db.query(query, [req.user.user_matricula], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    res.json(results);
+  });
+});
+
+
+/////////////////       PAGOS       ///////////////////////////////////////
+
+app.get('/student/tabla-pagos/', authenticateToken, (req, res) => {
+  const query = `
+    SELECT 
+    DATE_FORMAT(p.fecha_vencimiento, '%M') AS MES,  -- Extracts month name
+    p.pago_mensual AS CANTIDAD,
+    p.fecha_vencimiento AS FECHA_CORTE,
+    CASE 
+        WHEN p.fecha_pago IS NULL THEN 'Pendiente'
+        WHEN DAY(p.fecha_pago) BETWEEN 1 AND 5 THEN 'Descuento 5%'
+        WHEN DAY(p.fecha_pago) BETWEEN 6 AND 15 THEN 'Normal'
+        WHEN DAY(p.fecha_pago) > 15 THEN 'Recargo 5%'
+    END AS ESTADO,
+    CASE 
+        WHEN p.fecha_pago IS NULL THEN 'Por pagar'
+        ELSE 'Pagado'
+    END AS ACCION
+
+FROM PAGOS p
+JOIN ALUMNOS on ALUMNOS.matricula = p.matricula
+where ALUMNOS.matricula = 'AA123';
+  `;
+  
+  db.query(query, [req.user.user_matricula], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    res.json(results);
+  });
+});
+
+///////////////////////////////////////////////////////    FIN   ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
 
 
 // PROFESSOR ROUTES

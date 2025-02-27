@@ -538,7 +538,54 @@
       });
     }
 
+/////////////////       KARDEZ       ////////////////////////////////////////////
+async function loadKardez() {
+    const token = localStorage.getItem("authToken"); 
+    const response = await fetch("http://192.168.18.4:3000/student/tabla-kardez/", { headers: { "Authorization": `Bearer ${token}` } });;
 
+    if (!response.ok) { console.error("Error al obtener las materias");
+        return;
+    }
+
+    const subjects = await response.json();
+    const tbody = document.getElementById("kardex-table");
+    tbody.innerHTML = "";
+
+    subjects.forEach(subject => {
+    const row = `<tr>
+        <td>${subject.materia}</td>
+        <td>${subject.periodo}</td>
+        <td>${subject.calif_final}</td>
+        <td>${subject.estado}</td>
+    </tr>`;
+    tbody.innerHTML += row;
+});
+}
+
+/////////////////       PAGOS       ////////////////////////////////////////////
+async function loadPagos() {
+    const token = localStorage.getItem("authToken"); 
+    const response = await fetch("http://192.168.18.4:3000/student/tabla-pagos/", { headers: { "Authorization": `Bearer ${token}` } });;
+
+    if (!response.ok) { console.error("Error al obtener las materias");
+        return;
+    }
+
+    const subjects = await response.json();
+    const tbody = document.getElementById("payments-table");
+    tbody.innerHTML = "";
+
+    subjects.forEach(subject => {
+    const row = `<tr>
+        <td>${subject.MES}</td>
+        <td>${subject.CANTIDAD}</td>
+        <td>${subject.FECHA_CORTE}</td>
+        <td>${subject.ESTADO}</td>
+        <td>${subject.ACCION}</td>
+    </tr>`;
+    tbody.innerHTML += row;
+});
+}
 
   </script>
   <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
