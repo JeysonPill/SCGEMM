@@ -283,7 +283,7 @@ app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
 
   db.query(query, [user_matricula, codigo_asistencia], (err, result) => {
     if (err) {
-      console.error(err);
+      console.log(err);
       return res.status(500).json({ success: false, message: "Database error" });
     }
     res.json({ success: true, message: "Asistencia registrada correctamente" });

@@ -596,6 +596,7 @@ async function loadPagos() {
 /////////////////       ASISTENCIAS       ////////////////////////////////////////////
 
 function submitAttendance() {
+  const token = localStorage.getItem("authToken"); 
     const attendanceCode = document.getElementById("attendance-code").value.trim();
 
     if (!attendanceCode) {
