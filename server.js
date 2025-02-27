@@ -266,7 +266,7 @@ app.get('/student/tabla-pagos/', authenticateToken, (req, res) => {
 });
 
 
-/////////////////       PAGOS       ///////////////////////////////////////
+/////////////////       ASISTENCIAS       ///////////////////////////////////////
 
 app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
   const { codigo_asistencia } = req.body;
