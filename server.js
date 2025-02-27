@@ -272,6 +272,8 @@ app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
   const { codigo_asistencia } = req.body;
   const user_matricula = req.user.user_matricula;
 
+  console.log(codigo_asistencia);
+
   if (!codigo_asistencia) {
     return res.status(400).json({ success: false, message: "Código de asistencia requerido" });
   }
