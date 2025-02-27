@@ -253,9 +253,9 @@ app.get('/student/tabla-pagos/', authenticateToken, (req, res) => {
         ELSE 'Pagado'
     END AS ACCION
 
-FROM PAGOS p
-JOIN ALUMNOS on ALUMNOS.matricula = p.matricula
-where ALUMNOS.matricula = 'AA123';
+  FROM PAGOS p
+  JOIN ALUMNOS on ALUMNOS.matricula = p.matricula
+  where ALUMNOS.matricula = ?;
   `;
   
   db.query(query, [req.user.user_matricula], (err, results) => {
