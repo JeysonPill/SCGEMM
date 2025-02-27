@@ -60,9 +60,6 @@ app.post('/login', (req, res) => {
   db.query('SELECT *, ALUMNOS.matricula FROM USUARIOS JOIN ALUMNOS ON USUARIOS.id_user = ALUMNOS.matricula WHERE user_name = ?;', [username], (err, result) => {
     if (err) return res.status(500).json({ message: 'Database error' });
 
-  
-
-
     if (result.length === 0 || result[0].password !== password) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -84,64 +81,9 @@ app.post('/login', (req, res) => {
       user_role: user.user_role,
       user_id: user.id_user,
       user_matricula: user.matricula
-      //matricula: user.matricula  
     });
   });
 });
-
-// STUDENT ROUTES
-
-app.get('/student/subjects/:matricula', authenticateToken, (req, res) => {
-  const query = `
-    SELECT 
-      m.nombre as materia,
-      p.nombre as profesor,
-      TIME_FORMAT(h.h_lunes, '%H:%i') as lunes,
-      TIME_FORMAT(h.h_martes, '%H:%i') as martes,
-      TIME_FORMAT(h.h_miercoles, '%H:%i') as miercoles,
-      TIME_FORMAT(h.h_jueves, '%H:%i') as jueves,
-      TIME_FORMAT(h.h_viernes, '%H:%i') as viernes,
-      ga.id_grupo
-    FROM GRUPOALUMNOS ga
-    JOIN MATERIAS m ON ga.id_materia = m.id_materia
-    JOIN MATERIASPROFESORES mp ON ga.id_grupo = mp.id_grupo
-    JOIN PROFESORES p ON mp.id_profesor = p.id_profesor
-    JOIN HORARIOS h ON ga.id_grupo = h.id_grupo
-    WHERE ga.matricula = ?
-  `;
-
-  db.query(query, [req.params.matricula], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(results);
-  });
-});
-
-
-
-app.get('/student/payments/:matricula', authenticateToken, (req, res) => {
-  const query = `
-    SELECT 
-      matricula,
-      ciclo_cursando,
-      DATE_FORMAT(pago1, '%Y-%m-%d') as pago1,
-      DATE_FORMAT(pago2, '%Y-%m-%d') as pago2,
-      DATE_FORMAT(pago3, '%Y-%m-%d') as pago3,
-      DATE_FORMAT(pago4, '%Y-%m-%d') as pago4,
-      DATE_FORMAT(pago5, '%Y-%m-%d') as pago5,
-      DATE_FORMAT(pago6, '%Y-%m-%d') as pago6,
-      pago_mensual,
-      total,
-      status
-    FROM PAGOS
-    WHERE matricula = ?
-  `;
-
-  db.query(query, [req.params.matricula], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(results);
-  });
-});
-
 
 ///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
 
@@ -172,20 +114,16 @@ WHERE ALUMNOS.matricula = ?;
   });
 });
 
+
 /////////////////       CALIFICACIONES       ///////////////////////////////////////
-
 app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
-  // Get current date
   const today = new Date();
-  const year = today.getFullYear().toString().slice(-2); // Last 2 digits of the year
-  const month = today.getMonth() + 1; // Months are 0-indexed in JS
+  const year = today.getFullYear().toString().slice(-2);
+  const month = today.getMonth() + 1; 
 
-  // Determine ciclo_cursando based on the month
   const ciclo_cursando = month >= 1 && month <= 6 
     ? `FEB${year}-JUN${year}` 
     : `AGO${year}-DEC${year}`;
-
-  // SQL Query with ciclo_cursando filter
   const query = `
     SELECT 
       m.nombre as materia,
@@ -208,7 +146,6 @@ app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
 
 
 /////////////////       KARDEZ       ///////////////////////////////////////
-
 app.get('/student/tabla-kardez/', authenticateToken, (req, res) => {
   const query = `
     SELECT 
@@ -227,15 +164,12 @@ app.get('/student/tabla-kardez/', authenticateToken, (req, res) => {
   
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
-    console.log(query);
-    console.log(results);
     res.json(results);
   });
 });
 
 
 /////////////////       PAGOS       ///////////////////////////////////////
-
 app.get('/student/tabla-pagos/', authenticateToken, (req, res) => {
   const query = `
     SELECT 
@@ -267,21 +201,16 @@ app.get('/student/tabla-pagos/', authenticateToken, (req, res) => {
 
 
 /////////////////       ASISTENCIAS       ///////////////////////////////////////
-
 app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
   const { codigo_asistencia } = req.body;
   const user_matricula = req.user.user_matricula;
 
   console.log(codigo_asistencia);
 
-  if (!codigo_asistencia) {
-    return res.status(400).json({ success: false, message: "Código de asistencia requerido" });
-  }
-
-  const query = `
-    INSERT INTO ASISTENCIAS (matricula, codigo_asistencia, asistencia) 
-    VALUES (?, ?, NOW());
-  `;
+  if (!codigo_asistencia) 
+      return res.status(400).json({ success: false, message: "Código de asistencia requerido" });
+  
+  const query = ` INSERT INTO ASISTENCIAS (matricula, codigo_asistencia, asistencia) VALUES (?, ?, NOW()); `;
 
   db.query(query, [user_matricula, codigo_asistencia], (err, result) => {
     if (err) {
@@ -296,7 +225,15 @@ app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
 ///////////////////////////////////////////////////////    FIN   ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
 
 
-// PROFESSOR ROUTES
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////       PROFESORES       ////////////////////////////////////////////////////////////////////////////////
 
 app.get('/professor/schedule/:id_profesor', authenticateToken, (req, res) => {
   const query = `
