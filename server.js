@@ -264,6 +264,32 @@ app.get('/student/tabla-pagos/', authenticateToken, (req, res) => {
   });
 });
 
+
+/////////////////       PAGOS       ///////////////////////////////////////
+
+app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
+  const { codigo_asistencia } = req.body;
+  const user_matricula = req.user.user_matricula;
+
+  if (!codigo_asistencia) {
+    return res.status(400).json({ success: false, message: "Código de asistencia requerido" });
+  }
+
+  const query = `
+    INSERT INTO ASISTENCIAS (matricula, codigo_asistencia, fecha_hora) 
+    VALUES (?, ?, NOW());
+  `;
+
+  db.query(query, [user_matricula, codigo_asistencia], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ success: false, message: "Database error" });
+    }
+    res.json({ success: true, message: "Asistencia registrada correctamente" });
+  });
+});
+
+
 ///////////////////////////////////////////////////////    FIN   ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
 
 

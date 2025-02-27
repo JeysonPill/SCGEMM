@@ -593,6 +593,61 @@ async function loadPagos() {
 });
 }
 
+/////////////////       PAGOS       ////////////////////////////////////////////
+async function loadPagos() {
+    const token = localStorage.getItem("authToken"); 
+    const response = await fetch("http://192.168.18.4:3000/student/registro-asistencias/", { headers: { "Authorization": `Bearer ${token}` } });;
+
+    if (!response.ok) { console.error("Error al obtener las materias");
+        return;
+    }
+
+    const subjects = await response.json();
+    const tbody = document.getElementById("payments-table");
+    tbody.innerHTML = "";
+
+    subjects.forEach(subject => {
+    const row = `<tr>
+        <td>${subject.MES}</td>
+        <td>${subject.CANTIDAD}</td>
+        <td>${subject.FECHA_CORTE}</td>
+        <td>${subject.ESTADO}</td>
+        <td>${subject.ACCION}</td>
+    </tr>`;
+    tbody.innerHTML += row;
+});
+}
+
+function submitAttendance() {
+    const attendanceCode = document.getElementById("attendance-code").value.trim();
+
+    if (!attendanceCode) {
+      alert("Por favor, ingresa un código de asistencia.");
+      return;
+    }
+
+    fetch("/student/registro-asistencias/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token") // Ensure token is sent
+      },
+      body: JSON.stringify({ codigo_asistencia: attendanceCode })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert("Asistencia registrada exitosamente.");
+      } else {
+        alert("Error al registrar asistencia: " + data.message);
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      alert("Error al conectar con el servidor.");
+    });
+  }
+
   </script>
 </body>
 
