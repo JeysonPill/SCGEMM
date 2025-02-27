@@ -12,11 +12,14 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
-  host: '192.168.18.4',
+  host: '127.0.0.1',
   user: 'node_user',
   password: 'Zapatitoblanco123',
-  database: 'SCGEM'
+  database: 'scgem',
+  port : 3000
 });
+
+
 
 // Role constants
 const ROLES = {
@@ -31,13 +34,13 @@ const authenticateToken = (req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
   if (!token) return res.status(401).json({ message: 'Authentication required' });
 
-  
+
   jwt.verify(token, 'aVeryStrongSecretKeyHere', (err, user) => {
     if (err) return res.status(403).json({ message: 'Invalid token' });
     req.user = user;
     next();
   });
-  
+
 };
 
 // Role check middleware
@@ -55,10 +58,10 @@ const checkRole = (roles) => {
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
-  db.query('SELECT *,ALUMNOS.matricula FROM USUARIOS JOIN ALUMNOS ON USUARIOS.id_user = ALUMNOS.matricula WHERE user_name = ?;', [username], (err, result) => {
+  db.query('SELECT *, ALUMNOS.matricula FROM USUARIOS JOIN ALUMNOS ON USUARIOS.id_user = ALUMNOS.matricula WHERE user_name = ?;', [username], (err, result) => {
     if (err) return res.status(500).json({ message: 'Database error' });
 
-    //console.log("Query:" ,query);
+    console.log("Query:", query);
 
 
     if (result.length === 0 || result[0].password !== password) {
@@ -67,8 +70,8 @@ app.post('/login', (req, res) => {
 
     const user = result[0];
     const token = jwt.sign(
-      { 
-        user_id: user.id_user, 
+      {
+        user_id: user.id_user,
         user_name: user.user_name,
         user_role: user.user_role,
         user_matricula: user.matricula
@@ -77,8 +80,8 @@ app.post('/login', (req, res) => {
       { expiresIn: '1h' }
     );
 
-    res.json({ 
-      token, 
+    res.json({
+      token,
       user_role: user.user_role,
       user_id: user.id_user,
       user_matricula: user.matricula
@@ -107,7 +110,7 @@ app.get('/student/subjects/:matricula', authenticateToken, (req, res) => {
     JOIN HORARIOS h ON ga.id_grupo = h.id_grupo
     WHERE ga.matricula = ?
   `;
-  
+
   db.query(query, [req.params.matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     res.json(results);
@@ -133,7 +136,7 @@ app.get('/student/payments/:matricula', authenticateToken, (req, res) => {
     FROM PAGOS
     WHERE matricula = ?
   `;
-  
+
   db.query(query, [req.params.matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     res.json(results);
@@ -163,7 +166,7 @@ JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
 JOIN GRUPOALUMNOS ON GRUPOALUMNOS.id_materia = MATERIAS.id_materia
 JOIN ALUMNOS ON GRUPOALUMNOS.matricula = ALUMNOS.matricula
 WHERE ALUMNOS.matricula = ?;
-   `;  
+  `;
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     res.json(results);
@@ -206,63 +209,6 @@ app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
 });
 
 
-/////////////////       KARDEZ       ///////////////////////////////////////
-
-app.get('/student/tabla-kardez/', authenticateToken, (req, res) => {
-  const query = `
-    SELECT 
-    m.nombre AS materia,
-    c.ciclo_cursando AS periodo,
-    ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) AS calif_final,
-    CASE 
-        WHEN ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) > 7 
-        THEN 'Aprobado' 
-        ELSE 'Reprobado' 
-    END AS estado
-    FROM CALIFICACIONES c
-    JOIN MATERIAS m ON c.id_materia = m.id_materia
-    WHERE c.matricula = ?;
-  `;
-  
-  db.query(query, [req.user.user_matricula], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(results);
-  });
-});
-
-
-/////////////////       PAGOS       ///////////////////////////////////////
-
-app.get('/student/tabla-pagos/', authenticateToken, (req, res) => {
-  const query = `
-    SELECT 
-    DATE_FORMAT(p.fecha_vencimiento, '%M') AS MES,  -- Extracts month name
-    p.pago_mensual AS CANTIDAD,
-    p.fecha_vencimiento AS FECHA_CORTE,
-    CASE 
-        WHEN p.fecha_pago IS NULL THEN 'Pendiente'
-        WHEN DAY(p.fecha_pago) BETWEEN 1 AND 5 THEN 'Descuento 5%'
-        WHEN DAY(p.fecha_pago) BETWEEN 6 AND 15 THEN 'Normal'
-        WHEN DAY(p.fecha_pago) > 15 THEN 'Recargo 5%'
-    END AS ESTADO,
-    CASE 
-        WHEN p.fecha_pago IS NULL THEN 'Por pagar'
-        ELSE 'Pagado'
-    END AS ACCION
-
-FROM PAGOS p
-JOIN ALUMNOS on ALUMNOS.matricula = p.matricula
-where ALUMNOS.matricula = 'AA123';
-  `;
-  
-  db.query(query, [req.user.user_matricula], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(results);
-  });
-});
-
-///////////////////////////////////////////////////////    FIN   ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
-
 
 
 // PROFESSOR ROUTES
@@ -282,7 +228,7 @@ app.get('/professor/schedule/:id_profesor', authenticateToken, (req, res) => {
     JOIN HORARIOS h ON mp.id_grupo = h.id_grupo
     WHERE mp.id_profesor = ?
   `;
-  
+
   db.query(query, [req.params.id_profesor], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     res.json(results);
@@ -304,7 +250,7 @@ app.get('/professor/group-students/:id_grupo', authenticateToken, (req, res) => 
     LEFT JOIN CALIFICACIONES c ON ga.matricula = c.matricula AND ga.id_materia = c.id_materia
     WHERE ga.id_grupo = ?
   `;
-  
+
   db.query(query, [req.params.id_grupo], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     res.json(results);
@@ -314,7 +260,7 @@ app.get('/professor/group-students/:id_grupo', authenticateToken, (req, res) => 
 app.post('/professor/generate-qr', authenticateToken, async (req, res) => {
   const { id_grupo, id_materia } = req.body;
   const codigo = Math.random().toString(36).substring(2, 12).toUpperCase();
-  
+
   try {
     const qrCode = await qr.toDataURL(codigo);
     res.json({ qrCode, codigo });
@@ -325,7 +271,7 @@ app.post('/professor/generate-qr', authenticateToken, async (req, res) => {
 
 app.post('/professor/update-grades', authenticateToken, (req, res) => {
   const { matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando } = req.body;
-  
+
   const query = `
     INSERT INTO CALIFICACIONES 
       (matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando)
@@ -335,8 +281,8 @@ app.post('/professor/update-grades', authenticateToken, (req, res) => {
       calif_p2 = VALUES(calif_p2),
       calif_final = VALUES(calif_final)
   `;
-  
-  db.query(query, 
+
+  db.query(query,
     [matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando],
     (err, result) => {
       if (err) return res.status(500).json({ message: 'Database error' });
@@ -382,7 +328,7 @@ app.get('/superadmin/users', authenticateToken, checkRole([ROLES.SUPER_ADMIN]), 
 app.post('/superadmin/user', authenticateToken, checkRole([ROLES.SUPER_ADMIN]), (req, res) => {
   const { user_name, password, id_user, user_role } = req.body;
   const query = 'INSERT INTO USUARIOS (user_name, password, id_user, user_role) VALUES (?, ?, ?, ?)';
-  
+
   db.query(query, [user_name, password, id_user, user_role], (err, result) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     res.json({ message: 'User created successfully' });
