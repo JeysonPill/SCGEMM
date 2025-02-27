@@ -207,10 +207,6 @@ app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
 });
 
 
-  
-});
-
-
 /////////////////       KARDEZ       ///////////////////////////////////////
 
 app.get('/student/tabla-kardez/', authenticateToken, (req, res) => {
