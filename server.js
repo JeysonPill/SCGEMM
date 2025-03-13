@@ -70,7 +70,7 @@ app.post('/login', (req, res) => {
         user_id: user.id_user,
         user_name: user.user_name,
         user_role: user.user_role,
-        user_matricula: user.matricula
+        user_matricula: user.id_user
       },
       'aVeryStrongSecretKeyHere',
       { expiresIn: '1h' }
@@ -80,7 +80,7 @@ app.post('/login', (req, res) => {
       token,
       user_role: user.user_role,
       user_id: user.id_user,
-      user_matricula: user.matricula
+      user_matricula: user.id_user
     });
   });
 });
