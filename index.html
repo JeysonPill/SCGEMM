@@ -647,6 +647,7 @@ async function loadSubjectsProf() {
       }
 
       const subjects = await response.json();
+      console.log("retorno",subjects);
       const tbody = document.getElementById("schedule-table");
       tbody.innerHTML = "";
 

@@ -251,9 +251,9 @@ FROM MATERIAS
 JOIN PROFESORES
 JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
 JOIN GRUPOALUMNOS ON GRUPOALUMNOS.id_materia = MATERIAS.id_materia
-JOIN ALUMNOS ON GRUPOALUMNOS.matricula = ALUMNOS.matricula
 WHERE PROFESORES.id_profesor = ?;
   `;
+  console.log("matre",req.user.user_matricula);
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     console.log(results);
@@ -262,85 +262,6 @@ WHERE PROFESORES.id_profesor = ?;
 });
 
 
-
-
-app.post('/professor/generate-qr', authenticateToken, async (req, res) => {
-  const { id_grupo, id_materia } = req.body;
-  const codigo = Math.random().toString(36).substring(2, 12).toUpperCase();
-
-  try {
-    const qrCode = await qr.toDataURL(codigo);
-    res.json({ qrCode, codigo });
-  } catch (err) {
-    res.status(500).json({ message: 'QR generation failed' });
-  }
-});
-
-app.post('/professor/update-grades', authenticateToken, (req, res) => {
-  const { matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando } = req.body;
-
-  const query = `
-    INSERT INTO CALIFICACIONES 
-      (matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando)
-    VALUES (?, ?, ?, ?, ?, ?)
-    ON DUPLICATE KEY UPDATE
-      calif_p1 = VALUES(calif_p1),
-      calif_p2 = VALUES(calif_p2),
-      calif_final = VALUES(calif_final)
-  `;
-
-  db.query(query,
-    [matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando],
-    (err, result) => {
-      if (err) return res.status(500).json({ message: 'Database error' });
-      res.json({ message: 'Grades updated successfully' });
-    }
-  );
-});
-
-// ADMIN STAFF ROUTES
-app.get('/admin/students', authenticateToken, checkRole([ROLES.ADMIN_STAFF, ROLES.SUPER_ADMIN]), (req, res) => {
-  const query = 'SELECT * FROM ALUMNOS';
-  db.query(query, (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(results);
-  });
-});
-
-app.get('/admin/professors', authenticateToken, checkRole([ROLES.ADMIN_STAFF, ROLES.SUPER_ADMIN]), (req, res) => {
-  const query = 'SELECT * FROM PROFESORES';
-  db.query(query, (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(results);
-  });
-});
-
-app.get('/admin/subjects', authenticateToken, checkRole([ROLES.ADMIN_STAFF, ROLES.SUPER_ADMIN]), (req, res) => {
-  const query = 'SELECT * FROM MATERIAS';
-  db.query(query, (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(results);
-  });
-});
-
-// SUPER ADMIN ROUTES
-app.get('/superadmin/users', authenticateToken, checkRole([ROLES.SUPER_ADMIN]), (req, res) => {
-  const query = 'SELECT * FROM USUARIOS';
-  db.query(query, (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(results);
-  });
-});
-
-app.post('/superadmin/user', authenticateToken, checkRole([ROLES.SUPER_ADMIN]), (req, res) => {
-  const { user_name, password, id_user, user_role } = req.body;
-  const query = 'INSERT INTO USUARIOS (user_name, password, id_user, user_role) VALUES (?, ?, ?, ?)';
-
-  db.query(query, [user_name, password, id_user, user_role], (err, result) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json({ message: 'User created successfully' });
-  });
-});
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
