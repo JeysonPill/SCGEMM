@@ -58,11 +58,10 @@ app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
   db.query('SELECT * FROM USUARIOS WHERE user_name = ?;', [username], (err, result) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
+    if (err)                                                      return res.status(500).json({ message: 'Database error' });
 
-    if (result.length === 0 || result[0].password !== password) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
+    if (result.length === 0 || result[0].password !== password)   return res.status(401).json({ message: 'Invalid credentials' });
+    
 
     const user = result[0];
     const token = jwt.sign(
@@ -238,23 +237,22 @@ app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
 
 app.get('/professor/schedule/', authenticateToken, (req, res) => {
   const query = `
-    SELECT 
+   SELECT 
     MATERIAS.nombre AS materia_nombre,
-    PROFESORES.nombre AS profesor_nombre,
+    GRUPOALUMNOS.id_grupo,
     CONCAT(
         'Lunes: ', TIME_FORMAT(HORARIOS.h_lunes, '%H:%i'), '\n',
         'Martes: ', TIME_FORMAT(HORARIOS.h_martes, '%H:%i'), '\n',
         'Miércoles: ', TIME_FORMAT(HORARIOS.h_miercoles, '%H:%i'), '\n',
         'Jueves: ', TIME_FORMAT(HORARIOS.h_jueves, '%H:%i'), '\n',
         'Viernes: ', TIME_FORMAT(HORARIOS.h_viernes, '%H:%i')
-    ) AS horarios,
-    GRUPOALUMNOS.id_grupo
+    ) AS horarios
 FROM MATERIAS
 JOIN PROFESORES
 JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
 JOIN GRUPOALUMNOS ON GRUPOALUMNOS.id_materia = MATERIAS.id_materia
 JOIN ALUMNOS ON GRUPOALUMNOS.matricula = ALUMNOS.matricula
-WHERE ALUMNOS.matricula = ?;
+WHERE PROFESORES.id_profesor = ?;
   `;
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
@@ -262,29 +260,6 @@ WHERE ALUMNOS.matricula = ?;
   });
 });
 
-
-
-app.get('/professor/schedule/:id_profesor', authenticateToken, (req, res) => {
-  const query = `
-    SELECT 
-      m.nombre as materia,
-      mp.id_grupo,
-      TIME_FORMAT(h.h_lunes, '%H:%i') as lunes,
-      TIME_FORMAT(h.h_martes, '%H:%i') as martes,
-      TIME_FORMAT(h.h_miercoles, '%H:%i') as miercoles,
-      TIME_FORMAT(h.h_jueves, '%H:%i') as jueves,
-      TIME_FORMAT(h.h_viernes, '%H:%i') as viernes
-    FROM MATERIASPROFESORES mp
-    JOIN MATERIAS m ON mp.id_materia = m.id_materia
-    JOIN HORARIOS h ON mp.id_grupo = h.id_grupo
-    WHERE mp.id_profesor = ?
-  `;
-
-  db.query(query, [req.params.id_profesor], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(results);
-  });
-});
 
 
 

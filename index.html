@@ -265,7 +265,6 @@
             <th>Materia</th>
             <th>Grupo</th>
             <th>Horario</th>
-            <th>Salon</th>
           </tr>
         </thead>
         <tbody id="schedule-table">
@@ -405,6 +404,9 @@
       }
       if (tabId === 'payments') {
         loadPagos();
+      }
+      if (tabId === 'teaching-schedule') {
+        loadSubjectsProf();
       }
     }
 
@@ -651,9 +653,8 @@ async function loadSubjectsProf() {
       subjects.forEach(subject => {
         const row = `<tr>
         <td>${subject.materia_nombre}</td>
-        <td>${subject.profesor_nombre}</td>
-        <td>${subject.horarios.replace(/\n/g, '<br>')}</td> <!-- Replace \n with <br> -->
         <td>${subject.id_grupo}</td>
+        <td>${subject.horarios.replace(/\n/g, '<br>')}</td> <!-- Replace \n with <br> -->
     </tr>`;
         tbody.innerHTML += row;
       });
