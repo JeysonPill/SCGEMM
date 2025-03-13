@@ -157,7 +157,7 @@
     <div id="error-message"></div>
   </div>
 
-  <!-- Panel de estudiantes -->
+  <!-------------------------------------------------------------------- Panel de estudiantes -------------------------------------------------------------------------------->
   <div id="student-content" class="content-section">
     <button class="logout-button" onclick="handleLogout()">Cerrar sesion</button>
     <h2>Panel de estudiantes</h2>
@@ -246,6 +246,8 @@
     </div>
   </div>
 
+
+  <!-------------------------------------------------------------------- Panel de profesores -------------------------------------------------------------------------------->
   <div id="professor-content" class="content-section">
     <button class="logout-button" onclick="handleLogout()">Logout</button>
     <h2>Panel de profesor</h2>
@@ -305,6 +307,8 @@
     </div>
   </div>
 
+  
+<!-------------------------------------------------------------------- Panel de administrativos -------------------------------------------------------------------------------->
   <div id="admin-staff-content" class="content-section">
     <button class="logout-button" onclick="handleLogout()">Logout</button>
     <h2>Panel de administrativos</h2>
@@ -324,7 +328,7 @@
 
   </div>
 
-  <!-- Panel del linuxero maestro -->
+<!-------------------------------------------------------------------- Panel de linuxero maestro -------------------------------------------------------------------------------->
   <div id="super-admin-content" class="content-section">
     <button class="logout-button" onclick="handleLogout()">Logout</button>
     <h2>Administracion del sistema</h2>
@@ -515,9 +519,6 @@
       });
     }
 
-
-    ///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
-
     /////////////////       CALIFICACIONES       ////////////////////////////////////////////
     async function loadGrades() {
       const token = localStorage.getItem("authToken");
@@ -628,6 +629,35 @@ function submitAttendance() {
   });
 }
 
+
+
+
+/////////////////////////////////////////////////////////////       PROFESORES       ////////////////////////////////////////////////////////////////////////////////
+
+async function loadSubjectsProf() {
+      const token = localStorage.getItem("authToken");
+      const response = await fetch("http://192.168.18.4:3000/professor/schedule/", { headers: { "Authorization": `Bearer ${token}` } });
+      console.log("Token:", localStorage.getItem("authToken"));
+
+      if (!response.ok) {
+        console.error("Error al obtener las materias");
+        return;
+      }
+
+      const subjects = await response.json();
+      const tbody = document.getElementById("schedule-table");
+      tbody.innerHTML = "";
+
+      subjects.forEach(subject => {
+        const row = `<tr>
+        <td>${subject.materia_nombre}</td>
+        <td>${subject.profesor_nombre}</td>
+        <td>${subject.horarios.replace(/\n/g, '<br>')}</td> <!-- Replace \n with <br> -->
+        <td>${subject.id_grupo}</td>
+    </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
 
   </script>
 </body>

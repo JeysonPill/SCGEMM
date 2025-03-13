@@ -37,4 +37,8 @@ SELECT
     *,ALUMNOS.matricula
 FROM USUARIOS
 JOIN ALUMNOS ON USUARIOS.id_user = ALUMNOS.matricula
-WHERE user_name = ?;
+login
+SELECT * FROM USUARIOS WHERE user_name = ?;
+
+
+select MATERIAS.nombre, h_lunes,h_martes,h_miercoles,h_jueves,h_viernes from PROFESORES JOIN HORARIOS on PROFESORES.id_profesor=HORARIOS.id_profesor join MATERIAS where PROFESORES.id_profesor='SFW25';

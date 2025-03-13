@@ -57,7 +57,7 @@ const checkRole = (roles) => {
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
-  db.query('SELECT *, ALUMNOS.matricula FROM USUARIOS JOIN ALUMNOS ON USUARIOS.id_user = ALUMNOS.matricula WHERE user_name = ?;', [username], (err, result) => {
+  db.query('SELECT * FROM USUARIOS WHERE user_name = ?;', [username], (err, result) => {
     if (err) return res.status(500).json({ message: 'Database error' });
 
     if (result.length === 0 || result[0].password !== password) {
@@ -235,6 +235,35 @@ app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
 
 ///////////////////////////////////////////////////////       PROFESORES       ////////////////////////////////////////////////////////////////////////////////
 
+
+app.get('/professor/schedule/', authenticateToken, (req, res) => {
+  const query = `
+    SELECT 
+    MATERIAS.nombre AS materia_nombre,
+    PROFESORES.nombre AS profesor_nombre,
+    CONCAT(
+        'Lunes: ', TIME_FORMAT(HORARIOS.h_lunes, '%H:%i'), '\n',
+        'Martes: ', TIME_FORMAT(HORARIOS.h_martes, '%H:%i'), '\n',
+        'Miércoles: ', TIME_FORMAT(HORARIOS.h_miercoles, '%H:%i'), '\n',
+        'Jueves: ', TIME_FORMAT(HORARIOS.h_jueves, '%H:%i'), '\n',
+        'Viernes: ', TIME_FORMAT(HORARIOS.h_viernes, '%H:%i')
+    ) AS horarios,
+    GRUPOALUMNOS.id_grupo
+FROM MATERIAS
+JOIN PROFESORES
+JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
+JOIN GRUPOALUMNOS ON GRUPOALUMNOS.id_materia = MATERIAS.id_materia
+JOIN ALUMNOS ON GRUPOALUMNOS.matricula = ALUMNOS.matricula
+WHERE ALUMNOS.matricula = ?;
+  `;
+  db.query(query, [req.user.user_matricula], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    res.json(results);
+  });
+});
+
+
+
 app.get('/professor/schedule/:id_profesor', authenticateToken, (req, res) => {
   const query = `
     SELECT 
@@ -257,27 +286,7 @@ app.get('/professor/schedule/:id_profesor', authenticateToken, (req, res) => {
   });
 });
 
-app.get('/professor/group-students/:id_grupo', authenticateToken, (req, res) => {
-  const query = `
-    SELECT 
-      a.matricula,
-      a.nombre,
-      a.carrera,
-      a.semestre,
-      c.calif_p1,
-      c.calif_p2,
-      c.calif_final
-    FROM GRUPOALUMNOS ga
-    JOIN ALUMNOS a ON ga.matricula = a.matricula
-    LEFT JOIN CALIFICACIONES c ON ga.matricula = c.matricula AND ga.id_materia = c.id_materia
-    WHERE ga.id_grupo = ?
-  `;
 
-  db.query(query, [req.params.id_grupo], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(results);
-  });
-});
 
 app.post('/professor/generate-qr', authenticateToken, async (req, res) => {
   const { id_grupo, id_materia } = req.body;
