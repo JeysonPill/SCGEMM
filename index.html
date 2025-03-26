@@ -595,7 +595,7 @@ async function loadKardez() {
 /////////////////       PAGOS       ////////////////////////////////////////////
 async function loadPagos() {
     const token = localStorage.getItem("authToken"); 
-    const response = await fetch("http://"+ip+":3000/student/tabla-pagos/", { headers: { "Authorization": `Bearer ${token}` } });;
+    const response = await fetch("http://192.168.18.9:3000/student/tabla-pagos/", { headers: { "Authorization": `Bearer ${token}` } });;
 
     if (!response.ok) { console.error("Error al obtener las materias");
         return;
