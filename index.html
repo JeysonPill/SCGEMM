@@ -383,6 +383,25 @@
     };
     //////////////////////////////
 
+    function getBackendIP() {
+   let backendIP = localStorage.getItem('backendIP');
+
+  //if (!backendIP) {
+    backendIP = prompt("Enter backend IP (e.g., 192.168.18.X):", "192.168.18.4");
+    if (backendIP) {
+      localStorage.setItem('backendIP', backendIP);
+    } else {
+      alert("Backend IP is required!");
+      return null;
+    }
+ // }
+  
+  return backendIP;
+}
+
+var backendIP = getBackendIP();
+
+
     // cambia paginas
     function switchTab(tabId, element) {
       // Remove active class from all tabs
@@ -427,7 +446,9 @@
       const errorMessage = document.getElementById('error-message');
       ///Cambio solo las ip, no el puerto
       try {
-        const response = await fetch('http://192.168.18.4:3000/login', {
+        let ip = '192.168.18.27';
+        console.log(backendIP);
+        const response = await fetch('http://'+ip+':3000/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password })
@@ -498,7 +519,7 @@
     /////////////////       MATERIAS       ////////////////////////////////////////////
     async function loadSubjects() {
       const token = localStorage.getItem("authToken");
-      const response = await fetch("http://192.168.18.4:3000/student/tabla-datos-estudiante/", { headers: { "Authorization": `Bearer ${token}` } });
+      const response = await fetch("http://"+ip+":3000/student/tabla-datos-estudiante/", { headers: { "Authorization": `Bearer ${token}` } });
       console.log("Token:", localStorage.getItem("authToken"));
 
       if (!response.ok) {
@@ -524,7 +545,7 @@
     /////////////////       CALIFICACIONES       ////////////////////////////////////////////
     async function loadGrades() {
       const token = localStorage.getItem("authToken");
-      const response = await fetch("http://192.168.18.4:3000/student/tabla-calificaciones/", { headers: { "Authorization": `Bearer ${token}` } });;
+      const response = await fetch("http://"+ip+":3000/student/tabla-calificaciones/", { headers: { "Authorization": `Bearer ${token}` } });;
 
       if (!response.ok) {
         console.error("Error al obtener las materias");
@@ -550,7 +571,7 @@
 /////////////////       KARDEZ       ////////////////////////////////////////////
 async function loadKardez() {
     const token = localStorage.getItem("authToken"); 
-    const response = await fetch("http://192.168.18.4:3000/student/tabla-kardez/", { headers: { "Authorization": `Bearer ${token}` } });;
+    const response = await fetch("http://"+ip+":3000/student/tabla-kardez/", { headers: { "Authorization": `Bearer ${token}` } });;
 
     if (!response.ok) { console.error("Error al obtener las materias");
         return;
@@ -574,7 +595,7 @@ async function loadKardez() {
 /////////////////       PAGOS       ////////////////////////////////////////////
 async function loadPagos() {
     const token = localStorage.getItem("authToken"); 
-    const response = await fetch("http://192.168.18.4:3000/student/tabla-pagos/", { headers: { "Authorization": `Bearer ${token}` } });;
+    const response = await fetch("http://"+ip+":3000/student/tabla-pagos/", { headers: { "Authorization": `Bearer ${token}` } });;
 
     if (!response.ok) { console.error("Error al obtener las materias");
         return;
@@ -609,7 +630,7 @@ function submitAttendance() {
     return;
   }
 
-  fetch("http://192.168.18.4:3000/student/registro-asistencias/", {
+  fetch("http://"+ip+":3000/student/registro-asistencias/", {
     method: "POST",
     headers: { 
       "Authorization": `Bearer ${token}`,
@@ -638,7 +659,7 @@ function submitAttendance() {
 
 async function loadSubjectsProf() {
       const token = localStorage.getItem("authToken");
-      const response = await fetch("http://192.168.18.4:3000/professor/schedule/", { headers: { "Authorization": `Bearer ${token}` } });
+      const response = await fetch("http://"+ip+":3000/professor/schedule/", { headers: { "Authorization": `Bearer ${token}` } });
       console.log("Token:", localStorage.getItem("authToken"));
 
       if (!response.ok) {
