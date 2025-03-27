@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -308,12 +308,13 @@ app.get('/professor/getSubjects', authenticateToken, async (req, res) => {
     JOIN PROFESORES ON MATERIASPROFESORES.id_profesor = PROFESORES.id_profesor
     WHERE PROFESORES.id_profesor = ?;
     `;
-    console.log("Profesor ID:", req.user.user_matricula); // Debugging log
-    let [rows] = await db.query(query, [req.user.user_matricula]);
-    res.json(rows);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+    console.log("matricula del profesor:", req.user.user_matricula);
+  
+  db.query(query, [req.user.user_matricula], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    console.log(results);
+    res.json(results);  // Return the query results
+  });
 });
 
 
