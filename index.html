@@ -636,7 +636,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchSubjects() {
-    fetch('/professor/getSubjects') // Adjust the endpoint according to your backend
+    fetch('http://192.168.18.9:3000/professor/getSubjects') // Adjust the endpoint according to your backend
         .then(response => response.json())
         .then(data => {
             let select = document.getElementById("grade-subject-select");
@@ -662,7 +662,7 @@ document.getElementById("grade-subject-select").addEventListener("change", funct
 });
 
 function fetchStudents(subjectId) {
-    fetch(`/professor/getStudents?subjectId=${subjectId}`)
+    fetch(`http://192.168.18.9:3000/professor/getStudents?subjectId=${subjectId}`)
         .then(response => response.json())
         .then(data => {
             let tableBody = document.getElementById("grade-entry-table");
@@ -709,7 +709,7 @@ function saveGrades(event) {
         return;
     }
 
-    fetch('/professor/insertGrade', {
+    fetch('http://192.168.18.9:3000/professor/insertGrade', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(grades)
