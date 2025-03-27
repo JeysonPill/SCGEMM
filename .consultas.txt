@@ -72,5 +72,31 @@ JOIN ALUMNOS ON GRUPOALUMNOS.matricula = ALUMNOS.matricula
 WHERE PROFESORES.id_profesor = ?;
 
 
+SELECT 
 
-SELECT * FROM MATERIAS JOIN 
+
+-MATERIA
+id_materia      ---nombre-----    
+
+
+--UNIR DE  GRUPOALUMNOS
+--ID_MATERIA   matricula    id_grupo
+
+
+--MATERIASPROFESORES
+id_profesor    id_grupo
+
+
+PROFESORES 
+id_profesor    
+
+
+
+SELECT 
+MATERIA.nombre
+FROM MATERIA 
+JOIN GRUPOALUMNOS ON MATERIA.id_materia=GRUPOALUMNOS.ID_MATERIA
+JOIN MATERIASPROFESORES ON GRUPOALUMNOS.id_grupo=MATERIASPROFESORES.id_grupo
+JOIN PROFESORES ON MATERIASPROFESORES.id_profesor=PROFESORES.id_profesor
+WHERE PROFESORES.id_profesor = ?
+
