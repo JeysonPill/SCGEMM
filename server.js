@@ -268,29 +268,26 @@ WHERE PROFESORES.id_profesor = ?;
 
 app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
   const query = `
-   SELECT 
-    MATERIAS.nombre AS materia_nombre,
-    GRUPOALUMNOS.id_grupo,
-    CONCAT(
-        'Lunes: ', TIME_FORMAT(HORARIOS.h_lunes, '%H:%i'), '\n',
-        'Martes: ', TIME_FORMAT(HORARIOS.h_martes, '%H:%i'), '\n',
-        'Miércoles: ', TIME_FORMAT(HORARIOS.h_miercoles, '%H:%i'), '\n',
-        'Jueves: ', TIME_FORMAT(HORARIOS.h_jueves, '%H:%i'), '\n',
-        'Viernes: ', TIME_FORMAT(HORARIOS.h_viernes, '%H:%i')
-    ) AS horarios
-FROM MATERIAS
-JOIN PROFESORES
-JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
-JOIN GRUPOALUMNOS ON GRUPOALUMNOS.id_materia = MATERIAS.id_materia
-WHERE PROFESORES.id_profesor = ?;
+    SELECT 
+      GRUPOALUMNOS.id_materia,
+      MATERIAS.nombre,
+      GRUPOALUMNOS.id_grupo
+    FROM MATERIAS
+    JOIN GRUPOALUMNOS ON MATERIAS.id_materia = GRUPOALUMNOS.id_materia
+    JOIN MATERIASPROFESORES ON GRUPOALUMNOS.id_grupo = MATERIASPROFESORES.id_grupo
+    JOIN PROFESORES ON MATERIASPROFESORES.id_profesor = PROFESORES.id_profesor
+    WHERE PROFESORES.id_profesor = ?;
   `;
-  console.log("matre",req.user.user_matricula);
+  
+  console.log("matricula del profesor:", req.user.user_matricula);
+  
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     console.log(results);
-    res.json(results);
+    res.json(results);  // Return the query results
   });
 });
+
 
 
 

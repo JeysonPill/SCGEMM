@@ -275,13 +275,15 @@
     <div id="attendance-qr" class="tab-content">
       <h3>Generar QR de asistencia</h3>
       <div class="form-group">
-        <label>Elegir materia</label>
-        <select id="subject-select">
-        </select>
+          <label>Elegir materia</label>
+          <select id="subject-select">
+              <option value="">Seleccione una materia</option> <!-- Default option -->
+          </select>
       </div>
       <button onclick="QR_CODE_GEN()" class="action-button">Generar QR</button>
       <div id="qr-display"></div>
-    </div>
+  </div>
+  
 
     <div id="grade-entry" class="tab-content">
       <h3>Ingreso de calificaciones</h3>
@@ -685,31 +687,64 @@ async function loadSubjectsProf() {
 
     ///////////////////////////////////////////QR/////////////////////////////////
     async function QR_CODE_GEN() {
-      const token = localStorage.getItem("authToken");
-      const response = await fetch("http://192.168.18.9:3000/professor/QR_CODE_GEN/", { headers: { "Authorization": `Bearer ${token}` } });
-      console.log("Token:", localStorage.getItem("authToken"));
+    const token = localStorage.getItem("authToken");
+    const response = await fetch("http://192.168.18.9:3000/professor/QR_CODE_GEN/", { 
+        headers: { "Authorization": `Bearer ${token}` } 
+    });
+    console.log("Token:", localStorage.getItem("authToken"));
 
-      if (!response.ok) {
+    if (!response.ok) {
         console.error("Error al obtener las materias");
         return;
-      }
-
-      const subjects = await response.json();
-      console.log("retorno",subjects);
-      const tbody = document.getElementById("schedule-table");
-      tbody.innerHTML = "";
-
-      subjects.forEach(subject => {
-        const row = `<tr>
-        <td>${subject.materia_nombre}</td>
-        <td>${subject.id_grupo}</td>
-        <td>${subject.horarios.replace(/\n/g, '<br>')}</td> <!-- Replace \n with <br> -->
-    </tr>`;
-        tbody.innerHTML += row;
-      });
     }
 
+    const subjects = await response.json();
+    console.log("retorno", subjects);
+    
+    // Clear the select dropdown first
+    const selectElement = document.getElementById("subject-select");
+    selectElement.innerHTML = "<option value=''>Seleccione una materia</option>"; // Reset dropdown
+
+    // Populate dropdown with subjects
+    subjects.forEach(subject => {
+        const option = document.createElement("option");
+        option.value = `${subject.id_materia}-${subject.id_grupo}`; // Combine id_materia and id_grupo as value
+        option.textContent = `${subject.nombre} - ${subject.id_grupo}`; // Show the name and group
+        selectElement.appendChild(option);
+    });
+}
+
+document.getElementById("subject-select").addEventListener("change", function () {
+    const selectedValue = this.value;
+    if (selectedValue) {
+        const [idMateria, idGrupo] = selectedValue.split("-");
+        const subjectString = `Materia: ${idMateria}, Grupo: ${idGrupo}`;
+        console.log("Generating QR for: ", subjectString);
+        
+        // Use a QR code library to generate the QR code
+        generateQRCode(subjectString);
+    }
+});
+
+function generateQRCode(data) {
+    const qrDisplay = document.getElementById("qr-display");
+    qrDisplay.innerHTML = ""; // Clear any previous QR code
+
+    // Create a QR code with the provided data
+    new QRCode(qrDisplay, {
+        text: data,
+        width: 128,
+        height: 128,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+}
+
+
   </script>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
 </body>
 
 </html>
