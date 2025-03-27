@@ -161,7 +161,7 @@
       <h3>Ingreso de calificaciones</h3>
       <div class="form-group">
         <label>Elija materia</label>
-        <select id="grade-subject-select">
+        <select id="professor_grade_subject_select">
         </select>
       </div>
       <table>
@@ -634,7 +634,7 @@ function generateQRCode(data) {
 document.addEventListener("DOMContentLoaded", function () {
     fetchSubjects();
 });
-
+/*
 function fetchSubjects() {
     fetch('http://192.168.18.9:3000/professor/getSubjects') // Adjust the endpoint according to your backend
         .then(response => response.json())
@@ -650,6 +650,37 @@ function fetchSubjects() {
         })
         .catch(error => console.error("Error fetching subjects:", error));
 }
+*/
+
+async function fetchSubjects() {
+    const token = localStorage.getItem("authToken");
+    const response = await fetch("http://192.168.18.9:3000/professor/getSubjects/", { 
+        headers: { "Authorization": `Bearer ${token}` } 
+    });
+    console.log("Token:", localStorage.getItem("authToken"));
+
+    if (!response.ok) {
+        console.error("Error al obtener las materias");
+        return;
+    }
+
+    const subjects = await response.json();
+    console.log("retorno", subjects);
+    
+    // Clear the select dropdown first
+    const selectElement = document.getElementById("professor_grade_subject_select");
+    selectElement.innerHTML = "<option value=''>Seleccione una materia</option>"; // Reset dropdown
+
+    // Populate dropdown with subjects
+    subjects.forEach(subject => {
+        const option = document.createElement("option");
+        option.value = `${subject.id_materia}-${subject.id_grupo}`; // Combine id_materia and id_grupo as value
+        option.textContent = `${subject.nombre} - ${subject.id_grupo}`; // Show the name and group
+        selectElement.appendChild(option);
+    });
+}
+
+
 
 
 document.getElementById("grade-subject-select").addEventListener("change", function () {
