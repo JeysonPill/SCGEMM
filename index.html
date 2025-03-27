@@ -682,10 +682,7 @@ document.getElementById("professor_grade_subject_select").addEventListener("chan
     if (selectedValue) {
         const [idMateria, idGrupo] = selectedValue.split("-");
         const subjectString = `Materia: ${idMateria}, Grupo: ${idGrupo}`;
-        console.log("Generating QR for: ", subjectString);
-        
-        // Use a QR code library to generate the QR code
-        generateQRCode(subjectString);
+        fetchStudents(idMateria);
     }
 });
 
@@ -716,7 +713,6 @@ function fetchStudents(subjectId) {
                     <td><input type="number" class="grade-input" data-student="${student.matricula}" data-type="final" value="${student.calif_final || ''}"></td>
                     <td><button class="save-btn" data-matricula="${student.matricula}">Guardar</button></td>
                 `;
-
                 tableBody.appendChild(row);
             });
 

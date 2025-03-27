@@ -321,7 +321,6 @@ app.get('/professor/getSubjects', authenticateToken, (req, res) => {
 
 app.get('/professor/getStudents', async (req, res) => {
   let { subjectId } = req.query;
-  try {
       let query = `
           SELECT 
               A.matricula, A.nombre, C.calif_p1, C.calif_p2, C.calif_final
@@ -330,12 +329,11 @@ app.get('/professor/getStudents', async (req, res) => {
           LEFT JOIN CALIFICACIONES C ON A.matricula = C.matricula AND G.id_materia = C.id_materia
           WHERE G.id_materia = ?
       `;
-      let [rows] = await db.query(query, [subjectId]);
-      res.json(rows);
-  } catch (error) {
-      res.status(500).json({ error: error.message });
-  }
-});
+      db.query(query, [req.user.user_matricula], (err, results) => {
+        if (err) return res.status(500).json({ message: 'Database error' });
+        console.log(results);
+        res.json(results);  // Return the query results
+      })});
 
 
 app.post('/professor/insertGrade', async (req, res) => {
