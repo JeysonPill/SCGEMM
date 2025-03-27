@@ -292,6 +292,72 @@ app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
 
 
 
+//////////////
+///////////////////       CALIFICAICONES /////////////////////////
+
+
+
+pp.get('/professor/getSubjects', async (req, res) => {
+  try {
+      let [rows] = await db.query("SELECT DISTINCT id_materia, nombre FROM MATERIAS");
+      res.json(rows);
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
+
+
+app.get('/professor/getStudents', async (req, res) => {
+  let { subjectId } = req.query;
+  try {
+      let query = `
+          SELECT 
+              A.matricula, A.nombre, C.calif_p1, C.calif_p2, C.calif_final
+          FROM ALUMNOS A
+          JOIN GRUPOALUMNOS G ON A.matricula = G.matricula
+          LEFT JOIN CALIFICACIONES C ON A.matricula = C.matricula AND G.id_materia = C.id_materia
+          WHERE G.id_materia = ?
+      `;
+      let [rows] = await db.query(query, [subjectId]);
+      res.json(rows);
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
+
+
+app.post('/professor/insertGrade', async (req, res) => {
+  let { id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando } = req.body;
+
+  if (![calif_p1, calif_p2, calif_final].every(grade => grade === null || (Number.isInteger(grade) && grade >= 0 && grade <= 10))) {
+      return res.status(400).json({ error: "Invalid grade values" });
+  }
+
+  try {
+      let checkQuery = "SELECT * FROM CALIFICACIONES WHERE matricula = ? AND id_materia = ?";
+      let [existing] = await db.query(checkQuery, [matricula, id_materia]);
+
+      if (existing.length > 0) {
+          let updateQuery = `
+              UPDATE CALIFICACIONES 
+              SET calif_p1 = ?, calif_p2 = ?, calif_final = ?, ciclo_cursando = ? 
+              WHERE matricula = ? AND id_materia = ?
+          `;
+          await db.query(updateQuery, [calif_p1, calif_p2, calif_final, ciclo_cursando, matricula, id_materia]);
+      } else {
+          let insertQuery = `
+              INSERT INTO CALIFICACIONES (id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando)
+              VALUES (?, ?, ?, ?, ?, ?)
+          `;
+          await db.query(insertQuery, [id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando]);
+      }
+
+      res.json({ success: true });
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
