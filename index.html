@@ -682,12 +682,11 @@ document.getElementById("professor_grade_subject_select").addEventListener("chan
     if (selectedValue) {
         const [idMateria, idGrupo] = selectedValue.split("-");
         const subjectString = `Materia: ${idMateria}, Grupo: ${idGrupo}`;
-        
         fetchStudents(idMateria);
     }
 });
 
-
+/*
 document.getElementById("grade-subject-select").addEventListener("change", function () {
     let subjectId = this.value;
     if (subjectId) {
@@ -696,6 +695,8 @@ document.getElementById("grade-subject-select").addEventListener("change", funct
         document.getElementById("grade-entry-table").innerHTML = "";
     }
 });
+*/
+
 
 function fetchStudents(subjectId) {
     fetch(`http://192.168.18.9:3000/professor/getStudents?subjectId=${subjectId}`)
