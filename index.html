@@ -671,8 +671,8 @@ async function fetchSubjects(){
     // Populate dropdown with subjects
     subjects.forEach(subject => {
         const option = document.createElement("option");
-        option.value = `${subject.id_materia}-${subject.id_grupo}`; // Combine id_materia and id_grupo as value
-        option.textContent = `${subject.nombre} - ${subject.id_grupo}`; // Show the name and group
+        option.value = `${subject.id_materia}`; // Combine id_materia and id_grupo as value
+        option.textContent = `${subject.nombre} `; // Show the name and group
         selectElement.appendChild(option);
     });
 }
