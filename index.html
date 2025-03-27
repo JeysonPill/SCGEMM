@@ -745,13 +745,14 @@ function generateQRCode(data) {
 
     // Create a QR code with the provided data
     new QRCode(qrDisplay, {
-        text: data,
-        width: 128,
-        height: 128,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
+    text: data,
+    width: 128,
+    height: 128,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+});
+
 }
 
 
