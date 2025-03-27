@@ -266,7 +266,7 @@ WHERE PROFESORES.id_profesor = ?;
 
 
 
-app.get('/professor/QR-CODE-GEN/', authenticateToken, (req, res) => {
+app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
   const query = `
    SELECT 
     MATERIAS.nombre AS materia_nombre,

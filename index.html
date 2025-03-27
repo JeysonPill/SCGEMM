@@ -279,7 +279,7 @@
         <select id="subject-select">
         </select>
       </div>
-      <button onclick="QR-CODE-GEN()" class="action-button">Generar QR</button>
+      <button onclick="QR_CODE_GEN()" class="action-button">Generar QR</button>
       <div id="qr-display"></div>
     </div>
 
@@ -684,9 +684,9 @@ async function loadSubjectsProf() {
 
 
     ///////////////////////////////////////////QR/////////////////////////////////
-    async function QR-CODE-GEN() {
+    async function QR_CODE_GEN() {
       const token = localStorage.getItem("authToken");
-      const response = await fetch("http://192.168.18.9:3000/professor/schedule/", { headers: { "Authorization": `Bearer ${token}` } });
+      const response = await fetch("http://192.168.18.9:3000/professor/QR_CODE_GEN/", { headers: { "Authorization": `Bearer ${token}` } });
       console.log("Token:", localStorage.getItem("authToken"));
 
       if (!response.ok) {
