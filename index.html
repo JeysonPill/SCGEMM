@@ -700,7 +700,7 @@ function fetchStudents(subjectId) {
     fetch(`http://192.168.18.9:3000/professor/getStudents?subjectId=${subjectId}`)
         .then(response => response.json())
         .then(data => {
-            let tableBody = document.getElementById("grade-entry-table");
+            let tableBody = document.getElementById("profesor_grade_entry_table");
             tableBody.innerHTML = ""; // Clear table before adding new rows
 
             data.forEach(student => {
