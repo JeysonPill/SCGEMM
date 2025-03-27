@@ -677,7 +677,17 @@ async function fetchSubjects(){
     });
 }
 
-
+document.getElementById("professor_grade_subject_select").addEventListener("change", function () {
+    const selectedValue = this.value;
+    if (selectedValue) {
+        const [idMateria, idGrupo] = selectedValue.split("-");
+        const subjectString = `Materia: ${idMateria}, Grupo: ${idGrupo}`;
+        console.log("Generating QR for: ", subjectString);
+        
+        // Use a QR code library to generate the QR code
+        generateQRCode(subjectString);
+    }
+});
 
 
 document.getElementById("grade-subject-select").addEventListener("change", function () {
