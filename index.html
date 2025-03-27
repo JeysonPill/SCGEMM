@@ -174,7 +174,7 @@
             <th>Accion</th>
           </tr>
         </thead>
-        <tbody id="grade-entry-table">
+        <tbody id="profesor_grade_entry_table">
         </tbody>
       </table>
     </div>
@@ -308,7 +308,7 @@ var backendIP = getBackendIP();
                   QR_CODE_GEN();
                   break;
             case 'profesor_grade_entry':  
-                  fetchSubjects()();
+                  fetchSubjects();
                 break;
             default:
                 console.warn(`No handler for tabId: ${tabId}`);
@@ -631,9 +631,6 @@ function generateQRCode(data) {
 
 /////////////////CALIFICACIONES/////////////////////////////////
 
-document.addEventListener("DOMContentLoaded", function () {
-    fetchSubjects();
-});
 /*
 function fetchSubjects() {
     fetch('http://192.168.18.9:3000/professor/getSubjects') // Adjust the endpoint according to your backend
@@ -652,7 +649,7 @@ function fetchSubjects() {
 }
 */
 
-async function fetchSubjects() {
+async function fetchSubjects(){
     const token = localStorage.getItem("authToken");
     const response = await fetch("http://192.168.18.9:3000/professor/getSubjects/", { 
         headers: { "Authorization": `Bearer ${token}` } 

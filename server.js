@@ -297,14 +297,25 @@ app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
 
 
 
-app.get('/professor/getSubjects', async (req, res) => {
+app.get('/professor/getSubjects', authenticateToken, async (req, res) => {
   try {
-      let [rows] = await db.query("SELECT DISTINCT id_materia, nombre FROM MATERIAS");
-      res.json(rows);
+    const query = `
+      SELECT DISTINCT MATERIAS.id_materia, MATERIAS.nombre
+      FROM MATERIAS
+      JOIN MATERIASPROFESORES ON MATERIAS.id_materia = MATERIASPROFESORES.id_materia
+      JOIN PROFESORES ON MATERIASPROFESORES.id_profesor = PROFESORES.id_profesor
+      WHERE PROFESORES.id_profesor = ?;
+    `;
+
+    console.log("Profesor ID:", req.user.user_matricula); // Debugging log
+
+    let [rows] = await db.query(query, [req.user.user_matricula]);
+    res.json(rows);
   } catch (error) {
-      res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 });
+
 
 
 app.get('/professor/getStudents', async (req, res) => {
