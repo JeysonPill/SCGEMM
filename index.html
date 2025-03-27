@@ -682,6 +682,7 @@ document.getElementById("professor_grade_subject_select").addEventListener("chan
     if (selectedValue) {
         const [idMateria, idGrupo] = selectedValue.split("-");
         const subjectString = `Materia: ${idMateria}, Grupo: ${idGrupo}`;
+        
         fetchStudents(idMateria);
     }
 });

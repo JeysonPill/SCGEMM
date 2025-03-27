@@ -329,7 +329,7 @@ app.get('/professor/getStudents', async (req, res) => {
           LEFT JOIN CALIFICACIONES C ON A.matricula = C.matricula AND G.id_materia = C.id_materia
           WHERE G.id_materia = ?
       `;
-      db.query(query, [req.user.user_matricula], (err, results) => {
+      db.query(query, [subjectId], (err, results) => {
         if (err) return res.status(500).json({ message: 'Database error' });
         console.log(results);
         res.json(results);  // Return the query results
