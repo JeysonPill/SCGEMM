@@ -157,7 +157,7 @@
   </div>
   
 
-    <div id="grade-entry" class="tab-content">
+    <div id="profesor_grade_entry" class="tab-content">
       <h3>Ingreso de calificaciones</h3>
       <div class="form-group">
         <label>Elija materia</label>
@@ -307,8 +307,8 @@ var backendIP = getBackendIP();
             case 'attendance-qr':
                   QR_CODE_GEN();
                   break;
-                  case 'grade-entry':  
-                loadGradeEntrySubjects();
+            case 'profesor_grade_entry':  
+                  fetchSubjects()();
                 break;
             default:
                 console.warn(`No handler for tabId: ${tabId}`);
