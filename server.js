@@ -298,7 +298,7 @@ app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
 
 
 app.get('/professor/getSubjects', authenticateToken, (req, res) => {
-  try {
+  
     const query = `
       SELECT DISTINCT
       MATERIAS.nombre
