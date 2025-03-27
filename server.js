@@ -262,6 +262,41 @@ WHERE PROFESORES.id_profesor = ?;
 });
 
 
+//////////////////////////////////////////////////////// QR ASISTENCIA //////////////////////////////////////////////////////////////////
+
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
+
+
+
+app.get('/professor/QR-CODE-GEN/', authenticateToken, (req, res) => {
+  const query = `
+   SELECT 
+    MATERIAS.nombre AS materia_nombre,
+    GRUPOALUMNOS.id_grupo,
+    CONCAT(
+        'Lunes: ', TIME_FORMAT(HORARIOS.h_lunes, '%H:%i'), '\n',
+        'Martes: ', TIME_FORMAT(HORARIOS.h_martes, '%H:%i'), '\n',
+        'Miércoles: ', TIME_FORMAT(HORARIOS.h_miercoles, '%H:%i'), '\n',
+        'Jueves: ', TIME_FORMAT(HORARIOS.h_jueves, '%H:%i'), '\n',
+        'Viernes: ', TIME_FORMAT(HORARIOS.h_viernes, '%H:%i')
+    ) AS horarios
+FROM MATERIAS
+JOIN PROFESORES
+JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
+JOIN GRUPOALUMNOS ON GRUPOALUMNOS.id_materia = MATERIAS.id_materia
+WHERE PROFESORES.id_profesor = ?;
+  `;
+  console.log("matre",req.user.user_matricula);
+  db.query(query, [req.user.user_matricula], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    console.log(results);
+    res.json(results);
+  });
+});
+
+
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

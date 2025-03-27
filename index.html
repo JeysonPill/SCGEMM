@@ -279,7 +279,7 @@
         <select id="subject-select">
         </select>
       </div>
-      <button onclick="generateQR()" class="action-button">Generar QR</button>
+      <button onclick="QR-CODE-GEN()" class="action-button">Generar QR</button>
       <div id="qr-display"></div>
     </div>
 
@@ -658,6 +658,33 @@ function submitAttendance() {
 /////////////////////////////////////////////////////////////       PROFESORES       ////////////////////////////////////////////////////////////////////////////////
 
 async function loadSubjectsProf() {
+      const token = localStorage.getItem("authToken");
+      const response = await fetch("http://192.168.18.9:3000/professor/schedule/", { headers: { "Authorization": `Bearer ${token}` } });
+      console.log("Token:", localStorage.getItem("authToken"));
+
+      if (!response.ok) {
+        console.error("Error al obtener las materias");
+        return;
+      }
+
+      const subjects = await response.json();
+      console.log("retorno",subjects);
+      const tbody = document.getElementById("schedule-table");
+      tbody.innerHTML = "";
+
+      subjects.forEach(subject => {
+        const row = `<tr>
+        <td>${subject.materia_nombre}</td>
+        <td>${subject.id_grupo}</td>
+        <td>${subject.horarios.replace(/\n/g, '<br>')}</td> <!-- Replace \n with <br> -->
+    </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+
+    ///////////////////////////////////////////QR/////////////////////////////////
+    async function QR-CODE-GEN() {
       const token = localStorage.getItem("authToken");
       const response = await fetch("http://192.168.18.9:3000/professor/schedule/", { headers: { "Authorization": `Bearer ${token}` } });
       console.log("Token:", localStorage.getItem("authToken"));
