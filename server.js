@@ -297,7 +297,7 @@ app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
 
 
 
-pp.get('/professor/getSubjects', async (req, res) => {
+app.get('/professor/getSubjects', async (req, res) => {
   try {
       let [rows] = await db.query("SELECT DISTINCT id_materia, nombre FROM MATERIAS");
       res.json(rows);
