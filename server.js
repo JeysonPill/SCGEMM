@@ -264,10 +264,6 @@ WHERE PROFESORES.id_profesor = ?;
 
 //////////////////////////////////////////////////////// QR ASISTENCIA //////////////////////////////////////////////////////////////////
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
-
 
 
 app.get('/professor/QR-CODE-GEN/', authenticateToken, (req, res) => {
