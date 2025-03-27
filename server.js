@@ -278,6 +278,8 @@ app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
     JOIN PROFESORES ON MATERIASPROFESORES.id_profesor = PROFESORES.id_profesor
     WHERE PROFESORES.id_profesor = ?;
   `;
+
+  
   
   console.log("matricula del profesor:", req.user.user_matricula);
   

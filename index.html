@@ -276,7 +276,7 @@
       <h3>Generar QR de asistencia</h3>
       <div class="form-group">
           <label>Elegir materia</label>
-          <select id="subject-select">
+          <select id="qr_subject_select">
               <option value="">Seleccione una materia</option> <!-- Default option -->
           </select>
       </div>
@@ -406,30 +406,43 @@ var backendIP = getBackendIP();
 
     // cambia paginas
     function switchTab(tabId, element) {
-      // Remove active class from all tabs
-      document.querySelectorAll('.nav-tab').forEach(tab => { tab.classList.remove('active'); });
-      document.querySelectorAll('.tab-content').forEach(content => { content.classList.remove('active'); });
+    // Remove active class from all tabs and tab content
+    document.querySelectorAll('.nav-tab').forEach(tab => { tab.classList.remove('active'); });
+    document.querySelectorAll('.tab-content').forEach(content => { content.classList.remove('active'); });
 
-      // establece clase activa a la pagina actual
-      element.classList.add('active');
-      document.getElementById(tabId).classList.add('active');
+    // Set active class to the current tab and content
+    element.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
 
-      if (tabId === 'enrolled-subjects') {
-        loadSubjects();
-      }
-      if (tabId === 'grades') {
-        loadGrades();
-      }
-      if (tabId === 'kardex') {
-        loadKardez();
-      }
-      if (tabId === 'payments') {
-        loadPagos();
-      }
-      if (tabId === 'teaching-schedule') {
-        loadSubjectsProf();
-      }
+    // Switch to the appropriate tab content
+    try {
+        switch (tabId) {
+            case 'enrolled-subjects':
+                loadSubjects();
+                break;
+            case 'grades':
+                loadGrades();
+                break;
+            case 'kardex':
+                loadKardex();
+                break;
+            case 'payments':
+                loadPagos();
+                break;
+            case 'teaching-schedule':
+                loadSubjectsProf();
+                break;
+            case 'qr_subject_select':
+                  QR_CODE_GEN();
+                  break;
+            default:
+                console.warn(`No handler for tabId: ${tabId}`);
+        }
+    } catch (error) {
+        console.error(`Error loading content for tab ${tabId}:`, error);
     }
+}
+
 
     // Logout
     function handleLogout() {
@@ -702,7 +715,7 @@ async function loadSubjectsProf() {
     console.log("retorno", subjects);
     
     // Clear the select dropdown first
-    const selectElement = document.getElementById("subject-select");
+    const selectElement = document.getElementById("qr_subject_select");
     selectElement.innerHTML = "<option value=''>Seleccione una materia</option>"; // Reset dropdown
 
     // Populate dropdown with subjects
@@ -714,7 +727,7 @@ async function loadSubjectsProf() {
     });
 }
 
-document.getElementById("subject-select").addEventListener("change", function () {
+document.getElementById("qr_subject_select").addEventListener("change", function () {
     const selectedValue = this.value;
     if (selectedValue) {
         const [idMateria, idGrupo] = selectedValue.split("-");
