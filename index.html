@@ -427,7 +427,7 @@ var backendIP = getBackendIP();
         const row = `<tr>
         <td>${subject.materia_nombre}</td>
         <td>${subject.profesor_nombre}</td>
-        <td>${subject.horarios.replace(/\n/g, '<br>')}</td> <!-- Replace \n with <br> -->
+        <td>${subject.horarios}</td> 
         <td>${subject.id_grupo}</td>
     </tr>`;
         tbody.innerHTML += row;
