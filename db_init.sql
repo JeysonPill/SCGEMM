@@ -65,7 +65,7 @@ CREATE TABLE USUARIOS (
 
 -- HORARIOS
 CREATE TABLE HORARIOS (
-    id_materia VARCHAR(5),
+    id_materia VARCHAR(10),
     id_grupo VARCHAR(5),
     id_profesor VARCHAR(5),
     h_lunes VARCHAR(20),
