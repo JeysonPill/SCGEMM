@@ -90,7 +90,7 @@ app.post('/login', (req, res) => {
 app.get('/student/tabla-datos-estudiante/', authenticateToken, (req, res) => {
   const query = `
     SELECT 
-    MATERIAS.nombre AS materia_nombre,
+    MATERIAS.materia_nombre AS materia_nombre,
     PROFESORES.nombre AS profesor_nombre,
     CONCAT(
         'Lunes: ', TIME_FORMAT(HORARIOS.h_lunes, '%H:%i'), '\n',
@@ -99,12 +99,12 @@ app.get('/student/tabla-datos-estudiante/', authenticateToken, (req, res) => {
         'Jueves: ', TIME_FORMAT(HORARIOS.h_jueves, '%H:%i'), '\n',
         'Viernes: ', TIME_FORMAT(HORARIOS.h_viernes, '%H:%i')
     ) AS horarios,
-    GRUPOALUMNOS.id_grupo
+    GRUPOSALUM.id_grupo
 FROM MATERIAS
 JOIN PROFESORES
 JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
-JOIN GRUPOALUMNOS ON GRUPOALUMNOS.id_materia = MATERIAS.id_materia
-JOIN ALUMNOS ON GRUPOALUMNOS.matricula = ALUMNOS.matricula
+JOIN GRUPOSALUM ON GRUPOSALUM.id_materia = MATERIAS.id_materia
+JOIN ALUMNOS ON GRUPOSALUM.matricula_alumno = ALUMNOS.matricula
 WHERE ALUMNOS.matricula = ?;
   `;
   db.query(query, [req.user.user_matricula], (err, results) => {
