@@ -124,6 +124,7 @@ app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
   const ciclo_cursando = month >= 1 && month <= 6 
     ? `FEB${year}-JUN${year}` 
     : `AGO${year}-DEC${year}`;
+
   const query = `
     SELECT 
       m.nombre as materia,
@@ -134,7 +135,7 @@ app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
       c.ciclo_cursando
     FROM CALIFICACIONES c
     JOIN MATERIAS m ON c.id_materia = m.id_materia
-    WHERE c.matricula = ? AND c.ciclo_cursando = ?;
+    WHERE c.matricula = ? AND c.ciclo_cursando = 2025-1;
   `;
 
   // Execute Query
