@@ -275,7 +275,7 @@ app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
 
 ///////////////////////////////////////////////////////       PROFESORES       ////////////////////////////////////////////////////////////////////////////////
 
-
+/*
 app.get('/professor/schedule/', authenticateToken, (req, res) => {
   const query = `
    SELECT 
@@ -292,7 +292,7 @@ FROM MATERIAS
 JOIN PROFESORES
 JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
 JOIN GRUPOSALUM ON GRUPOSALUM.id_materia = MATERIAS.id_materia
-WHERE PROFESORES.id_profesor = ?;
+WHERE PROFESORES.id_profesor = 'P0001';
   `;
   console.log("matre",req.user.user_matricula);
   db.query(query, [req.user.user_matricula], (err, results) => {
@@ -301,6 +301,33 @@ WHERE PROFESORES.id_profesor = ?;
     res.json(results);
   });
 });
+*/
+app.get('/professor/schedule/', authenticateToken, (req, res) => {
+  const query = `
+    SELECT 
+      M.materia_nombre AS materia_nombre,
+      H.id_grupo,
+      CONCAT(
+          'Lunes: ', TIME_FORMAT(H.h_lunes, '%H:%i'), '\n',
+          'Martes: ', TIME_FORMAT(H.h_martes, '%H:%i'), '\n',
+          'Miércoles: ', TIME_FORMAT(H.h_miercoles, '%H:%i'), '\n',
+          'Jueves: ', TIME_FORMAT(H.h_jueves, '%H:%i'), '\n',
+          'Viernes: ', TIME_FORMAT(H.h_viernes, '%H:%i')
+      ) AS horarios
+    FROM HORARIOS H
+    JOIN MATERIAS M ON M.id_materia = H.id_materia
+    JOIN PROFESORES P ON P.id_profesor = H.id_profesor
+    WHERE P.id_profesor = ?;
+  `;
+  
+  console.log("matre", req.user.user_matricula);
+  db.query(query, [req.user.user_matricula], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    console.log(results);
+    res.json(results);
+  });
+});
+
 
 
 //////////////////////////////////////////////////////// QR ASISTENCIA //////////////////////////////////////////////////////////////////
