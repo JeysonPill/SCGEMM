@@ -279,8 +279,8 @@ app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
 app.get('/professor/schedule/', authenticateToken, (req, res) => {
   const query = `
    SELECT 
-    MATERIAS.nombre AS materia_nombre,
-    GRUPOALUMNOS.id_grupo,
+    MATERIAS.materia_nombre AS materia_nombre,
+    GRUPOSALUM.id_grupo,
     CONCAT(
         'Lunes: ', TIME_FORMAT(HORARIOS.h_lunes, '%H:%i'), '\n',
         'Martes: ', TIME_FORMAT(HORARIOS.h_martes, '%H:%i'), '\n',
@@ -291,7 +291,7 @@ app.get('/professor/schedule/', authenticateToken, (req, res) => {
 FROM MATERIAS
 JOIN PROFESORES
 JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
-JOIN GRUPOALUMNOS ON GRUPOALUMNOS.id_materia = MATERIAS.id_materia
+JOIN GRUPOSALUM ON GRUPOSALUM.id_materia = MATERIAS.id_materia
 WHERE PROFESORES.id_profesor = ?;
   `;
   console.log("matre",req.user.user_matricula);
@@ -310,13 +310,13 @@ WHERE PROFESORES.id_profesor = ?;
 app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
   const query = `
     SELECT 
-      GRUPOALUMNOS.id_materia,
-      MATERIAS.nombre,
-      GRUPOALUMNOS.id_grupo
+      GRUPOSALUM.id_materia,
+      MATERIAS.materia_nombre,
+      GRUPOSALUM.id_grupo
     FROM MATERIAS
-    JOIN GRUPOALUMNOS ON MATERIAS.id_materia = GRUPOALUMNOS.id_materia
-    JOIN MATERIASPROFESORES ON GRUPOALUMNOS.id_grupo = MATERIASPROFESORES.id_grupo
-    JOIN PROFESORES ON MATERIASPROFESORES.id_profesor = PROFESORES.id_profesor
+    JOIN GRUPOSALUM ON MATERIAS.id_materia = GRUPOSALUM.id_materia
+    JOIN MATERIASPROF ON GRUPOSALUM.id_grupo = MATERIASPROF.id_grupo
+    JOIN PROFESORES ON MATERIASPROF.id_profesor = PROFESORES.id_profesor
     WHERE PROFESORES.id_profesor = ?;
   `;
 
@@ -342,11 +342,11 @@ app.get('/professor/getSubjects', authenticateToken, (req, res) => {
   
     const query = `
       SELECT DISTINCT
-      MATERIAS.nombre
+      MATERIAS.materia_nombre
     FROM MATERIAS
-    JOIN GRUPOALUMNOS ON MATERIAS.id_materia = GRUPOALUMNOS.id_materia
-    JOIN MATERIASPROFESORES ON GRUPOALUMNOS.id_grupo = MATERIASPROFESORES.id_grupo
-    JOIN PROFESORES ON MATERIASPROFESORES.id_profesor = PROFESORES.id_profesor
+    JOIN GRUPOSALUM ON MATERIAS.id_materia = GRUPOSALUM.id_materia
+    JOIN MATERIASPROF ON GRUPOSALUM.id_grupo = MATERIASPROF.id_grupo
+    JOIN PROFESORES ON MATERIASPROF.id_profesor = PROFESORES.id_profesor
     WHERE PROFESORES.id_profesor = ?;
     `;
     console.log("matricula del profesor:", req.user.user_matricula);
@@ -364,11 +364,12 @@ app.get('/professor/getStudents', async (req, res) => {
   let { subjectId } = req.query;
       let query = `
           SELECT 
-              A.matricula, A.nombre, C.calif_p1, C.calif_p2, C.calif_final
-          FROM ALUMNOS A
-          JOIN GRUPOALUMNOS G ON A.matricula = G.matricula
-          LEFT JOIN CALIFICACIONES C ON A.matricula = C.matricula AND G.id_materia = C.id_materia
-          WHERE G.id_materia = ?
+    A.matricula, A.user_name, C.calif_p1, C.calif_p2, C.calif_final
+FROM ALUMNOS A
+JOIN GRUPOSALUM G ON A.matricula = G.matricula_alumno
+LEFT JOIN CALIFICACIONES C ON A.matricula = C.matricula AND G.id_materia = C.id_materia
+WHERE G.id_materia = /;
+
       `;
       db.query(query, [subjectId], (err, results) => {
         if (err) return res.status(500).json({ message: 'Database error' });
