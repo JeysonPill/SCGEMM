@@ -1,5 +1,5 @@
 -- Drop and recreate database
-DROP DATABASE IF EXISTS SCGEM;
+--DROP DATABASE IF EXISTS SCGEM;
 CREATE DATABASE SCGEM CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Drop and recreate user
