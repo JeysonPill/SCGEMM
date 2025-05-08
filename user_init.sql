@@ -1,3 +1,4 @@
+USE SCGEM;
 -- ALUMNOS
 INSERT INTO ALUMNOS (matricula, carrera, semestre, user_name, celular, email)
 VALUES 
