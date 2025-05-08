@@ -1,6 +1,6 @@
 -- Drop and recreate database
 --DROP DATABASE IF EXISTS SCGEM;
-CREATE DATABASE SCGEM ;
+CREATE DATABASE SCGEM;
 
 -- Drop and recreate user
 DROP USER IF EXISTS 'node_user'@'localhost';
