@@ -198,7 +198,7 @@ app.get('/student/tabla-kardez/', authenticateToken, (req, res) => {
     END AS estado
 FROM CALIFICACIONES c
 JOIN MATERIAS m ON c.id_materia = m.id_materia
-WHERE c.matricula_alumno = ?;
+WHERE c.matricula = 'A0001';
 
 `;
   db.query(query, [req.user.user_matricula], (err, results) => {
