@@ -60,8 +60,7 @@ CREATE TABLE USUARIOS (
     user_name VARCHAR(30),
     password VARCHAR(100) UNIQUE NOT NULL,
     id_user VARCHAR(5) PRIMARY KEY,
-    user_role VARCHAR(1),
-    PRIMARY KEY (id_user)
+    user_role VARCHAR(1)
 );
 
 -- HORARIOS
