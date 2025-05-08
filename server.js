@@ -203,6 +203,7 @@ WHERE c.matricula_alumno = ?;
 `;
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
+    console.log(results);
     res.json(results);
   });
 });
