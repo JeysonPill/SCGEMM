@@ -116,6 +116,7 @@ WHERE ALUMNOS.matricula = ?;
 
 
 /////////////////       CALIFICACIONES       ///////////////////////////////////////
+/*
 app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
   const today = new Date();
   const year = today.getFullYear().toString().slice(-2);
@@ -127,7 +128,7 @@ app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
 
   const query = `
     SELECT 
-      m.nombre as materia,
+      m.materia_nombre as materia,
       c.calif_p1,
       c.calif_p2,
       c.calif_final,
@@ -135,11 +136,32 @@ app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
       c.ciclo_cursando
     FROM CALIFICACIONES c
     JOIN MATERIAS m ON c.id_materia = m.id_materia
-    WHERE c.matricula = ? AND c.ciclo_cursando = 2025-1;
+    WHERE c.matricula = 'A0001' AND c.ciclo_cursando = '2025-1';
   `;
 
   // Execute Query
   db.query(query, [req.user.user_matricula, ciclo_cursando], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    res.json(results);
+  });
+});
+*/
+app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
+  const query = `
+    SELECT 
+      m.materia_nombre as materia,
+      c.calif_p1,
+      c.calif_p2,
+      c.calif_final,
+      ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) as promedio,
+      c.ciclo_cursando
+    FROM CALIFICACIONES c
+    JOIN MATERIAS m ON c.id_materia = m.id_materia
+    WHERE c.matricula = ? AND c.ciclo_cursando = '2025-1';
+  `;
+
+  // Execute Query
+  db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     res.json(results);
   });
