@@ -77,7 +77,7 @@ CREATE TABLE HORARIOS (
 
 -- CALIFICACIONES
 CREATE TABLE CALIFICACIONES (
-    id_materia VARCHAR(5),
+    id_materia VARCHAR(10),
     matricula VARCHAR(5),
     calif_p1 VARCHAR(2),
     calif_p2 VARCHAR(2),
