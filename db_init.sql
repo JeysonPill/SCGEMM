@@ -99,7 +99,7 @@ CREATE TABLE PAGOS (
 -- ASISTENCIA
 CREATE TABLE ASISTENCIA (
     asistencia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    id_materia VARCHAR(5),
+    id_materia VARCHAR(10),
     codigo VARCHAR(10),
     ciclo_cursando VARCHAR(15)
 );
