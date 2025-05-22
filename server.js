@@ -117,7 +117,7 @@ WHERE ALUMNOS.matricula = ?;
 
 
 /////////////////////////////////MATERIA EN GENERAL////////////////////////////////////////////////
-// Nueva ruta para obtener todas las materias (opcionalmente con autenticación)
+// Nueva ruta para obtener todas las materias
 app.get('/subjects', authenticateToken, (req, res) => {
   const query = `SELECT id_materia, 
                           materia_nombre, 
@@ -144,6 +144,28 @@ app.get('/students', authenticateToken, (req, res) => {
                 FROM ALUMNOS a
                 JOIN USUARIOS u
                 WHERE u.user_role = 99;
+`;
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error al obtener alumnos:', err);
+      return res.status(500).json({ message: 'Error de base de datos al obtener alumnos' });
+    }
+    res.json(results);
+  });
+});
+
+
+////////////////////////////Horarios/////////////////////////////////
+app.get('/schedules', (req, res) => {
+  const query = `SELECT h.id_materia,
+                        h.id_grupo,
+                        h.id_profesor,
+                        h.h_lunes,
+                        h.h_martes,
+                        h.h_miercoles,
+                        h.h_jueves,
+                        h.h_viernes
+                FROM HORARIOS h;
 `;
   db.query(query, (err, results) => {
     if (err) {
