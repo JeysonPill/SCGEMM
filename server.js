@@ -58,10 +58,10 @@ app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
   db.query('SELECT * FROM USUARIOS WHERE user_name = ?;', [username], (err, result) => {
-    if (err)                                                      return res.status(500).json({ message: 'Database error' });
+    if (err) return res.status(500).json({ message: 'Database error' });
 
-    if (result.length === 0 || result[0].password !== password)   return res.status(401).json({ message: 'Invalid credentials' });
-    
+    if (result.length === 0 || result[0].password !== password) return res.status(401).json({ message: 'Invalid credentials' });
+
 
     const user = result[0];
     const token = jwt.sign(
@@ -119,37 +119,39 @@ WHERE ALUMNOS.matricula = ?;
 /////////////////////////////////MATERIA EN GENERAL////////////////////////////////////////////////
 // Nueva ruta para obtener todas las materias (opcionalmente con autenticación)
 app.get('/subjects', authenticateToken, (req, res) => {
-    const query = `SELECT id_materia, 
+  const query = `SELECT id_materia, 
                           materia_nombre, 
                           sem_cursante 
                           FROM MATERIAS JOIN USUARIOS
                           WHERE USUARIOS.user_role = 99;`;
-    db.query(query, (err, results) => {
-        if (err) {
-            console.error('Error al obtener materias:', err);
-            return res.status(500).json({ message: 'Error de base de datos al obtener materias' });
-        }
-        res.json(results);
-    });
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error al obtener materias:', err);
+      return res.status(500).json({ message: 'Error de base de datos al obtener materias' });
+    }
+    res.json(results);
+  });
 });
 
 ////////////////////////////////////ALUMNOS XD/////////////////////////////////////////////////
 app.get('/students', authenticateToken, (req, res) => {
-    const query = `SELECT matricula, 
-                          carrera, 
-                          semestre,
-                          user_name,
-                          celular,
-                          email, 
-                          FROM ALUMNOS JOIN USUARIOS
-                          WHERE USUARIOS.user_role = 99;`;
-    db.query(query, (err, results) => {
-        if (err) {
-            console.error('Error al obtener alumnos:', err);
-            return res.status(500).json({ message: 'Error de base de datos al obtener alumnos' });
-        }
-        res.json(results);
-    });
+  const query = `SELECT a.matricula, 
+                        a.carrera, 
+                        a.semestre,
+                        a.user_name,
+                        a.celular,
+                        a.email
+                FROM ALUMNOS a
+                JOIN USUARIOS u
+                WHERE u.user_role = 99;
+`;
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error al obtener alumnos:', err);
+      return res.status(500).json({ message: 'Error de base de datos al obtener alumnos' });
+    }
+    res.json(results);
+  });
 });
 
 /////////////////       CALIFICACIONES       ///////////////////////////////////////
@@ -268,7 +270,7 @@ app.get('/student/tabla-pagos/', authenticateToken, (req, res) => {
   JOIN ALUMNOS on ALUMNOS.matricula = p.matricula
   where ALUMNOS.matricula = ?;
   `;
-  
+
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     console.log(results);
@@ -284,9 +286,9 @@ app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
 
   console.log(codigo_asistencia);
 
-  if (!codigo_asistencia) 
-      return res.status(400).json({ success: false, message: "Código de asistencia requerido" });
-  
+  if (!codigo_asistencia)
+    return res.status(400).json({ success: false, message: "Código de asistencia requerido" });
+
   const query = ` INSERT INTO ASISTENCIAS (matricula, codigo_asistencia, asistencia) VALUES (?, ?, NOW()); `;
 
   db.query(query, [user_matricula, codigo_asistencia], (err, result) => {
@@ -356,7 +358,7 @@ app.get('/professor/schedule/', authenticateToken, (req, res) => {
     JOIN PROFESORES P ON P.id_profesor = H.id_profesor
     WHERE P.id_profesor = ?;
   `;
-  
+
   console.log("matre", req.user.user_matricula);
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
@@ -384,10 +386,10 @@ app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
     WHERE PROFESORES.id_profesor = ?;
   `;
 
-  
-  
+
+
   console.log("matricula del profesor:", req.user.user_matricula);
-  
+
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     console.log(results);
@@ -403,8 +405,8 @@ app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
 
 
 app.get('/professor/getSubjects', authenticateToken, (req, res) => {
-  
-    const query = `
+
+  const query = `
       SELECT DISTINCT
       MATERIAS.materia_nombre
     FROM MATERIAS
@@ -413,8 +415,8 @@ app.get('/professor/getSubjects', authenticateToken, (req, res) => {
     JOIN PROFESORES ON MATERIASPROF.id_profesor = PROFESORES.id_profesor
     WHERE PROFESORES.id_profesor = ?;
     `;
-    console.log("matricula del profesor:", req.user.user_matricula);
-  
+  console.log("matricula del profesor:", req.user.user_matricula);
+
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     console.log(results);
@@ -426,7 +428,7 @@ app.get('/professor/getSubjects', authenticateToken, (req, res) => {
 
 app.get('/professor/getStudents', async (req, res) => {
   let { subjectId } = req.query;
-      let query = `
+  let query = `
           SELECT 
     A.matricula, A.user_name, C.calif_p1, C.calif_p2, C.calif_final
 FROM ALUMNOS A
@@ -435,42 +437,43 @@ LEFT JOIN CALIFICACIONES C ON A.matricula = C.matricula AND G.id_materia = C.id_
 WHERE G.id_materia = /;
 
       `;
-      db.query(query, [subjectId], (err, results) => {
-        if (err) return res.status(500).json({ message: 'Database error' });
-        console.log(results);
-        res.json(results);  // Return the query results
-      })});
+  db.query(query, [subjectId], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    console.log(results);
+    res.json(results);  // Return the query results
+  })
+});
 
 
 app.post('/professor/insertGrade', async (req, res) => {
   let { id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando } = req.body;
 
   if (![calif_p1, calif_p2, calif_final].every(grade => grade === null || (Number.isInteger(grade) && grade >= 0 && grade <= 10))) {
-      return res.status(400).json({ error: "Invalid grade values" });
+    return res.status(400).json({ error: "Invalid grade values" });
   }
 
   try {
-      let checkQuery = "SELECT * FROM CALIFICACIONES WHERE matricula = ? AND id_materia = ?";
-      let [existing] = await db.query(checkQuery, [matricula, id_materia]);
+    let checkQuery = "SELECT * FROM CALIFICACIONES WHERE matricula = ? AND id_materia = ?";
+    let [existing] = await db.query(checkQuery, [matricula, id_materia]);
 
-      if (existing.length > 0) {
-          let updateQuery = `
+    if (existing.length > 0) {
+      let updateQuery = `
               UPDATE CALIFICACIONES 
               SET calif_p1 = ?, calif_p2 = ?, calif_final = ?, ciclo_cursando = ? 
               WHERE matricula = ? AND id_materia = ?
           `;
-          await db.query(updateQuery, [calif_p1, calif_p2, calif_final, ciclo_cursando, matricula, id_materia]);
-      } else {
-          let insertQuery = `
+      await db.query(updateQuery, [calif_p1, calif_p2, calif_final, ciclo_cursando, matricula, id_materia]);
+    } else {
+      let insertQuery = `
               INSERT INTO CALIFICACIONES (id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando)
               VALUES (?, ?, ?, ?, ?, ?)
           `;
-          await db.query(insertQuery, [id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando]);
-      }
+      await db.query(insertQuery, [id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando]);
+    }
 
-      res.json({ success: true });
+    res.json({ success: true });
   } catch (error) {
-      res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 });
 
