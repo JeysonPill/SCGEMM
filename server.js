@@ -115,6 +115,20 @@ WHERE ALUMNOS.matricula = ?;
 });
 
 
+
+/////////////////////////////////MATERIA EN GENERAL////////////////////////////////////////////////
+// Nueva ruta para obtener todas las materias (opcionalmente con autenticación)
+app.get('/subjects', authenticateToken, (req, res) => {
+    const query = `SELECT id_materia, materia_nombre FROM MATERIAS;`;
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al obtener materias:', err);
+            return res.status(500).json({ message: 'Error de base de datos al obtener materias' });
+        }
+        res.json(results);
+    });
+});
+
 /////////////////       CALIFICACIONES       ///////////////////////////////////////
 /*
 app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
