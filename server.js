@@ -133,6 +133,25 @@ app.get('/subjects', authenticateToken, (req, res) => {
     });
 });
 
+////////////////////////////////////ALUMNOS XD/////////////////////////////////////////////////
+app.get('/students', authenticateToken, (req, res) => {
+    const query = `SELECT matricula, 
+                          carrera, 
+                          semestre,
+                          user_name,
+                          celular,
+                          email, 
+                          FROM ALUMNOS JOIN USUARIOS
+                          WHERE USUARIOS.user_role = 99;`;
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al obtener alumnos:', err);
+            return res.status(500).json({ message: 'Error de base de datos al obtener alumnos' });
+        }
+        res.json(results);
+    });
+});
+
 /////////////////       CALIFICACIONES       ///////////////////////////////////////
 /*
 app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
