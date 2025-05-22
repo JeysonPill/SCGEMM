@@ -119,7 +119,11 @@ WHERE ALUMNOS.matricula = ?;
 /////////////////////////////////MATERIA EN GENERAL////////////////////////////////////////////////
 // Nueva ruta para obtener todas las materias (opcionalmente con autenticación)
 app.get('/subjects', authenticateToken, (req, res) => {
-    const query = `SELECT id_materia, materia_nombre FROM MATERIAS;`;
+    const query = `SELECT id_materia, 
+                          materia_nombre, 
+                          sem_cursante 
+                          FROM MATERIAS JOIN USUARIOS
+                          WHERE USUARIOS.user_role = 99;`;
     db.query(query, (err, results) => {
         if (err) {
             console.error('Error al obtener materias:', err);
