@@ -445,7 +445,8 @@ const query = `
 // Backend - Accept both query parameters
 app.get('/professor/getStudents', async (req, res) => {
   const { id_materia, id_grupo } = req.query;
-
+ console.log("Received:", id_materia, id_grupo);
+ 
   const query = `
     SELECT 
       A.matricula, A.user_name, C.calif_p1, C.calif_p2, C.calif_final
