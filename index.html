@@ -265,32 +265,15 @@ var backendIP = getBackendIP();
     // Switch to the appropriate tab content
     try {
         switch (tabId) {
-            case 'enrolled-subjects':
-                loadSubjects();
-                break;
-            case 'grades':
-                loadGrades();
-                break;
-            case 'kardex':
-                loadKardez();
-                break;
-            case 'payments':
-                loadPagos();
-                break;
-            case 'attendance':
-                initializeAttendance(); 
-                break;
-            case 'teaching-schedule':
-                loadSubjectsProf();
-                break;
-            case 'attendance-qr':
-                QR_CODE_GEN();
-                break;
-            case 'profesor_grade_entry':  
-                fetchSubjects();
-                break;
-            default:
-                console.warn(`No handler for tabId: ${tabId}`);
+            case 'enrolled-subjects':     loadSubjects();          break;
+            case 'grades':                loadGrades();            break;
+            case 'kardex':                loadKardez();            break;
+            case 'payments':              loadPagos();             break;
+            case 'attendance':            initializeAttendance();  break;
+            case 'teaching-schedule':     loadSubjectsProf();      break;
+            case 'attendance-qr':         QR_CODE_GEN();           break;
+            case 'profesor_grade_entry':  fetchSubjects();         break;
+            default:  console.warn(`No handler for tabId: ${tabId}`);
         }
     } catch (error) {
         console.error(`Error loading content for tab ${tabId}:`, error);
@@ -327,15 +310,11 @@ var backendIP = getBackendIP();
           localStorage.setItem('authToken', data.token);
           errorMessage.textContent = '';
           showUserRole(data.user_role);
-        } else {
-          errorMessage.textContent = data.message || 'Login failed';
-        }
+        } else {  errorMessage.textContent = data.message || 'Login failed';  }
       } catch (error) {
         errorMessage.textContent = 'Connection error. Please try again.';
         console.error('Login error:', error);
       }
-
-      console.log("Token being sent:", localStorage.getItem('authToken'));
 
     });
 
@@ -344,20 +323,11 @@ var backendIP = getBackendIP();
       document.querySelectorAll('.content-section').forEach(section => { section.style.display = 'none'; });
 
       switch (parseInt(role)) {
-        case ROLES.SUPER_ADMIN:
-          document.getElementById('super-admin-content').style.display = 'block';
-          break;
-        case ROLES.PROFESSOR:
-          document.getElementById('professor-content').style.display = 'block';
-          break;
-        case ROLES.STUDENT:
-          document.getElementById('student-content').style.display = 'block';
-          break;
-        case ROLES.ADMIN_STAFF:
-          document.getElementById('admin-staff-content').style.display = 'block';
-          break;
-        default:
-          document.getElementById('login-content').style.display = 'block';
+        case      ROLES.SUPER_ADMIN: document.getElementById('super-admin-content').style.display = 'block';  break;
+        case      ROLES.PROFESSOR:document.getElementById('professor-content').style.display = 'block';       break;
+        case      ROLES.STUDENT:document.getElementById('student-content').style.display = 'block';           break;
+        case      ROLES.ADMIN_STAFF:document.getElementById('admin-staff-content').style.display = 'block';   break;
+        default:  document.getElementById('login-content').style.display = 'block';
       }
     }
 
@@ -372,9 +342,7 @@ var backendIP = getBackendIP();
           localStorage.removeItem('authToken');
           showUserRole(null);
         }
-      } else {
-        showUserRole(null);
-      }
+      } else {  showUserRole(null); }
     });
 
 
@@ -387,8 +355,7 @@ var backendIP = getBackendIP();
       const response = await fetch(`http://${backendIP}:3000/student/tabla-datos-estudiante/`, { headers: { "Authorization": `Bearer ${token}` } });
       console.log("Token:", localStorage.getItem("authToken"));
 
-      if (!response.ok) {
-        console.error("Error al obtener las materias");
+      if (!response.ok) {   console.error("Error al obtener las materias");
         return;
       }
 
@@ -402,7 +369,7 @@ var backendIP = getBackendIP();
         <td>${subject.profesor_nombre}</td>
         <td>${subject.horarios}</td> 
         <td>${subject.id_grupo}</td>
-    </tr>`;
+        </tr>`;
         tbody.innerHTML += row;
       });
     }
@@ -412,8 +379,7 @@ var backendIP = getBackendIP();
       const token = localStorage.getItem("authToken");
       const response = await fetch(`http://${backendIP}:3000/student/tabla-calificaciones/`, { headers: { "Authorization": `Bearer ${token}` } });;
 
-      if (!response.ok) {
-        console.error("Error al obtener las materias");
+      if (!response.ok) {   console.error("Error al obtener las materias");
         return;
       }
 
@@ -428,7 +394,7 @@ var backendIP = getBackendIP();
         <td>${subject.calif_p2}</td>
         <td>${subject.calif_final}</td>
         <td>${subject.promedio}</td>
-    </tr>`;
+        </tr>`;
         tbody.innerHTML += row;
       });
     }
@@ -498,10 +464,7 @@ function submitAttendance() {
   const token = localStorage.getItem("authToken"); 
   const attendanceCode = document.getElementById("attendance-code").value.trim();
   
-  console.log("Attendance Code (Front):", attendanceCode); // Debugging
-
-  if (!attendanceCode) {
-    alert("Por favor, ingresa un código de asistencia.");
+  if (!attendanceCode) {    alert("Por favor, ingresa un código de asistencia.");
     return;
   }
 
@@ -515,10 +478,8 @@ function submitAttendance() {
   })
   .then(response => response.json())
   .then(data => {
-    if (data.success) {
-      alert("Asistencia registrada exitosamente.");
-    } else {
-      alert("Error al registrar asistencia: " + data.message);
+    if (data.success) { alert("Asistencia registrada exitosamente.");
+    } else {  alert("Error al registrar asistencia: " + data.message);
     }
   })
   .catch(error => {
@@ -537,8 +498,7 @@ async function loadSubjectsProf() {
       const response = await fetch(`http://${backendIP}:3000/professor/schedule/`, { headers: { "Authorization": `Bearer ${token}` } });
       console.log("Token:", localStorage.getItem("authToken"));
 
-      if (!response.ok) {
-        console.error("Error al obtener las materias");
+      if (!response.ok) {   console.error("Error al obtener las materias");
         return;
       }
 
@@ -552,7 +512,7 @@ async function loadSubjectsProf() {
         <td>${subject.materia_nombre}</td>
         <td>${subject.id_grupo}</td>
         <td>${subject.horarios}</td>
-    </tr>`;
+        </tr>`;
         tbody.innerHTML += row;
       });
     }
@@ -561,9 +521,7 @@ async function loadSubjectsProf() {
     ///////////////////////////////////////////QR/////////////////////////////////
 function fallbackHash(seed) {
     let hash = 0;
-    for (let i = 0; i < seed.length; i++) {
-        hash = (hash * 31 + seed.charCodeAt(i)) >>> 0; // unsigned 32-bit
-    }
+    for (let i = 0; i < seed.length; i++) { hash = (hash * 31 + seed.charCodeAt(i)) >>> 0; }
     return hash;
 }
 
@@ -582,20 +540,12 @@ function generateShortCode(seed) {
     return base62Encode(numericHash);
 }
 
-
-
-
-
-
     async function QR_CODE_GEN() {
     const token = localStorage.getItem("authToken");
-    const response = await fetch(`http://${backendIP}:3000/professor/QR_CODE_GEN/`, { 
-        headers: { "Authorization": `Bearer ${token}` } 
-    });
+    const response = await fetch(`http://${backendIP}:3000/professor/QR_CODE_GEN/`, {   headers: { "Authorization": `Bearer ${token}` }   });
     console.log("Token:", localStorage.getItem("authToken"));
 
-    if (!response.ok) {
-        console.error("Error al obtener las materias");
+    if (!response.ok) {   console.error("Error al obtener las materias");
         return;
     }
 
@@ -629,9 +579,8 @@ document.getElementById("qr_subject_select").addEventListener("change", function
 
 function generateQRCode(data) {
     const qrDisplay = document.getElementById("qr-display");
-    qrDisplay.innerHTML = ""; // Clear any previous QR code
+    qrDisplay.innerHTML = "";
 
-    // Create a QR code with the provided data
     new QRCode(qrDisplay, {
     text: data,
     colorDark : "#000000",
@@ -647,33 +596,27 @@ let currentSubjectInfo = null;
 
 async function fetchSubjects(){
     const token = localStorage.getItem("authToken");
-    const response = await fetch(`http://${backendIP}:3000/professor/getSubjects/`, { 
-        headers: { "Authorization": `Bearer ${token}` } 
-    });
+    const response = await fetch(`http://${backendIP}:3000/professor/getSubjects/`, {   headers: { "Authorization": `Bearer ${token}` }     });
     console.log("Token:", localStorage.getItem("authToken"));
 
-    if (!response.ok) {
-        console.error("Error al obtener las materias");
+    if (!response.ok) {   console.error("Error al obtener las materias");
         return;
     }
 
     const subjects = await response.json();
     console.log("retorno", subjects);
     
-    // Clear the select dropdown first
     const selectElement = document.getElementById("professor_grade_subject_select");
-    selectElement.innerHTML = "<option value=''>Seleccione una materia</option>"; // Reset dropdown
+    selectElement.innerHTML = "<option value=''>Seleccione una materia</option>";
 
-    // Remove any existing event listeners
     const newSelectElement = selectElement.cloneNode(true);
     selectElement.parentNode.replaceChild(newSelectElement, selectElement);
 
-    // Populate dropdown with subjects
     subjects.forEach(subject => {
         console.log("aaaa");
         const option = document.createElement("option");
-        option.value = `${subject.id_materia}-${subject.id_grupo}-${subject.materia_nombre}`; // Combine id_materia and id_grupo as value
-        option.textContent = `${subject.id_materia}-${subject.id_grupo}-${subject.materia_nombre}`; // Show the name and group
+        option.value = `${subject.id_materia}-${subject.id_grupo}-${subject.materia_nombre}`; 
+        option.textContent = `${subject.id_materia}-${subject.id_grupo}-${subject.materia_nombre}`; 
         newSelectElement.appendChild(option);
     });
 
@@ -683,7 +626,6 @@ async function fetchSubjects(){
 
         const [id_materia, id_grupo, materia_nombre] = selected.split("-");
         
-        // Store current subject info globally
         currentSubjectInfo = {
             id_materia: id_materia,
             id_grupo: id_grupo,
@@ -692,13 +634,10 @@ async function fetchSubjects(){
 
         console.log("idmateria" + id_materia + "idgrupo" + id_grupo);
         const response = await fetch(`http://${backendIP}:3000/professor/getStudents?id_materia=${id_materia}&id_grupo=${id_grupo}`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
+            headers: {  "Authorization": `Bearer ${token}`  }
         });
 
-        if (!response.ok) {
-            console.error("Error al obtener los estudiantes");
+        if (!response.ok) { console.error("Error al obtener los estudiantes");
             return;
         }
 
@@ -711,7 +650,7 @@ async function fetchSubjects(){
 async function populateStudentGradeTable(students) {
     console.log("ENTRANDO A LA SECCION DE RELLENAR TABLA");
     const tbody = document.getElementById("profesor_grade_entry_table");
-    tbody.innerHTML = ""; // Clear existing rows
+    tbody.innerHTML = ""; 
 
     students.forEach(student => {
         const row = document.createElement("tr");
@@ -723,38 +662,31 @@ async function populateStudentGradeTable(students) {
             <td><input type="number" value="${student.calif_final ?? ''}" data-field="calif_final" data-id="${student.matricula}" step="0.1" min="0" max="10" /></td>
             <td><button class="save-grade-btn" data-matricula="${student.matricula}" onclick="saveGrade('${student.matricula}')">Guardar</button></td>
         `;
-
         tbody.appendChild(row);
     });
 }
 
-// Fixed saveGrade function
 async function saveGrade(matricula) {
     console.log("Saving grade for matricula:", matricula);
     
-    // Check if we have subject information
-    if (!currentSubjectInfo) {
-        alert("Error: No se ha seleccionado una materia");
+    if (!currentSubjectInfo) {  alert("Error: No se ha seleccionado una materia");
         return;
     }
 
-    // Find the row for this student
     const button = document.querySelector(`button[data-matricula="${matricula}"]`);
     const row = button.closest("tr");
     
-    // Get the input values from this row
     const calif_p1_input = row.querySelector('input[data-field="calif_p1"]');
     const calif_p2_input = row.querySelector('input[data-field="calif_p2"]');
     const calif_final_input = row.querySelector('input[data-field="calif_final"]');
 
-    // Prepare the data
     const data = {
         id_materia: currentSubjectInfo.id_materia,
         matricula: matricula,
         calif_p1: calif_p1_input.value || null,
         calif_p2: calif_p2_input.value || null,
         calif_final: calif_final_input.value || null,
-        ciclo_cursando: "2025-1" // You might want to make this dynamic
+        ciclo_cursando: "2025-1" 
     };
 
     console.log("Data to send:", data);
@@ -766,8 +698,7 @@ async function saveGrade(matricula) {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify(data)
+            },body: JSON.stringify(data)
         });
 
         if (!response.ok) {
@@ -778,7 +709,6 @@ async function saveGrade(matricula) {
         console.log("Server response:", result);
         alert(result.message || "Calificación guardada exitosamente");
         
-        // Optional: Change button color temporarily to show success
         button.style.backgroundColor = "#4CAF50";
         button.textContent = "Guardado";
         setTimeout(() => {
