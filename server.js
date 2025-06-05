@@ -202,7 +202,7 @@ app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
 
 
 ///////////////////////////////////////////////////////       PROFESORES       ////////////////////////////////////////////////////////////////////////////////
-
+///////////////CALENDARIO DE MATERIAS A IMPARTIR
 app.get('/professor/schedule/', authenticateToken, (req, res) => {
   const query = `
     SELECT 
