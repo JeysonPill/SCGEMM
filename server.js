@@ -423,7 +423,7 @@ app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
 
 
 app.get('/professor/getSubjects', authenticateToken, (req, res) => {
-
+/*
   const query = `
       SELECT DISTINCT
       MATERIAS.materia_nombre
@@ -434,6 +434,19 @@ app.get('/professor/getSubjects', authenticateToken, (req, res) => {
     WHERE PROFESORES.id_profesor = 'P0001';
     `;
   //console.log("matricula del profesor:", req.user.user_matricula);
+
+  */
+const query = `
+    SELECT 
+      GRUPOSALUM.id_materia,
+      MATERIAS.materia_nombre,
+      GRUPOSALUM.id_grupo
+    FROM MATERIAS
+    JOIN GRUPOSALUM ON MATERIAS.id_materia = GRUPOSALUM.id_materia
+    JOIN MATERIASPROF ON GRUPOSALUM.id_grupo = MATERIASPROF.id_grupo
+    JOIN PROFESORES ON MATERIASPROF.id_profesor = PROFESORES.id_profesor
+    WHERE PROFESORES.id_profesor = 'P0001';
+  `;
 
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
