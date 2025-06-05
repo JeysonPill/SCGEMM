@@ -717,6 +717,7 @@ async function fetchSubjects(){
 
         const [id_materia, id_grupo] = selected.split("-");
 
+        console.log("idmateria" + id_materia "idgrupo" +idGrupo);
         const response = await fetch(`http://${backendIP}:3000/professor/getStudents?id_materia=${id_materia}&id_grupo=${id_grupo}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
