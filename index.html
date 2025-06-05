@@ -551,7 +551,7 @@ async function loadSubjectsProf() {
         const row = `<tr>
         <td>${subject.materia_nombre}</td>
         <td>${subject.id_grupo}</td>
-        <td>${subject.horarios ? subject.horarios.replace(/\n/g, "<br>") : 'Sin horario asignado'}</td>
+        <td>${subject.horarios}</td>
     </tr>`;
         tbody.innerHTML += row;
       });

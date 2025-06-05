@@ -297,7 +297,7 @@ app.get('/professor/schedule/', authenticateToken, (req, res) => {
     SELECT 
       M.materia_nombre AS materia_nombre,
       H.id_grupo,
-      CONCAT
+      CONCAT (
     IF(h_lunes IS NOT NULL AND h_lunes != '', CONCAT('Lunes: ', h_lunes, '<br>'), ''),
     IF(h_martes IS NOT NULL AND h_martes != '', CONCAT('Martes: ', h_martes, '<br>'), ''),
     IF(h_miercoles IS NOT NULL AND h_miercoles != '', CONCAT('Miércoles: ', h_miercoles, '<br>'), ''),
@@ -307,7 +307,7 @@ app.get('/professor/schedule/', authenticateToken, (req, res) => {
     FROM HORARIOS H
     JOIN MATERIAS M ON M.id_materia = H.id_materia
     JOIN PROFESORES P ON P.id_profesor = H.id_profesor
-    WHERE P.id_profesor = ?;
+    WHERE P.id_profesor = 'P0001';
   `;
 
   console.log("matre", req.user.user_matricula);
