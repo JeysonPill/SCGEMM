@@ -576,35 +576,27 @@ async function loadSubjectsProf() {
 
 
     ///////////////////////////////////////////QR/////////////////////////////////
-  function generateShortCode(seed) {
-    const base62chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const encoder = new TextEncoder();
-    const data = encoder.encode(seed);
-
-    // Make sure window.crypto.subtle exists
-    if (!window.crypto || !window.crypto.subtle) {
-        console.error("crypto.subtle not supported in this browser.");
-        return Promise.resolve("fallback123"); // fallback if needed
+function fallbackHash(seed) {
+    let hash = 0;
+    for (let i = 0; i < seed.length; i++) {
+        hash = (hash * 31 + seed.charCodeAt(i)) >>> 0; // unsigned 32-bit
     }
+    return hash;
+}
 
-    return window.crypto.subtle.digest("SHA-256", data).then(hashBuffer => {
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
+function base62Encode(num, length = 10) {
+    const base62chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let encoded = "";
+    while (encoded.length < length) {
+        encoded = base62chars[num % 62] + encoded;
+        num = Math.floor(num / 62);
+    }
+    return encoded;
+}
 
-        // Convert first 8 bytes to BigInt
-        let num = BigInt(0);
-        for (let i = 0; i < 8; i++) {
-            num = (num << 8n) + BigInt(hashArray[i]);
-        }
-
-        // Convert to base62
-        let shortCode = "";
-        for (let i = 0; i < 10; i++) {
-            shortCode = base62chars[num % 62n] + shortCode;
-            num = num / 62n;
-        }
-
-        return shortCode;
-    });
+function generateShortCode(seed) {
+    const numericHash = fallbackHash(seed);
+    return base62Encode(numericHash);
 }
 
 
@@ -645,13 +637,12 @@ document.getElementById("qr_subject_select").addEventListener("change", function
     if (selectedValue) {
         const [idMateria, idGrupo] = selectedValue.split("-");
         const seed = `${idMateria}-${idGrupo}`;
-
-        generateShortCode(seed).then(code => {
-            console.log("QR Code string:", code);
-            generateQRCode(code); // Call your QR generation function
-        });
+        const code = generateShortCode(seed);
+        console.log("Generated code:", code);
+        generateQRCode(code);
     }
 });
+
 
 
 
