@@ -509,7 +509,7 @@ function submitAttendance() {
     method: "POST",
     headers: { 
       "Authorization": `Bearer ${token}`,
-      "Content-Type": "application/json" // ✅ Required for JSON body parsing
+      "Content-Type": "application/json" 
     },
     body: JSON.stringify({ codigo_asistencia: attendanceCode })
   })

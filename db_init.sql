@@ -101,6 +101,7 @@ CREATE TABLE PAGOS (
 -- ASISTENCIA
 CREATE TABLE ASISTENCIA (
     asistencia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    matricula VARCHAR(10),
     id_materia VARCHAR(10),
     codigo VARCHAR(10),
     ciclo_cursando VARCHAR(15)
