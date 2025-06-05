@@ -177,36 +177,7 @@ app.get('/schedules', (req, res) => {
 });
 
 /////////////////       CALIFICACIONES       ///////////////////////////////////////
-/*
-app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
-  const today = new Date();
-  const year = today.getFullYear().toString().slice(-2);
-  const month = today.getMonth() + 1; 
 
-  const ciclo_cursando = month >= 1 && month <= 6 
-    ? `FEB${year}-JUN${year}` 
-    : `AGO${year}-DEC${year}`;
-
-  const query = `
-    SELECT 
-      m.materia_nombre as materia,
-      c.calif_p1,
-      c.calif_p2,
-      c.calif_final,
-      ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) as promedio,
-      c.ciclo_cursando
-    FROM CALIFICACIONES c
-    JOIN MATERIAS m ON c.id_materia = m.id_materia
-    WHERE c.matricula = 'A0001' AND c.ciclo_cursando = '2025-1';
-  `;
-
-  // Execute Query
-  db.query(query, [req.user.user_matricula, ciclo_cursando], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(results);
-  });
-});
-*/
 app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
   const query = `
     SELECT 
@@ -231,22 +202,6 @@ app.get('/student/tabla-calificaciones/', authenticateToken, (req, res) => {
 
 /////////////////       KARDEZ       ///////////////////////////////////////
 app.get('/student/tabla-kardez/', authenticateToken, (req, res) => {
-  /*
-  const query = `
-    SELECT 
-    m.nombre AS materia,
-    c.ciclo_cursando AS periodo,
-    ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) AS calif_final,
-    CASE 
-        WHEN ROUND((CAST(c.calif_p1 AS DECIMAL) + CAST(c.calif_p2 AS DECIMAL) + CAST(c.calif_final AS DECIMAL)) / 3, 2) > 7 
-        THEN 'Aprobado' 
-        ELSE 'Reprobado' 
-    END AS estado
-    FROM CALIFICACIONES c
-    JOIN MATERIAS m ON c.id_materia = m.id_materia
-    WHERE c.matricula = ?;
-  `;
-  */
   const query = `
  SELECT 
     m.materia_nombre AS materia,
@@ -336,33 +291,6 @@ app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
 
 ///////////////////////////////////////////////////////       PROFESORES       ////////////////////////////////////////////////////////////////////////////////
 
-/*
-app.get('/professor/schedule/', authenticateToken, (req, res) => {
-  const query = `
-   SELECT 
-    MATERIAS.materia_nombre AS materia_nombre,
-    GRUPOSALUM.id_grupo,
-    CONCAT(
-        'Lunes: ', TIME_FORMAT(HORARIOS.h_lunes, '%H:%i'), '\n',
-        'Martes: ', TIME_FORMAT(HORARIOS.h_martes, '%H:%i'), '\n',
-        'Miércoles: ', TIME_FORMAT(HORARIOS.h_miercoles, '%H:%i'), '\n',
-        'Jueves: ', TIME_FORMAT(HORARIOS.h_jueves, '%H:%i'), '\n',
-        'Viernes: ', TIME_FORMAT(HORARIOS.h_viernes, '%H:%i')
-    ) AS horarios
-FROM MATERIAS
-JOIN PROFESORES
-JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
-JOIN GRUPOSALUM ON GRUPOSALUM.id_materia = MATERIAS.id_materia
-WHERE PROFESORES.id_profesor = 'P0001';
-  `;
-  console.log("matre",req.user.user_matricula);
-  db.query(query, [req.user.user_matricula], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    console.log(results);
-    res.json(results);
-  });
-});
-*/
 app.get('/professor/schedule/', authenticateToken, (req, res) => {
   const query = `
     SELECT 

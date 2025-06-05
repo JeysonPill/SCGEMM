@@ -192,15 +192,8 @@
       <div class="nav-tab active" onclick="switchTab('student-management', this)">Estudiantes</div>
       <div class="nav-tab" onclick="switchTab('professor-management', this)">Profesores</div>
       <div class="nav-tab" onclick="switchTab('subject-management', this)">Materias</div>
-
-      <!--
-        <div id="student-management" class="tab-content active"></div>
-        <div id="professor-management" class="tab-content"></div>
-        <div id="subject-management" class="tab-content"></div>
--->
       <div class="nav-tab" onclick="switchTab('reports', this)">Reportes</div>
     </div>
-
   </div>
 
 <!-------------------------------------------------------------------- Panel de linuxero maestro -------------------------------------------------------------------------------->
@@ -208,24 +201,10 @@
     <button class="logout-button" onclick="handleLogout()">Logout</button>
     <h2>Administracion del sistema</h2>
     <div class="nav-tabs">
-
-      <!-- original
-      <div class="nav-tab active" onclick="switchTab('user-management', this)">Usuarios</div>
-      <div class="nav-tab" onclick="switchTab('system-config', this)">Configuraciones</div>
-      <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
-    -->
-
-      <div class="nav-tab active" onclick="switchTab('user-management', this)">Usuarios</div>
-      <div class="nav-tab" onclick="switchTab('system-config', this)">Configuraciones</div>
-      <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
-
-      <!-- version 2
-    <div id="user-management" class="tab-content active"></div>
-    <div id="system-config" class="tab-content"></div>
-    <div id="system-logs" class="tab-content"></div>
-    -->
+    <div class="nav-tab active" onclick="switchTab('user-management', this)">Usuarios</div>
+    <div class="nav-tab" onclick="switchTab('system-config', this)">Configuraciones</div>
+     <div class="nav-tab" onclick="switchTab('system-logs', this)">Registros</div>
     </div>
-
   </div>
 
   <script>
@@ -261,18 +240,13 @@
 
     function getBackendIP() {
    let backendIP = localStorage.getItem('backendIP');
-
-  //if (!backendIP) {
     backendIP = "192.168.1.103";
     if (backendIP) {
       localStorage.setItem('backendIP', backendIP);
-    } else {
+    }else {
       alert("Backend IP is required!");
       return null;
-    }
- // }
-  
-  return backendIP;
+    }return backendIP;
 }
 
 var backendIP = getBackendIP();
@@ -304,7 +278,7 @@ var backendIP = getBackendIP();
                 loadPagos();
                 break;
             case 'attendance':
-                initializeAttendance(); // ✅ Initialize attendance section instead
+                initializeAttendance(); 
                 break;
             case 'teaching-schedule':
                 loadSubjectsProf();
@@ -323,7 +297,6 @@ var backendIP = getBackendIP();
     }
 }
 
-
     // Logout
     function handleLogout() {
       localStorage.removeItem('authToken');
@@ -339,7 +312,6 @@ var backendIP = getBackendIP();
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
       const errorMessage = document.getElementById('error-message');
-      ///Cambio solo las ip, no el puerto
       try {
         let ip = backendIP;
         console.log(backendIP);
@@ -391,8 +363,6 @@ var backendIP = getBackendIP();
 
     // 
     window.addEventListener('load', () => {
-
-
       const token = localStorage.getItem('authToken');
       if (token) {
         try {
@@ -516,17 +486,11 @@ async function loadPagos() {
 
 async function initializeAttendance() {
     console.log("Initializing attendance section");
-    
-    // Clear the input field when switching to this tab
     const attendanceInput = document.getElementById("attendance-code");
     if (attendanceInput) {
         attendanceInput.value = "";
         attendanceInput.focus(); // Optional: focus on the input field
     }
-    
-    // You can add any other initialization logic here
-    // For example, if you want to initialize QR code scanning
-    // initializeQRScanner();
 }
 
 
@@ -638,11 +602,9 @@ function generateShortCode(seed) {
     const subjects = await response.json();
     console.log("retorno", subjects);
     
-    // Clear the select dropdown first
     const selectElement = document.getElementById("qr_subject_select");
     selectElement.innerHTML = "<option value=''>Seleccione una materia</option>"; // Reset dropdown
 
-    // Populate dropdown with subjects
     subjects.forEach(subject => {
         const option = document.createElement("option");
         option.value = `${subject.materia_nombre}-${subject.id_grupo}`; // Combine id_materia and id_grupo as value
@@ -681,25 +643,6 @@ function generateQRCode(data) {
 
 
 /////////////////CALIFICACIONES/////////////////////////////////
-
-/*
-function fetchSubjects() {
-    fetch('http://${backendIP}:3000/professor/getSubjects') // Adjust the endpoint according to your backend
-        .then(response => response.json())
-        .then(data => {
-            let select = document.getElementById("grade-subject-select");
-            select.innerHTML = '<option value="">Seleccione una materia</option>';
-            data.forEach(subject => {
-                let option = document.createElement("option");
-                option.value = subject.id_materia;
-                option.textContent = subject.nombre;
-                select.appendChild(option);
-            });
-        })
-        .catch(error => console.error("Error fetching subjects:", error));
-}
-*/
-// Global variable to store current subject info
 let currentSubjectInfo = null;
 
 async function fetchSubjects(){
@@ -850,49 +793,6 @@ async function saveGrade(matricula) {
 }
 
 ///////////////////////////////////////////////////////////////////////
-
-/* 
-function fetchStudents(subjectId) {
-    fetch(`http://${backendIP}:3000/professor/getStudents?subjectId=${subjectId}`)
-        .then(response => response.json())
-        .then(data => {
-            let tableBody = document.getElementById("profesor_grade_entry_table");
-            tableBody.innerHTML = ""; // Clear table before adding new rows
-
-            data.forEach(student => {
-                let row = document.createElement("tr");
-
-                row.innerHTML = `
-                    <td>${student.nombre}</td>
-                    <td><input type="number" class="grade-input" data-student="${student.matricula}" data-type="p1" value="${student.calif_p1 || ''}"></td>
-                    <td><input type="number" class="grade-input" data-student="${student.matricula}" data-type="p2" value="${student.calif_p2 || ''}"></td>
-                    <td><input type="number" class="grade-input" data-student="${student.matricula}" data-type="final" value="${student.calif_final || ''}"></td>
-                    <td><button class="save-btn" data-matricula="${student.matricula}">Guardar</button></td>
-                `;
-                tableBody.appendChild(row);
-            });
-
-            // Attach event listeners for save buttons
-            document.querySelectorAll(".save-btn").forEach(button => {
-                button.addEventListener("click", saveGrades);
-            });
-        })
-        .catch(error => console.error("Error fetching students:", error));
-}
-
-
-
-
-function getGradeValue(matricula, type) {
-    let input = document.querySelector(`.grade-input[data-student="${matricula}"][data-type="${type}"]`);
-    return input ? parseInt(input.value) || null : null;
-}
-
-function validateGrades(grades) {
-    return [grades.calif_p1, grades.calif_p2, grades.calif_final].every(grade => grade === null || (Number.isInteger(grade) && grade >= 0 && grade <= 10));
-}
-    */
-
 
   </script>
   <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
