@@ -446,14 +446,14 @@ const query = `
 app.get('/professor/getStudents', async (req, res) => {
   const { id_materia, id_grupo } = req.query;
  console.log("Received:", id_materia, id_grupo);
-
+ 
   const query = `
     SELECT 
       A.matricula, A.user_name, C.calif_p1, C.calif_p2, C.calif_final
     FROM ALUMNOS A
     JOIN GRUPOSALUM G ON A.matricula = G.matricula_alumno
     LEFT JOIN CALIFICACIONES C ON A.matricula = C.matricula AND G.id_materia = C.id_materia
-    WHERE G.materia_nombre = ? AND G.id_grupo = ?;
+    WHERE G.id_materia = ? AND G.id_grupo = ?;
   `;
 
   db.query(query, [id_materia, id_grupo], (err, results) => {
