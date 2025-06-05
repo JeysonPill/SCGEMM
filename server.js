@@ -297,13 +297,13 @@ app.get('/professor/schedule/', authenticateToken, (req, res) => {
     SELECT 
       M.materia_nombre AS materia_nombre,
       H.id_grupo,
-      CONCAT(
-          'Lunes: ', TIME_FORMAT(H.h_lunes, '%H:%i'), '\n',
-          'Martes: ', TIME_FORMAT(H.h_martes, '%H:%i'), '\n',
-          'Miércoles: ', TIME_FORMAT(H.h_miercoles, '%H:%i'), '\n',
-          'Jueves: ', TIME_FORMAT(H.h_jueves, '%H:%i'), '\n',
-          'Viernes: ', TIME_FORMAT(H.h_viernes, '%H:%i')
-      ) AS horarios
+      CONCAT
+    IF(h_lunes IS NOT NULL AND h_lunes != '', CONCAT('Lunes: ', h_lunes, '<br>'), ''),
+    IF(h_martes IS NOT NULL AND h_martes != '', CONCAT('Martes: ', h_martes, '<br>'), ''),
+    IF(h_miercoles IS NOT NULL AND h_miercoles != '', CONCAT('Miércoles: ', h_miercoles, '<br>'), ''),
+    IF(h_jueves IS NOT NULL AND h_jueves != '', CONCAT('Jueves: ', h_jueves, '<br>'), ''),
+    IF(h_viernes IS NOT NULL AND h_viernes != '', CONCAT('Viernes: ', h_viernes), '')
+  ) AS horarios
     FROM HORARIOS H
     JOIN MATERIAS M ON M.id_materia = H.id_materia
     JOIN PROFESORES P ON P.id_profesor = H.id_profesor
