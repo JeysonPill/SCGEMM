@@ -680,6 +680,8 @@ function fetchSubjects() {
         .catch(error => console.error("Error fetching subjects:", error));
 }
 */
+// Global variable to store current subject info
+let currentSubjectInfo = null;
 
 async function fetchSubjects(){
     const token = localStorage.getItem("authToken");
@@ -700,25 +702,33 @@ async function fetchSubjects(){
     const selectElement = document.getElementById("professor_grade_subject_select");
     selectElement.innerHTML = "<option value=''>Seleccione una materia</option>"; // Reset dropdown
 
+    // Remove any existing event listeners
+    const newSelectElement = selectElement.cloneNode(true);
+    selectElement.parentNode.replaceChild(newSelectElement, selectElement);
 
-    let id_materia="";
     // Populate dropdown with subjects
     subjects.forEach(subject => {
-      console.log("aaaa");
+        console.log("aaaa");
         const option = document.createElement("option");
         option.value = `${subject.id_materia}-${subject.id_grupo}-${subject.materia_nombre}`; // Combine id_materia and id_grupo as value
         option.textContent = `${subject.id_materia}-${subject.id_grupo}-${subject.materia_nombre}`; // Show the name and group
-        selectElement.appendChild(option);
+        newSelectElement.appendChild(option);
     });
 
-
-    selectElement.addEventListener("change", async function () {
+    newSelectElement.addEventListener("change", async function () {
         const selected = this.value;
         if (!selected) return;
 
-        const [id_materia, id_grupo] = selected.split("-");
+        const [id_materia, id_grupo, materia_nombre] = selected.split("-");
+        
+        // Store current subject info globally
+        currentSubjectInfo = {
+            id_materia: id_materia,
+            id_grupo: id_grupo,
+            materia_nombre: materia_nombre
+        };
 
-        console.log("idmateria" + id_materia +"idgrupo" +id_grupo);
+        console.log("idmateria" + id_materia + "idgrupo" + id_grupo);
         const response = await fetch(`http://${backendIP}:3000/professor/getStudents?id_materia=${id_materia}&id_grupo=${id_grupo}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -734,12 +744,10 @@ async function fetchSubjects(){
         console.log("Estudiantes:", students);
         populateStudentGradeTable(students);
     });
-
 }
 
 async function populateStudentGradeTable(students) {
-
-  console.log("eNTRANDO A LA SECCION DE RELLNAR TABLA");
+    console.log("ENTRANDO A LA SECCION DE RELLENAR TABLA");
     const tbody = document.getElementById("profesor_grade_entry_table");
     tbody.innerHTML = ""; // Clear existing rows
 
@@ -748,49 +756,79 @@ async function populateStudentGradeTable(students) {
 
         row.innerHTML = `
             <td>${student.user_name}</td>
-            <td><input type="number" value="${student.calif_p1 ?? ''}" data-field="calif_p1" data-id="${student.matricula}" /></td>
-            <td><input type="number" value="${student.calif_p2 ?? ''}" data-field="calif_p2" data-id="${student.matricula}" /></td>
-            <td><input type="number" value="${student.calif_final ?? ''}" data-field="calif_final" data-id="${student.matricula}" /></td>
-            <td><button data-id="${student.matricula}" onclick="saveGrade(this)">Guardar</button></td>
+            <td><input type="number" value="${student.calif_p1 ?? ''}" data-field="calif_p1" data-id="${student.matricula}" step="0.1" min="0" max="10" /></td>
+            <td><input type="number" value="${student.calif_p2 ?? ''}" data-field="calif_p2" data-id="${student.matricula}" step="0.1" min="0" max="10" /></td>
+            <td><input type="number" value="${student.calif_final ?? ''}" data-field="calif_final" data-id="${student.matricula}" step="0.1" min="0" max="10" /></td>
+            <td><button class="save-grade-btn" data-matricula="${student.matricula}" onclick="saveGrade('${student.matricula}')">Guardar</button></td>
         `;
 
         tbody.appendChild(row);
     });
 }
 
+// Fixed saveGrade function
+async function saveGrade(matricula) {
+    console.log("Saving grade for matricula:", matricula);
+    
+    // Check if we have subject information
+    if (!currentSubjectInfo) {
+        alert("Error: No se ha seleccionado una materia");
+        return;
+    }
 
-function saveGrade(event) {
-document.getElementById("profesor_grade_entry_table").addEventListener("click", async function (e) {
-  if (e.target.classList.contains("save-grade-btn")) {
-    const row = e.target.closest("tr");
-    const matricula = row.dataset.matricula;
-    const inputs = row.querySelectorAll("input.calif");
+    // Find the row for this student
+    const button = document.querySelector(`button[data-matricula="${matricula}"]`);
+    const row = button.closest("tr");
+    
+    // Get the input values from this row
+    const calif_p1_input = row.querySelector('input[data-field="calif_p1"]');
+    const calif_p2_input = row.querySelector('input[data-field="calif_p2"]');
+    const calif_final_input = row.querySelector('input[data-field="calif_final"]');
 
+    // Prepare the data
     const data = {
-      id_materia: selectedSubject.id_materia,
-      matricula,
-      calif_p1: row.querySelector('input[data-type="p1"]').value,
-      calif_p2: row.querySelector('input[data-type="p2"]').value,
-      calif_final: row.querySelector('input[data-type="final"]').value,
-      ciclo_cursando: "2025-1" // you might want this dynamic
+        id_materia: currentSubjectInfo.id_materia,
+        matricula: matricula,
+        calif_p1: calif_p1_input.value || null,
+        calif_p2: calif_p2_input.value || null,
+        calif_final: calif_final_input.value || null,
+        ciclo_cursando: "2025-1" // You might want to make this dynamic
     };
 
-    const token = localStorage.getItem("authToken");
-    const res = await fetch(`http://${backendIP}:3000/professor/saveGrade`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(data)
-    });
+    console.log("Data to send:", data);
 
-    const result = await res.json();
-    alert(result.message);
-  }
-});
+    try {
+        const token = localStorage.getItem("authToken");
+        const response = await fetch(`http://${backendIP}:3000/professor/saveGrade`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("Server response:", result);
+        alert(result.message || "Calificación guardada exitosamente");
+        
+        // Optional: Change button color temporarily to show success
+        button.style.backgroundColor = "#4CAF50";
+        button.textContent = "Guardado";
+        setTimeout(() => {
+            button.style.backgroundColor = "";
+            button.textContent = "Guardar";
+        }, 2000);
+
+    } catch (error) {
+        console.error("Error saving grade:", error);
+        alert("Error al guardar la calificación: " + error.message);
+    }
 }
-
 
 ///////////////////////////////////////////////////////////////////////
 
