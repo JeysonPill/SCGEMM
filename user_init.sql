@@ -189,54 +189,15 @@ INSERT INTO MATERIASPROF (id_profesor, id_grupo) VALUES
 ('P0012', 'G10');
 
 
--- G01 Math II (MAT201)
-INSERT INTO HORARIOS (id_grupo, id_materia, id_profesor, dia_semana, hora_inicio, hora_fin) VALUES
-('G01', 'MAT201', 'P0003', 1, 8, 10),
-('G01', 'MAT201', 'P0003', 3, 8, 10),
-('G01', 'MAT201', 'P0003', 5, 8, 10);
-
--- G02 Physics I (FIS101)
-INSERT INTO HORARIOS (id_grupo, id_materia, id_profesor, dia_semana, hora_inicio, hora_fin) VALUES
-('G02', 'FIS101', 'P0004', 2, 9, 11),
-('G02', 'FIS101', 'P0004', 4, 9, 11);
-
--- G03 Chemistry I (QUI101)
-INSERT INTO HORARIOS (id_grupo, id_materia, id_profesor, dia_semana, hora_inicio, hora_fin) VALUES
-('G03', 'QUI101', 'P0005', 1, 11, 13),
-('G03', 'QUI101', 'P0005', 3, 11, 13),
-('G03', 'QUI101', 'P0005', 5, 11, 13);
-
--- G04 History (HIS101)
-INSERT INTO HORARIOS (id_grupo, id_materia, id_profesor, dia_semana, hora_inicio, hora_fin) VALUES
-('G04', 'HIS101', 'P0006', 2, 12, 14),
-('G04', 'HIS101', 'P0006', 4, 12, 14);
-
--- G05 Literature (LIT101)
-INSERT INTO HORARIOS (id_grupo, id_materia, id_profesor, dia_semana, hora_inicio, hora_fin) VALUES
-('G05', 'LIT101', 'P0007', 1, 13, 15),
-('G05', 'LIT101', 'P0007', 3, 13, 15);
-
--- G06 Programming III (PROG201)
-INSERT INTO HORARIOS (id_grupo, id_materia, id_profesor, dia_semana, hora_inicio, hora_fin) VALUES
-('G06', 'PROG201', 'P0008', 2, 8, 10),
-('G06', 'PROG201', 'P0008', 4, 8, 10);
-
--- G07 Economics (ECO101)
-INSERT INTO HORARIOS (id_grupo, id_materia, id_profesor, dia_semana, hora_inicio, hora_fin) VALUES
-('G07', 'ECO101', 'P0009', 1, 9, 11),
-('G07', 'ECO101', 'P0009', 3, 9, 11);
-
--- G08 Biology (BIO101)
-INSERT INTO HORARIOS (id_grupo, id_materia, id_profesor, dia_semana, hora_inicio, hora_fin) VALUES
-('G08', 'BIO101', 'P0010', 2, 11, 13),
-('G08', 'BIO101', 'P0010', 4, 11, 13);
-
--- G09 Linear Algebra (MAT301)
-INSERT INTO HORARIOS (id_grupo, id_materia, id_profesor, dia_semana, hora_inicio, hora_fin) VALUES
-('G09', 'MAT301', 'P0011', 1, 10, 12),
-('G09', 'MAT301', 'P0011', 3, 10, 12);
-
--- G10 Statistics (EST101)
-INSERT INTO HORARIOS (id_grupo, id_materia, id_profesor, dia_semana, hora_inicio, hora_fin) VALUES
-('G10', 'EST101', 'P0012', 2, 13, 15),
-('G10', 'EST101', 'P0012', 4, 13, 15);
+-INSERT INTO HORARIOS (id_materia, id_grupo, id_profesor, h_lunes, h_martes, h_miercoles, h_jueves, h_viernes)
+VALUES
+('MAT101', 'G03', 'P0003', '', '', '10:00-12:00', '10:00-12:00', ''),
+('PROG102', 'G04', 'P0004', '12:00-14:00', '', '', '09:00-11:00', ''),
+('FIS103', 'G05', 'P0005', '10:00-12:00', '', '', '', '11:00-13:00'),
+('QUIM104', 'G06', 'P0006', '', '08:00-10:00', '', '12:00-14:00', ''),
+('BIO105', 'G07', 'P0007', '', '13:00-15:00', '', '08:00-10:00', ''),
+('HIST106', 'G08', 'P0008', '09:00-11:00', '', '11:00-13:00', '', ''),
+('ECON107', 'G09', 'P0009', '', '', '', '13:00-15:00', '08:00-10:00'),
+('DER108', 'G10', 'P0010', '', '10:00-12:00', '', '', '12:00-14:00'),
+('LIT109', 'G11', 'P0003', '11:00-13:00', '', '', '10:00-12:00', ''),
+('ING110', 'G12', 'P0004', '', '', '12:00-14:00', '', '13:00-15:00');
