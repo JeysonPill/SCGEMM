@@ -753,15 +753,14 @@ async function populateStudentGradeTable(students) {
             <td><input type="number" value="${student.calif_final ?? ''}" data-field="calif_final" data-id="${student.matricula}" /></td>
             <td><button data-id="${student.matricula}" onclick="saveGrade(this)">Guardar</button></td>
         `;
-        
+
+        tbody.appendChild(row);
+    });
+}
 
 
-
-
-
-
-
-
+function saveGrade(event) {
+    l
 document.getElementById("profesor_grade_entry_table").addEventListener("click", async function (e) {
   if (e.target.classList.contains("save-grade-btn")) {
     const row = e.target.closest("tr");
@@ -791,23 +790,9 @@ document.getElementById("profesor_grade_entry_table").addEventListener("click", 
     alert(result.message);
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        tbody.appendChild(row);
-    });
 }
+
+
 ///////////////////////////////////////////////////////////////////////
 
 /* 
@@ -840,39 +825,7 @@ function fetchStudents(subjectId) {
 }
 
 
-function saveGrades(event) {
-    let matricula = event.target.getAttribute("data-matricula");
-    let subjectId = document.getElementById("grade-subject-select").value;
 
-    let grades = {
-        id_materia: subjectId,
-        matricula: matricula,
-        calif_p1: getGradeValue(matricula, "p1"),
-        calif_p2: getGradeValue(matricula, "p2"),
-        calif_final: getGradeValue(matricula, "final"),
-        ciclo_cursando: "FEB25-JUN25" // Adjust according to your logic
-    };
-
-    if (!validateGrades(grades)) {
-        alert("Las calificaciones deben ser números enteros entre 0 y 10.");
-        return;
-    }
-
-    fetch(`http://${backendIP}:3000/professor/insertGrade`, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(grades)
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert("Calificaciones guardadas correctamente.");
-            } else {
-                alert("Error al guardar calificaciones.");
-            }
-        })
-        .catch(error => console.error("Error inserting grades:", error));
-}
 
 function getGradeValue(matricula, type) {
     let input = document.querySelector(`.grade-input[data-student="${matricula}"][data-type="${type}"]`);
