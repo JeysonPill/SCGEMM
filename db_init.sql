@@ -46,8 +46,10 @@ CREATE TABLE PROFESORES (
 CREATE TABLE GRUPOSALUM (
     id_materia VARCHAR(10),
     matricula_alumno VARCHAR(5),
-    id_grupo VARCHAR(5)
+    id_grupo VARCHAR(5),
+    UNIQUE (matricula_alumno, id_materia)
 );
+
 
 -- MATERIASPROF
 CREATE TABLE MATERIASPROF (
