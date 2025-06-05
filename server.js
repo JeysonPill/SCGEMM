@@ -93,12 +93,12 @@ app.get('/student/tabla-datos-estudiante/', authenticateToken, (req, res) => {
     MATERIAS.materia_nombre AS materia_nombre,
     PROFESORES.nombre AS profesor_nombre,
     CONCAT(
-        'Lunes: ', TIME_FORMAT(HORARIOS.h_lunes, '%H:%i'), '\n',
-        'Martes: ', TIME_FORMAT(HORARIOS.h_martes, '%H:%i'), '\n',
-        'Miércoles: ', TIME_FORMAT(HORARIOS.h_miercoles, '%H:%i'), '\n',
-        'Jueves: ', TIME_FORMAT(HORARIOS.h_jueves, '%H:%i'), '\n',
-        'Viernes: ', TIME_FORMAT(HORARIOS.h_viernes, '%H:%i')
-    ) AS horarios,
+    IF(h_lunes IS NOT NULL AND h_lunes != '', CONCAT('Lunes: ', h_lunes, '\n'), ''),
+    IF(h_martes IS NOT NULL AND h_martes != '', CONCAT('Martes: ', h_martes, '\n'), ''),
+    IF(h_miercoles IS NOT NULL AND h_miercoles != '', CONCAT('Miércoles: ', h_miercoles, '\n'), ''),
+    IF(h_jueves IS NOT NULL AND h_jueves != '', CONCAT('Jueves: ', h_jueves, '\n'), ''),
+    IF(h_viernes IS NOT NULL AND h_viernes != '', CONCAT('Viernes: ', h_viernes), '')
+  ) AS horarios,
     GRUPOSALUM.id_grupo
 FROM MATERIAS
 JOIN PROFESORES
@@ -107,6 +107,7 @@ JOIN GRUPOSALUM ON GRUPOSALUM.id_materia = MATERIAS.id_materia
 JOIN ALUMNOS ON GRUPOSALUM.matricula_alumno = ALUMNOS.matricula
 WHERE ALUMNOS.matricula = ?;
   `;
+
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     console.log(results);
