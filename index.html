@@ -700,6 +700,7 @@ async function fetchSubjects(){
     const selectElement = document.getElementById("professor_grade_subject_select");
     selectElement.innerHTML = "<option value=''>Seleccione una materia</option>"; // Reset dropdown
 
+
     // Populate dropdown with subjects
     subjects.forEach(subject => {
         const option = document.createElement("option");
@@ -707,8 +708,9 @@ async function fetchSubjects(){
         option.textContent = `${subject.materia_nombre} `; // Show the name and group
         selectElement.appendChild(option);
     });
-}
 
+}
+/*
 document.getElementById("professor_grade_subject_select").addEventListener("change", function () {
     const selectedValue = this.value;
     if (selectedValue) {
@@ -717,6 +719,7 @@ document.getElementById("professor_grade_subject_select").addEventListener("chan
         fetchStudents(idMateria);
     }
 });
+*/
 
 /*
 document.getElementById("grade-subject-select").addEventListener("change", function () {
