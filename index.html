@@ -608,7 +608,7 @@ document.getElementById("qr_subject_select").addEventListener("change", function
     const selectedValue = this.value;
     if (selectedValue) {
         const [idMateria, idGrupo] = selectedValue.split("-");
-        const subjectString = `Materia: ${idMateria}, Grupo: ${idGrupo}`;
+        const subjectString = `${idMateria} - ${idGrupo}`;
         console.log("Generating QR for: ", subjectString);
         
         // Use a QR code library to generate the QR code
