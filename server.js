@@ -93,10 +93,10 @@ app.get('/student/tabla-datos-estudiante/', authenticateToken, (req, res) => {
     MATERIAS.materia_nombre AS materia_nombre,
     PROFESORES.nombre AS profesor_nombre,
     CONCAT(
-    IF(h_lunes IS NOT NULL AND h_lunes != '', CONCAT('Lunes: ', h_lunes, '\n'), ''),
-    IF(h_martes IS NOT NULL AND h_martes != '', CONCAT('Martes: ', h_martes, '\n'), ''),
-    IF(h_miercoles IS NOT NULL AND h_miercoles != '', CONCAT('Miércoles: ', h_miercoles, '\n'), ''),
-    IF(h_jueves IS NOT NULL AND h_jueves != '', CONCAT('Jueves: ', h_jueves, '\n'), ''),
+    IF(h_lunes IS NOT NULL AND h_lunes != '', CONCAT('Lunes: ', h_lunes, '<br>'), ''),
+    IF(h_martes IS NOT NULL AND h_martes != '', CONCAT('Martes: ', h_martes, '<br>'), ''),
+    IF(h_miercoles IS NOT NULL AND h_miercoles != '', CONCAT('Miércoles: ', h_miercoles, '<br>'), ''),
+    IF(h_jueves IS NOT NULL AND h_jueves != '', CONCAT('Jueves: ', h_jueves, '<br>'), ''),
     IF(h_viernes IS NOT NULL AND h_viernes != '', CONCAT('Viernes: ', h_viernes), '')
   ) AS horarios,
     GRUPOSALUM.id_grupo
