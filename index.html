@@ -705,33 +705,12 @@ async function fetchSubjects(){
     subjects.forEach(subject => {
       console.log("aaaa");
         const option = document.createElement("option");
-        option.value = `${subject.materia_nombre}`; // Combine id_materia and id_grupo as value
-        option.textContent = `${subject.materia_nombre} `; // Show the name and group
+        option.value = `${subject.materia_nombre}-${subject.id_grupo}`; // Combine id_materia and id_grupo as value
+        option.textContent = `${subject.materia_nombre}-${subject.id_grupo}`; // Show the name and group
         selectElement.appendChild(option);
     });
 
 }
-/*
-document.getElementById("professor_grade_subject_select").addEventListener("change", function () {
-    const selectedValue = this.value;
-    if (selectedValue) {
-        const [idMateria, idGrupo] = selectedValue.split("-");
-        const subjectString = `Materia: ${idMateria}, Grupo: ${idGrupo}`;
-        fetchStudents(idMateria);
-    }
-});
-*/
-
-/*
-document.getElementById("grade-subject-select").addEventListener("change", function () {
-    let subjectId = this.value;
-    if (subjectId) {
-        fetchStudents(subjectId);
-    } else {
-        document.getElementById("grade-entry-table").innerHTML = "";
-    }
-});
-*/
 
 
 function fetchStudents(subjectId) {

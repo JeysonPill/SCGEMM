@@ -423,19 +423,6 @@ app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
 
 
 app.get('/professor/getSubjects', authenticateToken, (req, res) => {
-/*
-  const query = `
-      SELECT DISTINCT
-      MATERIAS.materia_nombre
-    FROM MATERIAS
-    JOIN GRUPOSALUM ON MATERIAS.id_materia = GRUPOSALUM.id_materia
-    JOIN MATERIASPROF ON GRUPOSALUM.id_grupo = MATERIASPROF.id_grupo
-    JOIN PROFESORES ON MATERIASPROF.id_profesor = PROFESORES.id_profesor
-    WHERE PROFESORES.id_profesor = 'P0001';
-    `;
-  //console.log("matricula del profesor:", req.user.user_matricula);
-
-  */
 const query = `
     SELECT 
       GRUPOSALUM.id_materia,
@@ -447,14 +434,12 @@ const query = `
     JOIN PROFESORES ON MATERIASPROF.id_profesor = PROFESORES.id_profesor
     WHERE PROFESORES.id_profesor = ?;
   `;
-
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     console.log(results);
     res.json(results);  // Return the query results
   });
 });
-
 
 
 app.get('/professor/getStudents', async (req, res) => {
@@ -465,7 +450,7 @@ app.get('/professor/getStudents', async (req, res) => {
 FROM ALUMNOS A
 JOIN GRUPOSALUM G ON A.matricula = G.matricula_alumno
 LEFT JOIN CALIFICACIONES C ON A.matricula = C.matricula AND G.id_materia = C.id_materia
-WHERE G.id_materia = /;
+WHERE G.id_materia = 'MAT101';
 
       `;
   db.query(query, [subjectId], (err, results) => {
