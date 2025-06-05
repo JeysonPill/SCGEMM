@@ -189,7 +189,7 @@ INSERT INTO MATERIASPROF (id_profesor, id_grupo) VALUES
 ('P0012', 'G10');
 
 
--INSERT INTO HORARIOS (id_materia, id_grupo, id_profesor, h_lunes, h_martes, h_miercoles, h_jueves, h_viernes)
+INSERT INTO HORARIOS (id_materia, id_grupo, id_profesor, h_lunes, h_martes, h_miercoles, h_jueves, h_viernes)
 VALUES
 ('MAT101', 'G03', 'P0003', '', '', '10:00-12:00', '10:00-12:00', ''),
 ('PROG102', 'G04', 'P0004', '12:00-14:00', '', '', '09:00-11:00', ''),
