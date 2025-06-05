@@ -576,6 +576,37 @@ async function loadSubjectsProf() {
 
 
     ///////////////////////////////////////////QR/////////////////////////////////
+    function generateShortCode(seed) {
+    // Convert to SHA-256 and then to base62
+    const base62chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    // Use SubtleCrypto API for hashing (modern browsers)
+    const encoder = new TextEncoder();
+    const data = encoder.encode(seed);
+
+    return crypto.subtle.digest("SHA-256", data).then(hashBuffer => {
+        // Convert the first few bytes of the hash to base62
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        let num = BigInt(0);
+        for (let i = 0; i < 8; i++) { // take first 8 bytes for enough entropy
+            num = (num << 8n) + BigInt(hashArray[i]);
+        }
+
+        // Convert to base62 string
+        let shortCode = "";
+        while (shortCode.length < 10) {
+            shortCode = base62chars[num % 62n] + shortCode;
+            num /= 62n;
+        }
+
+        return shortCode;
+    });
+}
+
+
+
+
+
     async function QR_CODE_GEN() {
     const token = localStorage.getItem("authToken");
     const response = await fetch(`http://${backendIP}:3000/professor/QR_CODE_GEN/`, { 
@@ -608,13 +639,15 @@ document.getElementById("qr_subject_select").addEventListener("change", function
     const selectedValue = this.value;
     if (selectedValue) {
         const [idMateria, idGrupo] = selectedValue.split("-");
-        const subjectString = `${idMateria} - ${idGrupo}`;
-        console.log("Generating QR for: ", subjectString);
-        
-        // Use a QR code library to generate the QR code
-        generateQRCode(subjectString);
+        const seed = `${idMateria}-${idGrupo}`;
+
+        generateShortCode(seed).then(code => {
+            console.log("QR Code string: ", code);
+            generateQRCode(code); // Now generate QR from short code
+        });
     }
 });
+
 
 function generateQRCode(data) {
     const qrDisplay = document.getElementById("qr-display");
