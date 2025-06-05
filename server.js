@@ -464,37 +464,28 @@ app.get('/professor/getStudents', async (req, res) => {
 
 
 
-app.post('/professor/insertGrade', async (req, res) => {
-  let { id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando } = req.body;
+app.post('/professor/saveGrade', (req, res) => {
+  const { id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando } = req.body;
 
-  if (![calif_p1, calif_p2, calif_final].every(grade => grade === null || (Number.isInteger(grade) && grade >= 0 && grade <= 10))) {
-    return res.status(400).json({ error: "Invalid grade values" });
-  }
+  const sql = `
+    INSERT INTO CALIFICACIONES (id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando)
+    VALUES (?, ?, ?, ?, ?, ?)
+    ON DUPLICATE KEY UPDATE
+      calif_p1 = VALUES(calif_p1),
+      calif_p2 = VALUES(calif_p2),
+      calif_final = VALUES(calif_final),
+      ciclo_cursando = VALUES(ciclo_cursando);
+  `;
 
-  try {
-    let checkQuery = "SELECT * FROM CALIFICACIONES WHERE matricula = ? AND id_materia = ?";
-    let [existing] = await db.query(checkQuery, [matricula, id_materia]);
-
-    if (existing.length > 0) {
-      let updateQuery = `
-              UPDATE CALIFICACIONES 
-              SET calif_p1 = ?, calif_p2 = ?, calif_final = ?, ciclo_cursando = ? 
-              WHERE matricula = ? AND id_materia = ?
-          `;
-      await db.query(updateQuery, [calif_p1, calif_p2, calif_final, ciclo_cursando, matricula, id_materia]);
-    } else {
-      let insertQuery = `
-              INSERT INTO CALIFICACIONES (id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando)
-              VALUES (?, ?, ?, ?, ?, ?)
-          `;
-      await db.query(insertQuery, [id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando]);
+  db.query(sql, [id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando], (err, result) => {
+    if (err) {
+      console.error("Error saving grade:", err);
+      return res.status(500).json({ message: "Database error" });
     }
-
-    res.json({ success: true });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+    res.json({ message: "Grade saved successfully" });
+  });
 });
+
 
 
 app.listen(port, () => {

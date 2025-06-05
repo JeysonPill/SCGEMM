@@ -753,13 +753,64 @@ async function populateStudentGradeTable(students) {
             <td><input type="number" value="${student.calif_final ?? ''}" data-field="calif_final" data-id="${student.matricula}" /></td>
             <td><button data-id="${student.matricula}" onclick="saveGrades(this)">Guardar</button></td>
         `;
+        
+
+
+
+
+
+
+
+
+document.getElementById("profesor_grade_entry_table").addEventListener("click", async function (e) {
+  if (e.target.classList.contains("save-grade-btn")) {
+    const row = e.target.closest("tr");
+    const matricula = row.dataset.matricula;
+    const inputs = row.querySelectorAll("input.calif");
+
+    const data = {
+      id_materia: selectedSubject.id_materia,
+      matricula,
+      calif_p1: row.querySelector('input[data-type="p1"]').value,
+      calif_p2: row.querySelector('input[data-type="p2"]').value,
+      calif_final: row.querySelector('input[data-type="final"]').value,
+      ciclo_cursando: "2025-1" // you might want this dynamic
+    };
+
+    const token = localStorage.getItem("authToken");
+    const res = await fetch(`http://${backendIP}:3000/professor/saveGrade`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+    alert(result.message);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         tbody.appendChild(row);
     });
 }
 ///////////////////////////////////////////////////////////////////////
 
-
+/* 
 function fetchStudents(subjectId) {
     fetch(`http://${backendIP}:3000/professor/getStudents?subjectId=${subjectId}`)
         .then(response => response.json())
@@ -831,15 +882,7 @@ function getGradeValue(matricula, type) {
 function validateGrades(grades) {
     return [grades.calif_p1, grades.calif_p2, grades.calif_final].every(grade => grade === null || (Number.isInteger(grade) && grade >= 0 && grade <= 10));
 }
-
-
-
-
-
-
-
-
-
+    */
 
 
   </script>
