@@ -701,12 +701,13 @@ async function fetchSubjects(){
     selectElement.innerHTML = "<option value=''>Seleccione una materia</option>"; // Reset dropdown
 
 
+    let id_materia="";
     // Populate dropdown with subjects
     subjects.forEach(subject => {
       console.log("aaaa");
         const option = document.createElement("option");
-        option.value = `${subject.materia_nombre}-${subject.id_grupo}`; // Combine id_materia and id_grupo as value
-        option.textContent = `${subject.materia_nombre}-${subject.id_grupo}`; // Show the name and group
+        option.value = `${subject.id_materia}-${subject.materia_nombre}-${subject.id_grupo}`; // Combine id_materia and id_grupo as value
+        option.textContent = `${subject.id_materia}-${subject.materia_nombre}-${subject.id_grupo}`; // Show the name and group
         selectElement.appendChild(option);
     });
 
