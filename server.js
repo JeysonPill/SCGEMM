@@ -330,14 +330,13 @@ app.get('/professor/schedule/', authenticateToken, (req, res) => {
 app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
   const query = `
     SELECT 
-      GRUPOSALUM.id_materia,
-      MATERIAS.materia_nombre,
-      GRUPOSALUM.id_grupo
-    FROM MATERIAS
-    JOIN GRUPOSALUM ON MATERIAS.id_materia = GRUPOSALUM.id_materia
-    JOIN MATERIASPROF ON GRUPOSALUM.id_grupo = MATERIASPROF.id_grupo
-    JOIN PROFESORES ON MATERIASPROF.id_profesor = PROFESORES.id_profesor
-    WHERE PROFESORES.id_profesor = ?;
+    HORARIOS.id_materia,
+    MATERIAS.materia_nombre,
+    HORARIOS.id_grupo
+FROM HORARIOS
+JOIN MATERIAS ON HORARIOS.id_materia = MATERIAS.id_materia
+WHERE HORARIOS.id_profesor = ?;
+
   `;
   console.log("matricula del profesor:", req.user.user_matricula);
   db.query(query, [req.user.user_matricula], (err, results) => {
@@ -356,15 +355,16 @@ app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
 
 app.get('/professor/getSubjects', authenticateToken, (req, res) => {
 const query = `
-    SELECT 
-      GRUPOSALUM.id_materia,
-      MATERIAS.materia_nombre,
-      GRUPOSALUM.id_grupo
-    FROM MATERIAS
-    JOIN GRUPOSALUM ON MATERIAS.id_materia = GRUPOSALUM.id_materia
-    JOIN MATERIASPROF ON GRUPOSALUM.id_grupo = MATERIASPROF.id_grupo
-    JOIN PROFESORES ON MATERIASPROF.id_profesor = PROFESORES.id_profesor
-    WHERE PROFESORES.id_profesor = ?;
+    SELECT DISTINCT
+    GRUPOSALUM.id_materia,
+    MATERIAS.materia_nombre,
+    GRUPOSALUM.id_grupo
+FROM MATERIAS
+JOIN GRUPOSALUM ON MATERIAS.id_materia = GRUPOSALUM.id_materia
+JOIN MATERIASPROF ON GRUPOSALUM.id_grupo = MATERIASPROF.id_grupo
+JOIN PROFESORES ON MATERIASPROF.id_profesor = PROFESORES.id_profesor
+WHERE PROFESORES.id_profesor = ?;
+
   `;
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
