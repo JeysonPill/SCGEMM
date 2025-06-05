@@ -405,7 +405,7 @@ app.get('/professor/QR_CODE_GEN/', authenticateToken, (req, res) => {
     JOIN GRUPOSALUM ON MATERIAS.id_materia = GRUPOSALUM.id_materia
     JOIN MATERIASPROF ON GRUPOSALUM.id_grupo = MATERIASPROF.id_grupo
     JOIN PROFESORES ON MATERIASPROF.id_profesor = PROFESORES.id_profesor
-    WHERE PROFESORES.id_profesor = 'P0001';
+    WHERE PROFESORES.id_profesor = ?;
   `;
   console.log("matricula del profesor:", req.user.user_matricula);
   db.query(query, [req.user.user_matricula], (err, results) => {
@@ -445,7 +445,7 @@ const query = `
     JOIN GRUPOSALUM ON MATERIAS.id_materia = GRUPOSALUM.id_materia
     JOIN MATERIASPROF ON GRUPOSALUM.id_grupo = MATERIASPROF.id_grupo
     JOIN PROFESORES ON MATERIASPROF.id_profesor = PROFESORES.id_profesor
-    WHERE PROFESORES.id_profesor = 'P0001';
+    WHERE PROFESORES.id_profesor = ?;
   `;
 
   db.query(query, [req.user.user_matricula], (err, results) => {
