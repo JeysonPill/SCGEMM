@@ -703,6 +703,7 @@ async function fetchSubjects(){
 
     // Populate dropdown with subjects
     subjects.forEach(subject => {
+      console.log("aaaa");
         const option = document.createElement("option");
         option.value = `${subject.materia_nombre}`; // Combine id_materia and id_grupo as value
         option.textContent = `${subject.materia_nombre} `; // Show the name and group
