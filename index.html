@@ -304,16 +304,16 @@ var backendIP = getBackendIP();
                 loadPagos();
                 break;
             case 'attendance':
-              submitAttendance();
-              break;
+                initializeAttendance(); // ✅ Initialize attendance section instead
+                break;
             case 'teaching-schedule':
                 loadSubjectsProf();
                 break;
             case 'attendance-qr':
-                  QR_CODE_GEN();
-                  break;
+                QR_CODE_GEN();
+                break;
             case 'profesor_grade_entry':  
-                  fetchSubjects();
+                fetchSubjects();
                 break;
             default:
                 console.warn(`No handler for tabId: ${tabId}`);
@@ -513,6 +513,22 @@ async function loadPagos() {
 }
 
 /////////////////       ASISTENCIAS       ////////////////////////////////////////////
+
+function initializeAttendance() {
+    console.log("Initializing attendance section");
+    
+    // Clear the input field when switching to this tab
+    const attendanceInput = document.getElementById("attendance-code");
+    if (attendanceInput) {
+        attendanceInput.value = "";
+        attendanceInput.focus(); // Optional: focus on the input field
+    }
+    
+    // You can add any other initialization logic here
+    // For example, if you want to initialize QR code scanning
+    // initializeQRScanner();
+}
+
 
 function submitAttendance() {
   const token = localStorage.getItem("authToken"); 
