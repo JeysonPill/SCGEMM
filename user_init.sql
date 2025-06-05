@@ -31,14 +31,54 @@ VALUES
 ('P0002', 'G02');
 
 -- USUARIOS
+-- ALUMNOS (user_role = '1')
 INSERT INTO USUARIOS (user_name, password, id_user, user_role)
 VALUES
-('juanito', 'hashedpass123', 'A0001', '1'),
-('maria_g', 'hashedpass234', 'A0002', '1'),
-('carloslp', 'hashedpass345', 'P0001', '2'),
-('ana_t', 'hashedpass456', 'P0002', '2'),
-('admin', 'supersecure999', 'AD001', '3'),
-('root', 'godmode', 'SU001', '99');
+('juanito', 'pass1', 'A0001', '1'),
+('maria_g', 'pass2', 'A0002', '1'),
+('luis_r', 'pass3', 'A0003', '1'),
+('sofia_m', 'pass4', 'A0004', '1'),
+('ivan_d', 'pass5', 'A0005', '1'),
+('ana_l', 'pass6', 'A0006', '1'),
+('carlos_s', 'pass7', 'A0007', '1'),
+('marcela_z', 'pass8', 'A0008', '1'),
+('eduardo_v', 'pass9', 'A0009', '1'),
+('valeria_o', 'pass10', 'A0010', '1'),
+('felipe_q', 'pass11', 'A0011', '1'),
+('natalia_b', 'pass12', 'A0012', '1'),
+('roberto_t', 'pass13', 'A0013', '1'),
+('isabel_n', 'pass14', 'A0014', '1'),
+('diego_g', 'pass15', 'A0015', '1'),
+('monica_h', 'pass16', 'A0016', '1'),
+('andres_c', 'pass17', 'A0017', '1'),
+('laura_j', 'pass18', 'A0018', '1'),
+('jose_k', 'pass19', 'A0019', '1'),
+('elena_w', 'pass20', 'A0020', '1'),
+('martin_e', 'pass21', 'A0021', '1'),
+('paula_r', 'pass22', 'A0022', '1'),
+('ricardo_f', 'pass23', 'A0023', '1'),
+('diana_u', 'pass24', 'A0024', '1'),
+('hugo_y', 'pass25', 'A0025', '1'),
+('camila_x', 'pass26', 'A0026', '1'),
+('julio_a', 'pass27', 'A0027', '1'),
+('karla_p', 'pass28', 'A0028', '1'),
+('fernando_m', 'pass29', 'A0029', '1'),
+('veronica_s', 'pass30', 'A0030', '1');
+
+-- PROFESORES (user_role = '2')
+INSERT INTO USUARIOS (user_name, password, id_user, user_role)
+VALUES
+('carloslp', 'p1', 'P0001', '2'),
+('ana_t', 'p2', 'P0002', '2'),
+('jorge_r', 'p3', 'P0003', '2'),
+('lucia_m', 'p4', 'P0004', '2'),
+('oscar_v', 'p5', 'P0005', '2'),
+('rebeca_s', 'p6', 'P0006', '2'),
+('enrique_f', 'p7', 'P0007', '2'),
+('patricia_z', 'p8', 'P0008', '2'),
+('miguel_n', 'p9', 'P0009', '2'),
+('silvia_d', 'p10', 'P0010', '2');
+
 
 -- HORARIOS
 INSERT INTO HORARIOS (id_materia, id_grupo, id_profesor, h_lunes, h_martes, h_miercoles, h_jueves, h_viernes)
