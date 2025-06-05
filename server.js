@@ -311,7 +311,7 @@ app.post('/student/registro-asistencias/', authenticateToken, (req, res) => {
   if (!codigo_asistencia)
     return res.status(400).json({ success: false, message: "Código de asistencia requerido" });
 
-  const query = ` INSERT INTO ASISTENCIA (matricula, codigo_asistencia, asistencia) VALUES (?, ?, NOW()); `;
+  const query = ` INSERT INTO ASISTENCIA (matricula, codigo, asistencia) VALUES (?, ?, NOW()); `;
 
   db.query(query, [user_matricula, codigo_asistencia], (err, result) => {
     if (err) {
