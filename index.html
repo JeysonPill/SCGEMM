@@ -263,7 +263,7 @@
    let backendIP = localStorage.getItem('backendIP');
 
   //if (!backendIP) {
-    backendIP = "192.168.100.83";
+    backendIP = "192.168.1.103";
     if (backendIP) {
       localStorage.setItem('backendIP', backendIP);
     } else {
@@ -338,7 +338,7 @@ var backendIP = getBackendIP();
       const errorMessage = document.getElementById('error-message');
       ///Cambio solo las ip, no el puerto
       try {
-        let ip = '192.168.18.27';
+        let ip = backendIP;
         console.log(backendIP);
         const response = await fetch(`http://${backendIP}:3000/login`, {
           method: 'POST',
