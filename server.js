@@ -100,17 +100,13 @@ app.get('/student/tabla-datos-estudiante/', authenticateToken, (req, res) => {
         IF(h_viernes IS NOT NULL AND h_viernes != '', CONCAT('Viernes: ', h_viernes), '')
     ) AS horarios,
     GRUPOSALUM.id_grupo
-FROM MATERIAS
-JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
-JOIN PROFESORES ON HORARIOS.id_profesor = PROFESORES.id_profesor
-JOIN GRUPOSALUM 
-    ON GRUPOSALUM.id_materia = MATERIAS.id_materia 
-    AND GRUPOSALUM.id_grupo = HORARIOS.id_grupo
-JOIN ALUMNOS ON GRUPOSALUM.matricula_alumno = ALUMNOS.matricula
-WHERE ALUMNOS.matricula = 'A0001';
-
+    FROM MATERIAS
+    JOIN HORARIOS ON MATERIAS.id_materia = HORARIOS.id_materia
+    JOIN PROFESORES ON HORARIOS.id_profesor = PROFESORES.id_profesor
+    JOIN GRUPOSALUM ON GRUPOSALUM.id_materia = MATERIAS.id_materia AND GRUPOSALUM.id_grupo = HORARIOS.id_grupo
+    JOIN ALUMNOS ON GRUPOSALUM.matricula_alumno = ALUMNOS.matricula
+    WHERE ALUMNOS.matricula = 'A0001';
   `;
-
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     console.log(results);
@@ -120,65 +116,67 @@ WHERE ALUMNOS.matricula = 'A0001';
 
 
 
-/////////////////////////////////MATERIA EN GENERAL////////////////////////////////////////////////
-// Nueva ruta para obtener todas las materias
-app.get('/subjects', authenticateToken, (req, res) => {
-  const query = `SELECT id_materia, 
-                          materia_nombre, 
-                          sem_cursante 
-                          FROM MATERIAS JOIN USUARIOS
-                          WHERE USUARIOS.user_role = 99;`;
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error('Error al obtener materias:', err);
-      return res.status(500).json({ message: 'Error de base de datos al obtener materias' });
-    }
-    res.json(results);
-  });
-});
+// /////////////////////////////////MATERIA EN GENERAL////////////////////////////////////////////////
+// // Nueva ruta para obtener todas las materias
+// app.get('/subjects', authenticateToken, (req, res) => {
+//   const query = `
+//   SELECT 
+//     id_materia, 
+//     materia_nombre, 
+//     sem_cursante 
+//     FROM MATERIAS JOIN USUARIOS
+//     WHERE USUARIOS.user_role = 99;`;
+//   db.query(query, (err, results) => {
+//     if (err) {
+//       console.error('Error al obtener materias:', err);
+//       return res.status(500).json({ message: 'Error de base de datos al obtener materias' });
+//     }
+//     res.json(results);
+//   });
+// });
 
-////////////////////////////////////ALUMNOS XD/////////////////////////////////////////////////
-app.get('/students', authenticateToken, (req, res) => {
-  const query = `SELECT a.matricula, 
-                        a.carrera, 
-                        a.semestre,
-                        a.user_name,
-                        a.celular,
-                        a.email
-                FROM ALUMNOS a
-                JOIN USUARIOS u
-                WHERE u.user_role = 99;
-`;
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error('Error al obtener alumnos:', err);
-      return res.status(500).json({ message: 'Error de base de datos al obtener alumnos' });
-    }
-    res.json(results);
-  });
-});
+// ////////////////////////////////////ALUMNOS XD/////////////////////////////////////////////////
+// app.get('/students', authenticateToken, (req, res) => {
+//   const query = `SELECT a.matricula, 
+//                         a.carrera, 
+//                         a.semestre,
+//                         a.user_name,
+//                         a.celular,
+//                         a.email
+//                 FROM ALUMNOS a
+//                 JOIN USUARIOS u
+//                 WHERE u.user_role = 99;
+// `;
+//   db.query(query, (err, results) => {
+//     if (err) {
+//       console.error('Error al obtener alumnos:', err);
+//       return res.status(500).json({ message: 'Error de base de datos al obtener alumnos' });
+//     }
+//     res.json(results);
+//   });
+// });
 
 
-////////////////////////////Horarios/////////////////////////////////
-app.get('/schedules', (req, res) => {
-  const query = `SELECT h.id_materia,
-                        h.id_grupo,
-                        h.id_profesor,
-                        h.h_lunes,
-                        h.h_martes,
-                        h.h_miercoles,
-                        h.h_jueves,
-                        h.h_viernes
-                FROM HORARIOS h;
-`;
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error('Error al obtener alumnos:', err);
-      return res.status(500).json({ message: 'Error de base de datos al obtener alumnos' });
-    }
-    res.json(results);
-  });
-});
+// ////////////////////////////Horarios/////////////////////////////////
+// app.get('/schedules', (req, res) => {
+//   const query = `SELECT h.id_materia,
+//                         h.id_grupo,
+//                         h.id_profesor,
+//                         h.h_lunes,
+//                         h.h_martes,
+//                         h.h_miercoles,
+//                         h.h_jueves,
+//                         h.h_viernes
+//                 FROM HORARIOS h;
+// `;
+//   db.query(query, (err, results) => {
+//     if (err) {
+//       console.error('Error al obtener alumnos:', err);
+//       return res.status(500).json({ message: 'Error de base de datos al obtener alumnos' });
+//     }
+//     res.json(results);
+//   });
+// });
 
 /////////////////       CALIFICACIONES       ///////////////////////////////////////
 
@@ -350,9 +348,6 @@ WHERE HORARIOS.id_profesor = ?;
 
 //////////////
 ///////////////////       CALIFICAICONES /////////////////////////
-
-
-
 app.get('/professor/getSubjects', authenticateToken, (req, res) => {
 const query = `
     SELECT DISTINCT
@@ -364,7 +359,6 @@ JOIN GRUPOSALUM ON MATERIAS.id_materia = GRUPOSALUM.id_materia
 JOIN MATERIASPROF ON GRUPOSALUM.id_grupo = MATERIASPROF.id_grupo
 JOIN PROFESORES ON MATERIASPROF.id_profesor = PROFESORES.id_profesor
 WHERE PROFESORES.id_profesor = ?;
-
   `;
   db.query(query, [req.user.user_matricula], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
@@ -387,7 +381,6 @@ app.get('/professor/getStudents', async (req, res) => {
     LEFT JOIN CALIFICACIONES C ON A.matricula = C.matricula AND G.id_materia = C.id_materia
     WHERE G.id_materia = ? AND G.id_grupo = ?;
   `;
-
   db.query(query, [id_materia, id_grupo], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     res.json(results);
