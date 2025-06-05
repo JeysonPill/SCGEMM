@@ -576,32 +576,37 @@ async function loadSubjectsProf() {
 
 
     ///////////////////////////////////////////QR/////////////////////////////////
-    function generateShortCode(seed) {
-    // Convert to SHA-256 and then to base62
+  function generateShortCode(seed) {
     const base62chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    
-    // Use SubtleCrypto API for hashing (modern browsers)
     const encoder = new TextEncoder();
     const data = encoder.encode(seed);
 
-    return crypto.subtle.digest("SHA-256", data).then(hashBuffer => {
-        // Convert the first few bytes of the hash to base62
+    // Make sure window.crypto.subtle exists
+    if (!window.crypto || !window.crypto.subtle) {
+        console.error("crypto.subtle not supported in this browser.");
+        return Promise.resolve("fallback123"); // fallback if needed
+    }
+
+    return window.crypto.subtle.digest("SHA-256", data).then(hashBuffer => {
         const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+        // Convert first 8 bytes to BigInt
         let num = BigInt(0);
-        for (let i = 0; i < 8; i++) { // take first 8 bytes for enough entropy
+        for (let i = 0; i < 8; i++) {
             num = (num << 8n) + BigInt(hashArray[i]);
         }
 
-        // Convert to base62 string
+        // Convert to base62
         let shortCode = "";
-        while (shortCode.length < 10) {
+        for (let i = 0; i < 10; i++) {
             shortCode = base62chars[num % 62n] + shortCode;
-            num /= 62n;
+            num = num / 62n;
         }
 
         return shortCode;
     });
 }
+
 
 
 
@@ -642,11 +647,12 @@ document.getElementById("qr_subject_select").addEventListener("change", function
         const seed = `${idMateria}-${idGrupo}`;
 
         generateShortCode(seed).then(code => {
-            console.log("QR Code string: ", code);
-            generateQRCode(code); // Now generate QR from short code
+            console.log("QR Code string:", code);
+            generateQRCode(code); // Call your QR generation function
         });
     }
 });
+
 
 
 function generateQRCode(data) {
