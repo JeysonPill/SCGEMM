@@ -103,3 +103,7 @@ CREATE TABLE ASISTENCIA (
     codigo VARCHAR(10),
     ciclo_cursando VARCHAR(15)
 );
+
+ALTER TABLE CALIFICACIONES
+ADD UNIQUE KEY idx_materia_matricula (id_materia, matricula); --for grades updates and inserts
+
