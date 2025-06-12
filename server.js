@@ -31,7 +31,19 @@ const ROLES = {
   SUPER_ADMIN: '99'
 };
 
+// Middleware de autenticación (puede definirse aquí o en un archivo separado)
 const authenticateToken = (req, res, next) => {
+  const token = req.headers['authorization']?.split(' ')[1];
+  if (!token) return res.status(401).json({ message: 'Se requiere autenticación' });
+
+  jwt.verify(token, 'aVeryStrongSecretKeyHere', (err, user) => { // Asegúrate de que esta clave secreta sea la misma que usas al firmar el token en el login
+    if (err) return res.status(403).json({ message: 'Token inválido o expirado' });
+    req.user = user;
+    next();
+  });
+};
+
+/*const authenticateToken = (req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
   if (!token) return res.status(401).json({ message: 'Authentication required' });
 
@@ -42,7 +54,10 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 
-};
+};*/
+
+// CORRECTO: Registra las rutas de administrador DESPUÉS de que 'app' esté definida y 'adminRoutes' importada
+app.use('/admin', adminRoutes); // Esto prefija correctamente todas las rutas en adminRoutes con /admin
 
 const checkRole = (roles) => {
   return (req, res, next) => {
@@ -450,24 +465,40 @@ app.get('/professor/getStudents', async (req, res) => {
 });
 
 
-app.post('/professor/saveGrade', (req, res) => {
-  const { id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando } = req.body;
-  const sql = `
-    INSERT INTO CALIFICACIONES (id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando)
-    VALUES (?, ?, ?, ?, ?, ?)
-    ON DUPLICATE KEY UPDATE
-      calif_p1 = VALUES(calif_p1),
-      calif_p2 = VALUES(calif_p2),
-      calif_final = VALUES(calif_final),
-      ciclo_cursando = VALUES(ciclo_cursando);
-  `;
-  db.query(sql, [id_materia, matricula, calif_p1, calif_p2, calif_final, ciclo_cursando], (err, result) => {
-    if (err) {
-      console.error("Error saving grade:", err);
-      return res.status(500).json({ message: "Database error" });
+// --- Endpoint existente para guardar calificaciones del profesor (Mantén este, pero nota el prefijo 'professor') ---
+app.post('/professor/saveGrade', authenticateToken, async (req, res) => {
+    // Asegúrate de que el usuario autenticado sea un profesor
+    if (req.user.user_role !== ROLES.PROFESSOR) {
+        return res.status(403).json({ message: 'Acceso denegado. Se requieren privilegios de profesor.' });
     }
-    res.json({ message: "Grade saved successfully" });
-  });
+
+    const { matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando } = req.body;
+
+    if (!matricula || !id_materia || !ciclo_cursando) {
+        return res.status(400).json({ message: 'Matrícula, ID de materia y ciclo cursando son requeridos.' });
+    }
+
+    try {
+        // Usa un enfoque UPSERT (INSERT ... ON DUPLICATE KEY UPDATE)
+        const [result] = await db.execute(`
+            INSERT INTO CALIFICACIONES (matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando)
+            VALUES (?, ?, ?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE
+                calif_p1 = VALUES(calif_p1),
+                calif_p2 = VALUES(calif_p2),
+                calif_final = VALUES(calif_final),
+                ciclo_cursando = VALUES(ciclo_cursando)
+        `, [matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando]);
+
+        if (result.affectedRows > 0) {
+            res.json({ message: 'Calificaciones actualizadas/insertadas exitosamente.' });
+        } else {
+            res.status(500).json({ message: 'No se pudo actualizar/insertar las calificaciones.' });
+        }
+    } catch (err) {
+        console.error('Error al actualizar/insertar calificaciones:', err);
+        res.status(500).json({ message: 'Error al actualizar calificaciones.', error: err.message });
+    }
 });
 
 ////////////////////Materias
