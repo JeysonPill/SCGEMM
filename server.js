@@ -72,16 +72,25 @@ app.post('/login', (req, res) => {
 
 ///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
 // GET endpoint for students
-app.get('/students', authenticateToken, async (req, res) => {
-    try {
-        
-        const students = await db.query('SELECT * FROM ALUMNOS;'); // Using the placeholder db
-
-        res.json(students);
-    } catch (error) {
-        console.error('Error fetching students:', error);
-        res.status(500).json({ message: 'Error al cargar los estudiantes', error: error.message });
-    }
+app.get('/students', authenticateToken, (req, res) => {
+  const query = `
+    SELECT 
+      matricula,
+      nombre,
+      carrera,
+      semestre,
+      user_name,
+      celular,
+      email
+    FROM ALUMNOS;
+  `;
+  console.log(query);
+  console.dir(res)
+  db.query(query, [req.user.user_matricula], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    console.log(results);
+    res.json(results);
+  });
 });
 /////////////////       MATERIAS       ////////////////////////////////////////////
 app.get('/student/tabla-datos-estudiante/', authenticateToken, (req, res) => {

@@ -322,64 +322,6 @@
       </div>
     </div>
   </div>
-  <div id="student-panel" class="content-section" style="display:none;">
-    <h2>Gestión de Estudiantes</h2>
-    <button class="btn btn-primary mb-3" onclick="showStudentForm('create')">Crear Nuevo Estudiante</button>
-
-    <div id="student-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
-      <h3><span id="student-form-title"></span> Estudiante</h3>
-      <form id="student-form">
-        <input type="hidden" id="student-matricula-edit">
-        <div class="form-group">
-          <label for="matricula">Matrícula:</label>
-          <input type="text" class="form-control" id="matricula" required>
-        </div>
-        <div class="form-group">
-          <label for="nombre">Nombre:</label>
-          <input type="text" class="form-control" id="nombre" required>
-        </div>
-        <div class="form-group">
-          <label for="carrera">Carrera:</label>
-          <input type="text" class="form-control" id="carrera" required>
-        </div>
-        <div class="form-group">
-          <label for="semestre">Semestre:</label>
-          <input type="text" class="form-control" id="semestre" required>
-        </div>
-        <div class="form-group">
-          <label for="user_name">Usuario:</label>
-          <input type="text" class="form-control" id="user_name" required>
-        </div>
-        <div class="form-group">
-          <label for="celular">Celular:</label>
-          <input type="text" class="form-control" id="celular" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" class="form-control" id="email" required>
-        </div>
-        <button type="submit" class="btn btn-success">Guardar Estudiante</button>
-        <button type="button" class="btn btn-secondary" onclick="hideStudentForm()">Cancelar</button>
-      </form>
-    </div>
-
-    <table id="students-table" class="table table-striped table-bordered" style="width:100%">
-      <thead>
-        <tr>
-          <th>Matrícula</th>
-          <th>Nombre</th>
-          <th>Carrera</th>
-          <th>Semestre</th>
-          <th>Usuario</th>
-          <th>Celular</th>
-          <th>Email</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -747,16 +689,6 @@
                   </tr>
                 </thead>
                 <tbody id="admin-professor-table">
-                  <tr>
-                    <td>P001</td>
-                    <td>Maria Garcia</td>
-                    <td>5587654321</td>
-                    <td>maria.garcia@example.com</td>
-                    <td>
-                      <button class="btn btn-sm btn-info mr-2">Editar</button>
-                      <button class="btn btn-sm btn-danger">Eliminar</button>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>
