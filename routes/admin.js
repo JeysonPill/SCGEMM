@@ -1,7 +1,7 @@
 // routes/admin.js
 const express = require('express');
 const router = express.Router();
-const db = require('../config/db'); // Assuming you have a config/db.js or similar for your DB connection
+//const db = require('../config/db'); // Assuming you have a config/db.js or similar for your DB connection
 const jwt = require('jsonwebtoken'); // You'll need this if authenticateAdmin is here
 
 // This authenticateAdmin function should ideally be in a shared middleware file
