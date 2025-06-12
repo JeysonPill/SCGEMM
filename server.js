@@ -7,15 +7,13 @@ const qr = require('qrcode');
 const path = require('path');
 
 const adminRoutes = require('./routes/admin');
-app.use('/admin', adminRoutes);
-
-
 const app = express();
 const port = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/admin', adminRoutes);
 
 const db = mysql.createConnection({
   host: '192.168.100.20',
