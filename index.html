@@ -322,7 +322,6 @@
       </div>
     </div>
   </div>
-  <!--Formularios-->
   <div id="student-panel" class="content-section" style="display:none;">
     <h2>Gestión de Estudiantes</h2>
     <button class="btn btn-primary mb-3" onclick="showStudentForm('create')">Crear Nuevo Estudiante</button>
@@ -448,7 +447,6 @@
     </table>
   </div>
 
-  <!-----------------------------Profesor------------------------------------------->
   <div id="professor-panel" class="content-section" style="display:none;">
     <h2>Gestión de Profesores</h2>
     <button class="btn btn-primary mb-3" onclick="showProfessorForm('create')">Crear Nuevo Profesor</button>
@@ -498,7 +496,6 @@
     </table>
   </div>
 
-  <!-----Materias-->
   <div id="subject-panel" class="content-section" style="display:none;">
     <h2>Gestión de Materias</h2>
     <button class="btn btn-primary mb-3" onclick="showSubjectForm('create')">Crear Nueva Materia</button>
@@ -538,7 +535,6 @@
     </table>
   </div>
 
-  <!-------------Calificaciones-->
   <div id="grade-panel" class="content-section" style="display:none;">
     <h2>Gestión de Calificaciones</h2>
     <button class="btn btn-primary mb-3" onclick="showGradeForm('create')">Crear Nueva Calificación</button>
@@ -593,8 +589,6 @@
       </tbody>
     </table>
   </div>
-  <!-----------------------------END FORMS------------------------------------------->
-
   <div id="professor-content" class="content-section container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
       <a class="navbar-brand" href="#">Panel de Profesor</a>
@@ -1357,7 +1351,7 @@
       }
     }
     // Manejar envío del formulario de Estudiantes (CREATE/UPDATE)
-    document.getElementById('student-form').addEventListener('submit', async function(event) {
+    document.getElementById('student-form').addEventListener('submit', async function (event) {
       event.preventDefault();
       const matriculaEdit = document.getElementById('student-matricula-edit').value;
       const method = matriculaEdit ? 'PUT' : 'POST'; // Si hay matriculaEdit, es UPDATE, sino CREATE
