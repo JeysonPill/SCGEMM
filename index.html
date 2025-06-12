@@ -1315,13 +1315,13 @@
       loadStudentGrades(); // Asumiendo que esta función ya existe para estudiantes
       loadStudentSchedule(); // Asumiendo que esta función ya existe para estudiantes
     } else if (userRole === 2) { // Profesor
-      document.getElementById('professor-section').style.display = 'block';
+      document.getElementById('professor-content').style.display = 'block';
       document.getElementById('professor-dashboard-link').classList.add('active');
       // Llama a funciones específicas para profesores
       loadProfessorSchedule(); // Asumiendo que esta función ya existe para profesores
       loadProfessorGroups(); // Asumiendo que esta función ya existe para profesores
     } else if (userRole === 3 || userRole === 99) { // Administrativo o Super Administrador
-      document.getElementById('admin-section').style.display = 'block';
+      document.getElementById('admin-content-staff').style.display = 'block';
       document.getElementById('admin-dashboard-link').classList.add('active');
       
       // *** AQUÍ ES DONDE LLAMAS A LAS FUNCIONES PARA CARGAR LAS TABLAS ADMINISTRATIVAS ***
@@ -1332,7 +1332,7 @@
       // ***********************************************************************************
     } else {
       // Si el rol no se reconoce, muestra la sección de login
-      document.getElementById('login-section').style.display = 'block';
+      document.getElementById('login-content').style.display = 'block';
     }
   }
 
