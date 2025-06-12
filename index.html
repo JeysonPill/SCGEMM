@@ -731,12 +731,6 @@
                   </tr>
                 </thead>
                 <tbody id="admin-student-table">
-                  <tr>
-                    <td>
-                      <button class="btn btn-sm btn-info mr-2">Editar</button>
-                      <button class="btn btn-sm btn-danger">Eliminar</button>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -1206,7 +1200,7 @@
     ///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
     // Cargar Estudiantes (READ)
     async function loadStudents() {
-      const tbody = document.querySelector('#admin-student-table tbody');
+      const tbody = document.getElementById('admin-student-table');
       tbody.innerHTML = '';
       try {
         const token = getToken();
