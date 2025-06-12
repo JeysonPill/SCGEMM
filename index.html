@@ -858,6 +858,27 @@
         </div>
       </div>
 
+      <div class="tab-pane fade show active" id="students-management" role="tabpanel" aria-labelledby="admin-students-tab">
+        <h3 class="d-inline-block">Gestión de Estudiantes</h3>
+        <button class="btn btn-success float-right mb-3" data-toggle="modal" data-target="#addStudentModal">Agregar
+          Estudiante</button>
+        <table class="table table-bordered mt-3">
+          <thead>
+            <tr>
+              <th>Matrícula</th>
+              <th>Nombre</th>
+              <th>Carrera</th>
+              <th>Semestre</th>
+              <th>Celular</th>
+              <th>Email</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="admin-student-table">
+          </tbody>
+        </table>
+      </div>
+
       <div class="tab-pane fade" id="professor-management" role="tabpanel" aria-labelledby="v-pills-professor-mgmt-tab">
         <h3 class="mb-3">Gestión de Profesores</h3>
         <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addProfessorModal"
@@ -1197,6 +1218,47 @@
       SUPER_ADMIN: 99
     };
 
+    async function fetchData(url, method = 'GET', data = null) {
+      try {
+        const token = localStorage.getItem('authToken'); // Obtener el token de localStorage
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Incluir el token en el encabezado
+        };
+
+        const config = {
+          method: method,
+          headers: headers,
+        };
+
+        if (data) {
+          config.body = JSON.stringify(data);
+        }
+
+        const response = await fetch(url, config);
+        if (!response.ok) {
+          let errorMessage = `HTTP error! status: ${response.status}`;
+          try {
+            const errorData = await response.json();
+            errorMessage = errorData.message || errorMessage;
+          } catch (e) {
+            console.error('Error parsing error response:', e);
+          }
+          throw new Error(errorMessage);
+        }
+
+
+        if (response.status === 204) {
+          return {};
+        }
+
+        return await response.json();
+      } catch (error) {
+        console.error('Error in fetchData:', error);
+        throw error;
+      }
+    }
+
 
     function getBackendIP() {
       let backendIP = localStorage.getItem('backendIP');
@@ -1228,6 +1290,13 @@
       try {
         switch (tabId) {
           case 'enrolled-subjects': loadSubjects(); break;
+          case 'subjects-student': loadSubjectsStudent(); break;
+          case 'students': loadStudents(); break;
+          case 'professors': loadProfessors(); break;
+          case 'users': loadUsers(); break;
+          case 'subjects': loadSubjects(); break;
+          case 'student-grades': loadGrades(); break;
+          case 'student-kardex': loadKardez(); break;
           case 'grades': loadGrades(); break;
           case 'kardex': loadKardez(); break;
           case 'payments': loadPagos(); break;
@@ -1238,6 +1307,8 @@
           // Admin and Super Admin tabs will need their respective load functions
           // For now, these are placeholders. Actual data loading functions would be added here.
           case 'student-management': console.log('Loading student management...'); break;
+          case 'professor-management': console.log('Loading professor management...'); break;
+          case 'subject-management': console.log('Loading subject management...'); break;
           case 'professor-management': console.log('Loading professor management...'); break;
           case 'subject-management': console.log('Loading subject management...'); break;
           case 'reports': console.log('Loading reports...'); break;
@@ -1317,7 +1388,7 @@
           loadSubjectsStudent();
           loadKardez();
           loadPagos();
-          loadAttendance();
+
           break;
         case ROLES.ADMIN_STAFF:
           document.getElementById('admin-staff-content').style.display = 'block';
@@ -1327,7 +1398,7 @@
           loadPagos();
           loadAttendance();
           loadUsers();
-          loadAttendance();
+
           break;
         default: document.getElementById('login-content').style.display = 'block';
       }
