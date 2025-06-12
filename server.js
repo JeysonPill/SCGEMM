@@ -10,6 +10,7 @@ const port = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 const db = mysql.createConnection({
   host: '192.168.100.20',
