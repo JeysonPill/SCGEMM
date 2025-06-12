@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const qr = require('qrcode');
+const path = require('path');
+
 
 const app = express();
 const port = 3000;
