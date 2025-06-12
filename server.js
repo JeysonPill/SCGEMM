@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
-  host: '192.168.1.103',
+  host: '127.0.0.1', //esa mamada se queda asi, porque como corre en el servidor, no necesita apuntar a una ip externa, el servidor es la ip, por lo que se usa localhost
   user: 'node_user',
   password: 'Zapatitoblanco123***',
   database: 'SCGEM',
