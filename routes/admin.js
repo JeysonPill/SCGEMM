@@ -1,10 +1,12 @@
 // routes/admin.js
 const express = require('express');
 const router = express.Router();
-//const db = require('../config/db'); 
-const jwt = require('jsonwebtoken');
+const db = require('../config/db'); // Assuming you have a config/db.js or similar for your DB connection
+const jwt = require('jsonwebtoken'); // You'll need this if authenticateAdmin is here
 
-
+// This authenticateAdmin function should ideally be in a shared middleware file
+// or moved directly into server.js and passed to adminRoutes.
+// For now, I'll put it here, but moving it to server.js is cleaner.
 function authenticateAdmin(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -13,19 +15,22 @@ function authenticateAdmin(req, res, next) {
         return res.status(401).json({ message: 'Authentication token required.' });
     }
 
-    jwt.verify(token, 'aVeryStrongSecretKeyHere', (err, user) => {
+    jwt.verify(token, 'aVeryStrongSecretKeyHere', (err, user) => { // IMPORTANT: Use the same secret key as in your main server.js
         if (err) {
             return res.status(403).json({ message: 'Invalid or expired token.' });
         }
-        if (user.user_role !== '3' && user.user_role !== '99') { 
+        // Assuming your token payload contains user_role. ROLES defined in server.js, need to check here.
+        // For simplicity, directly check role string or numerical value
+        if (user.user_role !== '3' && user.user_role !== '99') { // 3 for ADMIN_STAFF, 99 for SUPER_ADMIN
             return res.status(403).json({ message: 'Access denied. Admin privileges required.' });
         }
-        req.user = user;
+        req.user = user; // Attach user payload to request
         next();
     });
 }
 
-router.use(authenticateAdmin); 
+// Apply authentication middleware to all admin routes
+router.use(authenticateAdmin); // Apply this middleware to ALL routes defined in this router
 
 // --- Student Endpoints ---
 
@@ -275,7 +280,7 @@ router.get('/student-grades/:matricula/:id_materia', async (req, res) => {
         if (rows.length > 0) {
             res.json(rows[0]);
         } else {
-            res.status(404).json({ message: 'Calificaciones no encontradas.' });
+            res.status(404).json({ message: 'No grades found for this subject and student in the current cycle.' });
         }
     } catch (err) {
         console.error('Error fetching student grades:', err);
