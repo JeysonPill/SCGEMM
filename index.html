@@ -704,6 +704,176 @@
             de Asistencia</a>
         </div>
       </div>
+
+      <!--FOrmularios-->
+      <div class="modal fade" id="addProfessorModal" tabindex="-1" role="dialog"
+        aria-labelledby="addProfessorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addProfessorModalLabel">Agregar Nuevo Profesor</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="add-professor-form">
+                <div class="form-group">
+                  <label for="add-professor-name">Nombre</label>
+                  <input type="text" class="form-control" id="add-professor-name" required>
+                </div>
+                <div class="form-group">
+                  <label for="add-professor-phone">Celular</label>
+                  <input type="text" class="form-control" id="add-professor-phone">
+                </div>
+                <div class="form-group">
+                  <label for="add-professor-email">Email</label>
+                  <input type="email" class="form-control" id="add-professor-email" required>
+                </div>
+                <div class="form-group">
+                  <label for="add-professor-password">Contraseña</label>
+                  <input type="password" class="form-control" id="add-professor-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary action-button">Guardar Profesor</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="editProfessorModal" tabindex="-1" role="dialog"
+        aria-labelledby="editProfessorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editProfessorModalLabel">Editar Profesor</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="edit-professor-form">
+                <input type="hidden" id="edit-professor-id-hidden">
+                <div class="form-group">
+                  <label for="edit-professor-name">Nombre</label>
+                  <input type="text" class="form-control" id="edit-professor-name" required>
+                </div>
+                <div class="form-group">
+                  <label for="edit-professor-phone">Celular</label>
+                  <input type="text" class="form-control" id="edit-professor-phone">
+                </div>
+                <div class="form-group">
+                  <label for="edit-professor-email">Email</label>
+                  <input type="email" class="form-control" id="edit-professor-email" required>
+                </div>
+                <button type="submit" class="btn btn-primary action-button">Actualizar Profesor</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addSubjectModalLabel">Agregar Nueva Materia</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="add-subject-form">
+                <div class="form-group">
+                  <label for="add-subject-name">Nombre de la Materia</label>
+                  <input type="text" class="form-control" id="add-subject-name" required>
+                </div>
+                <div class="form-group">
+                  <label for="add-subject-semester">Semestre Cursante</label>
+                  <input type="number" class="form-control" id="add-subject-semester" min="1" required>
+                </div>
+                <button type="submit" class="btn btn-primary action-button">Guardar Materia</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="editSubjectModal" tabindex="-1" role="dialog" aria-labelledby="editSubjectModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editSubjectModalLabel">Editar Materia</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="edit-subject-form">
+                <input type="hidden" id="edit-subject-id-hidden">
+                <div class="form-group">
+                  <label for="edit-subject-name">Nombre de la Materia</label>
+                  <input type="text" class="form-control" id="edit-subject-name" required>
+                </div>
+                <div class="form-group">
+                  <label for="edit-subject-semester">Semestre Cursante</label>
+                  <input type="number" class="form-control" id="edit-subject-semester" min="1" required>
+                </div>
+                <button type="submit" class="btn btn-primary action-button">Actualizar Materia</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="editStudentModal" tabindex="-1" role="dialog" aria-labelledby="editStudentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editStudentModalLabel">Editar Estudiante</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="edit-student-form">
+                <input type="hidden" id="edit-student-original-matricula">
+
+                <div class="form-group">
+                  <label for="edit-student-matricula">Matrícula</label>
+                  <input type="text" class="form-control" id="edit-student-matricula" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="edit-student-name">Nombre</label>
+                  <input type="text" class="form-control" id="edit-student-name" required>
+                </div>
+                <div class="form-group">
+                  <label for="edit-student-carrera">Carrera</label>
+                  <input type="text" class="form-control" id="edit-student-carrera" required>
+                </div>
+                <div class="form-group">
+                  <label for="edit-student-semestre">Semestre</label>
+                  <input type="number" class="form-control" id="edit-student-semestre" min="1" required>
+                </div>
+                <div class="form-group">
+                  <label for="edit-student-phone">Celular</label>
+                  <input type="text" class="form-control" id="edit-student-phone">
+                </div>
+                <div class="form-group">
+                  <label for="edit-student-email">Email</label>
+                  <input type="email" class="form-control" id="edit-student-email" required>
+                </div>
+                <button type="submit" class="btn btn-primary action-button">Actualizar Estudiante</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Forms xd -->
+
       <div class="col-md-9 col-lg-10">
         <div class="tab-content" id="v-pills-tabContent-admin">
           <div class="tab-pane fade show active" id="student-management" role="tabpanel"
@@ -725,6 +895,12 @@
                   </tr>
                 </thead>
                 <tbody id="admin-student-table">
+                  <tr>
+                    <td>
+                      <button class="btn btn-sm btn-info mr-2" href="#editStudentModal">Editar</button>
+                      <button class="btn btn-sm btn-danger" onclick="deleteStudent">Eliminar</button>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -733,8 +909,8 @@
           <div class="tab-pane fade" id="professor-management" role="tabpanel"
             aria-labelledby="v-pills-professor-mgmt-tab">
             <h3 class="mb-3">Gestión de Profesores</h3>
-            <button class="btn btn-success action-button mb-3" data-toggle="modal"
-              data-target="#addProfessorModal">Agregar Profesor</button>
+            <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addProfessorModal"
+              href="#addProfessorModal">Agregar Profesor</button>
             <div class="table-responsive">
               <table class="table table-hover table-striped">
                 <thead class="thead-dark">
@@ -748,19 +924,16 @@
                 </thead>
                 <tbody id="admin-professor-table">
                   <tr>
-                    <td>P001</td>
-                    <td>Maria Garcia</td>
-                    <td>5587654321</td>
-                    <td>maria.garcia@example.com</td>
                     <td>
-                      <button class="btn btn-sm btn-info mr-2">Editar</button>
-                      <button class="btn btn-sm btn-danger">Eliminar</button>
+                      <button class="btn btn-sm btn-info mr-2" href="#editProfessorModal">Editar</button>
+                      <button class="btn btn-sm btn-danger" onclick="deleteProfessor">Eliminar</button>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
+
           <div class="tab-pane fade" id="subject-management" role="tabpanel" aria-labelledby="v-pills-subject-mgmt-tab">
             <h3 class="mb-3">Gestión de Materias</h3>
             <button class="btn btn-success action-button mb-3" data-toggle="modal"
@@ -781,8 +954,8 @@
                     <td>Cálculo Diferencial</td>
                     <td>1</td>
                     <td>
-                      <button class="btn btn-sm btn-info mr-2">Editar</button>
-                      <button class="btn btn-sm btn-danger">Eliminar</button>
+                      <button class="btn btn-sm btn-info mr-2" data-target="#editSubjectModal">Editar</button>
+                      <button class="btn btn-sm btn-danger" onclick="deleteSubject">Eliminar</button>
                     </td>
                   </tr>
                 </tbody>
@@ -852,7 +1025,8 @@
               </table>
             </div>
           </div>
-          <div class="tab-pane fade" id="attendance-admin" role="tabpanel" aria-labelledby="v-pills-attendance-admin-tab">
+          <div class="tab-pane fade" id="attendance-admin" role="tabpanel"
+            aria-labelledby="v-pills-attendance-admin-tab">
             <h3 class="mb-3">Gestión de Asistencia</h3>
             <p>Visualización y gestión de registros de asistencia por materia/grupo.</p>
             <div class="form-group">
@@ -899,20 +1073,94 @@
         <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab-superadmin" role="tablist"
           aria-orientation="vertical">
           <a class="nav-link active" id="v-pills-user-mgmt-tab" data-toggle="pill" href="#user-management" role="tab"
-            aria-controls="user-management" aria-selected="true" onclick="switchTab('user-management', this)">Usuarios</a>
+            aria-controls="user-management" aria-selected="true"
+            onclick="switchTab('user-management', this)">Usuarios</a>
           <a class="nav-link" id="v-pills-system-config-tab" data-toggle="pill" href="#system-config" role="tab"
-            aria-controls="system-config" aria-selected="false" onclick="switchTab('system-config', this)">Configuraciones</a>
+            aria-controls="system-config" aria-selected="false"
+            onclick="switchTab('system-config', this)">Configuraciones</a>
           <a class="nav-link" id="v-pills-system-logs-tab" data-toggle="pill" href="#system-logs" role="tab"
             aria-controls="system-logs" aria-selected="false" onclick="switchTab('system-logs', this)">Registros</a>
         </div>
       </div>
+
+      <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addUserModalLabel">Agregar Nuevo Usuario</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="add-user-form">
+                <div class="form-group">
+                  <label for="add-username">Nombre de Usuario</label>
+                  <input type="text" class="form-control" id="add-username" required>
+                </div>
+                <div class="form-group">
+                  <label for="add-user-password">Contraseña</label>
+                  <input type="password" class="form-control" id="add-user-password" required>
+                </div>
+                <div class="form-group">
+                  <label for="add-user-role">Rol</label>
+                  <select class="form-control" id="add-user-role" required>
+                    <option value="">Seleccione un rol</option>
+                    <option value="1">Estudiante</option>
+                    <option value="2">Profesor</option>
+                    <option value="3">Administrativo</option>
+                    <option value="99">Super Administrador</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary action-button">Guardar Usuario</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---->
+      <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="edit-user-form">
+                <input type="hidden" id="edit-user-id-hidden">
+                <div class="form-group">
+                  <label for="edit-username">Nombre de Usuario</label>
+                  <input type="text" class="form-control" id="edit-username" required>
+                </div>
+                <div class="form-group">
+                  <label for="edit-user-role">Rol</label>
+                  <select class="form-control" id="edit-user-role" required>
+                    <option value="">Seleccione un rol</option>
+                    <option value="1">Estudiante</option>
+                    <option value="2">Profesor</option>
+                    <option value="3">Administrativo</option>
+                    <option value="99">Super Administrador</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary action-button">Actualizar Usuario</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---->
       <div class="col-md-9 col-lg-10">
         <div class="tab-content" id="v-pills-tabContent-superadmin">
           <div class="tab-pane fade show active" id="user-management" role="tabpanel"
             aria-labelledby="v-pills-user-mgmt-tab">
             <h3 class="mb-3">Gestión de Usuarios</h3>
-            <button class="btn btn-success action-button mb-3" data-toggle="modal"
-              data-target="#addUserModal">Agregar Usuario</button>
+            <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addUserModal">Agregar
+              Usuario</button>
             <div class="table-responsive">
               <table class="table table-hover table-striped">
                 <thead class="thead-dark">
@@ -929,8 +1177,8 @@
                     <td>admin_user</td>
                     <td>Admin</td>
                     <td>
-                      <button class="btn btn-sm btn-info mr-2">Editar</button>
-                      <button class="btn btn-sm btn-danger">Eliminar</button>
+                      <button class="btn btn-sm btn-info mr-2" data-target="#editUserModal">Editar</button>
+                      <button class="btn btn-sm btn-danger" onclick="deleteRegister">Eliminar</button>
                     </td>
                   </tr>
                 </tbody>
@@ -939,7 +1187,8 @@
           </div>
           <div class="tab-pane fade" id="system-config" role="tabpanel" aria-labelledby="v-pills-system-config-tab">
             <h3 class="mb-3">Configuraciones del Sistema</h3>
-            <p>Formularios para configurar parámetros globales del sistema, como ciclos escolares, notificaciones, etc. </p>
+            <p>Formularios para configurar parámetros globales del sistema, como ciclos escolares, notificaciones, etc.
+            </p>
             <form>
               <div class="form-group">
                 <label for="current_cycle">Ciclo Actual</label>
@@ -1094,9 +1343,28 @@
       document.querySelectorAll('.content-section').forEach(section => { section.style.display = 'none'; });
       document.getElementById('login-content').style.display = 'none';
       switch (parseInt(role)) {
-        case ROLES.SUPER_ADMIN: document.getElementById('super-admin-content').style.display = 'block'; break;
-        case ROLES.PROFESSOR: document.getElementById('professor-content').style.display = 'block'; break;
+        case ROLES.SUPER_ADMIN:
+          document.getElementById('super-admin-content').style.display = 'block';
+          loadStudents();
+          loadProfessors();
+          loadSubjects();
+          loadUsers();
+          loadPagos();
+          loadAttendance();
+          break;
+        case ROLES.PROFESSOR:
+          document.getElementById('professor-content').style.display = 'block';
+          loadStudents();
+          loadSubjectsProf();
+          fetchSubjects();
+          break;
         case ROLES.STUDENT: document.getElementById('student-content').style.display = 'block'; break;
+        loadGrades();
+        loadSubjects();
+        loadSubjectsStudent();
+        loadKardez();
+        loadPagos();
+        loadAttendance();
         case ROLES.ADMIN_STAFF: document.getElementById('admin-staff-content').style.display = 'block'; break;
         default: document.getElementById('login-content').style.display = 'block';
       }
@@ -1116,12 +1384,349 @@
       } else { showUserRole(null); }
     });
 
+    //////////////////GENERICO/(/////////////////)
+    async function fetchData(url, method = 'GET', data = null) {
+      const token = localStorage.getItem("authToken");
+      const headers = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      };
 
+      const config = {
+        method: method,
+        headers: headers,
+      };
 
-    ///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
+      if (data) {
+        config.body = JSON.stringify(data);
+      }
 
-    /////////////////       MATERIAS       ////////////////////////////////////////////
+      try {
+        const response = await fetch(url, config);
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+        }
+        return await response.json();
+      } catch (error) {
+        console.error(`Error en la petición ${method} a ${url}:`, error);
+        alert("Error en la operación: " + error.message);
+        throw error;
+      }
+    }
+    //////////////////////////////////////////                 ADD Registros                  //////////////////////////////////////////////////
+    // --- Estudiantes ---
+    document.getElementById('add-student-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const studentData = {
+        matricula: document.getElementById('add-matricula').value,
+        nombre: document.getElementById('add-student-name').value,
+        carrera: document.getElementById('add-carrera').value,
+        semestre: parseInt(document.getElementById('add-semestre').value),
+        celular: document.getElementById('add-student-phone').value,
+        email: document.getElementById('add-student-email').value,
+        contrasena: document.getElementById('add-student-password').value // Asegúrate de que tu backend hashee esto
+      };
+      try {
+        await fetchData(`http://${backendIP}:3000/students`, 'POST', studentData);
+        alert('Estudiante agregado exitosamente!');
+        $('#addStudentModal').modal('hide'); // Cierra el modal
+        this.reset(); // Limpia el formulario
+        loadStudents(); // Recarga la tabla de estudiantes
+      } catch (error) {
+        console.error("Error al agregar estudiante:", error);
+      }
+    });
+
+    document.getElementById('edit-student-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const originalMatricula = document.getElementById('edit-student-original-matricula').value;
+      const studentData = {
+        nombre: document.getElementById('edit-student-name').value,
+        carrera: document.getElementById('edit-student-carrera').value,
+        semestre: parseInt(document.getElementById('edit-student-semestre').value),
+        celular: document.getElementById('edit-student-phone').value,
+        email: document.getElementById('edit-student-email').value,
+
+      };
+      try {
+
+        await fetchData(`http://${backendIP}:3000/students/${originalMatricula}`, 'PUT', studentData);
+        alert('Estudiante actualizado exitosamente!');
+        $('#editStudentModal').modal('hide');
+        loadStudents();
+      } catch (error) {
+        console.error("Error al actualizar estudiante:", error);
+      }
+    });
+
+    // --- Profesores ---
+    document.getElementById('add-professor-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const professorData = {
+        nombre: document.getElementById('add-professor-name').value,
+        celular: document.getElementById('add-professor-phone').value,
+        email: document.getElementById('add-professor-email').value,
+        contrasena: document.getElementById('add-professor-password').value
+      };
+      try {
+        await fetchData(`http://${backendIP}:3000/professors`, 'POST', professorData);
+        alert('Profesor agregado exitosamente!');
+        $('#addProfessorModal').modal('hide');
+        this.reset();
+        loadProfessors();
+      } catch (error) {
+        console.error("Error al agregar profesor:", error);
+      }
+    });
+
+    document.getElementById('edit-professor-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const professorId = document.getElementById('edit-professor-id-hidden').value;
+      const professorData = {
+        nombre: document.getElementById('edit-professor-name').value,
+        celular: document.getElementById('edit-professor-phone').value,
+        email: document.getElementById('edit-professor-email').value,
+      };
+      try {
+        await fetchData(`http://${backendIP}:3000/professors/${professorId}`, 'PUT', professorData);
+        alert('Profesor actualizado exitosamente!');
+        $('#editProfessorModal').modal('hide');
+        loadProfessors();
+      } catch (error) {
+        console.error("Error al actualizar profesor:", error);
+      }
+    });
+
+    // --- Materias ---
+    document.getElementById('add-subject-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const subjectData = {
+        nombre: document.getElementById('add-subject-name').value,
+        semestre_cursante: parseInt(document.getElementById('add-subject-semester').value),
+      };
+      try {
+        await fetchData(`http://${backendIP}:3000/subjects`, 'POST', subjectData);
+        alert('Materia agregada exitosamente!');
+        $('#addSubjectModal').modal('hide');
+        this.reset();
+        loadSubjects();
+      } catch (error) {
+        console.error("Error al agregar materia:", error);
+      }
+    });
+
+    document.getElementById('edit-subject-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const subjectId = document.getElementById('edit-subject-id-hidden').value;
+      const subjectData = {
+        nombre: document.getElementById('edit-subject-name').value,
+        semestre_cursante: parseInt(document.getElementById('edit-subject-semester').value),
+      };
+      try {
+        await fetchData(`http://${backendIP}:3000/subjects/${subjectId}`, 'PUT', subjectData);
+        alert('Materia actualizada exitosamente!');
+        $('#editSubjectModal').modal('hide');
+        loadSubjects();
+      } catch (error) {
+        console.error("Error al actualizar materia:", error);
+      }
+    });
+
+    // --- Usuarios (Super Administrador) ---
+    document.getElementById('add-user-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const userData = {
+        nombre_usuario: document.getElementById('add-username').value,
+        contrasena: document.getElementById('add-user-password').value,
+        id_rol: parseInt(document.getElementById('add-user-role').value),
+      };
+      try {
+        await fetchData(`http://${backendIP}:3000/users`, 'POST', userData);
+        //alert('Usuario agregado exitosamente!');
+        $('#addUserModal').modal('hide');
+        this.reset();
+        loadUsers();
+      } catch (error) {
+        console.error("Error al agregar usuario:", error);
+      }
+    });
+
+    document.getElementById('edit-user-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const userId = document.getElementById('edit-user-id-hidden').value;
+      const userData = {
+        nombre_usuario: document.getElementById('edit-username').value,
+        id_rol: parseInt(document.getElementById('edit-user-role').value),
+      };
+      try {
+        await fetchData(`http://${backendIP}:3000/users/${userId}`, 'PUT', userData);
+        alert('Usuario actualizado exitosamente!');
+        $('#editUserModal').modal('hide');
+        loadUsers();
+      } catch (error) {
+        console.error("Error al actualizar usuario:", error);
+      }
+    });
+
+    ///////////////////////////////////////////////////////       LECTURA DE DAATOS      ////////////////////////////////////////////////////////////////////////////////
+
+    async function loadStudents() {
+      try {
+        const students = await fetchData(`http://${backendIP}:3000/students`); // Asegúrate de que esta URL sea correcta para tu API
+        const tbody = document.getElementById("admin-student-table");
+        tbody.innerHTML = ""; // Limpia la tabla antes de cargar
+
+        students.forEach(student => {
+          const row = `<tr>
+            <td>${student.matricula}</td>
+            <td>${student.nombre}</td>
+            <td>${student.carrera}</td>
+            <td>${student.semestre}</td>
+            <td>${student.celular || ''}</td>
+            <td>${student.email || ''}</td>
+            <td>
+              <button class="btn btn-sm btn-info mr-2"
+                      data-toggle="modal" data-target="#editStudentModal"
+                      onclick="openEditStudentModal('${student.matricula}', '${student.nombre}', '${student.carrera}', ${student.semestre}, '${student.celular || ''}', '${student.email || ''}')">
+                Editar
+              </button>
+              <button class="btn btn-sm btn-danger" onclick="deleteStudent('${student.matricula}')">Eliminar</button>
+            </td>
+          </tr>`;
+          tbody.innerHTML += row;
+        });
+        // Inicializar o recargar DataTables si lo estás usando
+        // $('#adminStudentTable').DataTable();
+      } catch (error) {
+        console.error("Error al cargar estudiantes:", error);
+      }
+    }
+
+    async function loadProfessors() {
+      try {
+        const professors = await fetchData(`http://${backendIP}:3000/professors`); // Asegúrate de que esta URL sea correcta
+        const tbody = document.getElementById("admin-professor-table");
+        tbody.innerHTML = "";
+
+        professors.forEach(prof => {
+          const row = `<tr>
+            <td>${prof.id}</td>
+            <td>${prof.nombre}</td>
+            <td>${prof.celular || ''}</td>
+            <td>${prof.email || ''}</td>
+            <td>
+              <button class="btn btn-sm btn-info mr-2"
+                      data-toggle="modal" data-target="#editProfessorModal"
+                      onclick="openEditProfessorModal('${prof.id}', '${prof.nombre}', '${prof.celular || ''}', '${prof.email || ''}')">
+                Editar
+              </button>
+              <button class="btn btn-sm btn-danger" onclick="deleteProfessor('${prof.id}')">Eliminar</button>
+            </td>
+          </tr>`;
+          tbody.innerHTML += row;
+        });
+        // $('#adminProfessorTable').DataTable();
+      } catch (error) {
+        console.error("Error al cargar profesores:", error);
+      }
+    }
+
     async function loadSubjects() {
+      try {
+        const subjects = await fetchData(`http://${backendIP}:3000/subjects`); // Asegúrate de que esta URL sea correcta
+        const tbody = document.getElementById("admin-subject-table");
+        tbody.innerHTML = "";
+
+        subjects.forEach(subject => {
+          const row = `<tr>
+            <td>${subject.id}</td>
+            <td>${subject.nombre}</td>
+            <td>${subject.semestre_cursante}</td>
+            <td>
+              <button class="btn btn-sm btn-info mr-2"
+                      data-toggle="modal" data-target="#editSubjectModal"
+                      onclick="openEditSubjectModal('${subject.id}', '${subject.nombre}', ${subject.semestre_cursante})">
+                Editar
+              </button>
+              <button class="btn btn-sm btn-danger" onclick="deleteSubject('${subject.id}')">Eliminar</button>
+            </td>
+          </tr>`;
+          tbody.innerHTML += row;
+        });
+        // $('#adminSubjectTable').DataTable();
+      } catch (error) {
+        console.error("Error al cargar materias:", error);
+      }
+    }
+
+    async function loadUsers() {
+      try {
+        const users = await fetchData(`http://${backendIP}:3000/users`); // Asegúrate de que esta URL sea correcta
+        const tbody = document.getElementById("admin-user-table");
+        tbody.innerHTML = "";
+
+        users.forEach(user => {
+
+          const roleName = {
+            '1': 'Estudiante',
+            '2': 'Profesor',
+            '3': 'Administrativo',
+            '99': 'Super Administrador'
+          }[user.id_rol] || 'Desconocido';
+
+          const row = `<tr>
+            <td>${user.id_usuario}</td>
+            <td>${user.nombre_usuario}</td>
+            <td>${roleName}</td>
+            <td>
+              <button class="btn btn-sm btn-info mr-2"
+                      data-toggle="modal" data-target="#editUserModal"
+                      onclick="openEditUserModal('${user.id_usuario}', '${user.nombre_usuario}', '${user.id_rol}')">
+                Editar
+              </button>
+              <button class="btn btn-sm btn-danger" onclick="deleteUser('${user.id_usuario}')">Eliminar</button>
+            </td>
+          </tr>`;
+          tbody.innerHTML += row;
+        });
+        // $('#adminUserTable').DataTable();
+      } catch (error) {
+        console.error("Error al cargar usuarios:", error);
+      }
+    }
+    /////////////////////EDICION MODALES/(/////////////////)
+    function openEditStudentModal(matricula, nombre, carrera, semestre, celular, email) {
+      document.getElementById('edit-student-original-matricula').value = matricula;
+      document.getElementById('edit-student-matricula').value = matricula;
+      document.getElementById('edit-student-name').value = nombre;
+      document.getElementById('edit-student-carrera').value = carrera;
+      document.getElementById('edit-student-semestre').value = semestre;
+      document.getElementById('edit-student-phone').value = celular;
+      document.getElementById('edit-student-email').value = email;
+    }
+
+    function openEditProfessorModal(id, nombre, celular, email) {
+      document.getElementById('edit-professor-id-hidden').value = id;
+      document.getElementById('edit-professor-name').value = nombre;
+      document.getElementById('edit-professor-phone').value = celular;
+      document.getElementById('edit-professor-email').value = email;
+    }
+
+    function openEditSubjectModal(id, nombre, semestre) {
+      document.getElementById('edit-subject-id-hidden').value = id;
+      document.getElementById('edit-subject-name').value = nombre;
+      document.getElementById('edit-subject-semester').value = semestre;
+    }
+
+    function openEditUserModal(id_usuario, nombre_usuario, id_rol) {
+      document.getElementById('edit-user-id-hidden').value = id_usuario;
+      document.getElementById('edit-username').value = nombre_usuario;
+      document.getElementById('edit-user-role').value = id_rol;
+    }
+
+    /////////////////       MATERIAS-ESTUDIANTES      ////////////////////////////////////////////
+    async function loadSubjectsStudent() {
       const token = localStorage.getItem("authToken");
       const response = await fetch(`http://${backendIP}:3000/student/tabla-datos-estudiante/`, { headers: { "Authorization": `Bearer ${token}` } });
       console.log("Token:", localStorage.getItem("authToken"));
@@ -1504,6 +2109,55 @@
       } catch (error) {
         console.error("Error al guardar la calificación:", error);
         alert("Error al guardar la calificación: " + error.message);
+      }
+    }
+
+    /////////////////////////////////////Eliminar Registros/////////////////////////////////////
+    async function deleteStudent(matricula) {
+      if (confirm(`¿Estás seguro de eliminar al estudiante con matrícula ${matricula}?`)) {
+        try {
+          await fetchData(`http://${backendIP}:3000/students/${matricula}`, 'DELETE');
+          alert('Estudiante eliminado exitosamente!');
+          loadStudents(); // Recarga la tabla
+        } catch (error) {
+          console.error("Error al eliminar estudiante:", error);
+        }
+      }
+    }
+
+    async function deleteProfessor(id) {
+      if (confirm(`¿Estás seguro de eliminar al profesor con ID ${id}?`)) {
+        try {
+          await fetchData(`http://${backendIP}:3000/professors/${id}`, 'DELETE');
+          alert('Profesor eliminado exitosamente!');
+          loadProfessors();
+        } catch (error) {
+          console.error("Error al eliminar profesor:", error);
+        }
+      }
+    }
+
+    async function deleteSubject(id) {
+      if (confirm(`¿Estás seguro de eliminar la materia con ID ${id}?`)) {
+        try {
+          await fetchData(`http://${backendIP}:3000/subjects/${id}`, 'DELETE');
+          alert('Materia eliminada exitosamente!');
+          loadSubjects();
+        } catch (error) {
+          console.error("Error al eliminar materia:", error);
+        }
+      }
+    }
+
+    async function deleteUser(id_usuario) {
+      if (confirm(`¿Estás seguro de eliminar al usuario con ID ${id_usuario}?`)) {
+        try {
+          await fetchData(`http://${backendIP}:3000/users/${id_usuario}`, 'DELETE');
+          alert('Usuario eliminado exitosamente!');
+          loadUsers();
+        } catch (error) {
+          console.error("Error al eliminar usuario:", error);
+        }
       }
     }
   </script>
