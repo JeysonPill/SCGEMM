@@ -1162,7 +1162,6 @@
       document.getElementById('student-form').reset();
     }
 
-    // display por roles
     function showUserRole(role) {
       document.querySelectorAll('.content-section').forEach(section => { section.style.display = 'none'; });
 
@@ -1174,6 +1173,184 @@
         default: document.getElementById('login-content').style.display = 'block';
       }
     }
+
+    // Funciones para manejar el token y el rol en localStorage
+    function setAuthToken(token) {
+      localStorage.setItem('authToken', token);
+    }
+
+    function getAuthToken() {
+      return localStorage.getItem('authToken');
+    }
+
+    function clearAuthToken() {
+      localStorage.removeItem('authToken');
+    }
+
+    function setUserRole(role) {
+      localStorage.setItem('userRole', role);
+    }
+
+    function getUserRole() {
+      return localStorage.getItem('userRole');
+    }
+
+    function clearUserRole() {
+      localStorage.removeItem('userRole');
+    }
+
+    // Handle login form submission
+    async function handleLogin(event) {
+      event.preventDefault(); // Evita el envío por defecto del formulario
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+      errorMessage.textContent = ''; // Limpia errores previos
+
+      try {
+        // --- INICIO: LÓGICA DE AUTENTICACIÓN REAL ---
+        // Aquí debes reemplazar esta simulación con tu llamada a la API de autenticación real
+        // Ejemplo de fetch a tu backend (asegúrate de que tu backend tenga el endpoint /login)
+        const response = await fetch(`http://${backendIP}:3000/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Error de autenticación');
+        }
+
+        const data = await response.json();
+        setAuthToken(data.token); // Guarda el token recibido del backend
+        setUserRole(data.role); // Guarda el rol del usuario recibido del backend
+
+        // --- FIN: LÓGICA DE AUTENTICACIÓN REAL ---
+
+        showUserRole(data.role); // Muestra el contenido basado en el rol
+
+        // Opcionalmente, resetea el formulario de login
+        document.getElementById('login-form').reset();
+
+        // Inicializa el contenido de la primera pestaña para el rol específico después del login
+        // Aquí deberías llamar a las funciones que cargan datos (loadStudents(), loadSubjectsProf(), etc.)
+        // para la pestaña predeterminada de cada rol.
+        if (parseInt(data.role) === ROLES.ADMIN_STAFF) {
+          const adminTab = document.getElementById('v-pills-student-mgmt-tab');
+          if (adminTab) {
+            switchTab('student-management', adminTab);
+          }
+        } else if (parseInt(data.role) === ROLES.PROFESSOR) {
+          const profTab = document.getElementById('v-pills-schedule-tab');
+          if (profTab) {
+            switchTab('teaching-schedule', profTab);
+          }
+        } else if (parseInt(data.role) === ROLES.STUDENT) {
+          const studentTab = document.getElementById('v-pills-subjects-tab');
+          if (studentTab) {
+            switchTab('enrolled-subjects', studentTab);
+          }
+        } else if (parseInt(data.role) === ROLES.SUPER_ADMIN) {
+          const superAdminTab = document.getElementById('v-pills-user-mgmt-tab');
+          if (superAdminTab) {
+            switchTab('user-management', superAdminTab);
+          }
+        }
+
+      } catch (error) {
+        console.error("Fallo el inicio de sesion:", error);
+        errorMessage.textContent = error.message || 'Usuario o contraseña incorrectos.';
+      }
+    }
+
+    // Handle logout
+    function handleLogout() {
+      clearAuthToken();
+      clearUserRole();
+      showUserRole(null); // Muestra la pantalla de login
+      // Opcionalmente, recarga la página para asegurar que todos los datos de la sesión anterior se limpien
+      location.reload();
+    }
+
+    // Verifica si hay un token y un rol almacenados al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedRole = getUserRole();
+      if (storedRole && getAuthToken()) {
+        showUserRole(storedRole);
+        // Activa la primera pestaña por defecto para el rol si ya está logeado
+        if (parseInt(storedRole) === ROLES.ADMIN_STAFF) {
+            const adminTab = document.getElementById('v-pills-student-mgmt-tab');
+            if(adminTab) {
+                switchTab('student-management', adminTab);
+            }
+        } else if (parseInt(storedRole) === ROLES.PROFESSOR) {
+            const profTab = document.getElementById('v-pills-schedule-tab');
+            if(profTab) {
+                switchTab('teaching-schedule', profTab);
+            }
+        } else if (parseInt(storedRole) === ROLES.STUDENT) {
+            const studentTab = document.getElementById('v-pills-subjects-tab');
+            if(studentTab) {
+                switchTab('enrolled-subjects', studentTab);
+            }
+        } else if (parseInt(storedRole) === ROLES.SUPER_ADMIN) {
+            const superAdminTab = document.getElementById('v-pills-user-mgmt-tab');
+            if(superAdminTab) {
+                switchTab('user-management', superAdminTab);
+            }
+        }
+      } else {
+        showUserRole(null); // No hay token o rol, muestra la pantalla de login
+      }
+
+      // Adjunta el event listener al formulario de login
+      const loginForm = document.getElementById('login-form');
+      if (loginForm) {
+        loginForm.addEventListener('submit', handleLogin);
+      }
+    });
+
+    // cambia paginas
+    function switchTab(tabId, element) {
+      // Elimina la clase 'active' de todas las pestañas de navegación y contenido de pestañas
+      document.querySelectorAll('.nav-link').forEach(tab => { tab.classList.remove('active'); });
+      document.querySelectorAll('.tab-pane').forEach(content => { content.classList.remove('show', 'active'); });
+
+      // Establece la clase 'active' en la pestaña actual y su contenido
+      if(element) { // Asegura que 'element' existe antes de intentar acceder a sus propiedades
+        element.classList.add('active');
+      }
+      document.getElementById(tabId).classList.add('show', 'active'); // Bootstrap necesita 'show' y 'active' para las transiciones de pestañas
+
+      // Carga de datos específicos para cada pestaña
+      try {
+        switch (tabId) {
+          case 'enrolled-subjects': /* loadSubjects(); */ console.log('Cargando materias del estudiante...'); break;
+          case 'grades': /* loadGrades(); */ console.log('Cargando calificaciones del estudiante...'); break;
+          case 'kardex': /* loadKardez(); */ console.log('Cargando kardex del estudiante...'); break;
+          case 'payments': /* loadPagos(); */ console.log('Cargando pagos del estudiante...'); break;
+          case 'attendance': /* initializeAttendance(); */ console.log('Inicializando asistencia del estudiante...'); break;
+          case 'teaching-schedule': /* loadSubjectsProf(); */ console.log('Cargando horario del profesor...'); break;
+          case 'attendance-qr': /* QR_CODE_GEN(); */ console.log('Generando codigo QR...'); break;
+          case 'profesor_grade_entry': /* fetchSubjects(); */ console.log('Cargando ingreso de calificaciones del profesor...'); break;
+          case 'student-management': /* loadStudents(); */ console.log('Cargando gestión de estudiantes (Admin)...'); break;
+          case 'professor-management': console.log('Cargando gestión de profesores (Admin)...'); break;
+          case 'subject-management': console.log('Cargando gestión de materias (Admin)...'); break;
+          case 'reports': console.log('Cargando reportes (Admin)...'); break;
+          case 'payments-admin': console.log('Cargando gestión de pagos (Admin)...'); break;
+          case 'attendance-admin': console.log('Cargando gestión de asistencia (Admin)...'); break;
+          case 'user-management': console.log('Cargando gestión de usuarios (Super Admin)...'); break;
+          case 'system-config': console.log('Cargando configuración del sistema (Super Admin)...'); break;
+          case 'system-logs': console.log('Cargando registros del sistema (Super Admin)...'); break;
+          default: console.log('Pestaña desconocida:', tabId);
+        }
+      } catch (error) {
+        console.error("Error al cambiar de pestaña:", error);
+      }
 
     //
     window.addEventListener('load', () => {
@@ -1809,6 +1986,7 @@
         alert("Error al guardar la calificación: " + error.message);
       }
     }
+  }
   </script>
   <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
