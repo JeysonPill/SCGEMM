@@ -71,7 +71,18 @@ app.post('/login', (req, res) => {
 });
 
 ///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
+// GET endpoint for students
+app.get('/students', authenticateToken, async (req, res) => {
+    try {
+        
+        const students = await db.query('SELECT * FROM ALUMNOS;'); // Using the placeholder db
 
+        res.json(students);
+    } catch (error) {
+        console.error('Error fetching students:', error);
+        res.status(500).json({ message: 'Error al cargar los estudiantes', error: error.message });
+    }
+});
 /////////////////       MATERIAS       ////////////////////////////////////////////
 app.get('/student/tabla-datos-estudiante/', authenticateToken, (req, res) => {
   const query = `
