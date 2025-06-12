@@ -183,812 +183,832 @@
 </head>
 
 <body>
-  <div id="login-content" class="content-section d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-4 shadow-sm login-card">
-      <h2 class="card-title text-center mb-4">Login</h2>
-      <form id="login-form">
-        <div class="form-group">
-          <label for="username">Usuario</label>
-          <input type="text" id="username" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Contraseña</label>
-          <input type="password" id="password" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block action-button mt-4">Login</button>
-      </form>
-      <div id="error-message" class="text-danger mt-3 text-center"></div>
+
+
+  <div id="login-section" class="content-section">
+    <div id="login-content" class="content-section d-flex justify-content-center align-items-center vh-100">
+      <div class="card p-4 shadow-sm login-card">
+        <h2 class="card-title text-center mb-4">Login</h2>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="username">Usuario</label>
+            <input type="text" id="username" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block action-button mt-4">Login</button>
+        </form>
+        <div id="error-message" class="text-danger mt-3 text-center"></div>
+      </div>
     </div>
   </div>
-
-<div id="student-content" class="content-section container-fluid" style="display: none;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
-      <a class="navbar-brand" href="#">Panel de Estudiantes</a>
-      <div class="ml-auto">
-        <button class="btn btn-outline-danger logout-button" onclick="handleLogout()">Cerrar sesión</button>
-      </div>
-    </nav>
-
-    <div class="row">
-      <div class="col-md-3 col-lg-2">
-        <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab" role="tablist"
-          aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-subjects-tab" data-toggle="pill" href="#enrolled-subjects" role="tab"
-            aria-controls="enrolled-subjects" aria-selected="true"
-            onclick="switchTab('enrolled-subjects', this)">Materias</a>
-          <a class="nav-link" id="v-pills-grades-tab" data-toggle="pill" href="#grades" role="tab"
-            aria-controls="grades" aria-selected="false" onclick="switchTab('grades', this)">Calificaciones</a>
-          <a class="nav-link" id="v-pills-kardex-tab" data-toggle="pill" href="#kardex" role="tab"
-            aria-controls="kardex" aria-selected="false" onclick="switchTab('kardex', this)">Kardex</a>
-          <a class="nav-link" id="v-pills-payments-tab" data-toggle="pill" href="#payments" role="tab"
-            aria-controls="payments" aria-selected="false" onclick="switchTab('payments', this)">Pagos</a>
-          <a class="nav-link" id="v-pills-attendance-tab" data-toggle="pill" href="#attendance" role="tab"
-            aria-controls="attendance" aria-selected="false" onclick="switchTab('attendance', this)">Asistencias</a>
+  <div id="student-section" class="content-section">
+    <div id="student-content" class="content-section container-fluid" style="display: none;">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <a class="navbar-brand" href="#">Panel de Estudiantes</a>
+        <div class="ml-auto">
+          <button class="btn btn-outline-danger logout-button" onclick="handleLogout()">Cerrar sesión</button>
         </div>
-      </div>
-      <div class="col-md-9 col-lg-10">
-        <div class="tab-content" id="v-pills-tabContent">
-          <div class="tab-pane fade show active" id="enrolled-subjects" role="tabpanel"
-            aria-labelledby="v-pills-subjects-tab">
-            <h3 class="mb-3">Materias</h3>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Profesor</th>
-                    <th>Horarios</th>
-                    <th>Grupos</th>
-                  </tr>
-                </thead>
-                <tbody id="subjects-table">
-                </tbody>
-              </table>
-            </div>
-          </div>
+      </nav>
 
-          <div class="tab-pane fade" id="grades" role="tabpanel" aria-labelledby="v-pills-grades-tab">
-            <h3 class="mb-3">Calificaciones</h3>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Parcial 1</th>
-                    <th>Parcial 2</th>
-                    <th>Final</th>
-                    <th>Promedio</th>
-                  </tr>
-                </thead>
-                <tbody id="grades-table">
-                </tbody>
-              </table>
-            </div>
+      <div class="row">
+        <div class="col-md-3 col-lg-2">
+          <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab" role="tablist"
+            aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-subjects-tab" data-toggle="pill" href="#enrolled-subjects" role="tab"
+              aria-controls="enrolled-subjects" aria-selected="true"
+              onclick="switchTab('enrolled-subjects', this)">Materias</a>
+            <a class="nav-link" id="v-pills-grades-tab" data-toggle="pill" href="#grades" role="tab"
+              aria-controls="grades" aria-selected="false" onclick="switchTab('grades', this)">Calificaciones</a>
+            <a class="nav-link" id="v-pills-kardex-tab" data-toggle="pill" href="#kardex" role="tab"
+              aria-controls="kardex" aria-selected="false" onclick="switchTab('kardex', this)">Kardex</a>
+            <a class="nav-link" id="v-pills-payments-tab" data-toggle="pill" href="#payments" role="tab"
+              aria-controls="payments" aria-selected="false" onclick="switchTab('payments', this)">Pagos</a>
+            <a class="nav-link" id="v-pills-attendance-tab" data-toggle="pill" href="#attendance" role="tab"
+              aria-controls="attendance" aria-selected="false" onclick="switchTab('attendance', this)">Asistencias</a>
           </div>
-
-          <div class="tab-pane fade" id="kardex" role="tabpanel" aria-labelledby="v-pills-kardex-tab">
-            <h3 class="mb-3">Historial académico</h3>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Materia</th>
-                    <th>Periodo</th>
-                    <th>Calificación final</th>
-                    <th>Estado</th>
-                  </tr>
-                </thead>
-                <tbody id="kardex-table">
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="tab-pane fade" id="payments" role="tabpanel" aria-labelledby="v-pills-payments-tab">
-            <h3 class="mb-3">Estado de pagos</h3>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Mes</th>
-                    <th>Cantidad</th>
-                    <th>Fecha de corte</th>
-                    <th>Estado</th>
-                    <th>Acción</th>
-                  </tr>
-                </thead>
-                <tbody id="payments-table">
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="tab-pane fade" id="attendance" role="tabpanel" aria-labelledby="v-pills-attendance-tab">
-            <h3 class="mb-3">Registro de asistencia</h3>
-            <div class="qr-section card p-4 shadow-sm">
-              <div id="qr-reader" class="mb-3 text-center"></div>
-              <p class="text-center">Ingresa código de asistencia:</p>
-              <div class="form-group">
-                <input type="text" id="attendance-code" class="form-control" placeholder="Ingresa código">
+        </div>
+        <div class="col-md-9 col-lg-10">
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="enrolled-subjects" role="tabpanel"
+              aria-labelledby="v-pills-subjects-tab">
+              <h3 class="mb-3">Materias</h3>
+              <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Profesor</th>
+                      <th>Horarios</th>
+                      <th>Grupos</th>
+                    </tr>
+                  </thead>
+                  <tbody id="subjects-table">
+                  </tbody>
+                </table>
               </div>
-              <button onclick="submitAttendance()" class="btn btn-primary action-button btn-block mt-3">Enviar</button>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div id="student-panel" class="content-section" style="display:none;">
-    <h2>Gestión de Estudiantes</h2>
-    <button class="btn btn-primary mb-3" onclick="showStudentForm('create')">Crear Nuevo Estudiante</button>
 
-    <div id="student-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
-      <h3><span id="student-form-title"></span> Estudiante</h3>
-      <form id="student-form">
-        <input type="hidden" id="student-matricula-edit">
-        <div class="form-group">
-          <label for="matricula">Matrícula:</label>
-          <input type="text" class="form-control" id="matricula" required>
-        </div>
-        <div class="form-group">
-          <label for="nombre">Nombre:</label>
-          <input type="text" class="form-control" id="student-nombre" required>
-        </div>
-        <div class="form-group">
-          <label for="carrera">Carrera:</label>
-          <input type="text" class="form-control" id="carrera" required>
-        </div>
-        <div class="form-group">
-          <label for="semestre">Semestre:</label>
-          <input type="text" class="form-control" id="semestre" required>
-        </div>
-        <div class="form-group">
-          <label for="user_name">Usuario:</label>
-          <input type="text" class="form-control" id="student-user_name" required>
-        </div>
-        <div class="form-group">
-          <label for="celular">Celular:</label>
-          <input type="text" class="form-control" id="student-celular" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" class="form-control" id="student-email" required>
-        </div>
-        <button type="submit" class="btn btn-success">Guardar Estudiante</button>
-        <button type="button" class="btn btn-secondary" onclick="hideStudentForm()">Cancelar</button>
-      </form>
-    </div>
-
-    <table id="students-table" class="table table-striped table-bordered" style="width:100%">
-      <thead>
-        <tr>
-          <th>Matrícula</th>
-          <th>Nombre</th>
-          <th>Carrera</th>
-          <th>Semestre</th>
-          <th>Usuario</th>
-          <th>Celular</th>
-          <th>Email</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-
-  <div id="professor-content" class="content-section container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
-      <a class="navbar-brand" href="#">Panel de Profesor</a>
-      <div class="ml-auto">
-        <button class="btn btn-outline-danger logout-button" onclick="handleLogout()">Cerrar sesión</button>
-      </div>
-    </nav>
-
-    <div class="row">
-      <div class="col-md-3 col-lg-2">
-        <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab-prof" role="tablist"
-          aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-schedule-tab" data-toggle="pill" href="#teaching-schedule" role="tab"
-            aria-controls="teaching-schedule" aria-selected="true"
-            onclick="switchTab('teaching-schedule', this)">Horario de clases</a>
-          <a class="nav-link" id="v-pills-qr-tab" data-toggle="pill" href="#attendance-qr" role="tab"
-            aria-controls="attendance-qr" aria-selected="false" onclick="switchTab('attendance-qr', this)">QR de
-            asistencia</a>
-          <a class="nav-link" id="v-pills-grade-entry-tab" data-toggle="pill" href="#profesor_grade_entry" role="tab"
-            aria-controls="profesor_grade_entry" aria-selected="false"
-            onclick="switchTab('profesor_grade_entry', this)">Ingreso de Calificaciones</a>
-        </div>
-      </div>
-      <div class="col-md-9 col-lg-10">
-        <div class="tab-content" id="v-pills-tabContent-prof">
-          <div class="tab-pane fade show active" id="teaching-schedule" role="tabpanel"
-            aria-labelledby="v-pills-schedule-tab">
-            <h3 class="mb-3">Horario de clases</h3>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Materia</th>
-                    <th>Grupo</th>
-                    <th>Horario</th>
-                  </tr>
-                </thead>
-                <tbody id="schedule-table">
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="tab-pane fade" id="attendance-qr" role="tabpanel" aria-labelledby="v-pills-qr-tab">
-            <h3 class="mb-3">Generar QR de asistencia</h3>
-            <div class="card p-4 shadow-sm">
-              <div class="form-group">
-                <label for="qr_subject_select">Elegir materia</label>
-                <select id="qr_subject_select" class="form-control">
-                  <option value="">Seleccione una materia</option>
-                </select>
+            <div class="tab-pane fade" id="grades" role="tabpanel" aria-labelledby="v-pills-grades-tab">
+              <h3 class="mb-3">Calificaciones</h3>
+              <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Parcial 1</th>
+                      <th>Parcial 2</th>
+                      <th>Final</th>
+                      <th>Promedio</th>
+                    </tr>
+                  </thead>
+                  <tbody id="grades-table">
+                  </tbody>
+                </table>
               </div>
-              <button onclick="QR_CODE_GEN()" class="btn btn-primary action-button mt-3">Generar QR</button>
-              <div id="qr-display" class="mt-4 text-center"></div>
+            </div>
+
+            <div class="tab-pane fade" id="kardex" role="tabpanel" aria-labelledby="v-pills-kardex-tab">
+              <h3 class="mb-3">Historial académico</h3>
+              <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Materia</th>
+                      <th>Periodo</th>
+                      <th>Calificación final</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody id="kardex-table">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="payments" role="tabpanel" aria-labelledby="v-pills-payments-tab">
+              <h3 class="mb-3">Estado de pagos</h3>
+              <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Mes</th>
+                      <th>Cantidad</th>
+                      <th>Fecha de corte</th>
+                      <th>Estado</th>
+                      <th>Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody id="payments-table">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="attendance" role="tabpanel" aria-labelledby="v-pills-attendance-tab">
+              <h3 class="mb-3">Registro de asistencia</h3>
+              <div class="qr-section card p-4 shadow-sm">
+                <div id="qr-reader" class="mb-3 text-center"></div>
+                <p class="text-center">Ingresa código de asistencia:</p>
+                <div class="form-group">
+                  <input type="text" id="attendance-code" class="form-control" placeholder="Ingresa código">
+                </div>
+                <button onclick="submitAttendance()"
+                  class="btn btn-primary action-button btn-block mt-3">Enviar</button>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="tab-pane fade" id="profesor_grade_entry" role="tabpanel"
-            aria-labelledby="v-pills-grade-entry-tab">
-            <h3 class="mb-3">Ingreso de calificaciones</h3>
+    <div id="student-panel" class="content-section" style="display:none;">
+      <h2>Gestión de Estudiantes</h2>
+      <button class="btn btn-primary mb-3" onclick="showStudentForm('create')">Crear Nuevo Estudiante</button>
+
+      <div id="student-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
+        <h3><span id="student-form-title"></span> Estudiante</h3>
+        <form id="student-form">
+          <input type="hidden" id="student-matricula-edit">
+          <div class="form-group">
+            <label for="matricula">Matrícula:</label>
+            <input type="text" class="form-control" id="matricula" required>
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="student-nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="carrera">Carrera:</label>
+            <input type="text" class="form-control" id="carrera" required>
+          </div>
+          <div class="form-group">
+            <label for="semestre">Semestre:</label>
+            <input type="text" class="form-control" id="semestre" required>
+          </div>
+          <div class="form-group">
+            <label for="user_name">Usuario:</label>
+            <input type="text" class="form-control" id="student-user_name" required>
+          </div>
+          <div class="form-group">
+            <label for="celular">Celular:</label>
+            <input type="text" class="form-control" id="student-celular" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="student-email" required>
+          </div>
+          <button type="submit" class="btn btn-success">Guardar Estudiante</button>
+          <button type="button" class="btn btn-secondary" onclick="hideStudentForm()">Cancelar</button>
+        </form>
+      </div>
+
+      <table id="students-table" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th>Matrícula</th>
+            <th>Nombre</th>
+            <th>Carrera</th>
+            <th>Semestre</th>
+            <th>Usuario</th>
+            <th>Celular</th>
+            <th>Email</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="students-table-body">
+          <!-- Dynamic content will be inserted here -->
+        </tbody>
+      </table>
+    </div>
+
+    <div id="subject-panel" class="content-section" style="display:none;">
+      <h2>Gestión de Materias</h2>
+      <button class="btn btn-primary mb-3" onclick="showSubjectForm('create')">Crear Nueva Materia</button>
+
+      <div id="subject-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
+        <h3><span id="subject-form-title"></span> Materia</h3>
+        <form id="subject-form">
+          <input type="hidden" id="subject-id-edit">
+          <div class="form-group">
+            <label for="id_materia">ID Materia:</label>
+            <input type="text" class="form-control" id="id_materia" required>
+          </div>
+          <div class="form-group">
+            <label for="materia_nombre">Nombre Materia:</label>
+            <input type="text" class="form-control" id="materia_nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="sem_cursante">Semestre Cursante:</label>
+            <input type="text" class="form-control" id="sem_cursante" required>
+          </div>
+          <button type="submit" class="btn btn-success">Guardar Materia</button>
+          <button type="button" class="btn btn-secondary" onclick="hideSubjectForm()">Cancelar</button>
+        </form>
+      </div>
+
+      <table id="subjects-table" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th>ID Materia</th>
+            <th>Nombre Materia</th>
+            <th>Semestre Cursante</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="grade-panel" class="content-section" style="display:none;">
+      <h2>Gestión de Calificaciones</h2>
+      <button class="btn btn-primary mb-3" onclick="showGradeForm('create')">Crear Nueva Calificación</button>
+
+      <div id="grade-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
+        <h3><span id="grade-form-title"></span> Calificación</h3>
+        <form id="grade-form">
+          <input type="hidden" id="grade-id_materia-edit">
+          <input type="hidden" id="grade-matricula-edit">
+          <div class="form-group">
+            <label for="grade_id_materia">ID Materia:</label>
+            <input type="text" class="form-control" id="grade_id_materia" required>
+          </div>
+          <div class="form-group">
+            <label for="grade_matricula">Matrícula Alumno:</label>
+            <input type="text" class="form-control" id="grade_matricula" required>
+          </div>
+          <div class="form-group">
+            <label for="calif_p1">Calificación P1:</label>
+            <input type="text" class="form-control" id="calif_p1">
+          </div>
+          <div class="form-group">
+            <label for="calif_p2">Calificación P2:</label>
+            <input type="text" class="form-control" id="calif_p2">
+          </div>
+          <div class="form-group">
+            <label for="calif_final">Calificación Final:</label>
+            <input type="text" class="form-control" id="calif_final">
+          </div>
+          <div class="form-group">
+            <label for="ciclo_cursando">Ciclo Cursando:</label>
+            <input type="text" class="form-control" id="ciclo_cursando" required>
+          </div>
+          <button type="submit" class="btn btn-success">Guardar Calificación</button>
+          <button type="button" class="btn btn-secondary" onclick="hideGradeForm()">Cancelar</button>
+        </form>
+      </div>
+
+      <table id="grades-table" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th>ID Materia</th>
+            <th>Matrícula</th>
+            <th>Calificación P1</th>
+            <th>Calificación P2</th>
+            <th>Calificación Final</th>
+            <th>Ciclo Cursando</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div id="professor-section" class="content-section">
+    <div id="professor-content" class="content-section container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <a class="navbar-brand" href="#">Panel de Profesor</a>
+        <div class="ml-auto">
+          <button class="btn btn-outline-danger logout-button" onclick="handleLogout()">Cerrar sesión</button>
+        </div>
+      </nav>
+
+      <div class="row">
+        <div class="col-md-3 col-lg-2">
+          <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab-prof" role="tablist"
+            aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-schedule-tab" data-toggle="pill" href="#teaching-schedule" role="tab"
+              aria-controls="teaching-schedule" aria-selected="true"
+              onclick="switchTab('teaching-schedule', this)">Horario de clases</a>
+            <a class="nav-link" id="v-pills-qr-tab" data-toggle="pill" href="#attendance-qr" role="tab"
+              aria-controls="attendance-qr" aria-selected="false" onclick="switchTab('attendance-qr', this)">QR de
+              asistencia</a>
+            <a class="nav-link" id="v-pills-grade-entry-tab" data-toggle="pill" href="#profesor_grade_entry" role="tab"
+              aria-controls="profesor_grade_entry" aria-selected="false"
+              onclick="switchTab('profesor_grade_entry', this)">Ingreso de Calificaciones</a>
+          </div>
+        </div>
+        <div class="col-md-9 col-lg-10">
+          <div class="tab-content" id="v-pills-tabContent-prof">
+            <div class="tab-pane fade show active" id="teaching-schedule" role="tabpanel"
+              aria-labelledby="v-pills-schedule-tab">
+              <h3 class="mb-3">Horario de clases</h3>
+              <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Materia</th>
+                      <th>Grupo</th>
+                      <th>Horario</th>
+                    </tr>
+                  </thead>
+                  <tbody id="schedule-table">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="attendance-qr" role="tabpanel" aria-labelledby="v-pills-qr-tab">
+              <h3 class="mb-3">Generar QR de asistencia</h3>
+              <div class="card p-4 shadow-sm">
+                <div class="form-group">
+                  <label for="qr_subject_select">Elegir materia</label>
+                  <select id="qr_subject_select" class="form-control">
+                    <option value="">Seleccione una materia</option>
+                  </select>
+                </div>
+                <button onclick="QR_CODE_GEN()" class="btn btn-primary action-button mt-3">Generar QR</button>
+                <div id="qr-display" class="mt-4 text-center"></div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="profesor_grade_entry" role="tabpanel"
+              aria-labelledby="v-pills-grade-entry-tab">
+              <h3 class="mb-3">Ingreso de calificaciones</h3>
+              <div class="form-group">
+                <label for="professor_grade_subject_select">Elija materia</label>
+                <select id="professor_grade_subject_select" class="form-control"></select>
+              </div>
+              <div class="table-responsive mt-4">
+                <table class="table table-hover table-striped">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Estudiante</th>
+                      <th>Parcial 1</th>
+                      <th>Parcial 2</th>
+                      <th>Final</th>
+                      <th>Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody id="profesor_grade_entry_table">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="professor-panel" class="content-section" style="display:none;">
+      <h2>Gestión de Profesores</h2>
+      <button class="btn btn-primary mb-3" onclick="showProfessorForm('create')">Crear Nuevo Profesor</button>
+
+      <div id="professor-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
+        <h3><span id="professor-form-title"></span> Profesor</h3>
+        <form id="professor-form">
+          <input type="hidden" id="professor-id-edit">
+          <div class="form-group">
+            <label for="id_profesor">ID Profesor:</label>
+            <input type="text" class="form-control" id="id_profesor" required>
+          </div>
+          <div class="form-group">
+            <label for="profesor_nombre">Nombre:</label>
+            <input type="text" class="form-control" id="profesor_nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="profesor_celular">Celular:</label>
+            <input type="text" class="form-control" id="profesor_celular" required>
+          </div>
+          <div class="form-group">
+            <label for="profesor_email">Email:</label>
+            <input type="email" class="form-control" id="profesor_email" required>
+          </div>
+          <div class="form-group">
+            <label for="profesor_fecha_ingreso">Fecha de Ingreso:</label>
+            <input type="date" class="form-control" id="profesor_fecha_ingreso" required>
+          </div>
+          <button type="submit" class="btn btn-success">Guardar Profesor</button>
+          <button type="button" class="btn btn-secondary" onclick="hideProfessorForm()">Cancelar</button>
+        </form>
+      </div>
+
+      <table id="professors-table" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th>ID Profesor</th>
+            <th>Nombre</th>
+            <th>Celular</th>
+            <th>Email</th>
+            <th>Fecha de Ingreso</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="admin-section" class="content-section">
+    <div id="admin-staff-content" class="content-section container-fluid " style="display: none;">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <a class="navbar-brand" href="#">Panel de Administrativos</a>
+        <div class="ml-auto">
+          <button class="btn btn-outline-danger logout-button" onclick="handleLogout()">Cerrar sesión</button>
+        </div>
+      </nav>
+      <div class="row">
+        <div class="col-md-3 col-lg-2">
+          <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab-admin" role="tablist"
+            aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-student-mgmt-tab" data-toggle="pill" href="#student-management"
+              role="tab" aria-controls="student-management" aria-selected="true"
+              onclick="switchTab('student-management', this)">Estudiantes</a>
+            <a class="nav-link" id="v-pills-professor-mgmt-tab" data-toggle="pill" href="#professor-management"
+              role="tab" aria-controls="professor-management" aria-selected="false"
+              onclick="switchTab('professor-management', this)">Profesores</a>
+            <a class="nav-link" id="v-pills-subject-mgmt-tab" data-toggle="pill" href="#subject-management" role="tab"
+              aria-controls="subject-management" aria-selected="false"
+              onclick="switchTab('subject-management', this)">Materias</a>
+            <a class="nav-link" id="v-pills-reports-tab" data-toggle="pill" href="#reports" role="tab"
+              aria-controls="reports" aria-selected="false" onclick="switchTab('reports', this)">Reportes</a>
+            <a class="nav-link" id="v-pills-payments-admin-tab" data-toggle="pill" href="#payments-admin" role="tab"
+              aria-controls="payments-admin" aria-selected="false" onclick="switchTab('payments-admin', this)">Gestión
+              de
+              Pagos</a>
+            <a class="nav-link" id="v-pills-attendance-admin-tab" data-toggle="pill" href="#attendance-admin" role="tab"
+              aria-controls="attendance-admin" aria-selected="false"
+              onclick="switchTab('attendance-admin', this)">Gestión
+              de Asistencia</a>
+          </div>
+        </div>
+
+        <!--FOrmularios-->
+        <div class="modal fade" id="addProfessorModal" tabindex="-1" role="dialog"
+          aria-labelledby="addProfessorModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addProfessorModalLabel">Agregar Nuevo Profesor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="add-professor-form">
+                  <div class="form-group">
+                    <label for="add-professor-name">Nombre</label>
+                    <input type="text" class="form-control" id="add-professor-name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="add-professor-phone">Celular</label>
+                    <input type="text" class="form-control" id="add-professor-phone">
+                  </div>
+                  <div class="form-group">
+                    <label for="add-professor-email">Email</label>
+                    <input type="email" class="form-control" id="add-professor-email" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="add-professor-password">Contraseña</label>
+                    <input type="password" class="form-control" id="add-professor-password" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary action-button">Guardar Profesor</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="editProfessorModal" tabindex="-1" role="dialog"
+          aria-labelledby="editProfessorModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editProfessorModalLabel">Editar Profesor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="edit-professor-form">
+                  <input type="hidden" id="edit-professor-id-hidden">
+                  <div class="form-group">
+                    <label for="edit-professor-name">Nombre</label>
+                    <input type="text" class="form-control" id="edit-professor-name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-professor-phone">Celular</label>
+                    <input type="text" class="form-control" id="edit-professor-phone">
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-professor-email">Email</label>
+                    <input type="email" class="form-control" id="edit-professor-email" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary action-button">Actualizar Profesor</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addSubjectModalLabel">Agregar Nueva Materia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="add-subject-form">
+                  <div class="form-group">
+                    <label for="add-subject-name">Nombre de la Materia</label>
+                    <input type="text" class="form-control" id="add-subject-name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="add-subject-semester">Semestre Cursante</label>
+                    <input type="number" class="form-control" id="add-subject-semester" min="1" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary action-button">Guardar Materia</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="editSubjectModal" tabindex="-1" role="dialog"
+          aria-labelledby="editSubjectModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editSubjectModalLabel">Editar Materia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="edit-subject-form">
+                  <input type="hidden" id="edit-subject-id-hidden">
+                  <div class="form-group">
+                    <label for="edit-subject-name">Nombre de la Materia</label>
+                    <input type="text" class="form-control" id="edit-subject-name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-subject-semester">Semestre Cursante</label>
+                    <input type="number" class="form-control" id="edit-subject-semester" min="1" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary action-button">Actualizar Materia</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="editStudentModal" tabindex="-1" role="dialog"
+          aria-labelledby="editStudentModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editStudentModalLabel">Editar Estudiante</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="edit-student-form">
+                  <input type="hidden" id="edit-student-original-matricula">
+
+                  <div class="form-group">
+                    <label for="edit-student-matricula">Matrícula</label>
+                    <input type="text" class="form-control" id="edit-student-matricula" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-student-name">Nombre</label>
+                    <input type="text" class="form-control" id="edit-student-name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-student-carrera">Carrera</label>
+                    <input type="text" class="form-control" id="edit-student-carrera" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-student-semestre">Semestre</label>
+                    <input type="number" class="form-control" id="edit-student-semestre" min="1" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-student-phone">Celular</label>
+                    <input type="text" class="form-control" id="edit-student-phone">
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-student-email">Email</label>
+                    <input type="email" class="form-control" id="edit-student-email" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary action-button">Actualizar Estudiante</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Forms xd -->
+
+        <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addStudentModalLabel">Agregar Nuevo Estudiante</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="add-student-form">
+                  <div class="form-group">
+                    <label for="add-matricula">Matrícula</label>
+                    <input type="text" class="form-control" id="add-matricula" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="add-student-name">Nombre</label>
+                    <input type="text" class="form-control" id="add-student-name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="add-carrera">Carrera</label>
+                    <input type="text" class="form-control" id="add-carrera" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="add-semestre">Semestre</label>
+                    <input type="number" class="form-control" id="add-semestre" min="1" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="add-student-phone">Celular</label>
+                    <input type="text" class="form-control" id="add-student-phone">
+                  </div>
+                  <div class="form-group">
+                    <label for="add-student-email">Email</label>
+                    <input type="email" class="form-control" id="add-student-email" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="add-student-password">Contraseña</label>
+                    <input type="password" class="form-control" id="add-student-password" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary action-button">Guardar Estudiante</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="professor-management" role="tabpanel"
+          aria-labelledby="v-pills-professor-mgmt-tab">
+          <h3 class="mb-3">Gestión de Profesores</h3>
+          <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addProfessorModal"
+            href="#addProfessorModal">Agregar Profesor</button>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>ID Profesor</th>
+                  <th>Nombre</th>
+                  <th>Celular</th>
+                  <th>Email</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="admin-professor-table">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="subject-management" role="tabpanel" aria-labelledby="v-pills-subject-mgmt-tab">
+          <h3 class="mb-3">Gestión de Materias</h3>
+          <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addSubjectModal">Agregar
+            Materia</button>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>ID Materia</th>
+                  <th>Nombre</th>
+                  <th>Semestre Cursante</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="admin-subject-table">
+              </tbody>
+            </table>
+          </div>
+          <h4 class="mt-4">Asignar Materias a Profesores</h4>
+          <div class="card p-3 shadow-sm mb-3">
             <div class="form-group">
-              <label for="professor_grade_subject_select">Elija materia</label>
-              <select id="professor_grade_subject_select" class="form-control"></select>
+              <label for="assign_prof_subject">Profesor</label>
+              <select id="assign_prof_subject" class="form-control"></select>
             </div>
-            <div class="table-responsive mt-4">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Estudiante</th>
-                    <th>Parcial 1</th>
-                    <th>Parcial 2</th>
-                    <th>Final</th>
-                    <th>Acción</th>
-                  </tr>
-                </thead>
-                <tbody id="profesor_grade_entry_table">
-                </tbody>
-              </table>
+            <div class="form-group">
+              <label for="assign_subject_group">Materia y Grupo</label>
+              <select id="assign_subject_group" class="form-control"></select>
             </div>
+            <button class="btn btn-primary action-button">Asignar</button>
+          </div>
+          <h4 class="mt-4">Asignar Materias a Estudiantes (Grupos)</h4>
+          <div class="card p-3 shadow-sm">
+            <div class="form-group">
+              <label for="assign_student_subject">Estudiante</label>
+              <select id="assign_student_subject" class="form-control"></select>
+            </div>
+            <div class="form-group">
+              <label for="assign_student_group">Materia y Grupo</label>
+              <select id="assign_student_group" class="form-control"></select>
+            </div>
+            <button class="btn btn-primary action-button">Asignar</button>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div id="professor-panel" class="content-section" style="display:none;">
-    <h2>Gestión de Profesores</h2>
-    <button class="btn btn-primary mb-3" onclick="showProfessorForm('create')">Crear Nuevo Profesor</button>
-
-    <div id="professor-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
-      <h3><span id="professor-form-title"></span> Profesor</h3>
-      <form id="professor-form">
-        <input type="hidden" id="professor-id-edit">
-        <div class="form-group">
-          <label for="id_profesor">ID Profesor:</label>
-          <input type="text" class="form-control" id="id_profesor" required>
+        <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="v-pills-reports-tab">
+          <h3 class="mb-3">Reportes</h3>
+          <p>Generación de reportes académicos y administrativos.</p>
+          <button class="btn btn-secondary action-button mr-2">Reporte de Calificaciones</button>
+          <button class="btn btn-secondary action-button">Reporte de Asistencias</button>
         </div>
-        <div class="form-group">
-          <label for="profesor_nombre">Nombre:</label>
-          <input type="text" class="form-control" id="profesor_nombre" required>
-        </div>
-        <div class="form-group">
-          <label for="profesor_celular">Celular:</label>
-          <input type="text" class="form-control" id="profesor_celular" required>
-        </div>
-        <div class="form-group">
-          <label for="profesor_email">Email:</label>
-          <input type="email" class="form-control" id="profesor_email" required>
-        </div>
-        <div class="form-group">
-          <label for="profesor_fecha_ingreso">Fecha de Ingreso:</label>
-          <input type="date" class="form-control" id="profesor_fecha_ingreso" required>
-        </div>
-        <button type="submit" class="btn btn-success">Guardar Profesor</button>
-        <button type="button" class="btn btn-secondary" onclick="hideProfessorForm()">Cancelar</button>
-      </form>
-    </div>
-
-    <table id="professors-table" class="table table-striped table-bordered" style="width:100%">
-      <thead>
-        <tr>
-          <th>ID Profesor</th>
-          <th>Nombre</th>
-          <th>Celular</th>
-          <th>Email</th>
-          <th>Fecha de Ingreso</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-
-  <div id="subject-panel" class="content-section" style="display:none;">
-    <h2>Gestión de Materias</h2>
-    <button class="btn btn-primary mb-3" onclick="showSubjectForm('create')">Crear Nueva Materia</button>
-
-    <div id="subject-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
-      <h3><span id="subject-form-title"></span> Materia</h3>
-      <form id="subject-form">
-        <input type="hidden" id="subject-id-edit">
-        <div class="form-group">
-          <label for="id_materia">ID Materia:</label>
-          <input type="text" class="form-control" id="id_materia" required>
-        </div>
-        <div class="form-group">
-          <label for="materia_nombre">Nombre Materia:</label>
-          <input type="text" class="form-control" id="materia_nombre" required>
-        </div>
-        <div class="form-group">
-          <label for="sem_cursante">Semestre Cursante:</label>
-          <input type="text" class="form-control" id="sem_cursante" required>
-        </div>
-        <button type="submit" class="btn btn-success">Guardar Materia</button>
-        <button type="button" class="btn btn-secondary" onclick="hideSubjectForm()">Cancelar</button>
-      </form>
-    </div>
-
-    <table id="subjects-table" class="table table-striped table-bordered" style="width:100%">
-      <thead>
-        <tr>
-          <th>ID Materia</th>
-          <th>Nombre Materia</th>
-          <th>Semestre Cursante</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-
-  <div id="grade-panel" class="content-section" style="display:none;">
-    <h2>Gestión de Calificaciones</h2>
-    <button class="btn btn-primary mb-3" onclick="showGradeForm('create')">Crear Nueva Calificación</button>
-
-    <div id="grade-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
-      <h3><span id="grade-form-title"></span> Calificación</h3>
-      <form id="grade-form">
-        <input type="hidden" id="grade-id_materia-edit">
-        <input type="hidden" id="grade-matricula-edit">
-        <div class="form-group">
-          <label for="grade_id_materia">ID Materia:</label>
-          <input type="text" class="form-control" id="grade_id_materia" required>
-        </div>
-        <div class="form-group">
-          <label for="grade_matricula">Matrícula Alumno:</label>
-          <input type="text" class="form-control" id="grade_matricula" required>
-        </div>
-        <div class="form-group">
-          <label for="calif_p1">Calificación P1:</label>
-          <input type="text" class="form-control" id="calif_p1">
-        </div>
-        <div class="form-group">
-          <label for="calif_p2">Calificación P2:</label>
-          <input type="text" class="form-control" id="calif_p2">
-        </div>
-        <div class="form-group">
-          <label for="calif_final">Calificación Final:</label>
-          <input type="text" class="form-control" id="calif_final">
-        </div>
-        <div class="form-group">
-          <label for="ciclo_cursando">Ciclo Cursando:</label>
-          <input type="text" class="form-control" id="ciclo_cursando" required>
-        </div>
-        <button type="submit" class="btn btn-success">Guardar Calificación</button>
-        <button type="button" class="btn btn-secondary" onclick="hideGradeForm()">Cancelar</button>
-      </form>
-    </div>
-
-    <table id="grades-table" class="table table-striped table-bordered" style="width:100%">
-      <thead>
-        <tr>
-          <th>ID Materia</th>
-          <th>Matrícula</th>
-          <th>Calificación P1</th>
-          <th>Calificación P2</th>
-          <th>Calificación Final</th>
-          <th>Ciclo Cursando</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-  
-
-  <div id="admin-staff-content" class="content-section container-fluid " style="display: none;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
-      <a class="navbar-brand" href="#">Panel de Administrativos</a>
-      <div class="ml-auto">
-        <button class="btn btn-outline-danger logout-button" onclick="handleLogout()">Cerrar sesión</button>
-      </div>
-    </nav>
-    <div class="row">
-      <div class="col-md-3 col-lg-2">
-        <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab-admin" role="tablist"
-          aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-student-mgmt-tab" data-toggle="pill" href="#student-management"
-            role="tab" aria-controls="student-management" aria-selected="true"
-            onclick="switchTab('student-management', this)">Estudiantes</a>
-          <a class="nav-link" id="v-pills-professor-mgmt-tab" data-toggle="pill" href="#professor-management" role="tab"
-            aria-controls="professor-management" aria-selected="false"
-            onclick="switchTab('professor-management', this)">Profesores</a>
-          <a class="nav-link" id="v-pills-subject-mgmt-tab" data-toggle="pill" href="#subject-management" role="tab"
-            aria-controls="subject-management" aria-selected="false"
-            onclick="switchTab('subject-management', this)">Materias</a>
-          <a class="nav-link" id="v-pills-reports-tab" data-toggle="pill" href="#reports" role="tab"
-            aria-controls="reports" aria-selected="false" onclick="switchTab('reports', this)">Reportes</a>
-          <a class="nav-link" id="v-pills-payments-admin-tab" data-toggle="pill" href="#payments-admin" role="tab"
-            aria-controls="payments-admin" aria-selected="false" onclick="switchTab('payments-admin', this)">Gestión de
-            Pagos</a>
-          <a class="nav-link" id="v-pills-attendance-admin-tab" data-toggle="pill" href="#attendance-admin" role="tab"
-            aria-controls="attendance-admin" aria-selected="false" onclick="switchTab('attendance-admin', this)">Gestión
-            de Asistencia</a>
-        </div>
-      </div>
-
-      <!--FOrmularios-->
-      <div class="modal fade" id="addProfessorModal" tabindex="-1" role="dialog"
-        aria-labelledby="addProfessorModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="addProfessorModalLabel">Agregar Nuevo Profesor</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form id="add-professor-form">
-                <div class="form-group">
-                  <label for="add-professor-name">Nombre</label>
-                  <input type="text" class="form-control" id="add-professor-name" required>
-                </div>
-                <div class="form-group">
-                  <label for="add-professor-phone">Celular</label>
-                  <input type="text" class="form-control" id="add-professor-phone">
-                </div>
-                <div class="form-group">
-                  <label for="add-professor-email">Email</label>
-                  <input type="email" class="form-control" id="add-professor-email" required>
-                </div>
-                <div class="form-group">
-                  <label for="add-professor-password">Contraseña</label>
-                  <input type="password" class="form-control" id="add-professor-password" required>
-                </div>
-                <button type="submit" class="btn btn-primary action-button">Guardar Profesor</button>
-              </form>
-            </div>
+        <div class="tab-pane fade" id="payments-admin" role="tabpanel" aria-labelledby="v-pills-payments-admin-tab">
+          <h3 class="mb-3">Gestión de Pagos</h3>
+          <button class="btn btn-success action-button mb-3" data-toggle="modal"
+            data-target="#addPaymentModal">Registrar
+            Pago</button>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Matrícula</th>
+                  <th>Ciclo</th>
+                  <th>Fecha Vencimiento</th>
+                  <th>Fecha Pago</th>
+                  <th>Monto</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="admin-payments-table">
+                <tr>
+                  <td>A001</td>
+                  <td>2025-1</td>
+                  <td>2025-01-31</td>
+                  <td>2025-01-28</td>
+                  <td>$1500.00</td>
+                  <td>Pagado</td>
+                  <td>
+                    <button class="btn btn-sm btn-info mr-2">Detalles</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
-
-      <div class="modal fade" id="editProfessorModal" tabindex="-1" role="dialog"
-        aria-labelledby="editProfessorModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="editProfessorModalLabel">Editar Profesor</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form id="edit-professor-form">
-                <input type="hidden" id="edit-professor-id-hidden">
-                <div class="form-group">
-                  <label for="edit-professor-name">Nombre</label>
-                  <input type="text" class="form-control" id="edit-professor-name" required>
-                </div>
-                <div class="form-group">
-                  <label for="edit-professor-phone">Celular</label>
-                  <input type="text" class="form-control" id="edit-professor-phone">
-                </div>
-                <div class="form-group">
-                  <label for="edit-professor-email">Email</label>
-                  <input type="email" class="form-control" id="edit-professor-email" required>
-                </div>
-                <button type="submit" class="btn btn-primary action-button">Actualizar Profesor</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="addSubjectModalLabel">Agregar Nueva Materia</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form id="add-subject-form">
-                <div class="form-group">
-                  <label for="add-subject-name">Nombre de la Materia</label>
-                  <input type="text" class="form-control" id="add-subject-name" required>
-                </div>
-                <div class="form-group">
-                  <label for="add-subject-semester">Semestre Cursante</label>
-                  <input type="number" class="form-control" id="add-subject-semester" min="1" required>
-                </div>
-                <button type="submit" class="btn btn-primary action-button">Guardar Materia</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="editSubjectModal" tabindex="-1" role="dialog" aria-labelledby="editSubjectModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="editSubjectModalLabel">Editar Materia</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form id="edit-subject-form">
-                <input type="hidden" id="edit-subject-id-hidden">
-                <div class="form-group">
-                  <label for="edit-subject-name">Nombre de la Materia</label>
-                  <input type="text" class="form-control" id="edit-subject-name" required>
-                </div>
-                <div class="form-group">
-                  <label for="edit-subject-semester">Semestre Cursante</label>
-                  <input type="number" class="form-control" id="edit-subject-semester" min="1" required>
-                </div>
-                <button type="submit" class="btn btn-primary action-button">Actualizar Materia</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="editStudentModal" tabindex="-1" role="dialog" aria-labelledby="editStudentModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="editStudentModalLabel">Editar Estudiante</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form id="edit-student-form">
-                <input type="hidden" id="edit-student-original-matricula">
-
-                <div class="form-group">
-                  <label for="edit-student-matricula">Matrícula</label>
-                  <input type="text" class="form-control" id="edit-student-matricula" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="edit-student-name">Nombre</label>
-                  <input type="text" class="form-control" id="edit-student-name" required>
-                </div>
-                <div class="form-group">
-                  <label for="edit-student-carrera">Carrera</label>
-                  <input type="text" class="form-control" id="edit-student-carrera" required>
-                </div>
-                <div class="form-group">
-                  <label for="edit-student-semestre">Semestre</label>
-                  <input type="number" class="form-control" id="edit-student-semestre" min="1" required>
-                </div>
-                <div class="form-group">
-                  <label for="edit-student-phone">Celular</label>
-                  <input type="text" class="form-control" id="edit-student-phone">
-                </div>
-                <div class="form-group">
-                  <label for="edit-student-email">Email</label>
-                  <input type="email" class="form-control" id="edit-student-email" required>
-                </div>
-                <button type="submit" class="btn btn-primary action-button">Actualizar Estudiante</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Forms xd -->
-
-      <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="addStudentModalLabel">Agregar Nuevo Estudiante</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form id="add-student-form">
-                <div class="form-group">
-                  <label for="add-matricula">Matrícula</label>
-                  <input type="text" class="form-control" id="add-matricula" required>
-                </div>
-                <div class="form-group">
-                  <label for="add-student-name">Nombre</label>
-                  <input type="text" class="form-control" id="add-student-name" required>
-                </div>
-                <div class="form-group">
-                  <label for="add-carrera">Carrera</label>
-                  <input type="text" class="form-control" id="add-carrera" required>
-                </div>
-                <div class="form-group">
-                  <label for="add-semestre">Semestre</label>
-                  <input type="number" class="form-control" id="add-semestre" min="1" required>
-                </div>
-                <div class="form-group">
-                  <label for="add-student-phone">Celular</label>
-                  <input type="text" class="form-control" id="add-student-phone">
-                </div>
-                <div class="form-group">
-                  <label for="add-student-email">Email</label>
-                  <input type="email" class="form-control" id="add-student-email" required>
-                </div>
-                <div class="form-group">
-                  <label for="add-student-password">Contraseña</label>
-                  <input type="password" class="form-control" id="add-student-password" required>
-                </div>
-                <button type="submit" class="btn btn-primary action-button">Guardar Estudiante</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-pane fade" id="professor-management" role="tabpanel" aria-labelledby="v-pills-professor-mgmt-tab">
-        <h3 class="mb-3">Gestión de Profesores</h3>
-        <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addProfessorModal"
-          href="#addProfessorModal">Agregar Profesor</button>
-        <div class="table-responsive">
-          <table class="table table-hover table-striped">
-            <thead class="thead-dark">
-              <tr>
-                <th>ID Profesor</th>
-                <th>Nombre</th>
-                <th>Celular</th>
-                <th>Email</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="admin-professor-table">
-              
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="tab-pane fade" id="subject-management" role="tabpanel" aria-labelledby="v-pills-subject-mgmt-tab">
-        <h3 class="mb-3">Gestión de Materias</h3>
-        <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addSubjectModal">Agregar
-          Materia</button>
-        <div class="table-responsive">
-          <table class="table table-hover table-striped">
-            <thead class="thead-dark">
-              <tr>
-                <th>ID Materia</th>
-                <th>Nombre</th>
-                <th>Semestre Cursante</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="admin-subject-table">
-            </tbody>
-          </table>
-        </div>
-        <h4 class="mt-4">Asignar Materias a Profesores</h4>
-        <div class="card p-3 shadow-sm mb-3">
+        <div class="tab-pane fade" id="attendance-admin" role="tabpanel" aria-labelledby="v-pills-attendance-admin-tab">
+          <h3 class="mb-3">Gestión de Asistencia</h3>
+          <p>Visualización y gestión de registros de asistencia por materia/grupo.</p>
           <div class="form-group">
-            <label for="assign_prof_subject">Profesor</label>
-            <select id="assign_prof_subject" class="form-control"></select>
+            <label for="attendance_subject_group">Filtrar por Materia y Grupo</label>
+            <select id="attendance_subject_group" class="form-control"></select>
           </div>
-          <div class="form-group">
-            <label for="assign_subject_group">Materia y Grupo</label>
-            <select id="assign_subject_group" class="form-control"></select>
+          <div class="table-responsive mt-3">
+            <table class="table table-hover table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Fecha/Hora</th>
+                  <th>Matrícula</th>
+                  <th>Materia</th>
+                  <th>Código</th>
+                  <th>Ciclo</th>
+                </tr>
+              </thead>
+              <tbody id="admin-attendance-table">
+                <tr>
+                  <td>2025-06-10 09:00:00</td>
+                  <td>A001</td>
+                  <td>MAT101</td>
+                  <td>ABC123</td>
+                  <td>2025-1</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <button class="btn btn-primary action-button">Asignar</button>
-        </div>
-        <h4 class="mt-4">Asignar Materias a Estudiantes (Grupos)</h4>
-        <div class="card p-3 shadow-sm">
-          <div class="form-group">
-            <label for="assign_student_subject">Estudiante</label>
-            <select id="assign_student_subject" class="form-control"></select>
-          </div>
-          <div class="form-group">
-            <label for="assign_student_group">Materia y Grupo</label>
-            <select id="assign_student_group" class="form-control"></select>
-          </div>
-          <button class="btn btn-primary action-button">Asignar</button>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="v-pills-reports-tab">
-        <h3 class="mb-3">Reportes</h3>
-        <p>Generación de reportes académicos y administrativos.</p>
-        <button class="btn btn-secondary action-button mr-2">Reporte de Calificaciones</button>
-        <button class="btn btn-secondary action-button">Reporte de Asistencias</button>
-      </div>
-      <div class="tab-pane fade" id="payments-admin" role="tabpanel" aria-labelledby="v-pills-payments-admin-tab">
-        <h3 class="mb-3">Gestión de Pagos</h3>
-        <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addPaymentModal">Registrar
-          Pago</button>
-        <div class="table-responsive">
-          <table class="table table-hover table-striped">
-            <thead class="thead-dark">
-              <tr>
-                <th>Matrícula</th>
-                <th>Ciclo</th>
-                <th>Fecha Vencimiento</th>
-                <th>Fecha Pago</th>
-                <th>Monto</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="admin-payments-table">
-              <tr>
-                <td>A001</td>
-                <td>2025-1</td>
-                <td>2025-01-31</td>
-                <td>2025-01-28</td>
-                <td>$1500.00</td>
-                <td>Pagado</td>
-                <td>
-                  <button class="btn btn-sm btn-info mr-2">Detalles</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="attendance-admin" role="tabpanel" aria-labelledby="v-pills-attendance-admin-tab">
-        <h3 class="mb-3">Gestión de Asistencia</h3>
-        <p>Visualización y gestión de registros de asistencia por materia/grupo.</p>
-        <div class="form-group">
-          <label for="attendance_subject_group">Filtrar por Materia y Grupo</label>
-          <select id="attendance_subject_group" class="form-control"></select>
-        </div>
-        <div class="table-responsive mt-3">
-          <table class="table table-hover table-striped">
-            <thead class="thead-dark">
-              <tr>
-                <th>Fecha/Hora</th>
-                <th>Matrícula</th>
-                <th>Materia</th>
-                <th>Código</th>
-                <th>Ciclo</th>
-              </tr>
-            </thead>
-            <tbody id="admin-attendance-table">
-              <tr>
-                <td>2025-06-10 09:00:00</td>
-                <td>A001</td>
-                <td>MAT101</td>
-                <td>ABC123</td>
-                <td>2025-1</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
   </div>
+
+
+
+
+
+
+
   </div>
   </div>
 
@@ -1281,44 +1301,44 @@
 
     // display por roles
     function showUserRole(userRole) {
-    // Oculta todas las secciones de contenido
-    document.querySelectorAll('.content-section').forEach(section => {
-      section.style.display = 'none';
-    });
+      // Oculta todas las secciones de contenido
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.style.display = 'none';
+      });
 
-    // Remueve la clase 'active' de todos los enlaces de navegación
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('active');
-    });
+      // Remueve la clase 'active' de todos los enlaces de navegación
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
 
-    // Muestra la sección correspondiente al rol del usuario
-    if (userRole === 1) { // Estudiante
-      document.getElementById('student-content').style.display = 'block';
-      document.getElementById('student-dashboard-link').classList.add('active');
-      // Llama a funciones específicas para estudiantes si las tienes
-      loadStudentGrades(); // Asumiendo que esta función ya existe para estudiantes
-      loadStudentSchedule(); // Asumiendo que esta función ya existe para estudiantes
-    } else if (userRole === 2) { // Profesor
-      document.getElementById('professor-content').style.display = 'block';
-      document.getElementById('professor-dashboard-link').classList.add('active');
-      // Llama a funciones específicas para profesores
-      loadProfessorSchedule(); // Asumiendo que esta función ya existe para profesores
-      loadProfessorGroups(); // Asumiendo que esta función ya existe para profesores
-    } else if (userRole === 3 || userRole === 99) { // Administrativo o Super Administrador
-      document.getElementById('admin-content-staff').style.display = 'block';
-      document.getElementById('admin-dashboard-link').classList.add('active');
-      
-      // *** AQUÍ ES DONDE LLAMAS A LAS FUNCIONES PARA CARGAR LAS TABLAS ADMINISTRATIVAS ***
-      loadStudents();
-      loadProfessors();
-      loadSubjects();
-      loadUsers();
-      // ***********************************************************************************
-    } else {
-      // Si el rol no se reconoce, muestra la sección de login
-      document.getElementById('login-content').style.display = 'block';
+      // Muestra la sección correspondiente al rol del usuario
+      if (userRole === 1) { // Estudiante
+        document.getElementById('student-content').style.display = 'block';
+        document.getElementById('student-dashboard-link').classList.add('active');
+        // Llama a funciones específicas para estudiantes si las tienes
+        loadStudentGrades(); // Asumiendo que esta función ya existe para estudiantes
+        loadStudentSchedule(); // Asumiendo que esta función ya existe para estudiantes
+      } else if (userRole === 2) { // Profesor
+        document.getElementById('professor-content').style.display = 'block';
+        document.getElementById('professor-dashboard-link').classList.add('active');
+        // Llama a funciones específicas para profesores
+        loadProfessorSchedule(); // Asumiendo que esta función ya existe para profesores
+        loadProfessorGroups(); // Asumiendo que esta función ya existe para profesores
+      } else if (userRole === 3 || userRole === 99) { // Administrativo o Super Administrador
+        document.getElementById('admin-content-staff').style.display = 'block';
+        document.getElementById('admin-dashboard-link').classList.add('active');
+
+        // *** AQUÍ ES DONDE LLAMAS A LAS FUNCIONES PARA CARGAR LAS TABLAS ADMINISTRATIVAS ***
+        loadStudents();
+        loadProfessors();
+        loadSubjects();
+        loadUsers();
+        // ***********************************************************************************
+      } else {
+        // Si el rol no se reconoce, muestra la sección de login
+        document.getElementById('login-content').style.display = 'block';
+      }
     }
-  }
 
     //
     window.addEventListener('load', () => {
