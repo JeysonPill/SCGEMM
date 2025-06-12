@@ -8,179 +8,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  
-
-  <style>
-    body {
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-      background-color: #f5f7fa;
-      color: #333;
-    }
-
-    .nav-tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #e0e0e0;
-      padding-bottom: 10px;
-    }
-
-    .nav-tab {
-      padding: 10px 18px;
-      cursor: pointer;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 6px 6px 0 0;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-    }
-
-    .nav-tab:hover {
-      background-color: #e9ecef;
-    }
-
-    .nav-tab.active {
-      background: #0d6efd;
-      color: #fff;
-      border-color: #0d6efd #0d6efd #fff;
-    }
-
-
-    .content-section,
-    .tab-content {
-      display: none;
-      background: #fff;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      margin-top: 20px;
-    }
-
-    .tab-content.active,
-    .content-section.active {
-      display: block;
-    }
-
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background: #fff;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    th,
-    td {
-      padding: 14px;
-      border: 1px solid #eee;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f1f3f5;
-      font-weight: 600;
-    }
-
-
-    .logout-button,
-    .action-button {
-      padding: 10px 18px;
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      cursor: pointer;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-
-    .logout-button {
-      background-color: #dc3545;
-      float: right;
-    }
-
-    .logout-button:hover {
-      background-color: #bb2d3b;
-    }
-
-    .action-button {
-      background-color: #0d6efd;
-      margin: 5px;
-    }
-
-    .action-button:hover {
-      background-color: #0b5ed7;
-    }
-
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 500;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      transition: border-color 0.2s;
-    }
-
-    .form-group input:focus {
-      border-color: #0d6efd;
-      outline: none;
-    }
-
-
-    .form-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(33, 37, 41, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-
-    .form-container {
-      background: #fff;
-      padding: 24px;
-      border-radius: 8px;
-      max-width: 480px;
-      width: 100%;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .qr-section {
-      text-align: center;
-      margin: 24px 0;
-    }
-
-    #qr-display {
-      position: fixed;
-      bottom: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      width: 30%;
-      height: 30%;
-    }
-  </style>
+  <link rel="stylesheet" href="stilazos.css">
 </head>
 
 <body>
@@ -202,8 +32,6 @@
     </div>
   </div>
 
-
-
   <div id="student-content" class="content-section container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
       <a class="navbar-brand" href="#">Panel de Estudiantes</a>
@@ -211,7 +39,6 @@
         <button class="btn btn-outline-danger logout-button" onclick="handleLogout()">Cerrar sesión</button>
       </div>
     </nav>
-
 
     <div class="row">
       <div class="col-md-3 col-lg-2">
@@ -323,214 +150,7 @@
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
 
-  <div id="student-panel" class="content-section" style="display:none;">
-    <h2>Gestión de Estudiantes</h2>
-    <button class="btn btn-primary mb-3" onclick="showStudentForm('create')">Crear Nuevo Estudiante</button>
-
-    <div id="student-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
-      <h3><span id="student-form-title"></span> Estudiante</h3>
-      <form id="student-form">
-        <input type="hidden" id="student-matricula-edit">
-        <div class="form-group">
-          <label for="matricula">Matrícula:</label>
-          <input type="text" class="form-control" id="matricula" required>
-        </div>
-        <div class="form-group">
-          <label for="nombre">Nombre:</label>
-          <input type="text" class="form-control" id="student-nombre" required>
-        </div>
-        <div class="form-group">
-          <label for="carrera">Carrera:</label>
-          <input type="text" class="form-control" id="carrera" required>
-        </div>
-        <div class="form-group">
-          <label for="semestre">Semestre:</label>
-          <input type="text" class="form-control" id="semestre" required>
-        </div>
-        <div class="form-group">
-          <label for="user_name">Usuario:</label>
-          <input type="text" class="form-control" id="student-user_name" required>
-        </div>
-        <div class="form-group">
-          <label for="celular">Celular:</label>
-          <input type="text" class="form-control" id="student-celular" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" class="form-control" id="student-email" required>
-        </div>
-        <button type="submit" class="btn btn-success">Guardar Estudiante</button>
-        <button type="button" class="btn btn-secondary" onclick="hideStudentForm()">Cancelar</button>
-      </form>
-    </div>
-
-    <table id="students-table" class="table table-striped table-bordered" style="width:100%">
-      <thead>
-        <tr>
-          <th>Matrícula</th>
-          <th>Nombre</th>
-          <th>Carrera</th>
-          <th>Semestre</th>
-          <th>Usuario</th>
-          <th>Celular</th>
-          <th>Email</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-
-  <div id="professor-panel" class="content-section" style="display:none;">
-    <h2>Gestión de Profesores</h2>
-    <button class="btn btn-primary mb-3" onclick="showProfessorForm('create')">Crear Nuevo Profesor</button>
-
-    <div id="professor-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
-      <h3><span id="professor-form-title"></span> Profesor</h3>
-      <form id="professor-form">
-        <input type="hidden" id="professor-id-edit">
-        <div class="form-group">
-          <label for="id_profesor">ID Profesor:</label>
-          <input type="text" class="form-control" id="id_profesor" required>
-        </div>
-        <div class="form-group">
-          <label for="profesor_nombre">Nombre:</label>
-          <input type="text" class="form-control" id="profesor_nombre" required>
-        </div>
-        <div class="form-group">
-          <label for="profesor_celular">Celular:</label>
-          <input type="text" class="form-control" id="profesor_celular" required>
-        </div>
-        <div class="form-group">
-          <label for="profesor_email">Email:</label>
-          <input type="email" class="form-control" id="profesor_email" required>
-        </div>
-        <div class="form-group">
-          <label for="profesor_fecha_ingreso">Fecha de Ingreso:</label>
-          <input type="date" class="form-control" id="profesor_fecha_ingreso" required>
-        </div>
-        <button type="submit" class="btn btn-success">Guardar Profesor</button>
-        <button type="button" class="btn btn-secondary" onclick="hideProfessorForm()">Cancelar</button>
-      </form>
-    </div>
-
-    <table id="professors-table" class="table table-striped table-bordered" style="width:100%">
-      <thead>
-        <tr>
-          <th>ID Profesor</th>
-          <th>Nombre</th>
-          <th>Celular</th>
-          <th>Email</th>
-          <th>Fecha de Ingreso</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-
-  <div id="subject-panel" class="content-section" style="display:none;">
-    <h2>Gestión de Materias</h2>
-    <button class="btn btn-primary mb-3" onclick="showSubjectForm('create')">Crear Nueva Materia</button>
-
-    <div id="subject-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
-      <h3><span id="subject-form-title"></span> Materia</h3>
-      <form id="subject-form">
-        <input type="hidden" id="subject-id-edit">
-        <div class="form-group">
-          <label for="id_materia">ID Materia:</label>
-          <input type="text" class="form-control" id="id_materia" required>
-        </div>
-        <div class="form-group">
-          <label for="materia_nombre">Nombre Materia:</label>
-          <input type="text" class="form-control" id="materia_nombre" required>
-        </div>
-        <div class="form-group">
-          <label for="sem_cursante">Semestre Cursante:</label>
-          <input type="text" class="form-control" id="sem_cursante" required>
-        </div>
-        <button type="submit" class="btn btn-success">Guardar Materia</button>
-        <button type="button" class="btn btn-secondary" onclick="hideSubjectForm()">Cancelar</button>
-      </form>
-    </div>
-
-    <table id="subjects-table" class="table table-striped table-bordered" style="width:100%">
-      <thead>
-        <tr>
-          <th>ID Materia</th>
-          <th>Nombre Materia</th>
-          <th>Semestre Cursante</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-
-  <div id="grade-panel" class="content-section" style="display:none;">
-    <h2>Gestión de Calificaciones</h2>
-    <button class="btn btn-primary mb-3" onclick="showGradeForm('create')">Crear Nueva Calificación</button>
-
-    <div id="grade-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
-      <h3><span id="grade-form-title"></span> Calificación</h3>
-      <form id="grade-form">
-        <input type="hidden" id="grade-id_materia-edit">
-        <input type="hidden" id="grade-matricula-edit">
-        <div class="form-group">
-          <label for="grade_id_materia">ID Materia:</label>
-          <input type="text" class="form-control" id="grade_id_materia" required>
-        </div>
-        <div class="form-group">
-          <label for="grade_matricula">Matrícula Alumno:</label>
-          <input type="text" class="form-control" id="grade_matricula" required>
-        </div>
-        <div class="form-group">
-          <label for="calif_p1">Calificación P1:</label>
-          <input type="text" class="form-control" id="calif_p1">
-        </div>
-        <div class="form-group">
-          <label for="calif_p2">Calificación P2:</label>
-          <input type="text" class="form-control" id="calif_p2">
-        </div>
-        <div class="form-group">
-          <label for="calif_final">Calificación Final:</label>
-          <input type="text" class="form-control" id="calif_final">
-        </div>
-        <div class="form-group">
-          <label for="ciclo_cursando">Ciclo Cursando:</label>
-          <input type="text" class="form-control" id="ciclo_cursando" required>
-        </div>
-        <button type="submit" class="btn btn-success">Guardar Calificación</button>
-        <button type="button" class="btn btn-secondary" onclick="hideGradeForm()">Cancelar</button>
-      </form>
-    </div>
-
-    <table id="grades-table" class="table table-striped table-bordered" style="width:100%">
-      <thead>
-        <tr>
-          <th>ID Materia</th>
-          <th>Matrícula</th>
-          <th>Calificación P1</th>
-          <th>Calificación P2</th>
-          <th>Calificación Final</th>
-          <th>Ciclo Cursando</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
   <div id="professor-content" class="content-section container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
       <a class="navbar-brand" href="#">Panel de Profesor</a>
@@ -667,11 +287,22 @@
                   </tr>
                 </thead>
                 <tbody id="admin-student-table">
+                  <tr>
+                    <td>A001</td>
+                    <td>Juan Perez</td>
+                    <td>Ing. Sistemas</td>
+                    <td>5</td>
+                    <td>5512345678</td>
+                    <td>juan.perez@example.com</td>
+                    <td>
+                      <button class="btn btn-sm btn-info mr-2">Editar</button>
+                      <button class="btn btn-sm btn-danger">Eliminar</button>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
           </div>
-
           <div class="tab-pane fade" id="professor-management" role="tabpanel"
             aria-labelledby="v-pills-professor-mgmt-tab">
             <h3 class="mb-3">Gestión de Profesores</h3>
@@ -689,6 +320,16 @@
                   </tr>
                 </thead>
                 <tbody id="admin-professor-table">
+                  <tr>
+                    <td>P001</td>
+                    <td>Maria Garcia</td>
+                    <td>5587654321</td>
+                    <td>maria.garcia@example.com</td>
+                    <td>
+                      <button class="btn btn-sm btn-info mr-2">Editar</button>
+                      <button class="btn btn-sm btn-danger">Eliminar</button>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -957,7 +598,7 @@
 
     function getBackendIP() {
       let backendIP = localStorage.getItem('backendIP');
-      backendIP = "192.168.100.20";
+      backendIP = "192.168.1.103";
       if (backendIP) {
         localStorage.setItem('backendIP', backendIP);
       } else {
@@ -1010,20 +651,6 @@
       }
     }
 
-
-    // Funciones genéricas para mostrar/ocultar formularios (puedes adaptarlas)
-    function showForm(entity) {
-      document.getElementById(`${entity}-form-section`).style.display = 'block';
-      document.getElementById(`${entity}-form-title`).textContent = 'Crear';
-      document.getElementById(`${entity}-form`).reset();
-      // Ocultar otras secciones si es necesario
-    }
-
-    function hideForm(entity) {
-      document.getElementById(`${entity}-form-section`).style.display = 'none';
-      document.getElementById(`${entity}-form`).reset();
-    }
-
     // Logout
     function handleLogout() {
       localStorage.removeItem('authToken');
@@ -1062,38 +689,7 @@
 
     });
 
-    // --- Funciones para Estudiantes ---
-    function showStudentForm(mode, studentData = null) {
-      const formSection = document.getElementById('student-form-section');
-      const formTitle = document.getElementById('student-form-title');
-      const form = document.getElementById('student-form');
-
-      formSection.style.display = 'block';
-      form.reset(); // Limpiar el formulario
-
-      if (mode === 'create') {
-        formTitle.textContent = 'Crear';
-        document.getElementById('student-matricula-edit').value = '';
-        document.getElementById('matricula').readOnly = false; // Matrícula editable al crear
-      } else if (mode === 'edit' && studentData) {
-        formTitle.textContent = 'Editar';
-        document.getElementById('student-matricula-edit').value = studentData.matricula;
-        document.getElementById('matricula').value = studentData.matricula;
-        document.getElementById('matricula').readOnly = true; // Matrícula no editable al editar
-        document.getElementById('student-nombre').value = studentData.nombre;
-        document.getElementById('carrera').value = studentData.carrera;
-        document.getElementById('semestre').value = studentData.semestre;
-        document.getElementById('student-user_name').value = studentData.user_name;
-        document.getElementById('student-celular').value = studentData.celular;
-        document.getElementById('student-email').value = studentData.email;
-      }
-    }
-
-    function hideStudentForm() {
-      document.getElementById('student-form-section').style.display = 'none';
-      document.getElementById('student-form').reset();
-    }
-
+    // display por roles
     function showUserRole(role) {
       document.querySelectorAll('.content-section').forEach(section => { section.style.display = 'none'; });
 
@@ -1105,184 +701,6 @@
         default: document.getElementById('login-content').style.display = 'block';
       }
     }
-
-    // Funciones para manejar el token y el rol en localStorage
-    function setAuthToken(token) {
-      localStorage.setItem('authToken', token);
-    }
-
-    function getAuthToken() {
-      return localStorage.getItem('authToken');
-    }
-
-    function clearAuthToken() {
-      localStorage.removeItem('authToken');
-    }
-
-    function setUserRole(role) {
-      localStorage.setItem('userRole', role);
-    }
-
-    function getUserRole() {
-      return localStorage.getItem('userRole');
-    }
-
-    function clearUserRole() {
-      localStorage.removeItem('userRole');
-    }
-
-    // Handle login form submission
-    async function handleLogin(event) {
-      event.preventDefault(); // Evita el envío por defecto del formulario
-
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const errorMessage = document.getElementById('error-message');
-      errorMessage.textContent = ''; // Limpia errores previos
-
-      try {
-        // --- INICIO: LÓGICA DE AUTENTICACIÓN REAL ---
-        // Aquí debes reemplazar esta simulación con tu llamada a la API de autenticación real
-        // Ejemplo de fetch a tu backend (asegúrate de que tu backend tenga el endpoint /login)
-        const response = await fetch(`http://${backendIP}:3000/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ username, password })
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Error de autenticación');
-        }
-
-        const data = await response.json();
-        setAuthToken(data.token); // Guarda el token recibido del backend
-        setUserRole(data.role); // Guarda el rol del usuario recibido del backend
-
-        // --- FIN: LÓGICA DE AUTENTICACIÓN REAL ---
-
-        showUserRole(data.role); // Muestra el contenido basado en el rol
-
-        // Opcionalmente, resetea el formulario de login
-        document.getElementById('login-form').reset();
-
-        // Inicializa el contenido de la primera pestaña para el rol específico después del login
-        // Aquí deberías llamar a las funciones que cargan datos (loadStudents(), loadSubjectsProf(), etc.)
-        // para la pestaña predeterminada de cada rol.
-        if (parseInt(data.role) === ROLES.ADMIN_STAFF) {
-          const adminTab = document.getElementById('v-pills-student-mgmt-tab');
-          if (adminTab) {
-            switchTab('student-management', adminTab);
-          }
-        } else if (parseInt(data.role) === ROLES.PROFESSOR) {
-          const profTab = document.getElementById('v-pills-schedule-tab');
-          if (profTab) {
-            switchTab('teaching-schedule', profTab);
-          }
-        } else if (parseInt(data.role) === ROLES.STUDENT) {
-          const studentTab = document.getElementById('v-pills-subjects-tab');
-          if (studentTab) {
-            switchTab('enrolled-subjects', studentTab);
-          }
-        } else if (parseInt(data.role) === ROLES.SUPER_ADMIN) {
-          const superAdminTab = document.getElementById('v-pills-user-mgmt-tab');
-          if (superAdminTab) {
-            switchTab('user-management', superAdminTab);
-          }
-        }
-
-      } catch (error) {
-        console.error("Fallo el inicio de sesion:", error);
-        errorMessage.textContent = error.message || 'Usuario o contraseña incorrectos.';
-      }
-    }
-
-    // Handle logout
-    function handleLogout() {
-      clearAuthToken();
-      clearUserRole();
-      showUserRole(null); // Muestra la pantalla de login
-      // Opcionalmente, recarga la página para asegurar que todos los datos de la sesión anterior se limpien
-      location.reload();
-    }
-
-    // Verifica si hay un token y un rol almacenados al cargar la página
-    document.addEventListener('DOMContentLoaded', () => {
-      const storedRole = getUserRole();
-      if (storedRole && getAuthToken()) {
-        showUserRole(storedRole);
-        // Activa la primera pestaña por defecto para el rol si ya está logeado
-        if (parseInt(storedRole) === ROLES.ADMIN_STAFF) {
-            const adminTab = document.getElementById('v-pills-student-mgmt-tab');
-            if(adminTab) {
-                switchTab('student-management', adminTab);
-            }
-        } else if (parseInt(storedRole) === ROLES.PROFESSOR) {
-            const profTab = document.getElementById('v-pills-schedule-tab');
-            if(profTab) {
-                switchTab('teaching-schedule', profTab);
-            }
-        } else if (parseInt(storedRole) === ROLES.STUDENT) {
-            const studentTab = document.getElementById('v-pills-subjects-tab');
-            if(studentTab) {
-                switchTab('enrolled-subjects', studentTab);
-            }
-        } else if (parseInt(storedRole) === ROLES.SUPER_ADMIN) {
-            const superAdminTab = document.getElementById('v-pills-user-mgmt-tab');
-            if(superAdminTab) {
-                switchTab('user-management', superAdminTab);
-            }
-        }
-      } else {
-        showUserRole(null); // No hay token o rol, muestra la pantalla de login
-      }
-
-      // Adjunta el event listener al formulario de login
-      const loginForm = document.getElementById('login-form');
-      if (loginForm) {
-        loginForm.addEventListener('submit', handleLogin);
-      }
-    });
-
-    // cambia paginas
-    function switchTab(tabId, element) {
-      // Elimina la clase 'active' de todas las pestañas de navegación y contenido de pestañas
-      document.querySelectorAll('.nav-link').forEach(tab => { tab.classList.remove('active'); });
-      document.querySelectorAll('.tab-pane').forEach(content => { content.classList.remove('show', 'active'); });
-
-      // Establece la clase 'active' en la pestaña actual y su contenido
-      if(element) { // Asegura que 'element' existe antes de intentar acceder a sus propiedades
-        element.classList.add('active');
-      }
-      document.getElementById(tabId).classList.add('show', 'active'); // Bootstrap necesita 'show' y 'active' para las transiciones de pestañas
-
-      // Carga de datos específicos para cada pestaña
-      try {
-        switch (tabId) {
-          case 'enrolled-subjects': /* loadSubjects(); */ console.log('Cargando materias del estudiante...'); break;
-          case 'grades': /* loadGrades(); */ console.log('Cargando calificaciones del estudiante...'); break;
-          case 'kardex': /* loadKardez(); */ console.log('Cargando kardex del estudiante...'); break;
-          case 'payments': /* loadPagos(); */ console.log('Cargando pagos del estudiante...'); break;
-          case 'attendance': /* initializeAttendance(); */ console.log('Inicializando asistencia del estudiante...'); break;
-          case 'teaching-schedule': /* loadSubjectsProf(); */ console.log('Cargando horario del profesor...'); break;
-          case 'attendance-qr': /* QR_CODE_GEN(); */ console.log('Generando codigo QR...'); break;
-          case 'profesor_grade_entry': /* fetchSubjects(); */ console.log('Cargando ingreso de calificaciones del profesor...'); break;
-          case 'student-management': /* loadStudents(); */ console.log('Cargando gestión de estudiantes (Admin)...'); break;
-          case 'professor-management': console.log('Cargando gestión de profesores (Admin)...'); break;
-          case 'subject-management': console.log('Cargando gestión de materias (Admin)...'); break;
-          case 'reports': console.log('Cargando reportes (Admin)...'); break;
-          case 'payments-admin': console.log('Cargando gestión de pagos (Admin)...'); break;
-          case 'attendance-admin': console.log('Cargando gestión de asistencia (Admin)...'); break;
-          case 'user-management': console.log('Cargando gestión de usuarios (Super Admin)...'); break;
-          case 'system-config': console.log('Cargando configuración del sistema (Super Admin)...'); break;
-          case 'system-logs': console.log('Cargando registros del sistema (Super Admin)...'); break;
-          default: console.log('Pestaña desconocida:', tabId);
-        }
-      } catch (error) {
-        console.error("Error al cambiar de pestaña:", error);
-      }
 
     //
     window.addEventListener('load', () => {
@@ -1301,50 +719,6 @@
 
 
     ///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
-    // Cargar Estudiantes (READ)
-    async function loadStudents() {
-      const tbody = document.getElementById('admin-student-table');
-      tbody.innerHTML = '';
-      try {
-        const token = getToken();
-        if (!token) {
-          console.error("No authentication token found.");
-          alert("Por favor, inicia sesión para ver los estudiantes.");
-          return;
-        }
-        const response = await fetch(`http://${backendIP}:3000/students`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        console.dir(response);
-        const students = await response.json();
-        students.forEach(student => {
-          const row = `
-            <tr>
-              <td>${student.matricula}</td>
-              <td>${student.nombre}</td>
-              <td>${student.carrera}</td>
-              <td>${student.semestre}</td>
-              <td>${student.user_name}</td>
-              <td>${student.celular}</td>
-              <td>${student.email}</td>
-              <td>
-                <button class="btn btn-warning btn-sm" onclick="editStudent('${student.matricula}')">Editar</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteStudent('${student.matricula}')">Eliminar</button>
-              </td>
-            </tr>
-          `;
-          tbody.innerHTML += row;
-        });
-      } catch (error) {
-        console.error("Error al cargar los estudiantes:", error);
-        alert("Error al cargar los estudiantes.");
-      }
-    }
 
     /////////////////       MATERIAS       ////////////////////////////////////////////
     async function loadSubjects() {
@@ -1370,192 +744,6 @@
         </tr>`;
         tbody.innerHTML += row;
       });
-    }
-
-    // Cargar Estudiantes (READ)
-    async function loadStudents() {
-      const tbody = document.querySelector('#students-table tbody');
-      tbody.innerHTML = '';
-      try {
-        const token = getToken();
-        if (!token) {
-          console.error("No authentication token found.");
-          alert("Por favor, inicia sesión para ver los estudiantes.");
-          return;
-        }
-        const response = await fetch(`http://${backendIP}:3000/students`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const students = await response.json();
-        students.forEach(student => {
-          const row = `
-            <tr>
-              <td>${student.matricula}</td>
-              <td>${student.nombre}</td>
-              <td>${student.carrera}</td>
-              <td>${student.semestre}</td>
-              <td>${student.user_name}</td>
-              <td>${student.celular}</td>
-              <td>${student.email}</td>
-              <td>
-                <button class="btn btn-warning btn-sm" onclick="editStudent('${student.matricula}')">Editar</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteStudent('${student.matricula}')">Eliminar</button>
-              </td>
-            </tr>
-          `;
-          tbody.innerHTML += row;
-        });
-      } catch (error) {
-        console.error("Error al cargar los estudiantes:", error);
-        alert("Error al cargar los estudiantes.");
-      }
-    }
-
-    // Cargar Estudiantes (READ)
-    async function loadStudents() {
-      const tbody = document.querySelector('#students-table tbody');
-      tbody.innerHTML = '';
-      try {
-        const token = getToken();
-        if (!token) {
-          console.error("No authentication token found.");
-          alert("Por favor, inicia sesión para ver los estudiantes.");
-          return;
-        }
-        const response = await fetch(`http://${backendIP}:3000/students`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const students = await response.json();
-        students.forEach(student => {
-          const row = `
-            <tr>
-              <td>${student.matricula}</td>
-              <td>${student.nombre}</td>
-              <td>${student.carrera}</td>
-              <td>${student.semestre}</td>
-              <td>${student.user_name}</td>
-              <td>${student.celular}</td>
-              <td>${student.email}</td>
-              <td>
-                <button class="btn btn-warning btn-sm" onclick="editStudent('${student.matricula}')">Editar</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteStudent('${student.matricula}')">Eliminar</button>
-              </td>
-            </tr>
-          `;
-          tbody.innerHTML += row;
-        });
-      } catch (error) {
-        console.error("Error al cargar los estudiantes:", error);
-        alert("Error al cargar los estudiantes.");
-      }
-    }
-    // Manejar envío del formulario de Estudiantes (CREATE/UPDATE)
-    document.getElementById('student-form').addEventListener('submit', async function (event) {
-      event.preventDefault();
-      const matriculaEdit = document.getElementById('student-matricula-edit').value;
-      const method = matriculaEdit ? 'PUT' : 'POST'; // Si hay matriculaEdit, es UPDATE, sino CREATE
-      const url = matriculaEdit ? `http://${backendIP}:3000/students/${matriculaEdit}` : `http://${backendIP}:3000/students`;
-
-      const data = {
-        matricula: document.getElementById('matricula').value,
-        nombre: document.getElementById('student-nombre').value,
-        carrera: document.getElementById('carrera').value,
-        semestre: document.getElementById('semestre').value,
-        user_name: document.getElementById('student-user_name').value,
-        celular: document.getElementById('student-celular').value,
-        email: document.getElementById('student-email').value
-      };
-
-      try {
-        const token = getToken();
-        if (!token) {
-          alert("Por favor, inicia sesión.");
-          return;
-        }
-        const response = await fetch(url, {
-          method: method,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
-        }
-
-        alert(`Estudiante ${matriculaEdit ? 'actualizado' : 'creado'} exitosamente!`);
-        hideStudentForm();
-        loadStudents(); // Recargar la tabla
-      } catch (error) {
-        console.error(`Error al ${matriculaEdit ? 'actualizar' : 'crear'} el estudiante:`, error);
-        alert(`Error al ${matriculaEdit ? 'actualizar' : 'crear'} el estudiante: ${error.message}`);
-      }
-    });
-
-    // Editar Estudiante
-    async function editStudent(matricula) {
-      try {
-        const token = getToken();
-        if (!token) {
-          alert("Por favor, inicia sesión.");
-          return;
-        }
-        const response = await fetch(`http://${backendIP}:3000/students/${matricula}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const student = await response.json();
-        showStudentForm('edit', student);
-      } catch (error) {
-        console.error("Error al obtener datos del estudiante para editar:", error);
-        alert("Error al obtener datos del estudiante para editar.");
-      }
-    }
-
-    // Eliminar Estudiante
-    async function deleteStudent(matricula) {
-      if (!confirm(`¿Estás seguro de que quieres eliminar al estudiante con matrícula ${matricula}?`)) {
-        return;
-      }
-      try {
-        const token = getToken();
-        if (!token) {
-          alert("Por favor, inicia sesión.");
-          return;
-        }
-        const response = await fetch(`http://${backendIP}:3000/students/${matricula}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
-        }
-        alert("Estudiante eliminado exitosamente!");
-        loadStudents(); // Recargar la tabla
-      } catch (error) {
-        console.error("Error al eliminar estudiante:", error);
-        alert(`Error al eliminar estudiante: ${error.message}`);
-      }
     }
 
     /////////////////       CALIFICACIONES       ////////////////////////////////////////////
@@ -1918,7 +1106,6 @@
         alert("Error al guardar la calificación: " + error.message);
       }
     }
-  }
   </script>
   <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
