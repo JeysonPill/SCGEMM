@@ -994,27 +994,6 @@
       SUPER_ADMIN: 99
     };
 
-    //Estilos tabla dinámica
-    const dataTableStyle = {
-      pageLength: 5,
-      lengthMenu: [5, 10, 20],
-      destroy: true,
-      language: {
-        lengthMenu: "Mostrar _MENU_ registros por pagina",
-        zeroRecords: "No se encontraron registros",
-        info: "Mostrando pagina _PAGE_ de _PAGES_",
-        infoEmpty: "No hay registros disponibles",
-        infoFiltered: "(filtrado de _MAX_ registros totales)",
-        search: "Buscar:",
-        paginate: {
-          first: "Primero",
-          last: "Ultimo",
-          next: "Siguiente",
-          previous: "Anterior"
-        }
-      }
-    };
-    //////////////////////////////
 
     function getBackendIP() {
       let backendIP = localStorage.getItem('backendIP');
@@ -1101,6 +1080,7 @@
           localStorage.setItem('authToken', data.token);
           errorMessage.textContent = '';
           showUserRole(data.user_role);
+          console.log('Login successful:', data.user_role);
         } else { errorMessage.textContent = data.message || 'Login failed'; }
       } catch (error) {
         errorMessage.textContent = 'Connection error. Please try again.';
@@ -1112,7 +1092,7 @@
     // display por roles
     function showUserRole(role) {
       document.querySelectorAll('.content-section').forEach(section => { section.style.display = 'none'; });
-
+      document.getElementById('login-content').style.display = 'none';
       switch (parseInt(role)) {
         case ROLES.SUPER_ADMIN: document.getElementById('super-admin-content').style.display = 'block'; break;
         case ROLES.PROFESSOR: document.getElementById('professor-content').style.display = 'block'; break;
