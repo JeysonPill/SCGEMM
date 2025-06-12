@@ -8,9 +8,179 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <link rel="stylesheet" href="stilazos.css">
+
+  <style>
+    body {
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+
+    .nav-tab {
+      padding: 10px 18px;
+      cursor: pointer;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px 6px 0 0;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .nav-tab:hover {
+      background-color: #e9ecef;
+    }
+
+    .nav-tab.active {
+      background: #0d6efd;
+      color: #fff;
+      border-color: #0d6efd #0d6efd #fff;
+    }
+
+
+    .content-section,
+    .tab-content {
+      display: none;
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      margin-top: 20px;
+    }
+
+    .tab-content.active,
+    .content-section.active {
+      display: block;
+    }
+
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      padding: 14px;
+      border: 1px solid #eee;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f3f5;
+      font-weight: 600;
+    }
+
+
+    .logout-button,
+    .action-button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .logout-button {
+      background-color: #dc3545;
+      float: right;
+    }
+
+    .logout-button:hover {
+      background-color: #bb2d3b;
+    }
+
+    .action-button {
+      background-color: #0d6efd;
+      margin: 5px;
+    }
+
+    .action-button:hover {
+      background-color: #0b5ed7;
+    }
+
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: #0d6efd;
+      outline: none;
+    }
+
+
+    .form-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(33, 37, 41, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 24px;
+      border-radius: 8px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .qr-section {
+      text-align: center;
+      margin: 24px 0;
+    }
+
+    #qr-display {
+      position: fixed;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      width: 30%;
+      height: 30%;
+    }
+  </style>
 </head>
 
 <body>
@@ -32,7 +202,7 @@
     </div>
   </div>
 
-  
+
 
   <div id="student-content" class="content-section container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
@@ -41,7 +211,7 @@
         <button class="btn btn-outline-danger logout-button" onclick="handleLogout()">Cerrar sesión</button>
       </div>
     </nav>
-    
+
 
     <div class="row">
       <div class="col-md-3 col-lg-2">
@@ -152,15 +322,16 @@
       </div>
     </div>
   </div>
-
-    <div id="student-panel" class="content-section" style="display:none;">
+  <!--Formularios-->
+  <div id="student-panel" class="content-section" style="display:none;">
     <h2>Gestión de Estudiantes</h2>
     <button class="btn btn-primary mb-3" onclick="showStudentForm('create')">Crear Nuevo Estudiante</button>
 
     <div id="student-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
       <h3><span id="student-form-title"></span> Estudiante</h3>
       <form id="student-form">
-        <input type="hidden" id="student-matricula-edit"> <div class="form-group">
+        <input type="hidden" id="student-matricula-edit">
+        <div class="form-group">
           <label for="matricula">Matrícula:</label>
           <input type="text" class="form-control" id="matricula" required>
         </div>
@@ -207,7 +378,7 @@
         </tr>
       </thead>
       <tbody>
-        </tbody>
+      </tbody>
     </table>
   </div>
 
@@ -217,8 +388,8 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
-  
-<div id="student-panel" class="content-section" style="display:none;">
+
+  <div id="student-panel" class="content-section" style="display:none;">
     <h2>Gestión de Estudiantes</h2>
     <button class="btn btn-primary mb-3" onclick="showStudentForm('create')">Crear Nuevo Estudiante</button>
 
@@ -273,9 +444,156 @@
         </tr>
       </thead>
       <tbody>
-        </tbody>
+      </tbody>
     </table>
   </div>
+
+  <!-----------------------------Profesor------------------------------------------->
+  <div id="professor-panel" class="content-section" style="display:none;">
+    <h2>Gestión de Profesores</h2>
+    <button class="btn btn-primary mb-3" onclick="showProfessorForm('create')">Crear Nuevo Profesor</button>
+
+    <div id="professor-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
+      <h3><span id="professor-form-title"></span> Profesor</h3>
+      <form id="professor-form">
+        <input type="hidden" id="professor-id-edit">
+        <div class="form-group">
+          <label for="id_profesor">ID Profesor:</label>
+          <input type="text" class="form-control" id="id_profesor" required>
+        </div>
+        <div class="form-group">
+          <label for="profesor_nombre">Nombre:</label>
+          <input type="text" class="form-control" id="profesor_nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="profesor_celular">Celular:</label>
+          <input type="text" class="form-control" id="profesor_celular" required>
+        </div>
+        <div class="form-group">
+          <label for="profesor_email">Email:</label>
+          <input type="email" class="form-control" id="profesor_email" required>
+        </div>
+        <div class="form-group">
+          <label for="profesor_fecha_ingreso">Fecha de Ingreso:</label>
+          <input type="date" class="form-control" id="profesor_fecha_ingreso" required>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar Profesor</button>
+        <button type="button" class="btn btn-secondary" onclick="hideProfessorForm()">Cancelar</button>
+      </form>
+    </div>
+
+    <table id="professors-table" class="table table-striped table-bordered" style="width:100%">
+      <thead>
+        <tr>
+          <th>ID Profesor</th>
+          <th>Nombre</th>
+          <th>Celular</th>
+          <th>Email</th>
+          <th>Fecha de Ingreso</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <!-----Materias-->
+  <div id="subject-panel" class="content-section" style="display:none;">
+    <h2>Gestión de Materias</h2>
+    <button class="btn btn-primary mb-3" onclick="showSubjectForm('create')">Crear Nueva Materia</button>
+
+    <div id="subject-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
+      <h3><span id="subject-form-title"></span> Materia</h3>
+      <form id="subject-form">
+        <input type="hidden" id="subject-id-edit">
+        <div class="form-group">
+          <label for="id_materia">ID Materia:</label>
+          <input type="text" class="form-control" id="id_materia" required>
+        </div>
+        <div class="form-group">
+          <label for="materia_nombre">Nombre Materia:</label>
+          <input type="text" class="form-control" id="materia_nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="sem_cursante">Semestre Cursante:</label>
+          <input type="text" class="form-control" id="sem_cursante" required>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar Materia</button>
+        <button type="button" class="btn btn-secondary" onclick="hideSubjectForm()">Cancelar</button>
+      </form>
+    </div>
+
+    <table id="subjects-table" class="table table-striped table-bordered" style="width:100%">
+      <thead>
+        <tr>
+          <th>ID Materia</th>
+          <th>Nombre Materia</th>
+          <th>Semestre Cursante</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <!-------------Calificaciones-->
+  <div id="grade-panel" class="content-section" style="display:none;">
+    <h2>Gestión de Calificaciones</h2>
+    <button class="btn btn-primary mb-3" onclick="showGradeForm('create')">Crear Nueva Calificación</button>
+
+    <div id="grade-form-section" class="card p-4 shadow-sm mb-4" style="display:none;">
+      <h3><span id="grade-form-title"></span> Calificación</h3>
+      <form id="grade-form">
+        <input type="hidden" id="grade-id_materia-edit">
+        <input type="hidden" id="grade-matricula-edit">
+        <div class="form-group">
+          <label for="grade_id_materia">ID Materia:</label>
+          <input type="text" class="form-control" id="grade_id_materia" required>
+        </div>
+        <div class="form-group">
+          <label for="grade_matricula">Matrícula Alumno:</label>
+          <input type="text" class="form-control" id="grade_matricula" required>
+        </div>
+        <div class="form-group">
+          <label for="calif_p1">Calificación P1:</label>
+          <input type="text" class="form-control" id="calif_p1">
+        </div>
+        <div class="form-group">
+          <label for="calif_p2">Calificación P2:</label>
+          <input type="text" class="form-control" id="calif_p2">
+        </div>
+        <div class="form-group">
+          <label for="calif_final">Calificación Final:</label>
+          <input type="text" class="form-control" id="calif_final">
+        </div>
+        <div class="form-group">
+          <label for="ciclo_cursando">Ciclo Cursando:</label>
+          <input type="text" class="form-control" id="ciclo_cursando" required>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar Calificación</button>
+        <button type="button" class="btn btn-secondary" onclick="hideGradeForm()">Cancelar</button>
+      </form>
+    </div>
+
+    <table id="grades-table" class="table table-striped table-bordered" style="width:100%">
+      <thead>
+        <tr>
+          <th>ID Materia</th>
+          <th>Matrícula</th>
+          <th>Calificación P1</th>
+          <th>Calificación P2</th>
+          <th>Calificación Final</th>
+          <th>Ciclo Cursando</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <!-----------------------------END FORMS------------------------------------------->
 
   <div id="professor-content" class="content-section container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
@@ -777,6 +1095,20 @@
       }
     }
 
+
+    // Funciones genéricas para mostrar/ocultar formularios (puedes adaptarlas)
+    function showForm(entity) {
+      document.getElementById(`${entity}-form-section`).style.display = 'block';
+      document.getElementById(`${entity}-form-title`).textContent = 'Crear';
+      document.getElementById(`${entity}-form`).reset();
+      // Ocultar otras secciones si es necesario
+    }
+
+    function hideForm(entity) {
+      document.getElementById(`${entity}-form-section`).style.display = 'none';
+      document.getElementById(`${entity}-form`).reset();
+    }
+
     // Logout
     function handleLogout() {
       localStorage.removeItem('authToken');
@@ -815,6 +1147,38 @@
 
     });
 
+    // --- Funciones para Estudiantes ---
+    function showStudentForm(mode, studentData = null) {
+      const formSection = document.getElementById('student-form-section');
+      const formTitle = document.getElementById('student-form-title');
+      const form = document.getElementById('student-form');
+
+      formSection.style.display = 'block';
+      form.reset(); // Limpiar el formulario
+
+      if (mode === 'create') {
+        formTitle.textContent = 'Crear';
+        document.getElementById('student-matricula-edit').value = '';
+        document.getElementById('matricula').readOnly = false; // Matrícula editable al crear
+      } else if (mode === 'edit' && studentData) {
+        formTitle.textContent = 'Editar';
+        document.getElementById('student-matricula-edit').value = studentData.matricula;
+        document.getElementById('matricula').value = studentData.matricula;
+        document.getElementById('matricula').readOnly = true; // Matrícula no editable al editar
+        document.getElementById('student-nombre').value = studentData.nombre;
+        document.getElementById('carrera').value = studentData.carrera;
+        document.getElementById('semestre').value = studentData.semestre;
+        document.getElementById('student-user_name').value = studentData.user_name;
+        document.getElementById('student-celular').value = studentData.celular;
+        document.getElementById('student-email').value = studentData.email;
+      }
+    }
+
+    function hideStudentForm() {
+      document.getElementById('student-form-section').style.display = 'none';
+      document.getElementById('student-form').reset();
+    }
+
     // display por roles
     function showUserRole(role) {
       document.querySelectorAll('.content-section').forEach(section => { section.style.display = 'none'; });
@@ -845,6 +1209,49 @@
 
 
     ///////////////////////////////////////////////////////       ESTUDIANTES       ////////////////////////////////////////////////////////////////////////////////
+    // Cargar Estudiantes (READ)
+    async function loadStudents() {
+      const tbody = document.querySelector('#students-table tbody');
+      tbody.innerHTML = '';
+      try {
+        const token = getToken();
+        if (!token) {
+          console.error("No authentication token found.");
+          alert("Por favor, inicia sesión para ver los estudiantes.");
+          return;
+        }
+        const response = await fetch(`http://${backendIP}:3000/students`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const students = await response.json();
+        students.forEach(student => {
+          const row = `
+            <tr>
+              <td>${student.matricula}</td>
+              <td>${student.nombre}</td>
+              <td>${student.carrera}</td>
+              <td>${student.semestre}</td>
+              <td>${student.user_name}</td>
+              <td>${student.celular}</td>
+              <td>${student.email}</td>
+              <td>
+                <button class="btn btn-warning btn-sm" onclick="editStudent('${student.matricula}')">Editar</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteStudent('${student.matricula}')">Eliminar</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      } catch (error) {
+        console.error("Error al cargar los estudiantes:", error);
+        alert("Error al cargar los estudiantes.");
+      }
+    }
 
     /////////////////       MATERIAS       ////////////////////////////////////////////
     async function loadSubjects() {
@@ -870,6 +1277,192 @@
         </tr>`;
         tbody.innerHTML += row;
       });
+    }
+
+    // Cargar Estudiantes (READ)
+    async function loadStudents() {
+      const tbody = document.querySelector('#students-table tbody');
+      tbody.innerHTML = '';
+      try {
+        const token = getToken();
+        if (!token) {
+          console.error("No authentication token found.");
+          alert("Por favor, inicia sesión para ver los estudiantes.");
+          return;
+        }
+        const response = await fetch(`http://${backendIP}:3000/students`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const students = await response.json();
+        students.forEach(student => {
+          const row = `
+            <tr>
+              <td>${student.matricula}</td>
+              <td>${student.nombre}</td>
+              <td>${student.carrera}</td>
+              <td>${student.semestre}</td>
+              <td>${student.user_name}</td>
+              <td>${student.celular}</td>
+              <td>${student.email}</td>
+              <td>
+                <button class="btn btn-warning btn-sm" onclick="editStudent('${student.matricula}')">Editar</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteStudent('${student.matricula}')">Eliminar</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      } catch (error) {
+        console.error("Error al cargar los estudiantes:", error);
+        alert("Error al cargar los estudiantes.");
+      }
+    }
+
+    // Cargar Estudiantes (READ)
+    async function loadStudents() {
+      const tbody = document.querySelector('#students-table tbody');
+      tbody.innerHTML = '';
+      try {
+        const token = getToken();
+        if (!token) {
+          console.error("No authentication token found.");
+          alert("Por favor, inicia sesión para ver los estudiantes.");
+          return;
+        }
+        const response = await fetch(`http://${backendIP}:3000/students`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const students = await response.json();
+        students.forEach(student => {
+          const row = `
+            <tr>
+              <td>${student.matricula}</td>
+              <td>${student.nombre}</td>
+              <td>${student.carrera}</td>
+              <td>${student.semestre}</td>
+              <td>${student.user_name}</td>
+              <td>${student.celular}</td>
+              <td>${student.email}</td>
+              <td>
+                <button class="btn btn-warning btn-sm" onclick="editStudent('${student.matricula}')">Editar</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteStudent('${student.matricula}')">Eliminar</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      } catch (error) {
+        console.error("Error al cargar los estudiantes:", error);
+        alert("Error al cargar los estudiantes.");
+      }
+    }
+    // Manejar envío del formulario de Estudiantes (CREATE/UPDATE)
+    document.getElementById('student-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const matriculaEdit = document.getElementById('student-matricula-edit').value;
+      const method = matriculaEdit ? 'PUT' : 'POST'; // Si hay matriculaEdit, es UPDATE, sino CREATE
+      const url = matriculaEdit ? `http://${backendIP}:3000/students/${matriculaEdit}` : `http://${backendIP}:3000/students`;
+
+      const data = {
+        matricula: document.getElementById('matricula').value,
+        nombre: document.getElementById('student-nombre').value,
+        carrera: document.getElementById('carrera').value,
+        semestre: document.getElementById('semestre').value,
+        user_name: document.getElementById('student-user_name').value,
+        celular: document.getElementById('student-celular').value,
+        email: document.getElementById('student-email').value
+      };
+
+      try {
+        const token = getToken();
+        if (!token) {
+          alert("Por favor, inicia sesión.");
+          return;
+        }
+        const response = await fetch(url, {
+          method: method,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        }
+
+        alert(`Estudiante ${matriculaEdit ? 'actualizado' : 'creado'} exitosamente!`);
+        hideStudentForm();
+        loadStudents(); // Recargar la tabla
+      } catch (error) {
+        console.error(`Error al ${matriculaEdit ? 'actualizar' : 'crear'} el estudiante:`, error);
+        alert(`Error al ${matriculaEdit ? 'actualizar' : 'crear'} el estudiante: ${error.message}`);
+      }
+    });
+
+    // Editar Estudiante
+    async function editStudent(matricula) {
+      try {
+        const token = getToken();
+        if (!token) {
+          alert("Por favor, inicia sesión.");
+          return;
+        }
+        const response = await fetch(`http://${backendIP}:3000/students/${matricula}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const student = await response.json();
+        showStudentForm('edit', student);
+      } catch (error) {
+        console.error("Error al obtener datos del estudiante para editar:", error);
+        alert("Error al obtener datos del estudiante para editar.");
+      }
+    }
+
+    // Eliminar Estudiante
+    async function deleteStudent(matricula) {
+      if (!confirm(`¿Estás seguro de que quieres eliminar al estudiante con matrícula ${matricula}?`)) {
+        return;
+      }
+      try {
+        const token = getToken();
+        if (!token) {
+          alert("Por favor, inicia sesión.");
+          return;
+        }
+        const response = await fetch(`http://${backendIP}:3000/students/${matricula}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        }
+        alert("Estudiante eliminado exitosamente!");
+        loadStudents(); // Recargar la tabla
+      } catch (error) {
+        console.error("Error al eliminar estudiante:", error);
+        alert(`Error al eliminar estudiante: ${error.message}`);
+      }
     }
 
     /////////////////       CALIFICACIONES       ////////////////////////////////////////////
