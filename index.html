@@ -5,10 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Academic Management System</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
-  <link rel="stylesheet" href="public/css/stilazos.css">
+  <link rel="stylesheet" href="/CSS/stilazos.css">
 </head>
 
 <body>
@@ -40,25 +39,17 @@
 
     <div class="row">
       <div class="col-md-3 col-lg-2">
-        <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab" role="tablist"
-          aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-subjects-tab" data-toggle="pill" href="#enrolled-subjects" role="tab"
-            aria-controls="enrolled-subjects" aria-selected="true"
-            onclick="switchTab('enrolled-subjects', this)">Materias</a>
-          <a class="nav-link" id="v-pills-grades-tab" data-toggle="pill" href="#grades" role="tab"
-            aria-controls="grades" aria-selected="false" onclick="switchTab('grades', this)">Calificaciones</a>
-          <a class="nav-link" id="v-pills-kardex-tab" data-toggle="pill" href="#kardex" role="tab"
-            aria-controls="kardex" aria-selected="false" onclick="switchTab('kardex', this)">Kardex</a>
-          <a class="nav-link" id="v-pills-payments-tab" data-toggle="pill" href="#payments" role="tab"
-            aria-controls="payments" aria-selected="false" onclick="switchTab('payments', this)">Pagos</a>
-          <a class="nav-link" id="v-pills-attendance-tab" data-toggle="pill" href="#attendance" role="tab"
-            aria-controls="attendance" aria-selected="false" onclick="switchTab('attendance', this)">Asistencias</a>
+        <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-subjects-tab" data-toggle="pill" href="#enrolled-subjects" role="tab" aria-controls="enrolled-subjects" aria-selected="true" onclick="switchTab('enrolled-subjects', this)">Materias</a>
+          <a class="nav-link" id="v-pills-grades-tab" data-toggle="pill" href="#grades" role="tab" aria-controls="grades" aria-selected="false" onclick="switchTab('grades', this)">Calificaciones</a>
+          <a class="nav-link" id="v-pills-kardex-tab" data-toggle="pill" href="#kardex" role="tab" aria-controls="kardex" aria-selected="false" onclick="switchTab('kardex', this)">Kardex</a>
+          <a class="nav-link" id="v-pills-payments-tab" data-toggle="pill" href="#payments" role="tab" aria-controls="payments" aria-selected="false" onclick="switchTab('payments', this)">Pagos</a>
+          <a class="nav-link" id="v-pills-attendance-tab" data-toggle="pill" href="#attendance" role="tab" aria-controls="attendance" aria-selected="false" onclick="switchTab('attendance', this)">Asistencias</a>
         </div>
       </div>
       <div class="col-md-9 col-lg-10">
         <div class="tab-content" id="v-pills-tabContent">
-          <div class="tab-pane fade show active" id="enrolled-subjects" role="tabpanel"
-            aria-labelledby="v-pills-subjects-tab">
+          <div class="tab-pane fade show active" id="enrolled-subjects" role="tabpanel" aria-labelledby="v-pills-subjects-tab">
             <h3 class="mb-3">Materias</h3>
             <div class="table-responsive">
               <table class="table table-hover table-striped">
@@ -159,23 +150,15 @@
 
     <div class="row">
       <div class="col-md-3 col-lg-2">
-        <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab-prof" role="tablist"
-          aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-schedule-tab" data-toggle="pill" href="#teaching-schedule" role="tab"
-            aria-controls="teaching-schedule" aria-selected="true"
-            onclick="switchTab('teaching-schedule', this)">Horario de clases</a>
-          <a class="nav-link" id="v-pills-qr-tab" data-toggle="pill" href="#attendance-qr" role="tab"
-            aria-controls="attendance-qr" aria-selected="false" onclick="switchTab('attendance-qr', this)">QR de
-            asistencia</a>
-          <a class="nav-link" id="v-pills-grade-entry-tab" data-toggle="pill" href="#profesor_grade_entry" role="tab"
-            aria-controls="profesor_grade_entry" aria-selected="false"
-            onclick="switchTab('profesor_grade_entry', this)">Ingreso de Calificaciones</a>
+        <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab-prof" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-schedule-tab" data-toggle="pill" href="#teaching-schedule" role="tab" aria-controls="teaching-schedule" aria-selected="true" onclick="switchTab('teaching-schedule', this)">Horario de clases</a>
+          <a class="nav-link" id="v-pills-qr-tab" data-toggle="pill" href="#attendance-qr" role="tab" aria-controls="attendance-qr" aria-selected="false" onclick="switchTab('attendance-qr', this)">QR de asistencia</a>
+          <a class="nav-link" id="v-pills-grade-entry-tab" data-toggle="pill" href="#profesor_grade_entry" role="tab" aria-controls="profesor_grade_entry" aria-selected="false" onclick="switchTab('profesor_grade_entry', this)">Ingreso de Calificaciones</a>
         </div>
       </div>
       <div class="col-md-9 col-lg-10">
         <div class="tab-content" id="v-pills-tabContent-prof">
-          <div class="tab-pane fade show active" id="teaching-schedule" role="tabpanel"
-            aria-labelledby="v-pills-schedule-tab">
+          <div class="tab-pane fade show active" id="teaching-schedule" role="tabpanel" aria-labelledby="v-pills-schedule-tab">
             <h3 class="mb-3">Horario de clases</h3>
             <div class="table-responsive">
               <table class="table table-hover table-striped">
@@ -195,19 +178,18 @@
           <div class="tab-pane fade" id="attendance-qr" role="tabpanel" aria-labelledby="v-pills-qr-tab">
             <h3 class="mb-3">Generar QR de asistencia</h3>
             <div class="card p-4 shadow-sm">
-              <div class="form-group">
-                <label for="qr_subject_select">Elegir materia</label>
-                <select id="qr_subject_select" class="form-control">
-                  <option value="">Seleccione una materia</option>
-                </select>
-              </div>
-              <button onclick="QR_CODE_GEN()" class="btn btn-primary action-button mt-3">Generar QR</button>
-              <div id="qr-display" class="mt-4 text-center"></div>
+                <div class="form-group">
+                    <label for="qr_subject_select">Elegir materia</label>
+                    <select id="qr_subject_select" class="form-control">
+                        <option value="">Seleccione una materia</option>
+                    </select>
+                </div>
+                <button onclick="QR_CODE_GEN()" class="btn btn-primary action-button mt-3">Generar QR</button>
+                <div id="qr-display" class="mt-4 text-center"></div>
             </div>
           </div>
 
-          <div class="tab-pane fade" id="profesor_grade_entry" role="tabpanel"
-            aria-labelledby="v-pills-grade-entry-tab">
+          <div class="tab-pane fade" id="profesor_grade_entry" role="tabpanel" aria-labelledby="v-pills-grade-entry-tab">
             <h3 class="mb-3">Ingreso de calificaciones</h3>
             <div class="form-group">
               <label for="professor_grade_subject_select">Elija materia</label>
@@ -243,217 +225,198 @@
     </nav>
     <div class="row">
       <div class="col-md-3 col-lg-2">
-        <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab-admin" role="tablist"
-          aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-student-mgmt-tab" data-toggle="pill" href="#student-management"
-            role="tab" aria-controls="student-management" aria-selected="true"
-            onclick="switchTab('student-management', this)">Estudiantes</a>
-          <a class="nav-link" id="v-pills-professor-mgmt-tab" data-toggle="pill" href="#professor-management" role="tab"
-            aria-controls="professor-management" aria-selected="false"
-            onclick="switchTab('professor-management', this)">Profesores</a>
-          <a class="nav-link" id="v-pills-subject-mgmt-tab" data-toggle="pill" href="#subject-management" role="tab"
-            aria-controls="subject-management" aria-selected="false"
-            onclick="switchTab('subject-management', this)">Materias</a>
-          <a class="nav-link" id="v-pills-reports-tab" data-toggle="pill" href="#reports" role="tab"
-            aria-controls="reports" aria-selected="false" onclick="switchTab('reports', this)">Reportes</a>
-          <a class="nav-link" id="v-pills-payments-admin-tab" data-toggle="pill" href="#payments-admin" role="tab"
-            aria-controls="payments-admin" aria-selected="false" onclick="switchTab('payments-admin', this)">Gestión de
-            Pagos</a>
-          <a class="nav-link" id="v-pills-attendance-admin-tab" data-toggle="pill" href="#attendance-admin" role="tab"
-            aria-controls="attendance-admin" aria-selected="false" onclick="switchTab('attendance-admin', this)">Gestión
-            de Asistencia</a>
+        <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab-admin" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-student-mgmt-tab" data-toggle="pill" href="#student-management" role="tab" aria-controls="student-management" aria-selected="true" onclick="switchTab('student-management', this)">Estudiantes</a>
+          <a class="nav-link" id="v-pills-professor-mgmt-tab" data-toggle="pill" href="#professor-management" role="tab" aria-controls="professor-management" aria-selected="false" onclick="switchTab('professor-management', this)">Profesores</a>
+          <a class="nav-link" id="v-pills-subject-mgmt-tab" data-toggle="pill" href="#subject-management" role="tab" aria-controls="subject-management" aria-selected="false" onclick="switchTab('subject-management', this)">Materias</a>
+          <a class="nav-link" id="v-pills-reports-tab" data-toggle="pill" href="#reports" role="tab" aria-controls="reports" aria-selected="false" onclick="switchTab('reports', this)">Reportes</a>
+          <a class="nav-link" id="v-pills-payments-admin-tab" data-toggle="pill" href="#payments-admin" role="tab" aria-controls="payments-admin" aria-selected="false" onclick="switchTab('payments-admin', this)">Gestión de Pagos</a>
+          <a class="nav-link" id="v-pills-attendance-admin-tab" data-toggle="pill" href="#attendance-admin" role="tab" aria-controls="attendance-admin" aria-selected="false" onclick="switchTab('attendance-admin', this)">Gestión de Asistencia</a>
         </div>
       </div>
       <div class="col-md-9 col-lg-10">
         <div class="tab-content" id="v-pills-tabContent-admin">
-          <div class="tab-pane fade show active" id="student-management" role="tabpanel"
-            aria-labelledby="v-pills-student-mgmt-tab">
-            <h3 class="mb-3">Gestión de Estudiantes</h3>
-            <button class="btn btn-success action-button mb-3" data-toggle="modal"
-              data-target="#addStudentModal">Agregar Estudiante</button>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Matrícula</th>
-                    <th>Nombre</th>
-                    <th>Carrera</th>
-                    <th>Semestre</th>
-                    <th>Celular</th>
-                    <th>Email</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-student-table">
-                  <tr>
-                    <td>A001</td>
-                    <td>Juan Perez</td>
-                    <td>Ing. Sistemas</td>
-                    <td>5</td>
-                    <td>5512345678</td>
-                    <td>juan.perez@example.com</td>
-                    <td>
-                      <button class="btn btn-sm btn-info mr-2">Editar</button>
-                      <button class="btn btn-sm btn-danger">Eliminar</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="tab-pane fade show active" id="student-management" role="tabpanel" aria-labelledby="v-pills-student-mgmt-tab">
+                <h3 class="mb-3">Gestión de Estudiantes</h3>
+                <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addStudentModal">Agregar Estudiante</button>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Matrícula</th>
+                                <th>Nombre</th>
+                                <th>Carrera</th>
+                                <th>Semestre</th>
+                                <th>Celular</th>
+                                <th>Email</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-student-table">
+                            <tr>
+                                <td>A001</td>
+                                <td>Juan Perez</td>
+                                <td>Ing. Sistemas</td>
+                                <td>5</td>
+                                <td>5512345678</td>
+                                <td>juan.perez@example.com</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info mr-2">Editar</button>
+                                    <button class="btn btn-sm btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
-          <div class="tab-pane fade" id="professor-management" role="tabpanel"
-            aria-labelledby="v-pills-professor-mgmt-tab">
-            <h3 class="mb-3">Gestión de Profesores</h3>
-            <button class="btn btn-success action-button mb-3" data-toggle="modal"
-              data-target="#addProfessorModal">Agregar Profesor</button>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>ID Profesor</th>
-                    <th>Nombre</th>
-                    <th>Celular</th>
-                    <th>Email</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-professor-table">
-                  <tr>
-                    <td>P001</td>
-                    <td>Maria Garcia</td>
-                    <td>5587654321</td>
-                    <td>maria.garcia@example.com</td>
-                    <td>
-                      <button class="btn btn-sm btn-info mr-2">Editar</button>
-                      <button class="btn btn-sm btn-danger">Eliminar</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="tab-pane fade" id="professor-management" role="tabpanel" aria-labelledby="v-pills-professor-mgmt-tab">
+                <h3 class="mb-3">Gestión de Profesores</h3>
+                <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addProfessorModal">Agregar Profesor</button>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID Profesor</th>
+                                <th>Nombre</th>
+                                <th>Celular</th>
+                                <th>Email</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-professor-table">
+                            <tr>
+                                <td>P001</td>
+                                <td>Maria Garcia</td>
+                                <td>5587654321</td>
+                                <td>maria.garcia@example.com</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info mr-2">Editar</button>
+                                    <button class="btn btn-sm btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
-          <div class="tab-pane fade" id="subject-management" role="tabpanel" aria-labelledby="v-pills-subject-mgmt-tab">
-            <h3 class="mb-3">Gestión de Materias</h3>
-            <button class="btn btn-success action-button mb-3" data-toggle="modal"
-              data-target="#addSubjectModal">Agregar Materia</button>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>ID Materia</th>
-                    <th>Nombre</th>
-                    <th>Semestre Cursante</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-subject-table">
-                  <tr>
-                    <td>MAT101</td>
-                    <td>Cálculo Diferencial</td>
-                    <td>1</td>
-                    <td>
-                      <button class="btn btn-sm btn-info mr-2">Editar</button>
-                      <button class="btn btn-sm btn-danger">Eliminar</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="tab-pane fade" id="subject-management" role="tabpanel" aria-labelledby="v-pills-subject-mgmt-tab">
+                <h3 class="mb-3">Gestión de Materias</h3>
+                <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addSubjectModal">Agregar Materia</button>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID Materia</th>
+                                <th>Nombre</th>
+                                <th>Semestre Cursante</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-subject-table">
+                            <tr>
+                                <td>MAT101</td>
+                                <td>Cálculo Diferencial</td>
+                                <td>1</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info mr-2">Editar</button>
+                                    <button class="btn btn-sm btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4 class="mt-4">Asignar Materias a Profesores</h4>
+                <div class="card p-3 shadow-sm mb-3">
+                    <div class="form-group">
+                        <label for="assign_prof_subject">Profesor</label>
+                        <select id="assign_prof_subject" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="assign_subject_group">Materia y Grupo</label>
+                        <select id="assign_subject_group" class="form-control"></select>
+                    </div>
+                    <button class="btn btn-primary action-button">Asignar</button>
+                </div>
+                <h4 class="mt-4">Asignar Materias a Estudiantes (Grupos)</h4>
+                <div class="card p-3 shadow-sm">
+                    <div class="form-group">
+                        <label for="assign_student_subject">Estudiante</label>
+                        <select id="assign_student_subject" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="assign_student_group">Materia y Grupo</label>
+                        <select id="assign_student_group" class="form-control"></select>
+                    </div>
+                    <button class="btn btn-primary action-button">Asignar</button>
+                </div>
             </div>
-            <h4 class="mt-4">Asignar Materias a Profesores</h4>
-            <div class="card p-3 shadow-sm mb-3">
-              <div class="form-group">
-                <label for="assign_prof_subject">Profesor</label>
-                <select id="assign_prof_subject" class="form-control"></select>
-              </div>
-              <div class="form-group">
-                <label for="assign_subject_group">Materia y Grupo</label>
-                <select id="assign_subject_group" class="form-control"></select>
-              </div>
-              <button class="btn btn-primary action-button">Asignar</button>
+            <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="v-pills-reports-tab">
+                <h3 class="mb-3">Reportes</h3>
+                <p>Generación de reportes académicos y administrativos.</p>
+                <button class="btn btn-secondary action-button mr-2">Reporte de Calificaciones</button>
+                <button class="btn btn-secondary action-button">Reporte de Asistencias</button>
             </div>
-            <h4 class="mt-4">Asignar Materias a Estudiantes (Grupos)</h4>
-            <div class="card p-3 shadow-sm">
-              <div class="form-group">
-                <label for="assign_student_subject">Estudiante</label>
-                <select id="assign_student_subject" class="form-control"></select>
-              </div>
-              <div class="form-group">
-                <label for="assign_student_group">Materia y Grupo</label>
-                <select id="assign_student_group" class="form-control"></select>
-              </div>
-              <button class="btn btn-primary action-button">Asignar</button>
+            <div class="tab-pane fade" id="payments-admin" role="tabpanel" aria-labelledby="v-pills-payments-admin-tab">
+                <h3 class="mb-3">Gestión de Pagos</h3>
+                <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addPaymentModal">Registrar Pago</button>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Matrícula</th>
+                                <th>Ciclo</th>
+                                <th>Fecha Vencimiento</th>
+                                <th>Fecha Pago</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-payments-table">
+                            <tr>
+                                <td>A001</td>
+                                <td>2025-1</td>
+                                <td>2025-01-31</td>
+                                <td>2025-01-28</td>
+                                <td>$1500.00</td>
+                                <td>Pagado</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info mr-2">Detalles</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
-          <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="v-pills-reports-tab">
-            <h3 class="mb-3">Reportes</h3>
-            <p>Generación de reportes académicos y administrativos.</p>
-            <button class="btn btn-secondary action-button mr-2">Reporte de Calificaciones</button>
-            <button class="btn btn-secondary action-button">Reporte de Asistencias</button>
-          </div>
-          <div class="tab-pane fade" id="payments-admin" role="tabpanel" aria-labelledby="v-pills-payments-admin-tab">
-            <h3 class="mb-3">Gestión de Pagos</h3>
-            <button class="btn btn-success action-button mb-3" data-toggle="modal"
-              data-target="#addPaymentModal">Registrar Pago</button>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Matrícula</th>
-                    <th>Ciclo</th>
-                    <th>Fecha Vencimiento</th>
-                    <th>Fecha Pago</th>
-                    <th>Monto</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-payments-table">
-                  <tr>
-                    <td>A001</td>
-                    <td>2025-1</td>
-                    <td>2025-01-31</td>
-                    <td>2025-01-28</td>
-                    <td>$1500.00</td>
-                    <td>Pagado</td>
-                    <td>
-                      <button class="btn btn-sm btn-info mr-2">Detalles</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="tab-pane fade" id="attendance-admin" role="tabpanel" aria-labelledby="v-pills-attendance-admin-tab">
+                <h3 class="mb-3">Gestión de Asistencia</h3>
+                <p>Visualización y gestión de registros de asistencia por materia/grupo.</p>
+                <div class="form-group">
+                    <label for="attendance_subject_group">Filtrar por Materia y Grupo</label>
+                    <select id="attendance_subject_group" class="form-control"></select>
+                </div>
+                <div class="table-responsive mt-3">
+                    <table class="table table-hover table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Fecha/Hora</th>
+                                <th>Matrícula</th>
+                                <th>Materia</th>
+                                <th>Código</th>
+                                <th>Ciclo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-attendance-table">
+                            <tr>
+                                <td>2025-06-10 09:00:00</td>
+                                <td>A001</td>
+                                <td>MAT101</td>
+                                <td>ABC123</td>
+                                <td>2025-1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
-          <div class="tab-pane fade" id="attendance-admin" role="tabpanel"
-            aria-labelledby="v-pills-attendance-admin-tab">
-            <h3 class="mb-3">Gestión de Asistencia</h3>
-            <p>Visualización y gestión de registros de asistencia por materia/grupo.</p>
-            <div class="form-group">
-              <label for="attendance_subject_group">Filtrar por Materia y Grupo</label>
-              <select id="attendance_subject_group" class="form-control"></select>
-            </div>
-            <div class="table-responsive mt-3">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Fecha/Hora</th>
-                    <th>Matrícula</th>
-                    <th>Materia</th>
-                    <th>Código</th>
-                    <th>Ciclo</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-attendance-table">
-                  <tr>
-                    <td>2025-06-10 09:00:00</td>
-                    <td>A001</td>
-                    <td>MAT101</td>
-                    <td>ABC123</td>
-                    <td>2025-1</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -468,367 +431,83 @@
     </nav>
     <div class="row">
       <div class="col-md-3 col-lg-2">
-        <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab-superadmin" role="tablist"
-          aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-user-mgmt-tab" data-toggle="pill" href="#user-management" role="tab"
-            aria-controls="user-management" aria-selected="true"
-            onclick="switchTab('user-management', this)">Usuarios</a>
-          <a class="nav-link" id="v-pills-system-config-tab" data-toggle="pill" href="#system-config" role="tab"
-            aria-controls="system-config" aria-selected="false"
-            onclick="switchTab('system-config', this)">Configuraciones</a>
-          <a class="nav-link" id="v-pills-system-logs-tab" data-toggle="pill" href="#system-logs" role="tab"
-            aria-controls="system-logs" aria-selected="false" onclick="switchTab('system-logs', this)">Registros</a>
+        <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab-superadmin" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-user-mgmt-tab" data-toggle="pill" href="#user-management" role="tab" aria-controls="user-management" aria-selected="true" onclick="switchTab('user-management', this)">Usuarios</a>
+          <a class="nav-link" id="v-pills-system-config-tab" data-toggle="pill" href="#system-config" role="tab" aria-controls="system-config" aria-selected="false" onclick="switchTab('system-config', this)">Configuraciones</a>
+          <a class="nav-link" id="v-pills-system-logs-tab" data-toggle="pill" href="#system-logs" role="tab" aria-controls="system-logs" aria-selected="false" onclick="switchTab('system-logs', this)">Registros</a>
         </div>
       </div>
       <div class="col-md-9 col-lg-10">
         <div class="tab-content" id="v-pills-tabContent-superadmin">
-          <div class="tab-pane fade show active" id="user-management" role="tabpanel"
-            aria-labelledby="v-pills-user-mgmt-tab">
-            <h3 class="mb-3">Gestión de Usuarios</h3>
-            <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addUserModal">Agregar
-              Usuario</button>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>ID Usuario</th>
-                    <th>Nombre de Usuario</th>
-                    <th>Rol</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody id="superadmin-user-table">
-                  <tr>
-                    <td>U001</td>
-                    <td>admin_user</td>
-                    <td>Admin</td>
-                    <td>
-                      <button class="btn btn-sm btn-info mr-2">Editar</button>
-                      <button class="btn btn-sm btn-danger">Eliminar</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="tab-pane fade show active" id="user-management" role="tabpanel" aria-labelledby="v-pills-user-mgmt-tab">
+                <h3 class="mb-3">Gestión de Usuarios</h3>
+                <button class="btn btn-success action-button mb-3" data-toggle="modal" data-target="#addUserModal">Agregar Usuario</button>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID Usuario</th>
+                                <th>Nombre de Usuario</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="superadmin-user-table">
+                            <tr>
+                                <td>U001</td>
+                                <td>admin_user</td>
+                                <td>Admin</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info mr-2">Editar</button>
+                                    <button class="btn btn-sm btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
-          <div class="tab-pane fade" id="system-config" role="tabpanel" aria-labelledby="v-pills-system-config-tab">
-            <h3 class="mb-3">Configuraciones del Sistema</h3>
-            <p>Formularios para configurar parámetros globales del sistema, como ciclos escolares, notificaciones, etc.
-            </p>
-            <form>
-              <div class="form-group">
-                <label for="current_cycle">Ciclo Actual</label>
-                <input type="text" id="current_cycle" class="form-control" value="2025-1">
-              </div>
-              <button class="btn btn-primary action-button">Guardar Configuración</button>
-            </form>
-          </div>
-          <div class="tab-pane fade" id="system-logs" role="tabpanel" aria-labelledby="v-pills-system-logs-tab">
-            <h3 class="mb-3">Registros del Sistema</h3>
-            <p>Visualización de logs de actividad y errores del sistema.</p>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Fecha/Hora</th>
-                    <th>Tipo</th>
-                    <th>Mensaje</th>
-                  </tr>
-                </thead>
-                <tbody id="superadmin-logs-table">
-                  <tr>
-                    <td>2025-06-10 10:30:00</td>
-                    <td>INFO</td>
-                    <td>User 'admin_user' logged in.</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="tab-pane fade" id="system-config" role="tabpanel" aria-labelledby="v-pills-system-config-tab">
+                <h3 class="mb-3">Configuraciones del Sistema</h3>
+                <p>Formularios para configurar parámetros globales del sistema, como ciclos escolares, notificaciones, etc.</p>
+                <form>
+                    <div class="form-group">
+                        <label for="current_cycle">Ciclo Actual</label>
+                        <input type="text" id="current_cycle" class="form-control" value="2025-1">
+                    </div>
+                    <button class="btn btn-primary action-button">Guardar Configuración</button>
+                </form>
             </div>
-          </div>
+            <div class="tab-pane fade" id="system-logs" role="tabpanel" aria-labelledby="v-pills-system-logs-tab">
+                <h3 class="mb-3">Registros del Sistema</h3>
+                <p>Visualización de logs de actividad y errores del sistema.</p>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Fecha/Hora</th>
+                                <th>Tipo</th>
+                                <th>Mensaje</th>
+                            </tr>
+                        </thead>
+                        <tbody id="superadmin-logs-table">
+                            <tr>
+                                <td>2025-06-10 10:30:00</td>
+                                <td>INFO</td>
+                                <td>User 'admin_user' logged in.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- forms -->
-  <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addStudentModalLabel">Agregar Nuevo Estudiante</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="addStudentForm">
-            <div class="form-group">
-              <label for="addStudentMatricula">Matrícula</label>
-              <input type="text" class="form-control" id="addStudentMatricula" required>
-            </div>
-            <div class="form-group">
-              <label for="addStudentName">Nombre Completo</label>
-              <input type="text" class="form-control" id="addStudentName" required>
-            </div>
-            <div class="form-group">
-              <label for="addStudentCarrera">Carrera</label>
-              <input type="text" class="form-control" id="addStudentCarrera" required>
-            </div>
-            <div class="form-group">
-              <label for="addStudentSemestre">Semestre</label>
-              <input type="number" class="form-control" id="addStudentSemestre" min="1" max="10" required>
-            </div>
-            <div class="form-group">
-              <label for="addStudentCelular">Celular</label>
-              <input type="text" class="form-control" id="addStudentCelular" required>
-            </div>
-            <div class="form-group">
-              <label for="addStudentEmail">Email</label>
-              <input type="email" class="form-control" id="addStudentEmail" required>
-            </div>
-            <button type="submit" class="btn btn-primary action-button">Guardar Estudiante</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="modal fade" id="editStudentModal" tabindex="-1" role="dialog" aria-labelledby="editStudentModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editStudentModalLabel">Editar Estudiante</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="editStudentForm">
-            <div class="form-group">
-              <label for="editStudentMatricula">Matrícula</label>
-              <input type="text" class="form-control" id="editStudentMatricula" readonly>
-            </div>
-            <div class="form-group">
-              <label for="editStudentName">Nombre Completo</label>
-              <input type="text" class="form-control" id="editStudentName" required>
-            </div>
-            <div class="form-group">
-              <label for="editStudentCarrera">Carrera</label>
-              <input type="text" class="form-control" id="editStudentCarrera" required>
-            </div>
-            <div class="form-group">
-              <label for="editStudentSemestre">Semestre</label>
-              <input type="number" class="form-control" id="editStudentSemestre" min="1" max="10" required>
-            </div>
-            <div class="form-group">
-              <label for="editStudentCelular">Celular</label>
-              <input type="text" class="form-control" id="editStudentCelular" required>
-            </div>
-            <div class="form-group">
-              <label for="editStudentEmail">Email</label>
-              <input type="email" class="form-control" id="editStudentEmail" required>
-            </div>
-            <button type="submit" class="btn btn-primary action-button">Actualizar Estudiante</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="addProfessorModal" tabindex="-1" role="dialog" aria-labelledby="addProfessorModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addProfessorModalLabel">Agregar Nuevo Profesor</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="addProfessorForm">
-            <div class="form-group">
-              <label for="addProfessorId">ID Profesor</label>
-              <input type="text" class="form-control" id="addProfessorId" required>
-            </div>
-            <div class="form-group">
-              <label for="addProfessorName">Nombre Completo</label>
-              <input type="text" class="form-control" id="addProfessorName" required>
-            </div>
-            <div class="form-group">
-              <label for="addProfessorCelular">Celular</label>
-              <input type="text" class="form-control" id="addProfessorCelular" required>
-            </div>
-            <div class="form-group">
-              <label for="addProfessorEmail">Email</label>
-              <input type="email" class="form-control" id="addProfessorEmail" required>
-            </div>
-            <button type="submit" class="btn btn-primary action-button">Guardar Profesor</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="editProfessorModal" tabindex="-1" role="dialog" aria-labelledby="editProfessorModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editProfessorModalLabel">Editar Profesor</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="editProfessorForm">
-            <div class="form-group">
-              <label for="editProfessorId">ID Profesor</label>
-              <input type="text" class="form-control" id="editProfessorId" readonly>
-            </div>
-            <div class="form-group">
-              <label for="editProfessorName">Nombre Completo</label>
-              <input type="text" class="form-control" id="editProfessorName" required>
-            </div>
-            <div class="form-group">
-              <label for="editProfessorCelular">Celular</label>
-              <input type="text" class="form-control" id="editProfessorCelular" required>
-            </div>
-            <div class="form-group">
-              <label for="editProfessorEmail">Email</label>
-              <input type="email" class="form-control" id="editProfessorEmail" required>
-            </div>
-            <button type="submit" class="btn btn-primary action-button">Actualizar Profesor</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addSubjectModalLabel">Agregar Nueva Materia</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="addSubjectForm">
-            <div class="form-group">
-              <label for="addSubjectId">ID Materia</label>
-              <input type="text" class="form-control" id="addSubjectId" required>
-            </div>
-            <div class="form-group">
-              <label for="addSubjectName">Nombre de la Materia</label>
-              <input type="text" class="form-control" id="addSubjectName" required>
-            </div>
-            <div class="form-group">
-              <label for="addSubjectSemestre">Semestre Cursante</label>
-              <input type="number" class="form-control" id="addSubjectSemestre" min="1" max="10" required>
-            </div>
-            <button type="submit" class="btn btn-primary action-button">Guardar Materia</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="editSubjectModal" tabindex="-1" role="dialog" aria-labelledby="editSubjectModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editSubjectModalLabel">Editar Materia</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="editSubjectForm">
-            <div class="form-group">
-              <label for="editSubjectId">ID Materia</label>
-              <input type="text" class="form-control" id="editSubjectId" readonly>
-            </div>
-            <div class="form-group">
-              <label for="editSubjectName">Nombre de la Materia</label>
-              <input type="text" class="form-control" id="editSubjectName" required>
-            </div>
-            <div class="form-group">
-              <label for="editSubjectSemestre">Semestre Cursante</label>
-              <input type="number" class="form-control" id="editSubjectSemestre" min="1" max="10" required>
-            </div>
-            <button type="submit" class="btn btn-primary action-button">Actualizar Materia</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="adminEditGradeModal" tabindex="-1" role="dialog"
-    aria-labelledby="adminEditGradeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="adminEditGradeModalLabel">Editar Calificaciones del Estudiante</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="adminEditGradeForm">
-            <div class="form-group">
-              <label for="adminGradeMatricula">Matrícula del Estudiante</label>
-              <input type="text" class="form-control" id="adminGradeMatricula" readonly>
-            </div>
-            <div class="form-group">
-              <label for="adminGradeStudentName">Nombre del Estudiante</label>
-              <input type="text" class="form-control" id="adminGradeStudentName" readonly>
-            </div>
-            <div class="form-group">
-              <label for="adminGradeSubjectSelect">Materia</label>
-              <select class="form-control" id="adminGradeSubjectSelect" required>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="adminGradeP1">Parcial 1</label>
-              <input type="number" class="form-control" id="adminGradeP1" step="0.1" min="0" max="10">
-            </div>
-            <div class="form-group">
-              <label for="adminGradeP2">Parcial 2</label>
-              <input type="number" class="form-control" id="adminGradeP2" step="0.1" min="0" max="10">
-            </div>
-            <div class="form-group">
-              <label for="adminGradeFinal">Final</label>
-              <input type="number" class="form-control" id="adminGradeFinal" step="0.1" min="0" max="10">
-            </div>
-            <div class="form-group">
-              <label for="adminGradeCiclo">Ciclo Cursando</label>
-              <input type="text" class="form-control" id="adminGradeCiclo" required>
-            </div>
-            <button type="submit" class="btn btn-primary action-button">Actualizar Calificaciones</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end forms -->
-
-
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
   <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
@@ -864,57 +543,59 @@
     //////////////////////////////
 
     function getBackendIP() {
-      let backendIP = localStorage.getItem('backendIP');
-      backendIP = "192.168.100.20";
-      if (backendIP) {
-        localStorage.setItem('backendIP', backendIP);
-      } else {
-        alert("Backend IP is required!");
-        return null;
-      } return backendIP;
-    }
+   let backendIP = localStorage.getItem('backendIP');
+    backendIP = "192.168.1.103";
+    if (backendIP) {
+      localStorage.setItem('backendIP', backendIP);
+    }else {
+      alert("Backend IP is required!");
+      return null;
+    }return backendIP;
+}
 
-    var backendIP = getBackendIP();
+var backendIP = getBackendIP();
 
 
     // cambia paginas
     function switchTab(tabId, element) {
-      // Remove active class from all tabs and tab content
-      document.querySelectorAll('.nav-link').forEach(tab => { tab.classList.remove('active'); }); // Corrected selector for Bootstrap nav-pills
-      // Bootstrap handles tab content activation with data-toggle="pill" and href, so direct content class manipulation might not be needed if using Bootstrap's JS.
-      // However, keeping for explicit control if needed.
-      document.querySelectorAll('.tab-pane').forEach(content => { content.classList.remove('show', 'active'); }); // Corrected selector for Bootstrap tab-pane
+    // Remove active class from all tabs and tab content
+    document.querySelectorAll('.nav-link').forEach(tab => { tab.classList.remove('active'); }); // Corrected selector for Bootstrap nav-pills
+    // Bootstrap handles tab content activation with data-toggle="pill" and href, so direct content class manipulation might not be needed if using Bootstrap's JS.
+    // However, keeping for explicit control if needed.
+    document.querySelectorAll('.tab-pane').forEach(content => { content.classList.remove('show', 'active'); }); // Corrected selector for Bootstrap tab-pane
 
-      // Set active class to the current tab and content
-      element.classList.add('active');
-      document.getElementById(tabId).classList.add('show', 'active'); // Bootstrap requires 'show' and 'active' for fading tabs
+    // Set active class to the current tab and content
+    element.classList.add('active');
+    document.getElementById(tabId).classList.add('show', 'active'); // Bootstrap requires 'show' and 'active' for fading tabs
 
-      // Switch to the appropriate tab content
-      try {
-            switch (tabId) {
-                case 'enrolled-subjects': loadSubjects(); break;
-                case 'grades': loadGrades(); break;
-                case 'kardex': loadKardez(); break;
-                case 'payments': loadPagos(); break;
-                case 'attendance': initializeAttendance(); break;
-                case 'teaching-schedule': loadSubjectsProf(); break;
-                case 'attendance-qr': QR_CODE_GEN(); break;
-                case 'profesor_grade_entry': fetchSubjects(); break;
-                case 'student-management': loadStudents(); break; // <--- ADD THIS
-                case 'professor-management': loadProfessors(); break; // <--- ADD THIS
-                case 'subject-management': loadSubjectsAdmin(); break; // <--- ADD THIS
-                case 'reports': console.log('Loading reports...'); break;
-                case 'payments-admin': console.log('Loading admin payments...'); break;
-                case 'attendance-admin': console.log('Loading admin attendance...'); break;
-                case 'user-management': console.log('Loading user management...'); break;
-                case 'system-config': console.log('Loading system configuration...'); break;
-                case 'system-logs': console.log('Loading system logs...'); break;
-                default: console.warn(`No handler for tabId: ${tabId}`);
-            }
-        } catch (error) {
-            console.error(`Error loading content for tab ${tabId}:`, error);
+    // Switch to the appropriate tab content
+    try {
+        switch (tabId) {
+            case 'enrolled-subjects':     loadSubjects();          break;
+            case 'grades':                loadGrades();            break;
+            case 'kardex':                loadKardez();            break;
+            case 'payments':              loadPagos();             break;
+            case 'attendance':            initializeAttendance();  break;
+            case 'teaching-schedule':     loadSubjectsProf();      break;
+            case 'attendance-qr':         QR_CODE_GEN();           break;
+            case 'profesor_grade_entry':  fetchSubjects();         break;
+            // Admin and Super Admin tabs will need their respective load functions
+            // For now, these are placeholders. Actual data loading functions would be added here.
+            case 'student-management':    console.log('Loading student management...'); break;
+            case 'professor-management':  console.log('Loading professor management...'); break;
+            case 'subject-management':    console.log('Loading subject management...'); break;
+            case 'reports':               console.log('Loading reports...'); break;
+            case 'payments-admin':        console.log('Loading admin payments...'); break;
+            case 'attendance-admin':      console.log('Loading admin attendance...'); break;
+            case 'user-management':       console.log('Loading user management...'); break;
+            case 'system-config':         console.log('Loading system configuration...'); break;
+            case 'system-logs':           console.log('Loading system logs...'); break;
+            default:  console.warn(`No handler for tabId: ${tabId}`);
         }
+    } catch (error) {
+        console.error(`Error loading content for tab ${tabId}:`, error);
     }
+}
 
     // Logout
     function handleLogout() {
@@ -946,7 +627,7 @@
           localStorage.setItem('authToken', data.token);
           errorMessage.textContent = '';
           showUserRole(data.user_role);
-        } else { errorMessage.textContent = data.message || 'Login failed'; }
+        } else {  errorMessage.textContent = data.message || 'Login failed';  }
       } catch (error) {
         errorMessage.textContent = 'Connection error. Please try again.';
         console.error('Login error:', error);
@@ -959,11 +640,11 @@
       document.querySelectorAll('.content-section').forEach(section => { section.style.display = 'none'; });
 
       switch (parseInt(role)) {
-        case ROLES.SUPER_ADMIN: document.getElementById('super-admin-content').style.display = 'block'; break;
-        case ROLES.PROFESSOR: document.getElementById('professor-content').style.display = 'block'; break;
-        case ROLES.STUDENT: document.getElementById('student-content').style.display = 'block'; break;
-        case ROLES.ADMIN_STAFF: document.getElementById('admin-staff-content').style.display = 'block'; break;
-        default: document.getElementById('login-content').style.display = 'block';
+        case      ROLES.SUPER_ADMIN: document.getElementById('super-admin-content').style.display = 'block';  break;
+        case      ROLES.PROFESSOR:document.getElementById('professor-content').style.display = 'block';       break;
+        case      ROLES.STUDENT:document.getElementById('student-content').style.display = 'block';           break;
+        case      ROLES.ADMIN_STAFF:document.getElementById('admin-staff-content').style.display = 'block';   break;
+        default:  document.getElementById('login-content').style.display = 'block';
       }
     }
 
@@ -978,7 +659,7 @@
           localStorage.removeItem('authToken');
           showUserRole(null);
         }
-      } else { showUserRole(null); }
+      } else {  showUserRole(null); }
     });
 
 
@@ -991,8 +672,7 @@
       const response = await fetch(`http://${backendIP}:3000/student/tabla-datos-estudiante/`, { headers: { "Authorization": `Bearer ${token}` } });
       console.log("Token:", localStorage.getItem("authToken"));
 
-      if (!response.ok) {
-        console.error("Error al obtener las materias");
+      if (!response.ok) {   console.error("Error al obtener las materias");
         return;
       }
 
@@ -1016,8 +696,7 @@
       const token = localStorage.getItem("authToken");
       const response = await fetch(`http://${backendIP}:3000/student/tabla-calificaciones/`, { headers: { "Authorization": `Bearer ${token}` } });;
 
-      if (!response.ok) {
-        console.error("Error al obtener las materias");
+      if (!response.ok) {   console.error("Error al obtener las materias");
         return;
       }
 
@@ -1037,117 +716,111 @@
       });
     }
 
-    /////////////////       KARDEZ       ////////////////////////////////////////////
-    async function loadKardez() {
-      const token = localStorage.getItem("authToken");
-      const response = await fetch(`http://${backendIP}:3000/student/tabla-kardez/`, { headers: { "Authorization": `Bearer ${token}` } });;
+/////////////////       KARDEZ       ////////////////////////////////////////////
+async function loadKardez() {
+    const token = localStorage.getItem("authToken");
+    const response = await fetch(`http://${backendIP}:3000/student/tabla-kardez/`, { headers: { "Authorization": `Bearer ${token}` } });;
 
-      if (!response.ok) {
-        console.error("Error al obtener las materias");
+    if (!response.ok) { console.error("Error al obtener las materias");
         return;
-      }
+    }
 
-      const subjects = await response.json();
-      const tbody = document.getElementById("kardex-table");
-      tbody.innerHTML = "";
+    const subjects = await response.json();
+    const tbody = document.getElementById("kardex-table");
+    tbody.innerHTML = "";
 
-      subjects.forEach(subject => {
-        const row = `<tr>
+    subjects.forEach(subject => {
+    const row = `<tr>
         <td>${subject.materia}</td>
         <td>${subject.periodo}</td>
         <td>${subject.calif_final}</td>
         <td>${subject.estado}</td>
     </tr>`;
-        tbody.innerHTML += row;
-      });
+    tbody.innerHTML += row;
+});
+}
+
+/////////////////       PAGOS       ////////////////////////////////////////////
+async function loadPagos() {
+    const token = localStorage.getItem("authToken");
+    const response = await fetch(`http://${backendIP}:3000/student/tabla-pagos/`, { headers: { "Authorization": `Bearer ${token}` } });;
+
+    if (!response.ok) { console.error("Error al obtener las materias");
+        return;
     }
 
-    /////////////////       PAGOS       ////////////////////////////////////////////
-    async function loadPagos() {
-      const token = localStorage.getItem("authToken");
-      const response = await fetch(`http://${backendIP}:3000/student/tabla-pagos/`, { headers: { "Authorization": `Bearer ${token}` } });;
+    const subjects = await response.json();
+    const tbody = document.getElementById("payments-table");
+    tbody.innerHTML = "";
 
-      if (!response.ok) {
-        console.error("Error al obtener las materias");
-        return;
-      }
-
-      const subjects = await response.json();
-      const tbody = document.getElementById("payments-table");
-      tbody.innerHTML = "";
-
-      subjects.forEach(subject => {
-        const row = `<tr>
+    subjects.forEach(subject => {
+    const row = `<tr>
         <td>${subject.MES}</td>
         <td>${subject.CANTIDAD}</td>
         <td>${subject.FECHA_CORTE}</td>
         <td>${subject.ESTADO}</td>
         <td>${subject.ACCION}</td>
     </tr>`;
-        tbody.innerHTML += row;
-      });
-    }
+    tbody.innerHTML += row;
+});
+}
 
-    /////////////////       ASISTENCIAS       ////////////////////////////////////////////
+/////////////////       ASISTENCIAS       ////////////////////////////////////////////
 
-    async function initializeAttendance() {
-      console.log("Initializing attendance section");
-      const attendanceInput = document.getElementById("attendance-code");
-      if (attendanceInput) {
+async function initializeAttendance() {
+    console.log("Initializing attendance section");
+    const attendanceInput = document.getElementById("attendance-code");
+    if (attendanceInput) {
         attendanceInput.value = "";
         attendanceInput.focus(); // Optional: focus on the input field
-      }
     }
+}
 
 
-    function submitAttendance() {
-      const token = localStorage.getItem("authToken");
-      const attendanceCode = document.getElementById("attendance-code").value.trim();
+function submitAttendance() {
+  const token = localStorage.getItem("authToken");
+  const attendanceCode = document.getElementById("attendance-code").value.trim();
 
-      if (!attendanceCode) {
-        alert("Por favor, ingresa un código de asistencia.");
-        return;
-      }
+  if (!attendanceCode) {    alert("Por favor, ingresa un código de asistencia.");
+    return;
+  }
 
-      fetch(`http://${backendIP}:3000/student/registro-asistencias/`, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ codigo_asistencia: attendanceCode })
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            alert("Asistencia registrada exitosamente.");
-          } else {
-            alert("Error al registrar asistencia: " + data.message);
-          }
-        })
-        .catch(error => {
-          console.log("Error:", error);
-          alert("Error al conectar con el servidor.");
-        });
+  fetch(`http://${backendIP}:3000/student/registro-asistencias/`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ codigo_asistencia: attendanceCode })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) { alert("Asistencia registrada exitosamente.");
+    } else {  alert("Error al registrar asistencia: " + data.message);
     }
+  })
+  .catch(error => {
+    console.log("Error:", error);
+    alert("Error al conectar con el servidor.");
+  });
+}
 
 
 
 
-    /////////////////////////////////////////////////////////////       PROFESORES       ////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////       PROFESORES       ////////////////////////////////////////////////////////////////////////////////
 
-    async function loadSubjectsProf() {
+async function loadSubjectsProf() {
       const token = localStorage.getItem("authToken");
       const response = await fetch(`http://${backendIP}:3000/professor/schedule/`, { headers: { "Authorization": `Bearer ${token}` } });
       console.log("Token:", localStorage.getItem("authToken"));
 
-      if (!response.ok) {
-        console.error("Error al obtener las materias");
+      if (!response.ok) {   console.error("Error al obtener las materias");
         return;
       }
 
       const subjects = await response.json();
-      console.log("retorno", subjects);
+      console.log("retorno",subjects);
       const tbody = document.getElementById("schedule-table");
       tbody.innerHTML = "";
 
@@ -1163,143 +836,140 @@
 
 
     ///////////////////////////////////////////QR/////////////////////////////////
-    function fallbackHash(seed) {
-      let hash = 0;
-      for (let i = 0; i < seed.length; i++) { hash = (hash * 31 + seed.charCodeAt(i)) >>> 0; }
-      return hash;
-    }
+function fallbackHash(seed) {
+    let hash = 0;
+    for (let i = 0; i < seed.length; i++) { hash = (hash * 31 + seed.charCodeAt(i)) >>> 0; }
+    return hash;
+}
 
-    function base62Encode(num, length = 10) {
-      const base62chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      let encoded = "";
-      while (encoded.length < length) {
+function base62Encode(num, length = 10) {
+    const base62chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let encoded = "";
+    while (encoded.length < length) {
         encoded = base62chars[num % 62] + encoded;
         num = Math.floor(num / 62);
-      }
-      return encoded;
     }
+    return encoded;
+}
 
-    function generateShortCode(seed) {
-      const numericHash = fallbackHash(seed);
-      return base62Encode(numericHash);
-    }
+function generateShortCode(seed) {
+    const numericHash = fallbackHash(seed);
+    return base62Encode(numericHash);
+}
 
     async function QR_CODE_GEN() {
-      const token = localStorage.getItem("authToken");
-      const response = await fetch(`http://${backendIP}:3000/professor/QR_CODE_GEN/`, { headers: { "Authorization": `Bearer ${token}` } });
-      console.log("Token:", localStorage.getItem("authToken"));
+    const token = localStorage.getItem("authToken");
+    const response = await fetch(`http://${backendIP}:3000/professor/QR_CODE_GEN/`, {   headers: { "Authorization": `Bearer ${token}` }   });
+    console.log("Token:", localStorage.getItem("authToken"));
 
-      if (!response.ok) {
-        console.error("Error al obtener las materias");
+    if (!response.ok) {   console.error("Error al obtener las materias");
         return;
-      }
+    }
 
-      const subjects = await response.json();
-      console.log("retorno", subjects);
+    const subjects = await response.json();
+    console.log("retorno", subjects);
 
-      const selectElement = document.getElementById("qr_subject_select");
-      selectElement.innerHTML = "<option value=''>Seleccione una materia</option>"; // Reset dropdown
+    const selectElement = document.getElementById("qr_subject_select");
+    selectElement.innerHTML = "<option value=''>Seleccione una materia</option>"; // Reset dropdown
 
-      subjects.forEach(subject => {
+    subjects.forEach(subject => {
         const option = document.createElement("option");
         option.value = `${subject.materia_nombre}-${subject.id_grupo}`; // Combine id_materia and id_grupo as value
         option.textContent = `${subject.materia_nombre}-${subject.id_grupo}`; // Show the name and group
         selectElement.appendChild(option);
-      });
-    }
+    });
+}
 
-    document.getElementById("qr_subject_select").addEventListener("change", function () {
-      const selectedValue = this.value;
-      if (selectedValue) {
+document.getElementById("qr_subject_select").addEventListener("change", function () {
+    const selectedValue = this.value;
+    if (selectedValue) {
         const [idMateria, idGrupo] = selectedValue.split("-");
         const seed = `${idMateria}-${idGrupo}`;
         const code = generateShortCode(seed);
         console.log("Generated code:", code);
         generateQRCode(code);
-      }
-    });
+    }
+});
 
 
 
 
-    function generateQRCode(data) {
-      const qrDisplay = document.getElementById("qr-display");
-      qrDisplay.innerHTML = "";
+function generateQRCode(data) {
+    const qrDisplay = document.getElementById("qr-display");
+    qrDisplay.innerHTML = "";
 
-      new QRCode(qrDisplay, {
-        text: data,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-      });
+    new QRCode(qrDisplay, {
+    text: data,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+});
 
+}
+
+
+/////////////////CALIFICACIONES/////////////////////////////////
+let currentSubjectInfo = null;
+
+async function fetchSubjects(){
+    const token = localStorage.getItem("authToken");
+    const response = await fetch(`http://${backendIP}:3000/professor/getSubjects/`, {   headers: { "Authorization": `Bearer ${token}` }     });
+    console.log("Token:", localStorage.getItem("authToken"));
+
+    if (!response.ok) {   console.error("Error al obtener las materias");
+        return;
     }
 
+    const subjects = await response.json();
+    console.log("retorno", subjects);
 
-    /////////////////CALIFICACIONES/////////////////////////////////
-    let currentSubjectInfo = null;
+    const selectElement = document.getElementById("professor_grade_subject_select");
+    selectElement.innerHTML = "<option value=''>Seleccione una materia</option>";
 
-    async function fetchSubjects() {
-      const token = localStorage.getItem("authToken");
-      const response = await fetch(`http://${backendIP}:3000/professor/getSubjects/`, { headers: { "Authorization": `Bearer ${token}` } });
-      console.log("Token:", localStorage.getItem("authToken"));
+    const newSelectElement = selectElement.cloneNode(true);
+    selectElement.parentNode.replaceChild(newSelectElement, selectElement);
 
-      if (!response.ok) {
-        console.error("Error al obtener las materias");
-        return;
-      }
-
-      const subjects = await response.json();
-      console.log("retorno", subjects);
-
-      const selectElement = document.getElementById("professor_grade_subject_select");
-      selectElement.innerHTML = "<option value=''>Seleccione una materia</option>";
-
-      const newSelectElement = selectElement.cloneNode(true);
-      selectElement.parentNode.replaceChild(newSelectElement, selectElement);
-
-      subjects.forEach(subject => {
+    subjects.forEach(subject => {
         console.log("aaaa");
         const option = document.createElement("option");
         option.value = `${subject.id_materia}-${subject.id_grupo}-${subject.materia_nombre}`;
         option.textContent = `${subject.id_materia}-${subject.id_grupo}-${subject.materia_nombre}`;
         newSelectElement.appendChild(option);
-      });
+    });
 
-      newSelectElement.addEventListener("change", async function () {
+    newSelectElement.addEventListener("change", async function () {
         const selected = this.value;
         if (!selected) return;
 
         const [id_materia, id_grupo, materia_nombre] = selected.split("-");
 
         currentSubjectInfo = {
-          id_materia: id_materia,
-          id_grupo: id_grupo,
-          materia_nombre: materia_nombre
+            id_materia: id_materia,
+            id_grupo: id_grupo,
+            materia_nombre: materia_nombre
         };
 
         console.log("idmateria" + id_materia + "idgrupo" + id_grupo);
         const response = await fetch(`http://${backendIP}:3000/professor/getStudents?id_materia=${id_materia}&id_grupo=${id_grupo}`, {
-          headers: { "Authorization": `Bearer ${token}` }
+            headers: {  "Authorization": `Bearer ${token}`  }
         });
 
-        if (!response.ok) {
-          console.error("Error al obtener los estudiantes");
-          return;
+        if (!response.ok) { console.error("Error al obtener los estudiantes");
+            return;
         }
 
         const students = await response.json();
         console.log("Estudiantes:", students);
         populateStudentGradeTable(students);
-      });
-    }
+    });
+}
 
-    async function populateStudentGradeTable(students) {
-      console.log("ENTRANDO A LA SECCION DE RELLENAR TABLA");
-      const tbody = document.getElementById("profesor_grade_entry_table");
-      tbody.innerHTML = "";
+async function populateStudentGradeTable(students) {
+    console.log("ENTRANDO A LA SECCION DE RELLENAR TABLA");
+    const tbody = document.getElementById("profesor_grade_entry_table");
+    tbody.innerHTML = "";
 
-      students.forEach(student => {
+    students.forEach(student => {
         const row = document.createElement("tr");
 
         row.innerHTML = `
@@ -1310,47 +980,46 @@
             <td><button class="btn btn-sm btn-outline-primary save-grade-btn" data-matricula="${student.matricula}" onclick="saveGrade('${student.matricula}')">Guardar</button></td>
         `;
         tbody.appendChild(row);
-      });
+    });
+}
+
+async function saveGrade(matricula) {
+    console.log("Saving grade for matricula:", matricula);
+
+    if (!currentSubjectInfo) {  alert("Error: No se ha seleccionado una materia");
+        return;
     }
 
-    async function saveGrade(matricula) {
-      console.log("Saving grade for matricula:", matricula);
+    const button = document.querySelector(`button[data-matricula="${matricula}"]`);
+    const row = button.closest("tr");
 
-      if (!currentSubjectInfo) {
-        alert("Error: No se ha seleccionado una materia");
-        return;
-      }
+    const calif_p1_input = row.querySelector('input[data-field="calif_p1"]');
+    const calif_p2_input = row.querySelector('input[data-field="calif_p2"]');
+    const calif_final_input = row.querySelector('input[data-field="calif_final"]');
 
-      const button = document.querySelector(`button[data-matricula="${matricula}"]`);
-      const row = button.closest("tr");
-
-      const calif_p1_input = row.querySelector('input[data-field="calif_p1"]');
-      const calif_p2_input = row.querySelector('input[data-field="calif_p2"]');
-      const calif_final_input = row.querySelector('input[data-field="calif_final"]');
-
-      const data = {
+    const data = {
         id_materia: currentSubjectInfo.id_materia,
         matricula: matricula,
         calif_p1: calif_p1_input.value || null,
         calif_p2: calif_p2_input.value || null,
         calif_final: calif_final_input.value || null,
         ciclo_cursando: "2025-1"
-      };
+    };
 
-      console.log("Data to send:", data);
+    console.log("Data to send:", data);
 
-      try {
+    try {
         const token = localStorage.getItem("authToken");
         const response = await fetch(`http://${backendIP}:3000/professor/saveGrade`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          }, body: JSON.stringify(data)
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },body: JSON.stringify(data)
         });
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const result = await response.json();
@@ -1361,612 +1030,18 @@
         button.classList.add('btn-success');
         button.textContent = "Guardado";
         setTimeout(() => {
-          button.classList.remove('btn-success');
-          button.classList.add('btn-outline-primary');
-          button.textContent = "Guardar";
+            button.classList.remove('btn-success');
+            button.classList.add('btn-outline-primary');
+            button.textContent = "Guardar";
         }, 2000);
 
-      } catch (error) {
+    } catch (error) {
         console.error("Error al guardar la calificación:", error);
         alert("Error al guardar la calificación: " + error.message);
-      }
     }
+}
 
-    async function loadStudents() {
-      const token = localStorage.getItem("authToken");
-      try {
-        const response = await fetch(`http://${backendIP}:3000/admin/students`, {
-          headers: { "Authorization": `Bearer ${token}` }
-        });
-
-        if (!response.ok) {
-          console.error("Error fetching students:", response.statusText);
-          alert("Error al cargar estudiantes.");
-          return;
-        }
-
-        const students = await response.json();
-        const tbody = document.getElementById("admin-student-table");
-        tbody.innerHTML = ""; // Clear existing rows
-
-        students.forEach(student => {
-          const row = `
-                    <tr>
-                        <td>${student.matricula}</td>
-                        <td>${student.user_name}</td>
-                        <td>${student.carrera}</td>
-                        <td>${student.semestre}</td>
-                        <td>${student.celular}</td>
-                        <td>${student.email}</td>
-                        <td>
-                            <button class="btn btn-sm btn-info mr-2" onclick="editStudent('${student.matricula}', '${student.user_name}', '${student.carrera}', '${student.semestre}', '${student.celular}', '${student.email}')">Editar</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteStudent('${student.matricula}', '${student.user_name}')">Eliminar</button>
-                        </td>
-                    </tr>
-                `;
-          tbody.innerHTML += row;
-        });
-        // Initialize DataTable
-        $('#admin-student-table').DataTable(dataTableStyle);
-      } catch (error) {
-        console.error('Error loading students:', error);
-        alert("Error de conexión al cargar estudiantes.");
-      }
-    }
-
-    async function addStudent(event) {
-      event.preventDefault();
-      const token = localStorage.getItem("authToken");
-
-      const matricula = document.getElementById('addStudentMatricula').value;
-      const user_name = document.getElementById('addStudentName').value;
-      const carrera = document.getElementById('addStudentCarrera').value;
-      const semestre = document.getElementById('addStudentSemestre').value;
-      const celular = document.getElementById('addStudentCelular').value;
-      const email = document.getElementById('addStudentEmail').value;
-
-      try {
-        const response = await fetch(`http://${backendIP}:3000/admin/students`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ matricula, user_name, carrera, semestre, celular, email })
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          alert(data.message || 'Estudiante agregado exitosamente.');
-          $('#addStudentModal').modal('hide');
-          loadStudents(); // Refresh the table
-        } else {
-          alert(data.message || 'Error al agregar estudiante.');
-        }
-      } catch (error) {
-        console.error('Error adding student:', error);
-        alert('Error de conexión al agregar estudiante.');
-      }
-    }
-
-    function editStudent(matricula, name, carrera, semestre, celular, email) {
-      document.getElementById('editStudentMatricula').value = matricula;
-      document.getElementById('editStudentName').value = name;
-      document.getElementById('editStudentCarrera').value = carrera;
-      document.getElementById('editStudentSemestre').value = semestre;
-      document.getElementById('editStudentCelular').value = celular;
-      document.getElementById('editStudentEmail').value = email;
-      $('#editStudentModal').modal('show');
-    }
-
-    async function updateStudent(event) {
-      event.preventDefault();
-      const token = localStorage.getItem("authToken");
-
-      const matricula = document.getElementById('editStudentMatricula').value;
-      const user_name = document.getElementById('editStudentName').value;
-      const carrera = document.getElementById('editStudentCarrera').value;
-      const semestre = document.getElementById('editStudentSemestre').value;
-      const celular = document.getElementById('editStudentCelular').value;
-      const email = document.getElementById('editStudentEmail').value;
-
-      try {
-        const response = await fetch(`http://${backendIP}:3000/admin/students/${matricula}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ user_name, carrera, semestre, celular, email })
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          alert(data.message || 'Estudiante actualizado exitosamente.');
-          $('#editStudentModal').modal('hide');
-          loadStudents(); // Refresh the table
-        } else {
-          alert(data.message || 'Error al actualizar estudiante.');
-        }
-      } catch (error) {
-        console.error('Error updating student:', error);
-        alert('Error de conexión al actualizar estudiante.');
-      }
-    }
-
-    async function deleteStudent(matricula, name) {
-      if (confirm(`¿Estás seguro de eliminar al estudiante ${name} (${matricula})?`)) {
-        const token = localStorage.getItem("authToken");
-        try {
-          const response = await fetch(`http://${backendIP}:3000/admin/students/${matricula}`, {
-            method: 'DELETE',
-            headers: { "Authorization": `Bearer ${token}` }
-          });
-
-          const data = await response.json();
-          if (response.ok) {
-            alert(data.message || 'Estudiante eliminado exitosamente.');
-            loadStudents(); // Refresh the table
-          } else {
-            alert(data.message || 'Error al eliminar estudiante.');
-          }
-        } catch (error) {
-          console.error('Error deleting student:', error);
-          alert('Error de conexión al eliminar estudiante.');
-        }
-      }
-    }
-
-    async function loadProfessors() {
-      const token = localStorage.getItem("authToken");
-      try {
-        const response = await fetch(`http://${backendIP}:3000/admin/professors`, {
-          headers: { "Authorization": `Bearer ${token}` }
-        });
-
-        if (!response.ok) {
-          console.error("Error fetching professors:", response.statusText);
-          alert("Error al cargar profesores.");
-          return;
-        }
-
-        const professors = await response.json();
-        const tbody = document.getElementById("admin-professor-table");
-        tbody.innerHTML = "";
-
-        professors.forEach(prof => {
-          const row = `
-                    <tr>
-                        <td>${prof.id_profesor}</td>
-                        <td>${prof.nombre}</td>
-                        <td>${prof.celular}</td>
-                        <td>${prof.email}</td>
-                        <td>
-                            <button class="btn btn-sm btn-info mr-2" onclick="editProfessor('${prof.id_profesor}', '${prof.nombre}', '${prof.celular}', '${prof.email}')">Editar</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteProfessor('${prof.id_profesor}', '${prof.nombre}')">Eliminar</button>
-                        </td>
-                    </tr>
-                `;
-          tbody.innerHTML += row;
-        });
-        // Initialize DataTable
-        $('#admin-professor-table').DataTable(dataTableStyle);
-      } catch (error) {
-        console.error('Error loading professors:', error);
-        alert("Error de conexión al cargar profesores.");
-      }
-    }
-
-    async function addProfessor(event) {
-      event.preventDefault();
-      const token = localStorage.getItem("authToken");
-
-      const id_profesor = document.getElementById('addProfessorId').value;
-      const nombre = document.getElementById('addProfessorName').value;
-      const celular = document.getElementById('addProfessorCelular').value;
-      const email = document.getElementById('addProfessorEmail').value;
-
-      try {
-        const response = await fetch(`http://${backendIP}:3000/admin/professors`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ id_profesor, nombre, celular, email })
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          alert(data.message || 'Profesor agregado exitosamente.');
-          $('#addProfessorModal').modal('hide');
-          loadProfessors();
-        } else {
-          alert(data.message || 'Error al agregar profesor.');
-        }
-      } catch (error) {
-        console.error('Error adding professor:', error);
-        alert('Error de conexión al agregar profesor.');
-      }
-    }
-
-    function editProfessor(id_profesor, nombre, celular, email) {
-      document.getElementById('editProfessorId').value = id_profesor;
-      document.getElementById('editProfessorName').value = nombre;
-      document.getElementById('editProfessorCelular').value = celular;
-      document.getElementById('editProfessorEmail').value = email;
-      $('#editProfessorModal').modal('show');
-    }
-
-    async function updateProfessor(event) {
-      event.preventDefault();
-      const token = localStorage.getItem("authToken");
-
-      const id_profesor = document.getElementById('editProfessorId').value;
-      const nombre = document.getElementById('editProfessorName').value;
-      const celular = document.getElementById('editProfessorCelular').value;
-      const email = document.getElementById('editProfessorEmail').value;
-
-      try {
-        const response = await fetch(`http://${backendIP}:3000/admin/professors/${id_profesor}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ nombre, celular, email })
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          alert(data.message || 'Profesor actualizado exitosamente.');
-          $('#editProfessorModal').modal('hide');
-          loadProfessors();
-        } else {
-          alert(data.message || 'Error al actualizar profesor.');
-        }
-      } catch (error) {
-        console.error('Error updating professor:', error);
-        alert('Error de conexión al actualizar profesor.');
-      }
-    }
-
-    async function deleteProfessor(id_profesor, nombre) {
-      if (confirm(`¿Estás seguro de eliminar al profesor ${nombre} (${id_profesor})?`)) {
-        const token = localStorage.getItem("authToken");
-        try {
-          const response = await fetch(`http://${backendIP}:3000/admin/professors/${id_profesor}`, {
-            method: 'DELETE',
-            headers: { "Authorization": `Bearer ${token}` }
-          });
-
-          const data = await response.json();
-          if (response.ok) {
-            alert(data.message || 'Profesor eliminado exitosamente.');
-            loadProfessors();
-          } else {
-            alert(data.message || 'Error al eliminar profesor.');
-          }
-        } catch (error) {
-          console.error('Error deleting professor:', error);
-          alert('Error de conexión al eliminar profesor.');
-        }
-      }
-    }
-
-    async function loadSubjectsAdmin() {
-      const token = localStorage.getItem("authToken");
-      try {
-        const response = await fetch(`http://${backendIP}:3000/admin/subjects`, {
-          headers: { "Authorization": `Bearer ${token}` }
-        });
-
-        if (!response.ok) {
-          console.error("Error fetching subjects:", response.statusText);
-          alert("Error al cargar materias.");
-          return;
-        }
-
-        const subjects = await response.json();
-        const tbody = document.getElementById("admin-subject-table");
-        tbody.innerHTML = "";
-
-        subjects.forEach(subject => {
-          const row = `
-                    <tr>
-                        <td>${subject.id_materia}</td>
-                        <td>${subject.materia_nombre}</td>
-                        <td>${subject.sem_cursante}</td>
-                        <td>
-                            <button class="btn btn-sm btn-info mr-2" onclick="editSubject('${subject.id_materia}', '${subject.materia_nombre}', '${subject.sem_cursante}')">Editar</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteSubject('${subject.id_materia}', '${subject.materia_nombre}')">Eliminar</button>
-                        </td>
-                    </tr>
-                `;
-          tbody.innerHTML += row;
-        });
-        // Initialize DataTable
-        $('#admin-subject-table').DataTable(dataTableStyle);
-      } catch (error) {
-        console.error('Error loading subjects:', error);
-        alert("Error de conexión al cargar materias.");
-      }
-    }
-
-    async function addSubject(event) {
-      event.preventDefault();
-      const token = localStorage.getItem("authToken");
-
-      const id_materia = document.getElementById('addSubjectId').value;
-      const materia_nombre = document.getElementById('addSubjectName').value;
-      const sem_cursante = document.getElementById('addSubjectSemestre').value;
-
-      try {
-        const response = await fetch(`http://${backendIP}:3000/admin/subjects`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ id_materia, materia_nombre, sem_cursante })
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          alert(data.message || 'Materia agregada exitosamente.');
-          $('#addSubjectModal').modal('hide');
-          loadSubjectsAdmin();
-        } else {
-          alert(data.message || 'Error al agregar materia.');
-        }
-      } catch (error) {
-        console.error('Error adding subject:', error);
-        alert('Error de conexión al agregar materia.');
-      }
-    }
-
-    function editSubject(id_materia, materia_nombre, sem_cursante) {
-      document.getElementById('editSubjectId').value = id_materia;
-      document.getElementById('editSubjectName').value = materia_nombre;
-      document.getElementById('editSubjectSemestre').value = sem_cursante;
-      $('#editSubjectModal').modal('show');
-    }
-
-    async function updateSubject(event) {
-      event.preventDefault();
-      const token = localStorage.getItem("authToken");
-
-      const id_materia = document.getElementById('editSubjectId').value;
-      const materia_nombre = document.getElementById('editSubjectName').value;
-      const sem_cursante = document.getElementById('editSubjectSemestre').value;
-
-      try {
-        const response = await fetch(`http://${backendIP}:3000/admin/subjects/${id_materia}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ materia_nombre, sem_cursante })
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          alert(data.message || 'Materia actualizada exitosamente.');
-          $('#editSubjectModal').modal('hide');
-          loadSubjectsAdmin();
-        } else {
-          alert(data.message || 'Error al actualizar materia.');
-        }
-      } catch (error) {
-        console.error('Error updating subject:', error);
-        alert('Error de conexión al actualizar materia.');
-      }
-    }
-
-    async function deleteSubject(id_materia, materia_nombre) {
-      if (confirm(`¿Estás seguro de eliminar la materia ${materia_nombre} (${id_materia})? Esto también eliminará las calificaciones y horarios asociados.`)) {
-        const token = localStorage.getItem("authToken");
-        try {
-          const response = await fetch(`http://${backendIP}:3000/admin/subjects/${id_materia}`, {
-            method: 'DELETE',
-            headers: { "Authorization": `Bearer ${token}` }
-          });
-
-          const data = await response.json();
-          if (response.ok) {
-            alert(data.message || 'Materia eliminada exitosamente.');
-            loadSubjectsAdmin();
-          } else {
-            alert(data.message || 'Error al eliminar materia.');
-          }
-        } catch (error) {
-          console.error('Error deleting subject:', error);
-          alert('Error de conexión al eliminar materia.');
-        }
-      }
-    }
-
-    // Function to load students for grade management (Admin)
-    async function loadStudentsForGradeManagement() {
-      const token = localStorage.getItem("authToken");
-      try {
-        const response = await fetch(`http://${backendIP}:3000/admin/students`, {
-          headers: { "Authorization": `Bearer ${token}` }
-        });
-
-        if (!response.ok) {
-          console.error("Error fetching students for grade management:", response.statusText);
-          return;
-        }
-
-        const students = await response.json();
-        const tbody = document.getElementById("admin-student-table"); // Reusing the student table for now, consider a separate one if needed.
-        tbody.innerHTML = "";
-
-        students.forEach(student => {
-          const row = `
-                    <tr>
-                        <td>${student.matricula}</td>
-                        <td>${student.user_name}</td>
-                        <td>${student.carrera}</td>
-                        <td>${student.semestre}</td>
-                        <td>${student.celular}</td>
-                        <td>${student.email}</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary" onclick="adminEditStudentGrades('${student.matricula}', '${student.user_name}')">Gestionar Calificaciones</button>
-                        </td>
-                    </tr>
-                `;
-          tbody.innerHTML += row;
-        });
-        // Re-initialize DataTable if it was already initialized
-        if ($.fn.DataTable.isDataTable('#admin-student-table')) {
-          $('#admin-student-table').DataTable().destroy();
-        }
-        $('#admin-student-table').DataTable(dataTableStyle);
-
-      } catch (error) {
-        console.error('Error loading students for grade management:', error);
-      }
-    }
-
-    // Function to open the Admin Grade Management Modal and load grades
-    async function adminEditStudentGrades(matricula, studentName) {
-      document.getElementById('adminGradeMatricula').value = matricula;
-      document.getElementById('adminGradeStudentName').value = studentName;
-
-      const token = localStorage.getItem("authToken");
-      const subjectSelect = document.getElementById('adminGradeSubjectSelect');
-      subjectSelect.innerHTML = '<option value="">Seleccione una materia</option>'; // Clear previous options
-
-      try {
-        // Fetch subjects the student is enrolled in
-        const subjectsResponse = await fetch(`http://${backendIP}:3000/admin/student-subjects/${matricula}`, {
-          headers: { "Authorization": `Bearer ${token}` }
-        });
-
-        if (!subjectsResponse.ok) {
-          console.error("Error fetching student's subjects:", subjectsResponse.statusText);
-          alert("Error al cargar materias del estudiante.");
-          return;
-        }
-
-        const enrolledSubjects = await subjectsResponse.json();
-
-        enrolledSubjects.forEach(subject => {
-          const option = document.createElement('option');
-          option.value = subject.id_materia; // Use id_materia as value
-          option.textContent = subject.materia_nombre;
-          subjectSelect.appendChild(option);
-        });
-
-        // Add event listener for when a subject is selected to load its grades
-        subjectSelect.onchange = async () => {
-          const selectedSubjectId = subjectSelect.value;
-          if (selectedSubjectId) {
-            const gradesResponse = await fetch(`http://${backendIP}:3000/admin/student-grades/${matricula}/${selectedSubjectId}`, {
-              headers: { "Authorization": `Bearer ${token}` }
-            });
-
-            if (gradesResponse.ok) {
-              const gradeData = await gradesResponse.json();
-              // Populate grade fields, assuming gradeData is an object like { calif_p1, calif_p2, calif_final, ciclo_cursando }
-              document.getElementById('adminGradeP1').value = gradeData.calif_p1 ?? '';
-              document.getElementById('adminGradeP2').value = gradeData.calif_p2 ?? '';
-              document.getElementById('adminGradeFinal').value = gradeData.calif_final ?? '';
-              document.getElementById('adminGradeCiclo').value = gradeData.ciclo_cursando ?? '';
-            } else {
-              console.error("Error fetching student grades for selected subject:", gradesResponse.statusText);
-              // If no grades found for this subject, clear fields
-              document.getElementById('adminGradeP1').value = '';
-              document.getElementById('adminGradeP2').value = '';
-              document.getElementById('adminGradeFinal').value = '';
-              document.getElementById('adminGradeCiclo').value = '2025-1'; // Default or suggest current cycle
-            }
-          } else {
-            // Clear grade fields if no subject is selected
-            document.getElementById('adminGradeP1').value = '';
-            document.getElementById('adminGradeP2').value = '';
-            document.getElementById('adminGradeFinal').value = '';
-            document.getElementById('adminGradeCiclo').value = '';
-          }
-        };
-
-        $('#adminEditGradeModal').modal('show');
-      } catch (error) {
-        console.error('Error in adminEditStudentGrades:', error);
-        alert('Error al gestionar calificaciones del estudiante.');
-      }
-    }
-
-    // Function to submit updated grades from Admin Grade Management Modal
-    async function updateStudentGrades(event) {
-      event.preventDefault();
-      const token = localStorage.getItem("authToken");
-
-      const matricula = document.getElementById('adminGradeMatricula').value;
-      const id_materia = document.getElementById('adminGradeSubjectSelect').value;
-      const calif_p1 = document.getElementById('adminGradeP1').value || null;
-      const calif_p2 = document.getElementById('adminGradeP2').value || null;
-      const calif_final = document.getElementById('adminGradeFinal').value || null;
-      const ciclo_cursando = document.getElementById('adminGradeCiclo').value;
-
-      if (!id_materia || !ciclo_cursando) {
-        alert('Por favor, seleccione una materia y especifique el ciclo cursando.');
-        return;
-      }
-
-      try {
-        const response = await fetch(`http://${backendIP}:3000/admin/update-grades`, {
-          method: 'POST', // Use POST for upsert logic
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando })
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          alert(data.message || 'Calificaciones actualizadas exitosamente.');
-          $('#adminEditGradeModal').modal('hide');
-          // You might want to refresh the student list or just close the modal
-        } else {
-          alert(data.message || 'Error al actualizar calificaciones.');
-        }
-      } catch (error) {
-        console.error('Error updating student grades:', error);
-        alert('Error de conexión al actualizar calificaciones.');
-      }
-    }
-
-
-    // Add event listeners for form submissions
-    document.addEventListener('DOMContentLoaded', () => {
-      // Only attach if elements exist (e.g., if admin-staff-content is loaded)
-      const addStudentForm = document.getElementById('addStudentForm');
-      if (addStudentForm) addStudentForm.addEventListener('submit', addStudent);
-
-      const editStudentForm = document.getElementById('editStudentForm');
-      if (editStudentForm) editStudentForm.addEventListener('submit', updateStudent);
-
-      const addProfessorForm = document.getElementById('addProfessorForm');
-      if (addProfessorForm) addProfessorForm.addEventListener('submit', addProfessor);
-
-      const editProfessorForm = document.getElementById('editProfessorForm');
-      if (editProfessorForm) editProfessorForm.addEventListener('submit', updateProfessor);
-
-      const addSubjectForm = document.getElementById('addSubjectForm');
-      if (addSubjectForm) addSubjectForm.addEventListener('submit', addSubject);
-
-      const editSubjectForm = document.getElementById('editSubjectForm');
-      if (editSubjectForm) editSubjectForm.addEventListener('submit', updateSubject);
-
-      const adminEditGradeForm = document.getElementById('adminEditGradeForm');
-      if (adminEditGradeForm) adminEditGradeForm.addEventListener('submit', updateStudentGrades);
-    });
-    ///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
   </script>
   <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
