@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
@@ -41,18 +41,18 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-/*const authenticateToken = (req, res, next) => {
-  const token = req.headers['authorization']?.split(' ')[1];
-  if (!token) return res.status(401).json({ message: 'Authentication required' });
-
-
-  jwt.verify(token, 'aVeryStrongSecretKeyHere', (err, user) => {
-    if (err) return res.status(403).json({ message: 'Invalid token' });
-    req.user = user;
-    next();
-  });
-
-};*/
+///const authenticateToken = (req, res, next) => {
+//  const token = req.headers['authorization']?.split(' ')[1];
+//  if (!token) return res.status(401).json({ message: 'Authentication required' });
+//
+//
+//  jwt.verify(token, 'aVeryStrongSecretKeyHere', (err, user) => {
+//    if (err) return res.status(403).json({ message: 'Invalid token' });
+//    req.user = user;
+//    next();
+//  });
+//
+//};
 
 // CORRECTO: Registra las rutas de administrador DESPUÉS de que 'app' esté definida y 'adminRoutes' importada
 app.use('/admin', adminRoutes); // Esto prefija correctamente todas las rutas en adminRoutes con /admin
@@ -656,4 +656,122 @@ router.post('/update-grades', async (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
+});*/
+
+const express = require('express');
+const mysql = require('mysql2/promise'); // Usa mysql2/promise para async/await
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const qr = require('qrcode');
+const path = require('path');
+
+// CORRECTO: Define 'app' ANTES de usarlo
+const app = express();
+const port = 3000;
+
+// Importa tus rutas de administrador DESPUÉS de que 'app' esté definida
+const adminRoutes = require('./routes/admin'); // Asegúrate de que esta ruta sea correcta
+
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Conexión a la base de datos
+const db = mysql.createPool({ // Usa createPool para una mejor gestión de conexiones
+  host: '192.168.100.20',
+  user: 'node_user',
+  password: 'Zapatitoblanco123***',
+  database: 'SCGEM',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
+
+// Constante de ROLES (ya está bien)
+const ROLES = {
+  STUDENT: '1',
+  PROFESSOR: '2',
+  ADMIN_STAFF: '3',
+  SUPER_ADMIN: '99'
+};
+
+// Middleware de autenticación (puede definirse aquí o en un archivo separado)
+const authenticateToken = (req, res, next) => {
+  const token = req.headers['authorization']?.split(' ')[1];
+  if (!token) return res.status(401).json({ message: 'Se requiere autenticación' });
+
+  jwt.verify(token, 'aVeryStrongSecretKeyHere', (err, user) => { // Asegúrate de que esta clave secreta sea la misma que usas al firmar el token en el login
+    if (err) return res.status(403).json({ message: 'Token inválido o expirado' });
+    req.user = user;
+    next();
+  });
+};
+
+// CORRECTO: Registra las rutas de administrador DESPUÉS de que 'app' esté definida y 'adminRoutes' importada
+app.use('/admin', adminRoutes); // Esto prefija correctamente todas las rutas en adminRoutes con /admin
+
+// Ruta de login existente
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const [users] = await db.execute('SELECT * FROM USUARIOS WHERE user_name = ? AND password = ?', [username, password]);
+        if (users.length > 0) {
+            const user = users[0];
+            const token = jwt.sign({
+                id_user: user.id_user,
+                user_name: user.user_name,
+                user_role: user.user_role
+            }, 'aVeryStrongSecretKeyHere', { expiresIn: '1h' }); // Usa la misma clave secreta
+            res.json({ token, role: user.user_role, user_name: user.user_name, id_user: user.id_user });
+        } else {
+            res.status(401).json({ message: 'Credenciales inválidas' });
+        }
+    } catch (err) {
+        console.error('Error al iniciar sesión:', err);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+});
+
+// --- Endpoint existente para guardar calificaciones del profesor (Mantén este, pero nota el prefijo 'professor') ---
+app.post('/professor/saveGrade', authenticateToken, async (req, res) => {
+    // Asegúrate de que el usuario autenticado sea un profesor
+    if (req.user.user_role !== ROLES.PROFESSOR) {
+        return res.status(403).json({ message: 'Acceso denegado. Se requieren privilegios de profesor.' });
+    }
+
+    const { matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando } = req.body;
+
+    if (!matricula || !id_materia || !ciclo_cursando) {
+        return res.status(400).json({ message: 'Matrícula, ID de materia y ciclo cursando son requeridos.' });
+    }
+
+    try {
+        // Usa un enfoque UPSERT (INSERT ... ON DUPLICATE KEY UPDATE)
+        const [result] = await db.execute(`
+            INSERT INTO CALIFICACIONES (matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando)
+            VALUES (?, ?, ?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE
+                calif_p1 = VALUES(calif_p1),
+                calif_p2 = VALUES(calif_p2),
+                calif_final = VALUES(calif_final),
+                ciclo_cursando = VALUES(ciclo_cursando)
+        `, [matricula, id_materia, calif_p1, calif_p2, calif_final, ciclo_cursando]);
+
+        if (result.affectedRows > 0) {
+            res.json({ message: 'Calificaciones actualizadas/insertadas exitosamente.' });
+        } else {
+            res.status(500).json({ message: 'No se pudo actualizar/insertar las calificaciones.' });
+        }
+    } catch (err) {
+        console.error('Error al actualizar/insertar calificaciones:', err);
+        res.status(500).json({ message: 'Error al actualizar calificaciones.', error: err.message });
+    }
+});
+
+// ... (Otras rutas existentes como /professor/subjects, /professor/grades, /professor/attendance, /student/subjects, etc.) ...
+
+// Inicia el servidor
+app.listen(port, () => {
+  console.log(`Servidor ejecutándose en el puerto ${port}`);
 });
