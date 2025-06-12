@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="stilazos.css">
 
   <style>
     body {
@@ -202,13 +201,126 @@
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
+<div id="student-content" class="content-section" style="display: none;"></div>
+<div id="student-content" class="content-section container-fluid" style="display: none;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+      <a class="navbar-brand" href="#">Panel de Estudiantes</a>
+      <div class="ml-auto">
+        <button class="btn btn-outline-danger logout-button" onclick="handleLogout()">Cerrar sesión</button>
+      </div>
+    </nav>
 
+
+    <div class="row">
+      <div class="col-md-3 col-lg-2">
+        <div class="nav flex-column nav-pills custom-nav-pills" id="v-pills-tab" role="tablist"
+          aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-subjects-tab" data-toggle="pill" href="#enrolled-subjects" role="tab"
+            aria-controls="enrolled-subjects" aria-selected="true"
+            onclick="switchTab('enrolled-subjects', this)">Materias</a>
+          <a class="nav-link" id="v-pills-grades-tab" data-toggle="pill" href="#grades" role="tab"
+            aria-controls="grades" aria-selected="false" onclick="switchTab('grades', this)">Calificaciones</a>
+          <a class="nav-link" id="v-pills-kardex-tab" data-toggle="pill" href="#kardex" role="tab"
+            aria-controls="kardex" aria-selected="false" onclick="switchTab('kardex', this)">Kardex</a>
+          <a class="nav-link" id="v-pills-payments-tab" data-toggle="pill" href="#payments" role="tab"
+            aria-controls="payments" aria-selected="false" onclick="switchTab('payments', this)">Pagos</a>
+          <a class="nav-link" id="v-pills-attendance-tab" data-toggle="pill" href="#attendance" role="tab"
+            aria-controls="attendance" aria-selected="false" onclick="switchTab('attendance', this)">Asistencias</a>
+        </div>
+      </div>
+      <div class="col-md-9 col-lg-10">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="enrolled-subjects" role="tabpanel"
+            aria-labelledby="v-pills-subjects-tab">
+            <h3 class="mb-3">Materias</h3>
+            <div class="table-responsive">
+              <table class="table table-hover table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Profesor</th>
+                    <th>Horarios</th>
+                    <th>Grupos</th>
+                  </tr>
+                </thead>
+                <tbody id="subjects-table">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="grades" role="tabpanel" aria-labelledby="v-pills-grades-tab">
+            <h3 class="mb-3">Calificaciones</h3>
+            <div class="table-responsive">
+              <table class="table table-hover table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Parcial 1</th>
+                    <th>Parcial 2</th>
+                    <th>Final</th>
+                    <th>Promedio</th>
+                  </tr>
+                </thead>
+                <tbody id="grades-table">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="kardex" role="tabpanel" aria-labelledby="v-pills-kardex-tab">
+            <h3 class="mb-3">Historial académico</h3>
+            <div class="table-responsive">
+              <table class="table table-hover table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Materia</th>
+                    <th>Periodo</th>
+                    <th>Calificación final</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="kardex-table">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="payments" role="tabpanel" aria-labelledby="v-pills-payments-tab">
+            <h3 class="mb-3">Estado de pagos</h3>
+            <div class="table-responsive">
+              <table class="table table-hover table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Mes</th>
+                    <th>Cantidad</th>
+                    <th>Fecha de corte</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="payments-table">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="attendance" role="tabpanel" aria-labelledby="v-pills-attendance-tab">
+            <h3 class="mb-3">Registro de asistencia</h3>
+            <div class="qr-section card p-4 shadow-sm">
+              <div id="qr-reader" class="mb-3 text-center"></div>
+              <p class="text-center">Ingresa código de asistencia:</p>
+              <div class="form-group">
+                <input type="text" id="attendance-code" class="form-control" placeholder="Ingresa código">
+              </div>
+              <button onclick="submitAttendance()" class="btn btn-primary action-button btn-block mt-3">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <div id="student-panel" class="content-section" style="display:none;">
     <h2>Gestión de Estudiantes</h2>
     <button class="btn btn-primary mb-3" onclick="showStudentForm('create')">Crear Nuevo Estudiante</button>
@@ -1070,6 +1182,13 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
   <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+
 
 
   <script>
@@ -1190,7 +1309,7 @@
 
     // Muestra la sección correspondiente al rol del usuario
     if (userRole === 1) { // Estudiante
-      document.getElementById('student-section').style.display = 'block';
+      document.getElementById('student-content').style.display = 'block';
       document.getElementById('student-dashboard-link').classList.add('active');
       // Llama a funciones específicas para estudiantes si las tienes
       loadStudentGrades(); // Asumiendo que esta función ya existe para estudiantes
