@@ -201,7 +201,6 @@
     </div>
   </div>
 
-<div id="student-content" class="content-section" style="display: none;"></div>
 <div id="student-content" class="content-section container-fluid" style="display: none;">
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
       <a class="navbar-brand" href="#">Panel de Estudiantes</a>
@@ -209,7 +208,6 @@
         <button class="btn btn-outline-danger logout-button" onclick="handleLogout()">Cerrar sesión</button>
       </div>
     </nav>
-
 
     <div class="row">
       <div class="col-md-3 col-lg-2">
@@ -871,12 +869,7 @@
               </tr>
             </thead>
             <tbody id="admin-professor-table">
-              <tr>
-                <td>
-                  <button class="btn btn-sm btn-info mr-2" href="#editProfessorModal">Editar</button>
-                  <button class="btn btn-sm btn-danger" onclick="deleteProfessor">Eliminar</button>
-                </td>
-              </tr>
+              
             </tbody>
           </table>
         </div>
@@ -897,15 +890,6 @@
               </tr>
             </thead>
             <tbody id="admin-subject-table">
-              <tr>
-                <td>MAT101</td>
-                <td>Cálculo Diferencial</td>
-                <td>1</td>
-                <td>
-                  <button class="btn btn-sm btn-info mr-2" data-target="#editSubjectModal">Editar</button>
-                  <button class="btn btn-sm btn-danger" onclick="deleteSubject">Eliminar</button>
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>
