@@ -1578,9 +1578,9 @@
 
     async function loadStudents() {
       try {
-        const students = await fetchData(`http://${backendIP}:3000/students`); // Asegúrate de que esta URL sea correcta para tu API
+        const students = await fetchData(`http://${backendIP}:3000/students`); 
         const tbody = document.getElementById("admin-student-table");
-        tbody.innerHTML = ""; // Limpia la tabla antes de cargar
+        tbody.innerHTML = "";
 
         students.forEach(student => {
           const row = `<tr>
@@ -1601,8 +1601,8 @@
           </tr>`;
           tbody.innerHTML += row;
         });
-        // Inicializar o recargar DataTables si lo estás usando
-        // $('#adminStudentTable').DataTable();
+        
+        $('#adminStudentTable').DataTable();
       } catch (error) {
         console.error("Error al cargar estudiantes:", error);
       }
@@ -1610,7 +1610,7 @@
 
     async function loadProfessors() {
       try {
-        const professors = await fetchData(`http://${backendIP}:3000/professors`); // Asegúrate de que esta URL sea correcta
+        const professors = await fetchData(`http://${backendIP}:3000/professors`);
         const tbody = document.getElementById("admin-professor-table");
         tbody.innerHTML = "";
 
@@ -1631,7 +1631,7 @@
           </tr>`;
           tbody.innerHTML += row;
         });
-        // $('#adminProfessorTable').DataTable();
+        $('#adminProfessorTable').DataTable();
       } catch (error) {
         console.error("Error al cargar profesores:", error);
       }
@@ -1639,7 +1639,7 @@
 
     async function loadSubjects() {
       try {
-        const subjects = await fetchData(`http://${backendIP}:3000/subjects`); // Asegúrate de que esta URL sea correcta
+        const subjects = await fetchData(`http://${backendIP}:3000/subjects`);
         const tbody = document.getElementById("admin-subject-table");
         tbody.innerHTML = "";
 

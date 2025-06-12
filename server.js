@@ -92,6 +92,34 @@ app.get('/students', authenticateToken, (req, res) => {
     res.json(results);
   });
 });
+
+// Obtener todos los profesores
+app.get('/professors', authenticateToken, (req, res) => {
+  const query = `
+    SELECT 
+      id_profesor, nombre, user_name, email, celular
+    FROM PROFESORES;
+  `;
+  db.query(query, (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    res.json(results);
+  });
+});
+
+// Obtener todas las materias
+app.get('/subjects', authenticateToken, (req, res) => {
+  const query = `
+    SELECT 
+      id_materia, materia_nombre, materia_clave, creditos
+    FROM MATERIAS;
+  `;
+  db.query(query, (err, results) => {
+    if (err) return res.status(500).json({ message: 'Database error' });
+    res.json(results);
+  });
+});
+
+
 /////////////////       MATERIAS       ////////////////////////////////////////////
 app.get('/student/tabla-datos-estudiante/', authenticateToken, (req, res) => {
   const query = `
