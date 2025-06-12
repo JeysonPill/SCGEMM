@@ -1348,35 +1348,6 @@
     });
 
     //////////////////GENERICO/(/////////////////)
-    async function fetchData(url, method = 'GET', data = null) {
-      const token = localStorage.getItem("authToken");
-      const headers = {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      };
-
-      const config = {
-        method: method,
-        headers: headers,
-      };
-
-      if (data) {
-        config.body = JSON.stringify(data);
-      }
-
-      try {
-        const response = await fetch(url, config);
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
-        }
-        return await response.json();
-      } catch (error) {
-        console.error(`Error en la petición ${method} a ${url}:`, error);
-        alert("Error en la operación: " + error.message);
-        throw error;
-      }
-    }
     //////////////////////////////////////////                 ADD Registros                  //////////////////////////////////////////////////
     // --- Estudiantes ---
     document.getElementById('add-student-form').addEventListener('submit', async function (event) {
